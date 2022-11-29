@@ -94,13 +94,12 @@ export const main = Reach.App(() => {
 			]
 		})
 
-	if (amountPaid < loanInfo.amount) {
-		transfer(balance(tokCollateral), tokCollateral).to(lender)
-		transfer(balance(tokLoan), tokLoan).to(Borrower)
-	} else {
-		transfer(balance(tokCollateral), tokCollateral).to(Borrower)
-		transfer(balance(tokLoan), tokLoan).to(lender)
-	}
+	transfer(balance(tokCollateral), tokCollateral).to(
+		amountPaid < loanInfo.amount ? lender : Borrower
+	)
+	transfer(balance(tokLoan), tokLoan).to(
+		amountPaid < loanInfo.amount ? Borrower : lender
+	)
 	transfer(balance()).to(Borrower)
 
 	commit()
