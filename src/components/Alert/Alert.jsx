@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'rect'
 import s from '../../styles/Shared.module.css'
 import alt from '../../styles/Alert.module.css'
-import { useReach, cf } from '../../hooks'
+import { useReach } from '../../hooks'
+import { cf } from '../../util'
 
 const Alert = () => {
 	const {

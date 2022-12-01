@@ -7,7 +7,7 @@ import {
 	ALGO_PeraConnect as PeraConnect,
 } from '@reach-sh/stdlib'
 import { loanCtc, adminCtc } from '../../contracts'
-import { cf } from '../hooks/cf'
+import { cf } from '../util/cf'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 

@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
-import { cf, useReach } from '../../hooks'
+import { useReach } from '../../hooks'
+import { cf } from '../../util'
 
 
 const Advert = ({ ad }) => {

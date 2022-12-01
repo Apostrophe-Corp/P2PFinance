@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
-import { cf, useReach } from '../../hooks'
+import { useReach } from '../../hooks'
+import { cf } from '../../util'
 import { loanCtc } from '../../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
@@ -18,18 +19,6 @@ const Borrowed = ({ loan }) => {
   
 	// Get the user's pfp
 	/*
-	const setPfp = (x = '') => {
-		// Set the container bg
-		uCRef.current.style.background = `rgba(255,255,255,.4), url(${x}))`
-		uCRef.current.style.backgroundPosition = 'center'
-		uCRef.current.style.backgroundRepeat = 'no-repeat'
-		uCRef.current.style.backgroundSize = 'contain'
-		// Set the pfp
-		pfpRef.current.style.background = `rgba(255,255,255,.4), url(${x}))`
-		pfpRef.current.style.backgroundPosition = 'center'
-		pfpRef.current.style.backgroundRepeat = 'no-repeat'
-		pfpRef.current.style.backgroundSize = 'contain'
-	}
 	*/
 	// useEffect(()=>{},[])
 

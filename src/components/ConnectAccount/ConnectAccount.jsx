@@ -1,7 +1,8 @@
 import React from 'react'
 import s from '../../styles/Shared.module.css'
 import ca from '../../styles/ConnectAccount.module.css'
-import { useReach, cf } from '../../hooks'
+import { useReach } from '../../hooks'
+import { cf } from '../../util'
 
 const ConnectAccount = () => {
     
