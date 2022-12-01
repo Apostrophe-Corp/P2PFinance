@@ -2,22 +2,16 @@ import React, { useState, useEffect, useRef } from 'rect'
 import s from '../../styles/Shared.module.css'
 import alt from '../../styles/Alert.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../util'
+import { cf } from '../../utils'
 
 const Alert = () => {
-	const {
-		alertInfo,
-		setAlertInfo,
-		showAlert,
-		setShowAlert,
-		sleep,
-		promiseOfConfirmation,
-	} = useReach()
+	const { alertInfo, showAlert, setShowAlert, promiseOfConfirmation } =
+		useReach()
 
 	const [active, setActive] = useState(showAlert)
 	const [response, setResponse] = useState('')
-	const [alertClass, setAlertClass] = useState()
-	cf(s.wMax, s.flex, s.flexCenter, alt.alertContainer)
+	const [alertClass, setAlertClass] = useState(cf(s.wMax, s.flex, s.flexCenter, alt.alertContainer))
+	
 
 	const decide = (decision) => {
 		promiseOfConfirmation.resolve && promiseOfConfirmation.resolve(decision)
@@ -36,10 +30,7 @@ const Alert = () => {
 			setAlertClass()
 			cf(s.wMax, s.flex, s.flexContainer, alt.alertContainer, alt.invisible)
 			terminate = setTimeout(() => {
-				setAlertClass(
-					cf()
-					// alt.terminate
-				)
+				setAlertClass(cf(alt.terminate))
 				setActive(false)
 				clearTimeout(terminate)
 			}, 300)

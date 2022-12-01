@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../util'
+import { cf } from '../../utils'
 import { loanCtc } from '../../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 

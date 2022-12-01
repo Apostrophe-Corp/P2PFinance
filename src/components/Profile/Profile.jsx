@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import p from '../../styles/Profiles.module.css'
 import s from '../../styles/Shared.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../util'
+import { cf } from '../../utils'
 
 const Profile = ({ user }) => {
 	const [pfp, setPfp] = useState(0)
@@ -13,7 +13,8 @@ const Profile = ({ user }) => {
 
 	const preview = (e) => {
 		// Just in case this causes the form to submit
-		e.preventDefault()
+    e.preventDefault()
+    
 	}
 
 	const save = (e) => {

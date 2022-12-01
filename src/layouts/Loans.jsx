@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../util'
+import { cf, request } from '../../utils'
 
 const Loans = ({ children }) => {
+    const [pfps, setPfps] = useState([])
+
+    // Retrieve the loans
+    useEffect(() => {
+        
+    },[])
+
+
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.loanContainer)}>
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>

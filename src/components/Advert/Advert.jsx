@@ -2,18 +2,16 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../util'
+import { cf } from '../../utils'
 
 
-const Advert = ({ ad }) => {
+const Advert = ({ ad, pfp }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const {lend} = useReach()
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
 
-	// Get the user's pfp
-	/*
 	const setPfp = (x = '') => {
 		// Set the container bg
 		uCRef.current.style.background = `rgba(255,255,255,.4), url(${x}))`
@@ -26,13 +24,16 @@ const Advert = ({ ad }) => {
 		pfpRef.current.style.backgroundRepeat = 'no-repeat'
 		pfpRef.current.style.backgroundSize = 'contain'
 	}
-	*/
-	// useEffect(()=>{},[])
+
+	// Set the user's pfp
+	useEffect(() => {
+		setPfp(pfp)
+	},[pfp])
 
 	// Get the asset name
 	// useEffect(()=>{},[])
 
-	return (
+	return (		
 		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 			<div
 				className={cf(s.flex, s.flex_dColumn, l.userContainer)}
@@ -162,7 +163,7 @@ const Advert = ({ ad }) => {
 						Lend
 					</button>
 				</div>
-			</div>
+			</div>			
 		</div>
 	)
 }
