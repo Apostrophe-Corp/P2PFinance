@@ -1,10 +1,10 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-array-constructor */
 /* eslint-disable no-use-before-define */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 'reach 0.1'
+
 const ParamsType = Object({
 	collateral: UInt,
 	principal: UInt,
@@ -14,18 +14,17 @@ const ParamsType = Object({
 	tokLoan: Token,
 	address: Address,
 })
+
 const ADVERTDEADLINE = 50
 
 export const main = Reach.App(() => {
-	const Borrower = Participant('Borrower', {
+	const B = Participant('B', {
 		getParams: Fun([], ParamsType),
 	})
-
 	const Lender = API('Lender', {
 		lend: Fun([], Bool),
 	})
-
-	const Borrowers = API('Borrowers', {
+	const Borrower = API('Borrower', {
 		repay: Fun([UInt], UInt),
 	})
 
@@ -36,24 +35,28 @@ export const main = Reach.App(() => {
 
 	init()
 
-	Borrower.only(() => {
+	B.only(() => {
 		const { tokCollateral, tokLoan, collateral, ...loanInfo } = declassify(
 			interact.getParams()
 		)
 		assume(loanInfo.principal < loanInfo.amount)
 		assume(tokCollateral != tokLoan)
 	})
-
-	Borrower.publish(tokCollateral, tokLoan, collateral, loanInfo)
+	B.publish(tokCollateral, tokLoan, collateral, loanInfo)
 	require(loanInfo.principal < loanInfo.amount)
 	commit()
-
-	Borrower.pay([[collateral, tokCollateral]])
+	B.pay([[collateral, tokCollateral]])
 
 	const [_, advertIsLive] = makeDeadline(ADVERTDEADLINE)
-	const [loanAccepted, lender] = parallelReduce([false, Borrower])
-		.invariant(balance(tokCollateral) == collateral)
-		.invariant(balance(tokLoan) == (loanAccepted ? loanInfo.principal : 0))
+	const [loanAccepted, lender] = parallelReduce([false, B])
+		.invariant(
+			balance(tokCollateral) == collateral,
+			'Collateral balance not right'
+		)
+		.invariant(
+			balance(tokLoan) == (loanAccepted ? loanInfo.principal : 0),
+			'Loan balance not right'
+		)
 		.while(advertIsLive() && !loanAccepted)
 		.api_(Lender.lend, () => {
 			return [
@@ -65,42 +68,54 @@ export const main = Reach.App(() => {
 				},
 			]
 		})
-
 	if (!loanAccepted) {
-		transfer(balance(tokCollateral), tokCollateral).to(Borrower)
-		transfer(balance()).to(Borrower)
+		transfer(balance(tokCollateral), tokCollateral).to(B)
+		transfer(balance()).to(B)
 		commit()
 		exit()
+	} else {
+		transfer(balance(tokLoan), tokLoan).to(B)
 	}
 
-	const currentTokLoanBal = balance(tokLoan)
 	const [q_, keepGoing] = makeDeadline(loanInfo.maturation)
 	const amountPaid = parallelReduce(0)
-		.invariant(balance(tokCollateral) == collateral)
-		.invariant(balance(tokLoan) == currentTokLoanBal + amountPaid)
+		.invariant(
+			balance(tokCollateral) == collateral,
+			'Collateral balance not right'
+		)
+		.invariant(balance(tokLoan) == amountPaid, 'Loan balance not right')
+		.invariant(
+			amountPaid <= loanInfo.amount,
+			'Amount paid is greater than repayment amount'
+		)
 		.define(() => {
 			LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
 			LoanViews.amountPaid.set(amountPaid)
 		})
 		.while(keepGoing() && amountPaid < loanInfo.amount)
-		.api_(Borrowers.repay, (amt) => {
-			check(this == loanInfo.address, 'You are not the Borrower')
+		.api_(Borrower.repay, (amt) => {
+			check(this == B, 'You are not the Borrower')
+			const excess =
+				amt + amountPaid > loanInfo.amount
+					? amt + amountPaid - loanInfo.amount
+					: 0
+			const payAmt = amt - excess
 			return [
-				[0, [amt, tokLoan]],
+				[0, [payAmt, tokLoan]],
 				(notify) => {
 					notify(amountPaid)
-					return amountPaid + amt
+					return amountPaid + payAmt
 				},
 			]
 		})
 
 	transfer(balance(tokCollateral), tokCollateral).to(
-		amountPaid < loanInfo.amount ? lender : Borrower
+		amountPaid < loanInfo.amount ? lender : B
 	)
 	transfer(balance(tokLoan), tokLoan).to(
-		amountPaid < loanInfo.amount ? Borrower : lender
+		amountPaid < loanInfo.amount ? B : lender
 	)
-	transfer(balance()).to(Borrower)
+	transfer(balance()).to(B)
 
 	commit()
 	exit()

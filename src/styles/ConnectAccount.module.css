@@ -1,0 +1,148 @@
+.conParent {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.conMask {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(133, 0, 255, 0.7);
+}
+
+.connectTitle {
+    composes: connectAccount from './App.module.css';
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    box-shadow: 0 5px 10px 5px rgb(54, 0, 131);
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.conContainer {
+    min-height: 50vh;
+    width: max(70%, 300px);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 30px 10px;
+    position: relative;
+}
+
+.closeBtn {
+    color: rgb(133, 0, 255);
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    position: absolute;
+    padding: 5px 10px;
+    top: 10px;
+    right: 10px;
+}
+
+.closeBtn:hover {
+    border: 1px solid rgb(133, 0, 255);
+}
+
+.wallet {
+    height: 400px;
+    background: url(../assets/images/wallet.jpg); /* bit.ly/3gD1nFM#i */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.connect {
+    opacity: 1;
+    gap: 20px;
+}
+
+/* .connectTitle{
+
+} */
+
+.connectOption {
+    width: 200px;
+    padding: 5px 5px;
+    box-shadow: 0 0 10px 5px rgba(97, 97, 97, 0.385);
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.walletIcon {
+    height: 50px;
+    width: 50px;
+    background: url(../assets/images/wallet.jpg); /* bit.ly/3gD1nFM#i */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.walletName {
+    flex: 1;
+}
+
+.walletNameText {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(48, 48, 48);
+}
+
+.pera {
+    background: url(https://algorand-governance-platform-web.s3.amazonaws.com/static/media/peraMobileWalletLogo.2a3002f0.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.myAlgo {
+    background: url(https://algorand-governance-platform-web.s3.amazonaws.com/static/media/MyAlgoLogo.30ab0664.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.other {
+    background: url(https://algorand-governance-platform-web.s3.amazonaws.com/static/media/Other.eac2bef4.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* -----------------Media-Queries---------------------- */
+@media only screen and (max-width: 900px) and (min-width: 761px) {
+    .wallet {
+            height: 350px;
+    }
+}
+
+@media only screen and (max-width: 760px) and (min-width: 481px) {
+    .wallet {
+            height: 300px;
+    }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 361px) {
+    .wallet {
+            height: 250px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .wallet {
+            height: 200px;
+    }
+}
