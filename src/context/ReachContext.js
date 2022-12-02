@@ -21,7 +21,6 @@ const waitingPro = {}
 export const ReachContext = React.createContext()
 
 const ReachContextProvider = ({ children }) => {
-	// states
 	const [user, setUser] = useState({
 		account: null,
 		balance: null,
