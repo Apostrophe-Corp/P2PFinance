@@ -27,7 +27,6 @@ export const setPfps = async (...others) => {
 			ref.current.style.backgroundPosition = 'center'
 			ref.current.style.backgroundRepeat = 'no-repeat'
 			ref.current.style.backgroundSize = 'contain'
-			await new Promise((resolve) => setTimeout(resolve, 500))
 		}
 	}
 }

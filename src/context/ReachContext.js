@@ -4,14 +4,17 @@ import {
 	loadStdlib,
 	ALGO_MyAlgoConnect as MyAlgoConnect,
 	ALGO_WalletConnect as WalletConnect,
+	ALGO_MakePeraConnect as MakePeraConnect,
 	ALGO_PeraConnect as PeraConnect,
 } from '@reach-sh/stdlib'
+import { PeraWalletConnect } from '@perawallet/connect'
 import { loanCtc, adminCtc } from '../../contracts'
 import { cf } from '../utils/cf'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 
 const reach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
+const providerEnv = 'TestNet'
 
 const waitingPro = {}
 
@@ -105,24 +108,32 @@ const ReachContextProvider = ({ children }) => {
 		delete window.algorand
 		const instantReach = loadStdlib(process.env)
 		switch (walletPreference) {
+			case 'PeraConnect':
+				instantReach.setWalletFallback(
+					instantReach.walletFallback({
+						providerEnv,
+						WalletConnect: MakePeraConnect(PeraWalletConnect),
+					})
+				)
+				break
 			case 'MyAlgoConnect':
 				instantReach.setWalletFallback(
-					instantReach.walletFallback({ providerEnv: 'TestNet', MyAlgoConnect })
+					instantReach.walletFallback({ providerEnv, MyAlgoConnect })
 				)
 				break
 			case 'WalletConnect':
 				instantReach.setWalletFallback(
-					instantReach.walletFallback({ providerEnv: 'TestNet', WalletConnect })
+					instantReach.walletFallback({ providerEnv, WalletConnect })
 				)
 				break
-			case 'PeraConnect':
+			case 'Mnemonic':
 				instantReach.setWalletFallback(
-					instantReach.walletFallback({ providerEnv: 'TestNet', PeraConnect })
+					instantReach.walletFallback({ providerEnv, PeraConnect })
 				)
 				break
 			default:
 				instantReach.setWalletFallback(
-					instantReach.walletFallback({ providerEnv: 'TestNet', WalletConnect })
+					instantReach.walletFallback({ providerEnv, WalletConnect })
 				)
 				break
 		}

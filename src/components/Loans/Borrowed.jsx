@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../utils'
+import { cf, setPfps, getTokenInfo } from '../../utils'
 import { loanCtc } from '../../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
@@ -17,15 +17,32 @@ const Borrowed = ({ loan }) => {
   const [outStanding, setOutStanding] = useState(loan.paymentAmount)
   const [maturation, setMaturation] = useState(loan.maturation)
   
-	// Get the user's pfp
-	/*
-	*/
-	// useEffect(()=>{},[])
+	useEffect(() => {
+		setPfps(
+			[uCRef, loan.tokenOffered, loan.offeredContract, true],
+			[pfpRef, loan.tokenOffered, loan.offeredContract, false]
+		)
+	}, [])
 
-	// Get the asset name
-	// useEffect(()=>{},[])
+	useEffect(() => {
+		const updateValues = async () => {
+			const assetData = await getTokenInfo(loan.tokenRequested, loan.tokenContract)
+			setAssetName(
+				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+			)
+			const collateralData = await getTokenInfo(
+				loan.tokenOffered,
+				loan.tokenContract
+			)
+			setCollateral(
+				`${collateralData?.name}${
+					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
+				}`
+			)
+		}
+		updateValues()
+	}, [])
 
-	// Query the loan contract to update the outstanding debt and maturation
 	useEffect(() => {
 		const ctc = instantReach.contract(loanCtc, JSON.parse(loan.contractInfo))
     const outStandingTimer = setInterval(async () => {

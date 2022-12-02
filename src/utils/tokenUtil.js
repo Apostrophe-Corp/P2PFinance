@@ -8,7 +8,7 @@ const savedNFTs = {}
 export const getTokenInfo = async (asset, address) => {
 	if (savedTokens[asset]) return savedTokens[asset]
 
-	const { result: { name = '', logo = '', ...result } = {} } = await fetch(
+	const { result: { name = '', symbol = '', logo = '', ...result } = {} } = await fetch(
 		`${alchemyTokURI}/${alchemyKEY}`,
 		{
 			method: 'POST',
@@ -34,7 +34,7 @@ export const getTokenInfo = async (asset, address) => {
 			}
 		})
 	if (result.success) {
-		savedTokens[asset] = { name, logo, result } // store the token data
+		savedTokens[asset] = { name, symbol, logo, result } // store the token data
 	}
 	return savedTokens[asset] ?? {} // the token data
 }

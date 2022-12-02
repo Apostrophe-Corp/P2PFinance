@@ -2,38 +2,42 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf } from '../../utils'
+import { cf, setPfps, getTokenInfo } from '../../utils'
 
-
-const Advert = ({ ad, pfp }) => {
+const Advert = ({ ad }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
-	const {lend} = useReach()
+	const { lend } = useReach()
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
 
-	const setPfp = (x = '') => {
-		// Set the container bg
-		uCRef.current.style.background = `rgba(255,255,255,.4), url(${x}))`
-		uCRef.current.style.backgroundPosition = 'center'
-		uCRef.current.style.backgroundRepeat = 'no-repeat'
-		uCRef.current.style.backgroundSize = 'contain'
-		// Set the pfp
-		pfpRef.current.style.background = `rgba(255,255,255,.4), url(${x}))`
-		pfpRef.current.style.backgroundPosition = 'center'
-		pfpRef.current.style.backgroundRepeat = 'no-repeat'
-		pfpRef.current.style.backgroundSize = 'contain'
-	}
-
-	// Set the user's pfp
 	useEffect(() => {
-		setPfp(pfp)
-	},[pfp])
+		setPfps(
+			[uCRef, ad.tokenOffered, ad.offeredContract, true],
+			[pfpRef, ad.tokenOffered, ad.offeredContract, false]
+		)
+	}, [])
 
-	// Get the asset name
-	// useEffect(()=>{},[])
+	useEffect(() => {
+		const updateValues = async () => {
+			const assetData = await getTokenInfo(ad.tokenRequested, ad.tokenContract)
+			setAssetName(
+				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+			)
+			const collateralData = await getTokenInfo(
+				ad.tokenOffered,
+				ad.tokenContract
+			)
+			setCollateral(
+				`${collateralData?.name}${
+					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
+				}`
+			)
+		}
+		updateValues()
+	}, [])
 
-	return (		
+	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 			<div
 				className={cf(s.flex, s.flex_dColumn, l.userContainer)}
@@ -157,13 +161,16 @@ const Advert = ({ ad, pfp }) => {
 					</div>
 				</div>
 				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<button className={ cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter) } onClick={ () => {
-						lend(ad.contractInfo, ad.amountRequested, ad.tokenRequested)
-					}}>
+					<button
+						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
+						onClick={() => {
+							lend(ad.contractInfo, ad.amountRequested, ad.tokenRequested)
+						}}
+					>
 						Lend
 					</button>
 				</div>
-			</div>			
+			</div>
 		</div>
 	)
 }

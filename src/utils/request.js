@@ -16,13 +16,15 @@ export const request = async ({
 					error,
 				}
 			})
-	return await fetch(path, {
-		method,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(body),
-	})
+	return (
+		await fetch(path, {
+			method,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
+	)
 		.then((res) => res.json())
 		.then((data) => ({ ...data, success: true }))
 		.catch((error) => {
