@@ -16,7 +16,7 @@ import { ConnectAccount } from '../components/ConnectAccount'
 const reach = loadStdlib({
 	...process.env,
 	REACH_NO_WARN: 'Y',
-	REACT_APP_REACH_CONNECTOR_MODE: 'ETH',
+	REACH_CONNECTOR_MODE: 'ETH',
 })
 const providerEnv = 'TestNet'
 
@@ -29,9 +29,6 @@ const ReachContextProvider = ({ children }) => {
 		account: null,
 		balance: null,
 		address: null,
-		username: null,
-		pfp: null,
-		pfpContract: null,
 	})
 
 	const [promiseOfConfirmation, setPromiseOfConfirmation] = useState({})
@@ -290,16 +287,18 @@ const ReachContextProvider = ({ children }) => {
 	const checkForSignin = async (func) => {
 		if (!user.account) {
 			const connect = await alertThis({
-				message: 'Log in and try that again',
-				accept: 'Log in',
+				message: 'Connect your wallet and try that again',
+				accept: 'Connect now',
 				decline: 'Not now',
 			})
 
 			if (connect) {
 				setShowConnectAccount(true)
 			}
-			return
-		}
+            return;
+        } else {
+               func() 
+            }
 	}
 
 	const create = async (loanParams) => {

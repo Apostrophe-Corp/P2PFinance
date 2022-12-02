@@ -8,7 +8,10 @@ import { cf } from '../utils'
 // TODO complete this component
 const Landing = () => {
 	const history = useHistory()
-	const { checkForSignin, alertThis } = useReach()
+	const { 
+        checkForSignin,
+        // alertThis
+    } = useReach()
 	return (
 		<div className={cf(s.wMax, s.window)}>
 			<div

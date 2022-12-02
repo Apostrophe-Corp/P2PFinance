@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import s from '../../styles/Shared.module.css'
 import su from '../../styles/SignUp.module.css'
-import { useReach } from '../../hooks'
+import { useReach, useAuth } from '../../hooks'
 import { cf, request } from '../../utils'
 
 const SignUp = () => {
-	const { alertThis } = useReach()
+	const { alertThis, user, checkForSignin } = useReach()
+	const { signUp } = useAuth()
 	const [[username, setUsername], [pfp, setPfp], [contract, setContract]] = [
 		useState(''),
 		useState(''),
@@ -15,32 +16,14 @@ const SignUp = () => {
 	const handleInputChange = (e) => {
 		const name = e.currentTarget.name
 		const value = e.currentTarget.value
-		if (name === pfp) setPfp(value)
-		else if (name === username) setUsername(value)
-		else if (name === contract) setContract(value)
+		if (name === 'pfp') setPfp(value)
+		else if (name === 'username') setUsername(value)
+		else if (name === 'contract') setContract(value)
 	}
 
 	const save = async (e) => {
 		e.preventDefault()
-		const result = await request({
-			path: '/users',
-			method: 'POST',
-			body: {
-				username,
-				pfp,
-				pfpAddress: contract,
-			},
-		})
-
-		alertThis({
-			message: result.success
-				? 'Success'
-				: 'Sorry, could not complete your request',
-			forConfirmation: false,
-		})
-
-		if (result.success) {
-		} // Go to profile page
+		await signUp(username, user.address, pfp, contract)
 	}
 
 	return (
@@ -51,7 +34,11 @@ const SignUp = () => {
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 				<form
 					className={cf(s.w900_50, s.w760_50, s.w480_100, s.w360_100)}
-					onSubmit={save}
+					onSubmit={(e) => {
+						checkForSignin(() => {
+							save(e)
+						})
+					}}
 				>
 					<label
 						htmlFor='username'
@@ -83,7 +70,7 @@ const SignUp = () => {
 						/>
 					</label>
 					<label
-						htmlFor='address'
+						htmlFor='contract'
 						className={cf(s.wMax, s.flex, s.flexCenter, su.label)}
 					>
 						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
@@ -92,8 +79,8 @@ const SignUp = () => {
 						<input
 							className={cf(s.wMax, s.dInlineBlock, su.input)}
 							placeholder='Contract Address'
-							id='address'
-							name='address'
+							id='contract'
+							name='contract'
 							onChange={handleInputChange}
 						/>
 					</label>

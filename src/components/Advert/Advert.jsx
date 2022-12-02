@@ -16,7 +16,7 @@ const Advert = ({ ad }) => {
 			[uCRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, true],
 			[pfpRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, false]
 		)
-	}, [])
+	}, [ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract])
 
 	useEffect(() => {
 		const updateValues = async () => {

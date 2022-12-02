@@ -9,7 +9,9 @@ import { cf } from '../utils'
 const App = ({children}) => {
 	const history = useHistory()
 	const { checkForSignin, setShowConnectAccount } = useReach()
-	const { isAuthenticated, authUser, signIn, signOut, signUp } = useAuth()
+  const { isAuthenticated, authUser,
+    // signIn, signOut, signUp
+   } = useAuth()
 	return (
 		<div>
 			<div
@@ -25,9 +27,7 @@ const App = ({children}) => {
 				<div
 					className={cf(app.branding, s.w480_100, s.w360_100)}
 					onClick={() => {
-						checkForSignin(() => {
 							history.push('/')
-						})
 					}}
 				>
 					0xAuction

@@ -3,8 +3,7 @@ import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
 import { cf, setPfps, getTokenInfo } from '../../utils'
-import { loanCtc } from '../../../contracts'
-import { loadStdlib } from '@reach-sh/stdlib'
+import { loadStdlib } from '../../contracts'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 
@@ -21,7 +20,7 @@ const Loaned = ({ loan }) => {
 			[uCRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, true],
 			[pfpRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, false]
 		)
-	}, [])
+	}, [loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract])
 
 	useEffect(() => {
 		const updateValues = async () => {
@@ -43,7 +42,7 @@ const Loaned = ({ loan }) => {
 			)
 		}
 		updateValues()
-	}, [])
+	}, [loan.tokenContract, loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		const maturationTimer = setInterval(async () => {
@@ -55,7 +54,7 @@ const Loaned = ({ loan }) => {
 		return () => {
 			clearInterval(maturationTimer)
 		}
-	}, [])
+	}, [loan.maturation])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter)}>

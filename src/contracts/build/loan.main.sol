@@ -851,12 +851,12 @@ contract ReachContract is Stdlib {
     _reachi_5(_ja, _Memory);
     }
   function _reacha_LoanViews_amountPaid(bool _a, Memory memory _Memory) internal view {
-    reachRequire(((current_step == uint256(5))), uint256(7) /*'(./contracts/loan.rsh:34:27:property binding,[],Just "Incorrect state: not leaf")'*/);
+    reachRequire(((current_step == uint256(5))), uint256(7) /*'(./src/contracts/loan.rsh:34:27:property binding,[],Just "Incorrect state: not leaf")'*/);
     (T6 memory _svs) = abi.decode(current_svbs, (T6));
     _Memory._reachr_LoanViews_amountPaid = _svs.v623;
     }
   function _reacha_LoanViews_loanPaid(bool _a, Memory memory _Memory) internal view {
-    reachRequire(((current_step == uint256(5))), uint256(8) /*'(./contracts/loan.rsh:33:25:property binding,[],Just "Incorrect state: not leaf")'*/);
+    reachRequire(((current_step == uint256(5))), uint256(8) /*'(./src/contracts/loan.rsh:33:25:property binding,[],Just "Incorrect state: not leaf")'*/);
     (T6 memory _svs) = abi.decode(current_svbs, (T6));
     _Memory._reachr_LoanViews_loanPaid = _svs.v654;
     }
@@ -870,7 +870,7 @@ contract ReachContract is Stdlib {
     _F1125 memory _f;
     reachRequire((! locked), uint256(9) /*'locked'*/);
     emit _reach_e0(msg.sender, _a);
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(10) /*'time check at ./contracts/loan.rsh:46:11:dot'*/);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(10) /*'time check at ./src/contracts/loan.rsh:46:11:dot'*/);
     _f.v469.elem0 = uint256(0);
     _f.v469.elem1 = uint256(0);
     _f.v469.elem2 = false;
@@ -878,11 +878,11 @@ contract ReachContract is Stdlib {
     _f.v470[1] = _f.v469;
     _f.v504 = array_set5(_f.v470, uint256(0), (T4({elem0: uint256(0), elem1: (_f.v470[uint256(0)]).elem1, elem2: (_f.v470[uint256(0)]).elem2})));
     _f.v508 = array_set5(_f.v504, uint256(1), (T4({elem0: uint256(0), elem1: (_f.v504[uint256(1)]).elem1, elem2: (_f.v504[uint256(1)]).elem2})));
-    reachRequire(((((_a.elem2) == (_a.elem1)) ? false : true)), uint256(11) /*'(./contracts/loan.rsh:46:11:dot,[],Just "non-network tokens distinct")'*/);
+    reachRequire(((((_a.elem2) == (_a.elem1)) ? false : true)), uint256(11) /*'(./src/contracts/loan.rsh:46:11:dot,[],Just "non-network tokens distinct")'*/);
     
     
-    reachRequire((msg.value == uint256(0)), uint256(12) /*'(./contracts/loan.rsh:46:11:dot,[],"verify network token pay amount")'*/);
-    reachRequire(((((_a.elem4)._principal) < ((_a.elem4)._amount))), uint256(13) /*'(./contracts/loan.rsh:47:16:application,[],Nothing)'*/);
+    reachRequire((msg.value == uint256(0)), uint256(12) /*'(./src/contracts/loan.rsh:46:11:dot,[],"verify network token pay amount")'*/);
+    reachRequire(((((_a.elem4)._principal) < ((_a.elem4)._amount))), uint256(13) /*'(./src/contracts/loan.rsh:47:16:application,[],Nothing)'*/);
     T9 memory nsvs;
     nsvs.v495 = payable(msg.sender);
     nsvs.v496 = (_a.elem1);
@@ -900,12 +900,12 @@ contract ReachContract is Stdlib {
   function _reachi_1(T1 memory _a, Memory memory _Memory) internal  {
     reachRequire((! locked), uint256(14) /*'locked'*/);
     emit _reach_e1(msg.sender, _a);
-    reachRequire((current_step == uint256(1)), uint256(15) /*'state check at ./contracts/loan.rsh:49:11:dot'*/);
+    reachRequire((current_step == uint256(1)), uint256(15) /*'state check at ./src/contracts/loan.rsh:49:11:dot'*/);
     (T9 memory _svs) = abi.decode(current_svbs, (T9));
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(16) /*'time check at ./contracts/loan.rsh:49:11:dot'*/);
-    reachRequire((msg.value == uint256(0)), uint256(17) /*'(./contracts/loan.rsh:49:11:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v496, _svs.v498)), uint256(18) /*'(./contracts/loan.rsh:49:11:dot,[],"verify non-network token pay amount")'*/);
-    reachRequire(((_svs.v495 == payable(msg.sender))), uint256(19) /*'(./contracts/loan.rsh:49:11:dot,[],Just "sender correct")'*/);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(16) /*'time check at ./src/contracts/loan.rsh:49:11:dot'*/);
+    reachRequire((msg.value == uint256(0)), uint256(17) /*'(./src/contracts/loan.rsh:49:11:dot,[],"verify network token pay amount")'*/);
+    reachRequire((checkPayAmt(msg.sender, _svs.v496, _svs.v498)), uint256(18) /*'(./src/contracts/loan.rsh:49:11:dot,[],"verify non-network token pay amount")'*/);
+    reachRequire(((_svs.v495 == payable(msg.sender))), uint256(19) /*'(./src/contracts/loan.rsh:49:11:dot,[],Just "sender correct")'*/);
     T10  memory _ja;
     _ja.elem0 = _svs.v495;
     _ja.elem1 = _svs.v496;
@@ -933,10 +933,10 @@ contract ReachContract is Stdlib {
     _F1127 memory _f;
     reachRequire((! locked), uint256(20) /*'locked'*/);
     emit _reach_e4(msg.sender, _a);
-    reachRequire((current_step == uint256(5)), uint256(21) /*'state check at ./contracts/loan.rsh:83:42:dot'*/);
+    reachRequire((current_step == uint256(5)), uint256(21) /*'state check at ./src/contracts/loan.rsh:83:42:dot'*/);
     (T6 memory _svs) = abi.decode(current_svbs, (T6));
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(22) /*'time check at ./contracts/loan.rsh:83:42:dot'*/);
-    reachRequire(((payable(msg.sender) == _svs.v495)), uint256(23) /*'(reach standard library:57:5:application,[at ./contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp),at ./contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./contracts/loan.rsh:98:45:function exp),at ./contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./contracts/loan.rsh:98:45:function exp)],Just "You are not the Borrower")'*/);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(22) /*'time check at ./src/contracts/loan.rsh:83:42:dot'*/);
+    reachRequire(((payable(msg.sender) == _svs.v495)), uint256(23) /*'(reach standard library:57:5:application,[at ./src/contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp),at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp),at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)],Just "You are not the Borrower")'*/);
     _f.v696 = safeAdd(((_a.elem1).elem0), _svs.v623);
     _f.v698 = _f.v696 > _svs.v513;
     if (_f.v698) {
@@ -946,8 +946,8 @@ contract ReachContract is Stdlib {
       _f.v699 = uint256(0);
       }
     _f.v703 = safeSub(((_a.elem1).elem0), _f.v699);
-    reachRequire((msg.value == uint256(0)), uint256(24) /*'(./contracts/loan.rsh:83:42:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v497, _f.v703)), uint256(25) /*'(./contracts/loan.rsh:83:42:dot,[],"verify non-network token pay amount")'*/);
+    reachRequire((msg.value == uint256(0)), uint256(24) /*'(./src/contracts/loan.rsh:83:42:dot,[],"verify network token pay amount")'*/);
+    reachRequire((checkPayAmt(msg.sender, _svs.v497, _f.v703)), uint256(25) /*'(./src/contracts/loan.rsh:83:42:dot,[],"verify non-network token pay amount")'*/);
     if (_f.v698) {
       _f.v720 = (safeSub(_f.v696, _svs.v513));
       }
@@ -973,12 +973,12 @@ contract ReachContract is Stdlib {
   function _reachi_5(T3 memory _a, Memory memory _Memory) internal  {
     reachRequire((! locked), uint256(26) /*'locked'*/);
     emit _reach_e5(msg.sender, _a);
-    reachRequire((current_step == uint256(7)), uint256(27) /*'state check at ./contracts/loan.rsh:53:54:dot'*/);
+    reachRequire((current_step == uint256(7)), uint256(27) /*'state check at ./src/contracts/loan.rsh:53:54:dot'*/);
     (T12 memory _svs) = abi.decode(current_svbs, (T12));
     _a.elem1;
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(28) /*'time check at ./contracts/loan.rsh:53:54:dot'*/);
-    reachRequire((msg.value == uint256(0)), uint256(29) /*'(./contracts/loan.rsh:53:54:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v497, _svs.v512)), uint256(30) /*'(./contracts/loan.rsh:53:54:dot,[],"verify non-network token pay amount")'*/);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(28) /*'time check at ./src/contracts/loan.rsh:53:54:dot'*/);
+    reachRequire((msg.value == uint256(0)), uint256(29) /*'(./src/contracts/loan.rsh:53:54:dot,[],"verify network token pay amount")'*/);
+    reachRequire((checkPayAmt(msg.sender, _svs.v497, _svs.v512)), uint256(30) /*'(./src/contracts/loan.rsh:53:54:dot,[],"verify non-network token pay amount")'*/);
     emit _reach_oe_v577( (true));
     _Memory._reachr_Lender_lend = (true);
     T10  memory _ja;

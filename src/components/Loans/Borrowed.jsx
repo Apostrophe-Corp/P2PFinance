@@ -14,19 +14,22 @@ const Borrowed = ({ loan }) => {
 	const { repay } = useReach()
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-  const [outStanding, setOutStanding] = useState(loan.paymentAmount)
-  const [maturation, setMaturation] = useState(loan.maturation)
-  
-  useEffect(() => {
-	setPfps(
-		[uCRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, true],
-		[pfpRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, false]
-	)
-}, [])
+	const [outStanding, setOutStanding] = useState(loan.paymentAmount)
+	const [maturation, setMaturation] = useState(loan.maturation)
+
+	useEffect(() => {
+		setPfps(
+			[uCRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, true],
+			[pfpRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, false]
+		)
+	}, [])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(loan.tokenRequested, loan.tokenContract)
+			const assetData = await getTokenInfo(
+				loan.tokenRequested,
+				loan.tokenContract
+			)
 			setAssetName(
 				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
 			)
@@ -45,11 +48,11 @@ const Borrowed = ({ loan }) => {
 
 	useEffect(() => {
 		const ctc = instantReach.contract(loanCtc, JSON.parse(loan.contractInfo))
-    const outStandingTimer = setInterval(async () => {
-      const amountPaid = (await ctc.v.LoanViews.amountPaid()?.[1])
-      console.log(amountPaid)
-      const outstanding = loan.paymentAmount - amountPaid
-      setOutStanding(outstanding)
+		const outStandingTimer = setInterval(async () => {
+			const amountPaid = await ctc.v.LoanViews.amountPaid()?.[1]
+			console.log(amountPaid)
+			const outstanding = loan.paymentAmount - amountPaid
+			setOutStanding(outstanding)
 		}, 5000)
 
 		const maturationTimer = setInterval(async () => {
