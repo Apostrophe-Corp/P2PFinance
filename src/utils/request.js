@@ -17,7 +17,7 @@ export const request = async ({
 				}
 			})
 	return (
-		await fetch(path, {
+		await fetch(`${serverURI}/${path}`, {
 			method,
 			headers: {
 				'Content-Type': 'application/json',

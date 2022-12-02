@@ -17,12 +17,12 @@ const Borrowed = ({ loan }) => {
   const [outStanding, setOutStanding] = useState(loan.paymentAmount)
   const [maturation, setMaturation] = useState(loan.maturation)
   
-	useEffect(() => {
-		setPfps(
-			[uCRef, loan.tokenOffered, loan.offeredContract, true],
-			[pfpRef, loan.tokenOffered, loan.offeredContract, false]
-		)
-	}, [])
+  useEffect(() => {
+	setPfps(
+		[uCRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, true],
+		[pfpRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, false]
+	)
+}, [])
 
 	useEffect(() => {
 		const updateValues = async () => {
@@ -76,7 +76,7 @@ const Borrowed = ({ loan }) => {
 				></div>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, l.username)}>
 					<span className={cf(s.dInlineBlock, s.p5, l.usernameText)}>
-						{loan.username}
+						{loan?.lenderInfo?.username}
 					</span>
 				</div>
 			</div>

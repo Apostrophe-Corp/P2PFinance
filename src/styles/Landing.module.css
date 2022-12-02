@@ -1,0 +1,348 @@
+.header {
+    background: linear-gradient(
+                    to bottom right,
+                    rgb(152, 0, 223),
+                    rgba(0, 119, 255, 0.5)
+            ),
+            rgb(152, 0, 223);
+    color: var(--reachWhite);
+    padding: 10px 100px;
+}
+
+.branding {
+    text-transform: none;
+    background:
+    /* linear-gradient(
+                    to bottom right,
+                    rgb(247, 231, 255),
+                    rgb(213, 3, 255)
+            ), */ rgb(
+            255,
+            255,
+            255
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.navItem {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.navItem::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    transform: scale(0, 1);
+    margin: 0 auto;
+    background-color: #fff;
+    transition: transform 0.3s;
+}
+
+.navItem:hover::after {
+    transform: scale(1, 1);
+}
+
+.connectAccount {
+    padding: 10px;
+    border-radius: 10px;
+    border: 0.5px solid rgb(0, 145, 255);
+    background-color: rgb(106, 0, 255);
+    color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px 5px rgb(54, 0, 131);
+    font-weight: 500;
+    font-size: 14px;
+    width: 200px;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.connectAccount:hover {
+    background-color: rgb(49, 0, 118);
+}
+
+.hero {
+    background: linear-gradient(to bottom, transparent, var(--reachBlack)),
+            url(../assets/images/bigConcept.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 140vh;
+}
+
+.heroWelcome {
+    opacity: 1;
+}
+
+.heroWelcomeText {
+    font-weight: var(--font-weight-medium-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--font-size-0);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.catchPhrase {
+    opacity: 1;
+}
+
+.catchPhraseText {
+    /* -----Imported-styles----- */
+    max-width: 10em;
+    margin: var(--spacing-6) 0 0;
+    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
+            linear-gradient(25deg, #c67df4 23%, #fff 60%);
+    letter-spacing: 0.01em;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* ------------------------- */
+    text-align: center;
+    font-size: 70px;
+}
+
+.intro {
+    opacity: 1;
+}
+
+.introText {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    max-width: 30em;
+}
+
+.forestParent {
+    opacity: 1;
+    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+    background: linear-gradient(to bottom, transparent, rgb(93, 0, 154)), #000;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.forestTextCon {
+    padding-top: 50px 10px;
+}
+
+.forestText {
+    font-weight: var(--font-weight-bold-5);
+    color: var(--title);
+    font-size: 50px;
+}
+
+.cardForest {
+    opacity: 1;
+    padding: 30px 0;
+}
+
+.card {
+    color: #fff;
+    max-width: 300px;
+    padding: 10px;
+    background-color: rgb(11, 0, 21);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.cardAction {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+}
+
+.cardPurpose {
+    padding: 20px 0;
+    gap: 5px;
+}
+
+.cardPurposeText {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.cardDescription {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.cardIcon {
+    padding-top: 10px;
+}
+
+.community {
+    box-shadow: 0 0 10px 5px rgb(93, 0, 154);
+    background-color: rgb(93, 0, 154);
+    color: #fff !important;
+    padding-bottom: 100px;
+}
+
+.joinCommunity,
+.communitySocials {
+    width: max(48%, 300px);
+    margin: 0;
+}
+
+/* .joinCommunity {
+    width: 46%;
+} */
+
+.joinComThemeText {
+    font-weight: var(--font-weight-bold-5);
+    font-size: var(--font-size-5);
+    line-height: var(--font-size-5);
+    text-align: left;
+}
+
+.joinComDescriptionText {
+    margin-top: var(--spacing-6);
+    line-height: calc(1.53983em + 0.13429vw - 0.42972px);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-normal-1);
+    padding-right: 70px !important;
+}
+
+.joinComAction {
+    opacity: 1;
+}
+
+.joinComActionLink {
+    color: var(--title);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.communitySocial {
+    opacity: 1;
+    gap: 10px;
+}
+
+.comSocialIcon {
+    width: 50px;
+    cursor: pointer;
+}
+
+.comSocialIcon svg {
+    width: 100%;
+}
+
+.comSocialContent {
+    flex: 1;
+}
+
+.comSocialName {
+    font-weight: var(--font-weight-bold-1);
+    font-size: var(--font-size-1);
+}
+
+.comSocialDescription {
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-normal-0);
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+}
+
+.footerBranding {
+    composes: branding;
+    background: linear-gradient(
+                    to bottom right,
+                    rgb(152, 0, 223),
+                    rgba(0, 119, 255, 0.5)
+            ),
+            rgb(152, 0, 223);
+    background-clip: text;
+    font-size: 30px;
+    font-weight: 800;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footerSocial {
+    width: 50px;
+    height: 50px;
+}
+
+.footerSocial svg,
+.footerSocial svg path {
+    width: 100%;
+    height: 100%;
+}
+
+.registered {
+    text-align: center;
+    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
+            linear-gradient(25deg, #c67df4 23%, #fff 60%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 900px) and (min-width: 761px) {
+    .header {
+            padding: 10px 80px;
+    }
+
+    .hero {
+            min-height: 95vh;
+    }
+}
+
+@media only screen and (max-width: 760px) and (min-width: 481px) {
+    .header {
+            padding: 10px 60px;
+    }
+
+    .hero {
+            min-height: 90vh;
+    }
+}
+
+@media only screen and (max-width: 480px) and (min-width: 361px) {
+    .header {
+            padding: 10px 40px;
+    }
+
+    .hero {
+            min-height: 90vh;
+    }
+
+    .catchPhraseText {
+            font-size: 50px;
+    }
+
+    .branding {
+            text-align: center;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .header {
+            padding: 10px 20px;
+    }
+    .hero {
+            height: 80vh;
+    }
+
+    .catchPhraseText {
+            font-size: 40px;
+    }
+
+    .branding {
+            text-align: center;
+    }
+}

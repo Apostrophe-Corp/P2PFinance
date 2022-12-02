@@ -20,6 +20,7 @@ const ADVERTDEADLINE = 50
 export const main = Reach.App(() => {
 	const B = Participant('B', {
 		getParams: Fun([], ParamsType),
+		created: Fun([UInt], Null),
 	})
 	const Lender = API('Lender', {
 		lend: Fun([], Bool),
@@ -46,6 +47,7 @@ export const main = Reach.App(() => {
 	require(loanInfo.principal < loanInfo.amount)
 	commit()
 	B.pay([[collateral, tokCollateral]])
+	B.interact.created(thisConsensusTime())
 
 	const [_, advertIsLive] = makeDeadline(ADVERTDEADLINE)
 	const [loanAccepted, lender] = parallelReduce([false, B])

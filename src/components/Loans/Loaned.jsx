@@ -18,14 +18,17 @@ const Loaned = ({ loan }) => {
 
 	useEffect(() => {
 		setPfps(
-			[uCRef, loan.tokenOffered, loan.offeredContract, true],
-			[pfpRef, loan.tokenOffered, loan.offeredContract, false]
+			[uCRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, true],
+			[pfpRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, false]
 		)
 	}, [])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(loan.tokenRequested, loan.tokenContract)
+			const assetData = await getTokenInfo(
+				loan.tokenRequested,
+				loan.tokenContract
+			)
 			setAssetName(
 				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
 			)
@@ -42,7 +45,7 @@ const Loaned = ({ loan }) => {
 		updateValues()
 	}, [])
 
-  useEffect(() => {
+	useEffect(() => {
 		const maturationTimer = setInterval(async () => {
 			const currentTime = await instantReach.getNetworkTime()
 			const blocksRemaining = loan.maturation - currentTime
@@ -66,7 +69,7 @@ const Loaned = ({ loan }) => {
 				></div>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, l.username)}>
 					<span className={cf(s.dInlineBlock, s.p5, l.usernameText)}>
-						{loan.username}
+						{loan?.borrowerInfo?.username}
 					</span>
 				</div>
 			</div>

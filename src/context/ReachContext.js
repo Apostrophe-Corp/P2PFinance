@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import {
 	loadStdlib,
@@ -9,11 +9,15 @@ import {
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
 import { loanCtc, adminCtc } from '../../contracts'
-import { cf } from '../utils/cf'
+import { cf, request } from '../utils/cf'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 
-const reach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
+const reach = loadStdlib({
+	...process.env,
+	REACH_NO_WARN: 'Y',
+	REACT_APP_REACH_CONNECTOR_MODE: 'ETH',
+})
 const providerEnv = 'TestNet'
 
 const waitingPro = {}
@@ -25,6 +29,9 @@ const ReachContextProvider = ({ children }) => {
 		account: null,
 		balance: null,
 		address: null,
+		username: null,
+		pfp: null,
+		pfpContract: null,
 	})
 
 	const [promiseOfConfirmation, setPromiseOfConfirmation] = useState({})
@@ -98,6 +105,37 @@ const ReachContextProvider = ({ children }) => {
 		else if (waitingPro.reject) waitingPro.reject()
 	}
 
+	const connectToWalletETH = async () => {
+		try {
+			const account = await reach.getDefaultAccount()
+			setUser({
+				...user,
+				account,
+				balance: async (tokenID = null) => {
+					const balAtomic = tokenID
+						? await reach.balanceOf(account, tokenID)
+						: await reach.balanceOf(account)
+					const balance = reach.formatCurrency(balAtomic, 4)
+					return balance
+				},
+				address: reach.formatAddress(account.getAddress()),
+			})
+			stopWaiting()
+			alertThis({
+				message: 'Connection to wallet was successful',
+				forConfirmation: false,
+			})
+		} catch (error) {
+			console.error({ error })
+			stopWaiting(false)
+			alertThis({
+				message:
+					'An error occurred, unable to connect to wallet. Please try again',
+				forConfirmation: false,
+			})
+		}
+	}
+
 	const connectToWallet = async (
 		walletPreference,
 		mnemonic = false,
@@ -143,7 +181,9 @@ const ReachContextProvider = ({ children }) => {
 			setUser({
 				account,
 				balance: async (tokenID = null) => {
-					const balAtomic = await reach.balanceOf(account, tokenID)
+					const balAtomic = tokenID
+						? await reach.balanceOf(account, tokenID)
+						: await reach.balanceOf(account)
 					const balance = reach.formatCurrency(balAtomic, 4)
 					return balance
 				},
@@ -247,10 +287,85 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
+	const checkForSignin = async (func) => {
+		if (!user.account) {
+			const connect = await alertThis({
+				message: 'Log in and try that again',
+				accept: 'Log in',
+				decline: 'Not now',
+			})
+
+			if (connect) {
+				setShowConnectAccount(true)
+			}
+			return
+		}
+	}
+
+	const create = async (loanParams) => {
+		startWaiting()
+		const optKeys = Object.keys(loanParams)
+		const len = optKeys.length
+		const creationOpts = { borrower: user.address }
+		let i = 0
+		for (i; i < len; i++) {
+			const key = optKeys[i]
+			if (loanParams[key]) creationOpts[key] = loanParams[key]
+		}
+		try {
+			const ctc = user.account.contract(loanCtc)
+			ctc.p.B({
+				getParams: {
+					collateral: Number(loanParams['amountOffered']),
+					principal: Number(loanParams['amountRequested']),
+					amount: Number(loanParams['paymentAmount']),
+					maturation: Number(loanParams['maturation']),
+					tokCollateral: Number(loanParams['tokenOffered']),
+					tokLoan: Number(loanParams['tokeRequested']),
+					address: user.address,
+				},
+				created: async (created) => {
+					const res = await request({
+						path: `/loans`,
+						method: 'POST',
+						body: {
+							...loanParams,
+                            contractInfo: JSON.stringify(await ctc.getInfo()),
+                            created,
+						},
+					})
+
+					if (res.success) {
+						alertThis({
+							message: 'Success',
+							forConfirmation: false,
+						})
+					} else {
+						alertThis({
+							message: `Failed to upload Advert information. Error message: ${res.message}`,
+							forConfirmation: false,
+						})
+					}
+				},
+			})
+			stopWaiting()
+		} catch (error) {
+			console.log({ error })
+			stopWaiting()
+			alertThis({
+				message: 'Creation failed',
+				forConfirmation: false,
+			})
+		}
+	}
+
 	const ReachContextValue = {
 		// ...states
 		user,
-		connectToWallet,
+		connectToWallet:
+			process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH'
+				? connectToWalletETH
+				: connectToWallet,
 		promiseOfConfirmation,
 		setPromiseOfConfirmation,
 		alertInfo,
@@ -261,16 +376,27 @@ const ReachContextProvider = ({ children }) => {
 		setShowPreloader,
 		setProcessing,
 		sleep,
+		processing,
 		setShowConnectAccount,
 		alertThis,
 		lend,
 		repay,
+		checkForSignin,
+		create,
 	}
 
 	return (
 		<ReachContext.Provider value={ReachContextValue}>
 			<Helmet>
-				<title>Urgent2K | D-Lending Platform</title>
+                <title>Urgent2K | D-Lending Platform</title>
+                <link
+                                        rel='icon'
+                                        href={icon} // TODO get an icon
+                                />
+                                <link
+                                        rel='apple-touch-icon'
+                                        href={icon}
+                                />
 				<meta
 					name='viewport'
 					content='width=device-width, initial-scale=1.0'

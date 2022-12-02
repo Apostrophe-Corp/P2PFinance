@@ -13,8 +13,8 @@ const Advert = ({ ad }) => {
 
 	useEffect(() => {
 		setPfps(
-			[uCRef, ad.tokenOffered, ad.offeredContract, true],
-			[pfpRef, ad.tokenOffered, ad.offeredContract, false]
+			[uCRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, true],
+			[pfpRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, false]
 		)
 	}, [])
 
@@ -49,7 +49,7 @@ const Advert = ({ ad }) => {
 				></div>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, l.username)}>
 					<span className={cf(s.dInlineBlock, s.p5, l.usernameText)}>
-						{ad.username}
+						{ad?.borrowerInfo?.username}
 					</span>
 				</div>
 			</div>
