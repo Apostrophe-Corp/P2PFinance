@@ -4,6 +4,7 @@ import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
 import { cf, request } from '../../utils'
 
+// TODO complete this component
 const Loans = ({ children }) => {
     const [pfps, setPfps] = useState([])
 
