@@ -44,12 +44,12 @@ const PrivateRoute = ({ child }) => {
 
 	return (
 		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
-			{isAuthenticated ? (
+			{/* {isAuthenticated ? ( */}
 				{ child }
-			) : (
+			{/* ) : (
 				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }
