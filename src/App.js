@@ -10,6 +10,8 @@ import AppView from './views/App'
 import ReachContextProvider from './context/ReachContext'
 import AuthContextProvider from './context/AuthContext'
 import { Landing, Loans, Profile } from './layouts'
+import { SignUp } from './components/SignUp'
+import { Create } from './components/Create'
 
 const PrivateRoute = ({ children, ...rest }) => {
 	const { isAuthenticated } = useAuth()
@@ -46,10 +48,12 @@ const App = () => {
 							<PrivateRoute path='/account'>
 								<Profile />
 							</PrivateRoute>
-							<PrivateRoute path='/account'>
-								<Profile />
+							<PrivateRoute path='/new-loan'>
+								<Create />
 							</PrivateRoute>
-							<Route path='/sign-in'>{/* <SignIn/> */}</Route>
+							<Route path='/sign-up'>
+								<SignUp />
+							</Route>
 						</Routes>
 					</Router>
 				</AppView>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import su from '../../styles/SignUp.module.css'
 import { useReach, useAuth } from '../../hooks'
@@ -12,6 +13,7 @@ const SignUp = () => {
 		useState(''),
 		useState(''),
 	]
+	const navigate = useNavigate()
 
 	const handleInputChange = (e) => {
 		const name = e.currentTarget.name
@@ -28,14 +30,19 @@ const SignUp = () => {
 			method: 'GET',
 		})
 		if (!(registered.success && registered.id))
-			await signUp(username, user.address, pfp, contract)
+			await signUp(username, user.address, pfp, contract, () => {
+				navigate('/account')
+			})
 		else {
 			const signin = await alertThis({
 				message: `You're already registered. Please Sign in`,
 				accept: 'Continue',
 				decline: 'Not now',
 			})
-			if (signin) await signIn(user.address)
+			if (signin)
+				await signIn(user.address, () => {
+					navigate('/account')
+				})
 		}
 	}
 

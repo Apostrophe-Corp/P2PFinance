@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useReach } from '../hooks'
 import { request } from '../utils'
 
@@ -9,7 +8,6 @@ const AuthContextProvider = ({ children }) => {
 	const { alertThis } = useReach()
 	const [isAuthenticated, setIsAuthenticated] = useState({})
 	const [authUser, setAuthUser] = useState({})
-	const navigate = useNavigate()
 
 	const signIn = async (address, cb=null) => {
 		const res = await request({
@@ -20,8 +18,7 @@ const AuthContextProvider = ({ children }) => {
 		if (res.success) {
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
-			cb != null && cb()
-			navigate('/account')
+			cb != null && cb()			
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -53,7 +50,6 @@ const AuthContextProvider = ({ children }) => {
 			setIsAuthenticated(true)
 			setAuthUser({ username, address, pfp, pfpContract })
 			cb != null && cb()
-			navigate('/account')
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -70,10 +66,9 @@ const AuthContextProvider = ({ children }) => {
 
 	const signOut = async (cb=null) => {
 		if (isAuthenticated) {
-			navigate('/')
+			cb != null && cb()
 			setIsAuthenticated(false)
 			setAuthUser({})
-			cb != null && cb()
 		}
 	}
 

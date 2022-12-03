@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
-import { useReach, fmtClasses as cf } from '../../hooks'
-import { setPfps } from '../../utils'
-import previewImg from '../../assets/images/preview.jpg' // TODO change this image
+import { useReach } from '../../hooks'
+import { setPfps, cf } from '../../utils'
+import previewImg from '../../assets/images/logo.jpg' // TODO change this image
 
 const Create = () => {
 	const { mintNFT } = useReach()
@@ -11,8 +11,8 @@ const Create = () => {
 
 	const previewRef = useRef()
 
-	const setPreviewBgs = (x) => {
-		previewRef.current.style.background = `url(${x})`
+	const setPreviewBgs = () => {
+		previewRef.current.style.background = `url(${previewImg})`
 		previewRef.current.style.backgroundPosition = 'center'
 		previewRef.current.style.backgroundRepeat = 'no-repeat'
 		previewRef.current.style.backgroundSize = 'contain'
@@ -34,6 +34,12 @@ const Create = () => {
 				...loanParams,
 				[name]: value,
 			})
+		}
+
+		if (loanParams['tokenOffered'] && loanParams['offeredContract']) {
+			setPfps([previewRef, loanParams['tokenOffered'], loanParams['offeredContract'], false])
+		}else{
+			setPreviewBgs()
 		}
 
 		e.currentTarget.value = value
