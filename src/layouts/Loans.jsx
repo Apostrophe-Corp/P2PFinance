@@ -6,22 +6,6 @@ import { Advert } from '../components/Advert'
 
 const Loans = () => {
 	const [loans, setLoans] = useState([])
-	// const [loanNum, setLoanNum] = useState([])
-	// const [page, setPage] = useState(1)
-
-	// const PageNumbers = ({ index }) => {
-	// 	return (
-	// 		<div
-	// 			key={index}
-	// 			className={cf(s.flex, s.flexCenter, s.dInlineBlock, s.p5, s.bRad5)}
-	// 			onClick={() => {
-	// 				setPage(index)
-	// 			}}
-	// 		>
-	// 			{index}
-	// 		</div>
-	// 	)
-	// }
 
 	useEffect(() => {
 		let retriever = undefined
@@ -44,16 +28,6 @@ const Loans = () => {
 			retriever = undefined
 		}
 	}, [])
-
-	// useEffect(() => {
-	// 	const x = [],
-	// 		runs = Math.ceil(loans.length / 5)
-	// 	let i = 0
-	// 	for (i; i < runs; i++) {
-	// 		x.push(i + 1)
-	// 	}
-	// 	setLoanNum(x)
-	// }, [loans])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.loanContainer)}>
@@ -130,9 +104,6 @@ const Loans = () => {
 				</div>
 			</div>
 			{loans && loans.map((el) => <Advert ad={el} />)}
-			{/* <div className={cf(s.wMax, s.flex, s.flexCenter, l.pageNumbers)}>
-				{loanNum && loanNum.map((el) => <PageNumbers index={el} />)}
-			</div> */}
 		</div>
 	)
 }

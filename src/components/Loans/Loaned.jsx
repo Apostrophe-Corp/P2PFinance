@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
-import { useReach } from '../../hooks'
 import { cf, setPfps, getTokenInfo } from '../../utils'
 import { loadStdlib } from '../../contracts'
 
@@ -10,7 +9,6 @@ const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 const Loaned = ({ loan }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
-	const { lend } = useReach()
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
 	const [maturation, setMaturation] = useState(loan.maturation)
@@ -178,16 +176,6 @@ const Loaned = ({ loan }) => {
 							Blocks
 						</span>
 					</div>
-				</div>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<button
-						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
-						onClick={() => {
-							lend(loan.contractInfo, loan.amountRequested, loan.tokenRequested)
-						}}
-					>
-						Lend
-					</button>
 				</div>
 			</div>
 		</div>

@@ -6,12 +6,10 @@ import { useReach, useAuth } from '../hooks'
 import { cf } from '../utils'
 
 // TODO complete this component
-const App = ({children}) => {
+const App = ({ children }) => {
 	const history = useHistory()
-	const { checkForSignin, setShowConnectAccount } = useReach()
-  const { isAuthenticated, authUser,
-    // signIn, signOut, signUp
-   } = useAuth()
+	const { checkForSignin, setShowConnectAccount, user } = useReach()
+	const { isAuthenticated, authUser } = useAuth()
 	return (
 		<div>
 			<div
@@ -27,10 +25,10 @@ const App = ({children}) => {
 				<div
 					className={cf(app.branding, s.w480_100, s.w360_100)}
 					onClick={() => {
-							history.push('/')
+						history.push('/')
 					}}
 				>
-					0xAuction
+					Urgent2K
 				</div>
 				<div className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}>
 					<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter)}>
@@ -59,18 +57,20 @@ const App = ({children}) => {
 				<button
 					className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 					onClick={() => {
-						// isAuthenticated && // 
+						!isAuthenticated
+							? history.push('/sign-up')
+							: history.push('/account')
 					}}
 				>
 					{isAuthenticated ? authUser.username : `Sign Up`}
-        </button>
-        <button
+				</button>
+				<button
 					className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 					onClick={() => {
 						setShowConnectAccount(true)
 					}}
 				>
-					{isAuthenticated ? 'Sign Out' : `Sign In`}
+					{!user.account ? 'Connect Wallet' : user.address}
 				</button>
 			</div>
 			{children}
@@ -79,14 +79,14 @@ const App = ({children}) => {
 					<div
 						className={cf(app.footerBranding)}
 						onClick={() => {
-              history.push('/')
+							history.push('/')
 						}}
 					>
-						0xAuction
+						Urgent2K
 					</div>
 					<div className={cf(s.wMax, app.registered)}>
-						0xAuction is the product of Apostrophe Corp. for the Algorand Green
-						House Bounty Hack.
+						Urgent2K is the product of Apostrophe Corp. for the Polygon Bounty
+						Hack.
 					</div>
 				</div>
 			</div>

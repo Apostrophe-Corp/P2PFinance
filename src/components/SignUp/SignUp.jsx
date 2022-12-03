@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import s from '../../styles/Shared.module.css'
 import su from '../../styles/SignUp.module.css'
 import { useReach, useAuth } from '../../hooks'
@@ -6,7 +6,7 @@ import { cf, request } from '../../utils'
 
 const SignUp = () => {
 	const { alertThis, user, checkForSignin } = useReach()
-	const { signUp } = useAuth()
+	const { signUp, signIn } = useAuth()
 	const [[username, setUsername], [pfp, setPfp], [contract, setContract]] = [
 		useState(''),
 		useState(''),
@@ -23,7 +23,20 @@ const SignUp = () => {
 
 	const save = async (e) => {
 		e.preventDefault()
-		await signUp(username, user.address, pfp, contract)
+		const registered = await request({
+			path: `/users/${user.address}`,
+			method: 'GET',
+		})
+		if (!(registered.success && registered.id))
+			await signUp(username, user.address, pfp, contract)
+		else {
+			const signin = await alertThis({
+				message: `You're already registered. Please Sign in`,
+				accept: 'Continue',
+				decline: 'Not now',
+			})
+			if (signin) await signIn(user.address)
+		}
 	}
 
 	return (

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Helmet from 'react-helmet'
 import {
 	loadStdlib,
 	ALGO_MyAlgoConnect as MyAlgoConnect,
@@ -9,9 +8,10 @@ import {
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
 import { loanCtc, adminCtc } from '../../contracts'
-import { cf, request } from '../utils/cf'
+import { request } from '../utils/cf'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
+import { LoadingPreview } from '../components/LoadingPreview'
 
 const reach = loadStdlib({
 	...process.env,
@@ -30,6 +30,7 @@ const ReachContextProvider = ({ children }) => {
 		balance: null,
 		address: null,
 	})
+	const [adminConnection, setAdminConnection] = useState(null)
 
 	const [promiseOfConfirmation, setPromiseOfConfirmation] = useState({})
 
@@ -105,8 +106,11 @@ const ReachContextProvider = ({ children }) => {
 	const connectToWalletETH = async () => {
 		try {
 			const account = await reach.getDefaultAccount()
+			const adminConn = account.contract(
+				adminCtc,
+				JSON.parse(process.env.REACT_APP_ADMIN_CONTRACT_INFO)
+			)
 			setUser({
-				...user,
 				account,
 				balance: async (tokenID = null) => {
 					const balAtomic = tokenID
@@ -117,6 +121,7 @@ const ReachContextProvider = ({ children }) => {
 				},
 				address: reach.formatAddress(account.getAddress()),
 			})
+			setAdminConnection(adminConn)
 			stopWaiting()
 			alertThis({
 				message: 'Connection to wallet was successful',
@@ -203,7 +208,8 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const lend = async (loanCtcInfo, loanAmount, asset) => {
+	const lend = async (id, loanCtcInfo, loanAmount, asset) => {
+		let rewardSent = false
 		const userAssetBalance = await reach.balanceOf(user.account, asset)
 		const enough = userAssetBalance >= loanAmount
 
@@ -226,11 +232,34 @@ const ReachContextProvider = ({ children }) => {
 		try {
 			const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
 			await ctc.a.Lender.lend()
-			stopWaiting()
-			alertThis({
-				message: 'Success',
-				forConfirmation: false,
+
+			const res = await request({
+				path: `/loans/${id}`,
+				method: 'PATCH',
+				body: {
+					lender: String(user.address),
+				},
 			})
+
+			try {
+				rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
+			} catch (error) {
+				console.log({ error })
+			}
+			stopWaiting()
+			if (res.success) {
+				alertThis({
+					message: `Success!${
+						rewardSent ? ` You've also received some loyalty tokens` : ''
+					}`,
+					forConfirmation: false,
+				})
+			} else {
+				alertThis({
+					message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.message}`,
+					forConfirmation: false,
+				})
+			}
 		} catch (error) {
 			console.log({ error })
 			stopWaiting()
@@ -295,10 +324,10 @@ const ReachContextProvider = ({ children }) => {
 			if (connect) {
 				setShowConnectAccount(true)
 			}
-            return;
-        } else {
-               func() 
-            }
+			return
+		} else {
+			func()
+		}
 	}
 
 	const create = async (loanParams) => {
@@ -324,19 +353,29 @@ const ReachContextProvider = ({ children }) => {
 					address: user.address,
 				},
 				created: async (created) => {
+					let rewardSent = false
 					const res = await request({
 						path: `/loans`,
 						method: 'POST',
 						body: {
 							...loanParams,
-                            contractInfo: JSON.stringify(await ctc.getInfo()),
-                            created,
+							contractInfo: JSON.stringify(await ctc.getInfo()),
+							created,
 						},
 					})
-
+					try {
+						rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
+							user.address
+						)
+					} catch (error) {
+						console.log({ error })
+					}
+					stopWaiting()
 					if (res.success) {
 						alertThis({
-							message: 'Success',
+							message: `Success!${
+								rewardSent ? ` You've also received some loyalty tokens` : ''
+							}`,
 							forConfirmation: false,
 						})
 					} else {
@@ -347,7 +386,6 @@ const ReachContextProvider = ({ children }) => {
 					}
 				},
 			})
-			stopWaiting()
 		} catch (error) {
 			console.log({ error })
 			stopWaiting()
@@ -386,24 +424,10 @@ const ReachContextProvider = ({ children }) => {
 
 	return (
 		<ReachContext.Provider value={ReachContextValue}>
-			<Helmet>
-                <title>Urgent2K | D-Lending Platform</title>
-                <link
-                                        rel='icon'
-                                        href={icon} // TODO get an icon
-                                />
-                                <link
-                                        rel='apple-touch-icon'
-                                        href={icon}
-                                />
-				<meta
-					name='viewport'
-					content='width=device-width, initial-scale=1.0'
-				/>
-			</Helmet>
 			{children}
 			<Alert />
 			{showConnectAccount && <ConnectAccount />}
+			{processing && <LoadingPreview />}
 		</ReachContext.Provider>
 	)
 }

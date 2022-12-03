@@ -22,7 +22,7 @@ const Borrowed = ({ loan }) => {
 			[uCRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, true],
 			[pfpRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, false]
 		)
-	}, [])
+	}, [loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract])
 
 	useEffect(() => {
 		const updateValues = async () => {
@@ -44,7 +44,7 @@ const Borrowed = ({ loan }) => {
 			)
 		}
 		updateValues()
-	}, [])
+	}, [loan.tokenContract, loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		const ctc = instantReach.contract(loanCtc, JSON.parse(loan.contractInfo))
@@ -65,7 +65,7 @@ const Borrowed = ({ loan }) => {
 			clearInterval(outStandingTimer)
 			clearInterval(maturationTimer)
 		}
-	}, [])
+	}, [loan.contractInfo, loan.maturation, loan.paymentAmount])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter)}>

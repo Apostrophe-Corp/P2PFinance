@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom'
+import { useAuth } from './hooks'
+import AppView from './views/App'
+import ReachContextProvider from './context/ReachContext'
+import AuthContextProvider from './context/AuthContext'
+import { Landing, Loans, Profile } from './layouts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const PrivateRoute = ({ children, ...rest }) => {
+	const { isAuthenticated } = useAuth()
+	return (
+		<Route
+			{...rest}
+			render={({ location }) =>
+				isAuthenticated ? (
+					children
+				) : (
+					<Redirect
+						to={{
+							pathname: '/sign-in',
+							state: { from: location },
+						}}
+					/>
+				)
+			}
+		/>
+	)
 }
 
-export default App;
+const App = () => {
+	return (
+		<ReachContextProvider>
+			<AuthContextProvider>
+        <AppView>
+          <Router>
+            <Switch>
+              <Route path='/'>
+                <Landing/>
+              </Route>
+              <PrivateRoute path='/loans'>
+                <Loans/>
+              </PrivateRoute>
+              <PrivateRoute path='/account'>
+                <Profile/>
+              </PrivateRoute>
+              <PrivateRoute path='/account'>
+                <Profile/>
+              </PrivateRoute>
+              <Route path='/sign-in'>
+                {/* <SignIn/> */}
+              </Route>
+            </Switch>
+          </Router>
+        </AppView>
+			</AuthContextProvider>
+		</ReachContextProvider>
+	)
+}
+
+export default App

@@ -1,0 +1,165 @@
+:root {
+    --max: rgb(255, 255, 255);
+    --mid: rgb(215, 96, 255);
+    --min: rgb(195, 0, 255);
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--max);
+    z-index: 10000;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    display: none;
+    padding: 5px;
+    color: rgba(5, 226, 255, 0.1);
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: var(--themeText);
+    box-shadow: 0 2px 5px 0 var(--theme);
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.terminated {
+    display: none !important;
+}
+
+.circle {
+    height: 10px;
+    width: 10px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+    animation-duration: 1s;
+}
+
+.c1 {
+    animation-name: aC1;
+}
+
+.c2 {
+    animation-name: aC2;
+}
+
+.c3 {
+    animation-name: aC3;
+}
+
+@keyframes aC1 {
+    0% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    20% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    40% {
+            transform: scale(2, 2);
+            background-color: var(--min);
+    }
+
+    60% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    80% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    100% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+}
+
+@keyframes aC2 {
+    0% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    20% {
+            transform: scale(2, 2);
+            background-color: var(--min);
+    }
+
+    40% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    60% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    80% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    100% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+}
+
+@keyframes aC3 {
+    0% {
+            transform: scale(2, 2);
+            background-color: var(--min);
+    }
+
+    20% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    40% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    60% {
+            transform: scale(1, 1);
+            background-color: var(--max);
+    }
+
+    80% {
+            transform: scale(1.5, 1.5);
+            background-color: var(--mid);
+    }
+
+    100% {
+            transform: scale(2, 2);
+            background-color: var(--min);
+    }
+}

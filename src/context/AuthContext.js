@@ -11,7 +11,7 @@ const AuthContextProvider = ({ children }) => {
 	const [authUser, setAuthUser] = useState({})
 	const history = useHistory()
 
-	const signIn = async (address, cb) => {
+	const signIn = async (address, cb=null) => {
 		const res = await request({
 			path: `/users/${address}`,
 			method: 'GET',
@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
 		if (res.success) {
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
-			cb()
+			cb != null && cb()
 			history.push('/account')
 			alertThis({
 				message: 'Success',
@@ -37,7 +37,7 @@ const AuthContextProvider = ({ children }) => {
 		return res.success
 	}
 
-	const signUp = async ({ username, address, pfp, pfpContract }, cb) => {
+	const signUp = async ({ username, address, pfp, pfpContract }, cb=null) => {
 		const res = await request({
 			path: `/users`,
 			method: 'POST',
@@ -52,7 +52,7 @@ const AuthContextProvider = ({ children }) => {
 		if (res.success) {
 			setIsAuthenticated(true)
 			setAuthUser({ username, address, pfp, pfpContract })
-			cb()
+			cb != null && cb()
 			history.push('/account')
 			alertThis({
 				message: 'Success',
@@ -68,12 +68,12 @@ const AuthContextProvider = ({ children }) => {
 		return res.success
 	}
 
-	const signOut = async (cb) => {
+	const signOut = async (cb=null) => {
 		if (isAuthenticated) {
 			history.push('/')
 			setIsAuthenticated(false)
 			setAuthUser({})
-			cb()
+			cb != null && cb()
 		}
 	}
 

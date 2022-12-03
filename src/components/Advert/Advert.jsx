@@ -35,7 +35,7 @@ const Advert = ({ ad }) => {
 			)
 		}
 		updateValues()
-	}, [])
+	}, [ad.tokenContract, ad.tokenOffered, ad.tokenRequested])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
@@ -164,7 +164,7 @@ const Advert = ({ ad }) => {
 					<button
 						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
 						onClick={() => {
-							lend(ad.contractInfo, ad.amountRequested, ad.tokenRequested)
+							lend(ad.id, ad.contractInfo, ad.amountRequested, ad.tokenRequested)
 						}}
 					>
 						Lend
