@@ -21,17 +21,20 @@ const PrivateRoute = ({ child }) => {
 
 	useEffect(() => {
 		const verifyAuth = async () => {
-			if (!isAuthenticated) {
-				const accept = await alertThis({
-					message: 'You are not signed in. Would you like to do so?',
-					accept: 'Sign in',
-					decline: 'Not now',
-				})
-				if (accept) {
-					const stay = await signIn(user.address)
-					if (!stay) navigate(-1)
-				} else {
-					navigate(-1)
+			if (!user.account) {
+				navigate('/')
+				if (!isAuthenticated) {
+					const accept = await alertThis({
+						message: 'You are not signed in. Would you like to do so?',
+						accept: 'Sign in',
+						decline: 'Not now',
+					})
+					if (accept) {
+						const stay = await signIn(user.address)
+						if (!stay) navigate(-1)
+					} else {
+						navigate(-1)
+					}
 				}
 			}
 		}
