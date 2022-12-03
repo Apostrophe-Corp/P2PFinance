@@ -105,6 +105,13 @@ const ReachContextProvider = ({ children }) => {
 
 	const connectToWalletETH = async () => {
 		try {
+			reach.setWalletFallback(
+				reach.walletFallback({
+					providerEnv: {
+						ETH_NODE_URI: 'https://matic-mubai.chainstacklabs.com',
+					},
+				})
+			)
 			const account = await reach.getDefaultAccount()
 			const adminConn = account.contract(
 				adminCtc,
@@ -215,13 +222,13 @@ const ReachContextProvider = ({ children }) => {
 
 		if (!enough) {
 			alertThis({
-				message: `Your balance of asset - ${asset}: ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
+				message: `Your balance of asset (${asset}): ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
 				forConfirmation: false,
 			})
 			return
 		}
 		const agreed = await alertThis({
-			message: `You're about to lend ${loanAmount} of asset: ${asset}. Proceed?`,
+			message: `You're about to lend ${loanAmount} of asset (${asset}). Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
 		})
@@ -281,13 +288,13 @@ const ReachContextProvider = ({ children }) => {
 
 		if (!enough) {
 			alertThis({
-				message: `Your balance of asset - ${asset}: ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
+				message: `Your balance of asset (${asset}): ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
 				forConfirmation: false,
 			})
 			return
 		}
 		const agreed = await alertThis({
-			message: `You're about to repay ${payAmount} of asset: ${asset}. Proceed?`,
+			message: `You're about to repay ${payAmount} of asset (${asset}). Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
 		})
@@ -348,9 +355,9 @@ const ReachContextProvider = ({ children }) => {
 					principal: Number(loanParams['amountRequested']),
 					amount: Number(loanParams['paymentAmount']),
 					maturation: Number(loanParams['maturation']),
-					tokCollateral: Number(loanParams['tokenOffered']),
-					tokLoan: Number(loanParams['tokeRequested']),
-					address: user.address,
+					tokCollateral: reach.formatAddress(loanParams['tokenOffered']),
+					tokLoan: reach.formatAddress(loanParams['tokeRequested']),
+					address: reach.formatAddress(user.address),
 				},
 				created: async (created) => {
 					let rewardSent = false
@@ -365,7 +372,7 @@ const ReachContextProvider = ({ children }) => {
 					})
 					try {
 						rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
-							user.address
+							reach.formatAddress(user.address)
 						)
 					} catch (error) {
 						console.log({ error })

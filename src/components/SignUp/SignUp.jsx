@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { loadStdlib } from '@reach-sh/stdlib'
 import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
-import su from '../../styles/SignUp.module.css'
+import cr8 from '../../styles/Create.module.css'
 import { useReach, useAuth } from '../../hooks'
-import { cf, request } from '../../utils'
+import { cf, request, setPfps } from '../../utils'
+
+const reach = loadStdlib({
+	...process.env,
+	REACH_NO_WARN: 'Y',
+	REACH_CONNECTOR_MODE: 'ETH',
+})
 
 const SignUp = () => {
-	const { alertThis, user, checkForSignIn } = useReach()
+	const pfpRef = useRef()
+	const { alertThis, user } = useReach()
 	const { signUp, signIn } = useAuth()
 	const [[username, setUsername], [pfp, setPfp], [contract, setContract]] = [
 		useState(''),
@@ -25,6 +33,15 @@ const SignUp = () => {
 
 	const save = async (e) => {
 		e.preventDefault()
+		const owned = await reach.balanceOf(user.account, contract)
+		const owned_ = await reach.balanceOf(user.account, pfp)
+		if (!(owned || owned_)) {
+			alertThis({
+				message: "You don't seem to own this NFT",
+				forConfirmation: false,
+			})
+			return
+		}
 		const registered = await request({
 			path: `/users/${user.address}`,
 			method: 'GET',
@@ -46,65 +63,120 @@ const SignUp = () => {
 		}
 	}
 
+	useEffect(() => {
+		let timer = undefined
+		if (pfp && contract && timer === undefined) {
+			timer = setTimeout(() => {
+				setPfps([pfpRef, pfp, contract, false])
+				clearTimeout(timer)
+				timer = undefined
+			}, 3000)
+		}
+		return () => {
+			clearTimeout(timer)
+			timer = undefined
+		}
+	}, [pfp, contract])
+
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-				<div className={cf(su.pfp)}></div>
-			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-				<form
-					className={cf(s.w900_50, s.w760_50, s.w480_100, s.w360_100)}
-					onSubmit={(e) => {
-						checkForSignIn(() => {
-							save(e)
-						})
-					}}
+		<div className={cf(s.wMax, s.window)}>
+			<div className={cf(s.wMax, s.flex, s.fleCenter, s.m0, cr8.createParent)}>
+				<div
+					className={cf(
+						s.flex,
+						s.flexCenter,
+						s.flex_dColumn,
+						s.w50,
+						s.w900_100,
+						s.w760_100,
+						s.w480_100,
+						s.w360_100,
+						cr8.callOut
+					)}
 				>
-					<label
-						htmlFor='username'
-						className={cf(s.wMax, s.flex, s.flexCenter, su.label)}
+					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
+						Some dummy text...Some dummy text...Some dummy text...Some dummy
+						text...
+					</h1>
+					<h2 className={cf(cr8.callOutSub)}>
+						Some dummy text...Some dummy text...Some dummy text...
+					</h2>
+				</div>
+				<div
+					className={cf(
+						s.w50,
+						s.w900_100,
+						s.w760_100,
+						s.w480_100,
+						s.w360_100,
+						s.flex,
+						s.flexCenter,
+						cr8.formContainer
+					)}
+				>
+					<form
+						className={cf(s.flex, s.flexCenter, s.flex_dColumn, cr8.createForm)}
+						onSubmit={save}
 					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							Username
+						<div
+							className={cf(cr8.preview)}
+							ref={pfpRef}
+						></div>
+						<span className={cf(cr8.sideNote)}>
+							Preview only available for image NFTs
 						</span>
-						<input
-							className={cf(s.wMax, s.dInlineBlock, su.input)}
-							id='username'
-							name='username'
-							onChange={handleInputChange}
-						/>
-					</label>
-					<label
-						htmlFor='pfp'
-						className={cf(s.wMax, s.flex, s.flexCenter, su.label)}
-					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							NFT ID
-						</span>
-						<input
-							className={cf(s.wMax, s.dInlineBlock, su.input)}
-							placeholder='New PFP ID'
-							id='pfp'
-							name='pfp'
-							onChange={handleInputChange}
-						/>
-					</label>
-					<label
-						htmlFor='contract'
-						className={cf(s.wMax, s.flex, s.flexCenter, su.label)}
-					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							NFT Contract Address
-						</span>
-						<input
-							className={cf(s.wMax, s.dInlineBlock, su.input)}
-							placeholder='Contract Address'
-							id='contract'
-							name='contract'
-							onChange={handleInputChange}
-						/>
-					</label>
-				</form>
+						<label
+							className={cf(cr8.formLabel)}
+							htmlFor='username'
+						>
+							<span className={cf(cr8.formText)}>Username</span>
+							<input
+								type='text'
+								name='username'
+								id='username'
+								onInput={handleInputChange}
+								placeholder=''
+								className={cf(cr8.formInput)}
+							/>
+						</label>
+						<label
+							className={cf(cr8.formLabel)}
+							htmlFor='pfp'
+						>
+							<span className={cf(cr8.formText)}>NFT ID</span>
+							<input
+								type='text'
+								name='pfp'
+								id='pfp'
+								onInput={handleInputChange}
+								placeholder=''
+								className={cf(cr8.formInput)}
+							/>
+						</label>
+						<label
+							className={cf(cr8.formLabel)}
+							htmlFor='contract'
+						>
+							<span className={cf(cr8.formText)}>NFT Contract Address</span>
+							<input
+								type='number'
+								name='contract'
+								id='contract'
+								onInput={handleInputChange}
+								placeholder=''
+								className={cf(cr8.formInput)}
+							/>
+						</label>
+						<div className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}>
+							<button
+								type='submit'
+								disabled={!(username && contract && pfp)}
+							>
+								Sign Up
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	)
