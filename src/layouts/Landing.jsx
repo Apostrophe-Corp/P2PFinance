@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useReach } from '../hooks'
 import s from '../styles/Shared.module.css'
 import lg from '../styles/Landing.module.css'
@@ -7,7 +7,7 @@ import { cf } from '../utils'
 
 // TODO complete this component
 const Landing = () => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { 
         checkForSignin,
         // alertThis
@@ -78,7 +78,7 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignin(() => {
-								history.push('/new-loan')
+								navigate('/new-loan')
 							})
 						}}
 					>
@@ -140,7 +140,7 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignin(() => {
-								history.push('/loans')
+								navigate('/loans')
 							})
 						}}
 					>
@@ -172,7 +172,7 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignin(() => {
-								history.push('/loans')
+								navigate('/loans')
 							})
 						}}
 					>

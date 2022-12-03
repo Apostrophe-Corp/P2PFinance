@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useReach } from '../hooks'
 import { request } from '../utils'
 
@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
 	const { alertThis } = useReach()
 	const [isAuthenticated, setIsAuthenticated] = useState({})
 	const [authUser, setAuthUser] = useState({})
-	const history = useHistory()
+	const navigate = useNavigate()
 
 	const signIn = async (address, cb=null) => {
 		const res = await request({
@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
 			cb != null && cb()
-			history.push('/account')
+			navigate('/account')
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -53,7 +53,7 @@ const AuthContextProvider = ({ children }) => {
 			setIsAuthenticated(true)
 			setAuthUser({ username, address, pfp, pfpContract })
 			cb != null && cb()
-			history.push('/account')
+			navigate('/account')
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -70,7 +70,7 @@ const AuthContextProvider = ({ children }) => {
 
 	const signOut = async (cb=null) => {
 		if (isAuthenticated) {
-			history.push('/')
+			navigate('/')
 			setIsAuthenticated(false)
 			setAuthUser({})
 			cb != null && cb()

@@ -72,7 +72,7 @@
 
 .hero {
     background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-            url(../assets/images/bigConcept.jpg);
+            url(../assets/images/contractLand.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

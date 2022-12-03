@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'rect'
+import React, { useState, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import alt from '../../styles/Alert.module.css'
 import { useReach } from '../../hooks'

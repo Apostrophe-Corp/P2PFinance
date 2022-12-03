@@ -1,242 +1,232 @@
 .createParent {
-    background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-            url(../assets/images/nftEth.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: inherit;
-    padding: 50px 10px;
-}
-
-.sellParent {
-    background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-            url(../assets/images/abstractTech.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: inherit;
-    padding: 50px 10px;
+	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
+		url(../assets/images/contractBox.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: inherit;
+	padding: 50px 10px;
 }
 
 .callOut {
-    opacity: 1;
+	opacity: 1;
 }
 
 .callOutMain {
-    color: var(--title);
-    width: 60%;
-    font-size: 60px;
-    font-weight: 500px;
+	color: var(--title);
+	width: 60%;
+	font-size: 60px;
+	font-weight: 500px;
 }
 
 .callOutSub {
-    color: var(--title);
-    width: 60%;
-    /* font- */
+	color: var(--title);
+	width: 60%;
+	/* font- */
 }
 
 .preview {
-    height: 200px;
-    width: 200px;
-    background: url(../assets/images/preview.jpg); /* bit.ly/3gD1nFM#i */
-    /* background: url(https://bit.ly/3gD1nFM#i), url(../assets/images/404.jpg); bit.ly/3gD1nFM#i */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+	height: 200px;
+	width: 200px;
+	background: url(../assets/images/logo.jpg); /* bit.ly/3gD1nFM#i */
+	/* background: url(https://bit.ly/3gD1nFM#i), url(../assets/images/404.jpg); bit.ly/3gD1nFM#i */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .createForm {
-    width: max(70%, 300px);
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent),
-            linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3)),
-            rgb(255, 255, 255);
-    border: 1px solid transparent;
-    border-radius: 10px;
-    padding: 20px 10px;
+	width: max(70%, 300px);
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent),
+		linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3)),
+		rgb(255, 255, 255);
+	border: 1px solid transparent;
+	border-radius: 10px;
+	padding: 20px 10px;
 }
 
 .formThemeYour {
-    text-transform: none;
-    background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(209, 3, 255)),
-            rgb(0, 0, 0);
-    background-clip: text;
-    font-size: 30px;
-    font-weight: 800;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+	text-transform: none;
+	background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(209, 3, 255)),
+		rgb(0, 0, 0);
+	background-clip: text;
+	font-size: 30px;
+	font-weight: 800;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .sideNote {
-    width: 100%;
-    display: inline-block;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: center;
+	width: 100%;
+	display: inline-block;
+	color: rgba(0, 0, 0, 0.6);
+	text-align: center;
 }
 
 .formLabel {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 100%;
-    padding: 5px;
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 5px;
+	width: 100%;
+	padding: 5px;
 }
 
 .formText {
-    display: inline-block;
-    width: 100%;
-    font-weight: 600;
-    color: #000;
-    font-size: 18px;
+	display: inline-block;
+	width: 100%;
+	font-weight: 600;
+	color: #000;
+	font-size: 18px;
 }
 
 .formInput {
-    width: 100%;
-    display: block;
-    padding: 5px;
-    font-family: inherit;
-    font-size: 16px;
-    color: rgb(51, 51, 51);
-    font-weight: 600;
-    border: 0.5px solid transparent;
-    outline: none !important;
-    border-radius: 5px;
+	width: 100%;
+	display: block;
+	padding: 5px;
+	font-family: inherit;
+	font-size: 16px;
+	color: rgb(51, 51, 51);
+	font-weight: 600;
+	border: 0.5px solid transparent;
+	outline: none !important;
+	border-radius: 5px;
 }
 
 .formInput[type='url'] {
-    color: rgb(187, 0, 255);
+	color: rgb(187, 0, 255);
 }
 
 .urlDiv {
-    gap: 5px;
+	gap: 5px;
 }
 
 .https {
-    padding: 5px;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: #fff;
-    color: rgb(187, 0, 255);
-    border: 0.5px solid transparent;
-    border-radius: 5px;
+	padding: 5px;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 600;
+	background-color: #fff;
+	color: rgb(187, 0, 255);
+	border: 0.5px solid transparent;
+	border-radius: 5px;
 }
 
 .nestedInput {
-    flex: 1;
+	flex: 1;
 }
 
 .note {
-    display: block;
-    padding: 2px;
-    border: 0.5px solid transparent;
-    background-color: #fff;
-    color: rgb(0, 0, 0);
-    border-radius: 5px;
-    text-align: center;
-    width: 100%;
-    font-weight: 400;
+	display: block;
+	padding: 2px;
+	border: 0.5px solid transparent;
+	background-color: #fff;
+	color: rgb(0, 0, 0);
+	border-radius: 5px;
+	text-align: center;
+	width: 100%;
+	font-weight: 400;
 }
 
 .partLink {
-    color: rgb(187, 0, 255);
-    font-weight: 600;
+	color: rgb(187, 0, 255);
+	font-weight: 600;
 }
 
 .submitDiv {
-    padding: 20px 10px 10px;
+	padding: 20px 10px 10px;
 }
 
 .submitDiv button {
-    padding: 5px 30px;
-    border: 2px solid rgb(187, 0, 255);
-    background: linear-gradient(
-                    to bottom,
-                    rgba(102, 0, 255, 0.471),
-                    rgba(0, 0, 0, 0.525)
-            ),
-            linear-gradient(to right, rgba(0, 0, 0, 0.46), rgba(85, 0, 255, 0.471));
-    color: rgb(255, 255, 255);
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 5px;
+	padding: 5px 30px;
+	border: 2px solid rgb(187, 0, 255);
+	background: linear-gradient(
+			to bottom,
+			rgba(102, 0, 255, 0.471),
+			rgba(0, 0, 0, 0.525)
+		),
+		linear-gradient(to right, rgba(0, 0, 0, 0.46), rgba(85, 0, 255, 0.471));
+	color: rgb(255, 255, 255);
+	font-size: 18px;
+	font-weight: 700;
+	border-radius: 5px;
 }
 
 .submitDiv button:disabled {
-    padding: 5px 30px;
-    border: 2px solid rgb(210, 210, 210);
-    background: linear-gradient(
-                    to bottom,
-                    rgba(224, 224, 224, 0.471),
-                    rgba(0, 0, 0, 0.525)
-            ),
-            linear-gradient(to right, rgba(0, 0, 0, 0.46), rgba(224, 224, 224, 0.471));
-    color: rgb(182, 182, 182);
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 5px;
-    cursor: not-allowed !important;
+	padding: 5px 30px;
+	border: 2px solid rgb(210, 210, 210);
+	background: linear-gradient(
+			to bottom,
+			rgba(224, 224, 224, 0.471),
+			rgba(0, 0, 0, 0.525)
+		),
+		linear-gradient(to right, rgba(0, 0, 0, 0.46), rgba(224, 224, 224, 0.471));
+	color: rgb(182, 182, 182);
+	font-size: 18px;
+	font-weight: 700;
+	border-radius: 5px;
+	cursor: not-allowed !important;
 }
 
 .checkboxLabel {
-    flex-direction: row !important;
+	flex-direction: row !important;
 }
 
 .forCheckbox {
-    width: 100%;
-    flex: 1;
+	width: 100%;
+	flex: 1;
 }
 
 .checkbox {
-    opacity: 1;
+	opacity: 1;
 }
 
 /* -----------------Media-Queries---------------------- */
 @media only screen and (max-width: 900px) and (min-width: 761px) {
-    .callOutMain {
-            text-align: center;
-    }
-    .callOutSub {
-            text-align: center;
-    }
+	.callOutMain {
+		text-align: center;
+	}
+	.callOutSub {
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width: 760px) and (min-width: 481px) {
-    .callOutMain {
-            text-align: center;
-    }
-    .callOutSub {
-            text-align: center;
-    }
+	.callOutMain {
+		text-align: center;
+	}
+	.callOutSub {
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width: 480px) and (min-width: 361px) {
-    .formContainer {
-            /* position: absolute;
+	.formContainer {
+		/* position: absolute;
             top: 0;
             bottom: 0;
             left: 0;
             right: 0; */
-    }
+	}
 
-    .callOutMain {
-            text-align: center;
-    }
+	.callOutMain {
+		text-align: center;
+	}
 
-    .callOutSub {
-            text-align: center;
-    }
+	.callOutSub {
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width: 360px) {
-    .callOutMain {
-            text-align: center;
-    }
+	.callOutMain {
+		text-align: center;
+	}
 
-    .callOutSub {
-            text-align: center;
-    }
+	.callOutSub {
+		text-align: center;
+	}
 }

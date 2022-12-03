@@ -1,13 +1,13 @@
 import React from 'react'
 import s from '../styles/Shared.module.css'
 import app from '../styles/Landing.module.css'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useReach, useAuth } from '../hooks'
 import { cf } from '../utils'
 
 // TODO complete this component
 const App = ({ children }) => {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { checkForSignin, setShowConnectAccount, user } = useReach()
 	const { isAuthenticated, authUser } = useAuth()
 	return (
@@ -25,7 +25,7 @@ const App = ({ children }) => {
 				<div
 					className={cf(app.branding, s.w480_100, s.w360_100)}
 					onClick={() => {
-						history.push('/')
+						navigate('/')
 					}}
 				>
 					Urgent2K
@@ -36,7 +36,7 @@ const App = ({ children }) => {
 							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
 							onClick={() => {
 								checkForSignin(() => {
-									history.push('/new-loan')
+									navigate('/new-loan')
 								})
 							}}
 						>
@@ -46,7 +46,7 @@ const App = ({ children }) => {
 							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
 							onClick={() => {
 								checkForSignin(() => {
-									history.push('/loans')
+									navigate('/loans')
 								})
 							}}
 						>
@@ -57,9 +57,7 @@ const App = ({ children }) => {
 				<button
 					className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 					onClick={() => {
-						!isAuthenticated
-							? history.push('/sign-up')
-							: history.push('/account')
+						!isAuthenticated ? navigate('/sign-up') : navigate('/account')
 					}}
 				>
 					{isAuthenticated ? authUser.username : `Sign Up`}
@@ -79,7 +77,7 @@ const App = ({ children }) => {
 					<div
 						className={cf(app.footerBranding)}
 						onClick={() => {
-							history.push('/')
+							navigate('/')
 						}}
 					>
 						Urgent2K

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import p from '../../styles/Profiles.module.css'
+import p from '../../styles/Profile.module.css'
 import s from '../../styles/Shared.module.css'
 import { useReach } from '../../hooks'
 import { cf, request, setPfps } from '../../utils'

@@ -17,7 +17,7 @@
 }
 
 .connectTitle {
-    composes: connectAccount from './App.module.css';
+    composes: connectAccount from './Landing.module.css';
     text-overflow: ellipsis !important;
     overflow: hidden !important;
     white-space: nowrap !important;
