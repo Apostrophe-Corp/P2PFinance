@@ -23,6 +23,7 @@ const PrivateRoute = ({ child }) => {
 		const verifyAuth = async () => {
 			if (!user.account) {
 				navigate('/')
+			} else {
 				if (!isAuthenticated) {
 					const accept = await alertThis({
 						message: 'You are not signed in. Would you like to do so?',
@@ -39,7 +40,7 @@ const PrivateRoute = ({ child }) => {
 			}
 		}
 		verifyAuth()
-	}, [])
+	}, [alertThis, isAuthenticated, navigate, signIn, user.account, user.address])
 	return <>{isAuthenticated ? { child } : <></>}</>
 }
 
