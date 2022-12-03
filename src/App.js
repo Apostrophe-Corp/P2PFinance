@@ -32,9 +32,9 @@ const PrivateRoute = ({ child }) => {
 					})
 					if (accept) {
 						const stay = await signIn(user.address)
-						if (!stay) navigate(-1)
+						if (!stay) navigate('/')
 					} else {
-						navigate(-1)
+						navigate('/')
 					}
 				}
 			}
