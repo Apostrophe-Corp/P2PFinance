@@ -7,7 +7,9 @@ import {
 	ALGO_PeraConnect as PeraConnect,
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
-import { loanCtc, adminCtc } from '../contracts'
+import { loanCtc,
+	//  adminCtc 
+	} from '../contracts'
 import { request } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
@@ -30,7 +32,7 @@ const ReachContextProvider = ({ children }) => {
 		balance: null,
 		address: null,
 	})
-	const [adminConnection, setAdminConnection] = useState(null)
+	// const [adminConnection, setAdminConnection] = useState(null)
 
 	const [promiseOfConfirmation, setPromiseOfConfirmation] = useState({})
 
@@ -113,10 +115,10 @@ const ReachContextProvider = ({ children }) => {
 				})
 			)
 			const account = await reach.getDefaultAccount()
-			const adminConn = account.contract(
-				adminCtc,
-				JSON.parse(process.env.REACT_APP_ADMIN_CONTRACT_INFO)
-			)
+			// const adminConn = account.contract(
+			// 	adminCtc,
+			// 	JSON.parse(process.env.REACT_APP_ADMIN_CONTRACT_INFO)
+			// )
 			setUser({
 				account,
 				balance: async (tokenID = null) => {
@@ -128,7 +130,7 @@ const ReachContextProvider = ({ children }) => {
 				},
 				address: reach.formatAddress(account.getAddress()),
 			})
-			setAdminConnection(adminConn)
+			// setAdminConnection(adminConn)
 			stopWaiting()
 			alertThis({
 				message: 'Connection to wallet was successful',
@@ -248,11 +250,12 @@ const ReachContextProvider = ({ children }) => {
 				},
 			})
 
-			try {
-				rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
-			} catch (error) {
-				console.log({ error })
-			}
+			// try {
+			// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
+			// } catch (error) {
+			// 	console.log({ error })
+			// }
+			
 			stopWaiting()
 			if (res.success) {
 				alertThis({
@@ -339,6 +342,16 @@ const ReachContextProvider = ({ children }) => {
 
 	const create = async (loanParams) => {
 		startWaiting()
+		const userBal = await reach.balanceOf(user.account, loanParams['offeredContract'])
+
+		if((reach.formatCurrency(userBal, 4) < loanParams['amountOffered'])){
+			alertThis({
+				message: 'Your collateral balance is insufficient for the loan',
+				forConfirmation: false,
+			})
+			return
+		}
+
 		const optKeys = Object.keys(loanParams)
 		const len = optKeys.length
 		const creationOpts = { borrower: user.address }
@@ -355,8 +368,8 @@ const ReachContextProvider = ({ children }) => {
 					principal: Number(loanParams['amountRequested']),
 					amount: Number(loanParams['paymentAmount']),
 					maturation: Number(loanParams['maturation']),
-					tokCollateral: reach.formatAddress(loanParams['tokenOffered']),
-					tokLoan: reach.formatAddress(loanParams['tokeRequested']),
+					tokCollateral: reach.formatAddress(loanParams['offeredContract']),
+					tokLoan: reach.formatAddress(loanParams['tokenContract']),
 					address: reach.formatAddress(user.address),
 				},
 				created: async (created) => {
@@ -370,13 +383,13 @@ const ReachContextProvider = ({ children }) => {
 							created,
 						},
 					})
-					try {
-						rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
-							reach.formatAddress(user.address)
-						)
-					} catch (error) {
-						console.log({ error })
-					}
+					// try {
+					// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
+					// 		reach.formatAddress(user.address)
+					// 	)
+					// } catch (error) {
+					// 	console.log({ error })
+					// }
 					stopWaiting()
 					if (res.success) {
 						alertThis({
