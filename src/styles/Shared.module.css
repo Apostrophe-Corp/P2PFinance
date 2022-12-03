@@ -1,5 +1,3 @@
-
-
 a {
 	font-family: inherit !important;
 	text-decoration: inherit !important;
@@ -291,4 +289,11 @@ a {
 		padding-right: 10px !important;
 		padding-left: 10px !important;
 	}
+}
+
+.hidden {
+	background: url(../assets/images/hidden.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }

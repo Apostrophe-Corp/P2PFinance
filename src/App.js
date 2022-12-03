@@ -3,7 +3,6 @@ import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	Navigate,
 	useNavigate,
 } from 'react-router-dom'
 import { useAuth, useReach } from './hooks'
@@ -13,6 +12,8 @@ import AuthContextProvider from './context/AuthContext'
 import { Landing, Loans, Profile } from './layouts'
 import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
+import {cf } from './utils'
+import s from './styles/Shared.module.css'
 
 const PrivateRoute = ({ child }) => {
 	const { isAuthenticated, signIn } = useAuth()
@@ -41,7 +42,7 @@ const PrivateRoute = ({ child }) => {
 		}
 		verifyAuth()
 	}, [alertThis, isAuthenticated, navigate, signIn, user.account, user.address])
-	return <>{isAuthenticated ? { child } : <></>}</>
+	return <>{isAuthenticated ? { child } : <div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}></div>}</>
 }
 
 const App = () => {
