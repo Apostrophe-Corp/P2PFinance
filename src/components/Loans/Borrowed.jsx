@@ -3,7 +3,7 @@ import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
 import { cf, setPfps, getTokenInfo } from '../../utils'
-import { loanCtc } from '../../../contracts'
+import { loanCtc } from '../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
