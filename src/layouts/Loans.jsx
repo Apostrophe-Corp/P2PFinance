@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import s from '../styles/Shared.module.css'
-import l from '../../styles/Loan.module.css'
+import l from '../styles/Loan.module.css'
 import { cf, request } from '../utils'
 import { Advert } from '../components/Advert'
 
