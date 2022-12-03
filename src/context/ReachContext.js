@@ -8,7 +8,7 @@ import {
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
 import { loanCtc, adminCtc } from '../contracts'
-import { request } from '../utils/cf'
+import { request } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 import { LoadingPreview } from '../components/LoadingPreview'
