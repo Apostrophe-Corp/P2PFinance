@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -14,44 +14,43 @@ import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
 import { cf } from './utils'
 import s from './styles/Shared.module.css'
+import app from './styles/Landing.module.css'
 
 const PrivateRoute = ({ child }) => {
 	const { isAuthenticated, signIn } = useAuth()
 	const { alertThis, user } = useReach()
 	const navigate = useNavigate()
 
-	useLayoutEffect(() => {
-		const verifyAuth = async () => {
-			if (!user.account) {
-				navigate('/')
-			} else {
-				if (!isAuthenticated) {
-					const accept = await alertThis({
-						message: 'You are not signed in. Would you like to do so?',
-						accept: 'Sign in',
-						decline: 'Not now',
-					})
+	useEffect(
+		() => {
+			if (!isAuthenticated) {
+				alertThis({
+					message: 'You are not signed in. Would you like to do so?',
+					accept: 'Sign in',
+					decline: 'Not now',
+				}).then(async (accept) => {
 					if (accept) {
 						const stay = await signIn(user.address)
 						if (!stay) navigate('/')
 					} else {
 						navigate('/')
 					}
-				}
+				})
 			}
-		}
-		verifyAuth()
-	}, [alertThis, isAuthenticated, navigate, signIn, user.account, user.address])
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[]
+	)
+
 	return (
-		<>
+		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
 			{isAuthenticated ? (
 				{ child }
 			) : (
-				<div
-					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
-				></div>
+				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
+				</div>
 			)}
-		</>
+		</div>
 	)
 }
 
@@ -72,37 +71,25 @@ const App = () => {
 						<Route
 							path='/loans'
 							element={
-								<PrivateRoute
-									child={
-										<AppView>
-											<Loans />
-										</AppView>
-									}
-								/>
+								<AppView>
+									<PrivateRoute child={<Loans />} />
+								</AppView>
 							}
 						/>
 						<Route
 							path='/account'
 							element={
-								<PrivateRoute
-									child={
-										<AppView>
-											<Profile />
-										</AppView>
-									}
-								/>
+								<AppView>
+									<PrivateRoute child={<Profile />} />
+								</AppView>
 							}
 						/>
 						<Route
 							path='/new-loan'
 							element={
-								<PrivateRoute
-									child={
-										<AppView>
-											<Create />
-										</AppView>
-									}
-								/>
+								<AppView>
+									<PrivateRoute child={<Create />} />
+								</AppView>
 							}
 						/>
 						<Route
