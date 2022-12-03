@@ -12,7 +12,7 @@ import AuthContextProvider from './context/AuthContext'
 import { Landing, Loans, Profile } from './layouts'
 import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
-import {cf } from './utils'
+import { cf } from './utils'
 import s from './styles/Shared.module.css'
 
 const PrivateRoute = ({ child }) => {
@@ -42,7 +42,17 @@ const PrivateRoute = ({ child }) => {
 		}
 		verifyAuth()
 	}, [alertThis, isAuthenticated, navigate, signIn, user.account, user.address])
-	return <>{isAuthenticated ? { child } : <div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}></div>}</>
+	return (
+		<>
+			{isAuthenticated ? (
+				{ child }
+			) : (
+				<div
+					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
+				></div>
+			)}
+		</>
+	)
 }
 
 const App = () => {
@@ -62,25 +72,37 @@ const App = () => {
 						<Route
 							path='/loans'
 							element={
-								<AppView>
-									<PrivateRoute child={<Loans />} />
-								</AppView>
+								<PrivateRoute
+									child={
+										<AppView>
+											<Loans />
+										</AppView>
+									}
+								/>
 							}
 						/>
 						<Route
 							path='/account'
 							element={
-								<AppView>
-									<PrivateRoute child={<Profile />} />
-								</AppView>
+								<PrivateRoute
+									child={
+										<AppView>
+											<Profile />
+										</AppView>
+									}
+								/>
 							}
 						/>
 						<Route
 							path='/new-loan'
 							element={
-								<AppView>
-									<PrivateRoute child={<Create />} />
-								</AppView>
+								<PrivateRoute
+									child={
+										<AppView>
+											<Create />
+										</AppView>
+									}
+								/>
 							}
 						/>
 						<Route
