@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
 	Navigate,
+	useNavigate,
 } from 'react-router-dom'
-import { useAuth } from './hooks'
+import { useAuth, useReach } from './hooks'
 import AppView from './views/App'
 import ReachContextProvider from './context/ReachContext'
 import AuthContextProvider from './context/AuthContext'
@@ -14,19 +15,29 @@ import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
 
 const PrivateRoute = ({ child }) => {
-	const { isAuthenticated } = useAuth()
-	return (
-		<>
-			{isAuthenticated ? (
-				{ child }
-			) : (
-				<Navigate
-					to='/sign-in'
-					replace={true}
-				/>
-			)}
-		</>
-	)
+	const { isAuthenticated, signIn } = useAuth()
+	const { alertThis, user } = useReach()
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		const verifyAuth = async () => {
+			if (!isAuthenticated) {
+				const accept = await alertThis({
+					message: 'You are not signed in. Would you like to do so?',
+					accept: 'Sign in',
+					decline: 'Not now',
+				})
+				if (accept) {
+					const stay = await signIn(user.address)
+					if (!stay) navigate(-1)
+				} else {
+					navigate(-1)
+				}
+			}
+		}
+		verifyAuth()
+	}, [])
+	return <>{isAuthenticated ? { child } : <></>}</>
 }
 
 const App = () => {

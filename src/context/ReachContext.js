@@ -7,9 +7,10 @@ import {
 	ALGO_PeraConnect as PeraConnect,
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
-import { loanCtc,
-	//  adminCtc 
-	} from '../contracts'
+import {
+	loanCtc,
+	//  adminCtc
+} from '../contracts'
 import { request } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
@@ -255,7 +256,7 @@ const ReachContextProvider = ({ children }) => {
 			// } catch (error) {
 			// 	console.log({ error })
 			// }
-			
+
 			stopWaiting()
 			if (res.success) {
 				alertThis({
@@ -342,9 +343,12 @@ const ReachContextProvider = ({ children }) => {
 
 	const create = async (loanParams) => {
 		startWaiting()
-		const userBal = await reach.balanceOf(user.account, loanParams['offeredContract'])
+		const userBal = await reach.balanceOf(
+			user.account,
+			loanParams['offeredContract']
+		)
 
-		if((reach.formatCurrency(userBal, 4) < loanParams['amountOffered'])){
+		if (reach.formatCurrency(userBal, 4) < loanParams['amountOffered']) {
 			alertThis({
 				message: 'Your collateral balance is insufficient for the loan',
 				forConfirmation: false,
@@ -432,6 +436,8 @@ const ReachContextProvider = ({ children }) => {
 		showPreloader,
 		setShowPreloader,
 		setProcessing,
+		startWaiting,
+		stopWaiting,
 		sleep,
 		processing,
 		setShowConnectAccount,

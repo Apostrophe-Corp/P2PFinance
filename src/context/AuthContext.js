@@ -5,17 +5,19 @@ import { request } from '../utils'
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
-	const { alertThis } = useReach()
+	const { alertThis, startWaiting, stopWaiting } = useReach()
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [authUser, setAuthUser] = useState({})
 
 	const signIn = async (address, cb=null) => {
+		startWaiting()
 		const res = await request({
 			path: `/users/${address}`,
 			method: 'GET',
 		})
 
-		if (res.success) {
+		stopWaiting()
+		if (res.success) {			
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
 			cb != null && cb()			
@@ -35,6 +37,7 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	const signUp = async ({ username, address, pfp, pfpContract }, cb=null) => {
+		startWaiting()
 		const res = await request({
 			path: `/users`,
 			method: 'POST',
@@ -46,6 +49,7 @@ const AuthContextProvider = ({ children }) => {
 			},
 		})
 
+		stopWaiting()
 		if (res.success) {
 			setIsAuthenticated(true)
 			setAuthUser({ username, address, pfp, pfpContract })

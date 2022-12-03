@@ -104,7 +104,7 @@ const Create = () => {
 						>
 							<span className={cf(cr8.formText)}>Loan Token ID</span>
 							<input
-								type='number'
+								type='text'
 								name='tokenRequested'
 								id='tokenRequested'
 								onInput={handleInput}
@@ -160,7 +160,7 @@ const Create = () => {
 						>
 							<span className={cf(cr8.formText)}>Collateral Token ID</span>
 							<input
-								type='number'
+								type='text'
 								name='tokenOffered'
 								id='tokenOffered'
 								onInput={handleInput}

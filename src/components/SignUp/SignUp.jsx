@@ -159,7 +159,7 @@ const SignUp = () => {
 						>
 							<span className={cf(cr8.formText)}>NFT Contract Address</span>
 							<input
-								type='number'
+								type='text'
 								name='contract'
 								id='contract'
 								onInput={handleInputChange}
@@ -170,7 +170,7 @@ const SignUp = () => {
 						<div className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}>
 							<button
 								type='submit'
-								disabled={!(username && contract && pfp)}
+								disabled={!username}
 							>
 								Sign Up
 							</button>
