@@ -1,3 +1,3 @@
-import * as adminCtc from './build/admin.main.mjs.js.js'
-import * as loanCtc from './build/loan.main.mjs.js.js'
+import * as adminCtc from './build/admin.main.mjs'
+import * as loanCtc from './build/loan.main.mjs'
 export { adminCtc, loanCtc }
