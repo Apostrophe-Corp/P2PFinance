@@ -267,7 +267,7 @@ const ReachContextProvider = ({ children }) => {
 				})
 			} else {
 				alertThis({
-					message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.message}`,
+					message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.error.message}`,
 					forConfirmation: false,
 				})
 			}
@@ -404,7 +404,7 @@ const ReachContextProvider = ({ children }) => {
 						})
 					} else {
 						alertThis({
-							message: `Failed to upload Advert information. Error message: ${res.message}`,
+							message: `Failed to upload Advert information. Error message: ${res.error.message}`,
 							forConfirmation: false,
 						})
 					}

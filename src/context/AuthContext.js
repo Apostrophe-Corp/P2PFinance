@@ -27,7 +27,7 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} else {
 			alertThis({
-				message: `Sign-in failed. Error message: ${res.message}`,
+				message: `Sign-in failed. Error message: ${res.error.message}`,
 				forConfirmation: false,
 			})
 			setAuthUser({})
@@ -60,7 +60,7 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} else {
 			alertThis({
-				message: `Sign-up failed. Error message: ${res.message}`,
+				message: `Sign-up failed. Error message: ${res.error.message}`,
 				forConfirmation: false,
 			})
 		}
