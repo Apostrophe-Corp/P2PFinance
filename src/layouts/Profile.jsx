@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import s from '../styles/Shared.module.css'
-import l from '../styles/Loans.module.css'
+import l from '../styles/Loan.module.css'
 import { useAuth } from '../hooks'
 import { cf, request } from '../utils'
 import { Profile as UserProfile } from '../components/Profile'
