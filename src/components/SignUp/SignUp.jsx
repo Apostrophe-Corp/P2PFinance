@@ -6,7 +6,7 @@ import { useReach, useAuth } from '../../hooks'
 import { cf, request } from '../../utils'
 
 const SignUp = () => {
-	const { alertThis, user, checkForSignin } = useReach()
+	const { alertThis, user, checkForSignIn } = useReach()
 	const { signUp, signIn } = useAuth()
 	const [[username, setUsername], [pfp, setPfp], [contract, setContract]] = [
 		useState(''),
@@ -55,7 +55,7 @@ const SignUp = () => {
 				<form
 					className={cf(s.w900_50, s.w760_50, s.w480_100, s.w360_100)}
 					onSubmit={(e) => {
-						checkForSignin(() => {
+						checkForSignIn(() => {
 							save(e)
 						})
 					}}

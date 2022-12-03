@@ -13,22 +13,19 @@ import { Landing, Loans, Profile } from './layouts'
 import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ child }) => {
 	const { isAuthenticated } = useAuth()
 	return (
-		<Route
-			{...rest}
-			render={({ location }) =>
-				isAuthenticated ? (
-					children
-				) : (
-					<Navigate
-						to='/sign-in'
-						replace={true}
-					/>
-				)
-			}
-		/>
+		<>
+			{isAuthenticated ? (
+				{ child }
+			) : (
+				<Navigate
+					to='/sign-in'
+					replace={true}
+				/>
+			)}
+		</>
 	)
 }
 
@@ -36,27 +33,50 @@ const App = () => {
 	return (
 		<ReachContextProvider>
 			<AuthContextProvider>
-				<AppView>
-					<Router>
-						<Routes>
-							<Route path='/'>
-								<Landing />
-							</Route>
-							<PrivateRoute path='/loans'>
-								<Loans />
-							</PrivateRoute>
-							<PrivateRoute path='/account'>
-								<Profile />
-							</PrivateRoute>
-							<PrivateRoute path='/new-loan'>
-								<Create />
-							</PrivateRoute>
-							<Route path='/sign-up'>
-								<SignUp />
-							</Route>
-						</Routes>
-					</Router>
-				</AppView>
+				<Router>
+					<Routes>
+						<Route
+							path='/'
+							element={
+								<AppView>
+									<Landing />
+								</AppView>
+							}
+						/>
+						<Route
+							path='/loans'
+							element={
+								<AppView>
+									<PrivateRoute child={<Loans />} />
+								</AppView>
+							}
+						/>
+						<Route
+							path='/account'
+							element={
+								<AppView>
+									<PrivateRoute child={<Profile />} />
+								</AppView>
+							}
+						/>
+						<Route
+							path='/new-loan'
+							element={
+								<AppView>
+									<PrivateRoute child={<Create />} />
+								</AppView>
+							}
+						/>
+						<Route
+							path='/sign-up'
+							element={
+								<AppView>
+									<SignUp />
+								</AppView>
+							}
+						/>
+					</Routes>
+				</Router>
 			</AuthContextProvider>
 		</ReachContextProvider>
 	)

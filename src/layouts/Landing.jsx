@@ -8,10 +8,10 @@ import { cf } from '../utils'
 // TODO complete this component
 const Landing = () => {
 	const navigate = useNavigate()
-	const { 
-        checkForSignin,
-        // alertThis
-    } = useReach()
+	const {
+		checkForSignIn,
+		// alertThis
+	} = useReach()
 	return (
 		<div className={cf(s.wMax, s.window)}>
 			<div
@@ -77,7 +77,7 @@ const Landing = () => {
 					<div
 						className={cf(lg.card)}
 						onClick={() => {
-							checkForSignin(() => {
+							checkForSignIn(() => {
 								navigate('/new-loan')
 							})
 						}}
@@ -139,7 +139,7 @@ const Landing = () => {
 					<div
 						className={cf(lg.card)}
 						onClick={() => {
-							checkForSignin(() => {
+							checkForSignIn(() => {
 								navigate('/loans')
 							})
 						}}
@@ -171,7 +171,7 @@ const Landing = () => {
 					<div
 						className={cf(lg.card)}
 						onClick={() => {
-							checkForSignin(() => {
+							checkForSignIn(() => {
 								navigate('/loans')
 							})
 						}}

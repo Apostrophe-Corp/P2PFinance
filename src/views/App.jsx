@@ -1,4 +1,5 @@
 import React from 'react'
+import g from '../styles/Global.module.css'
 import s from '../styles/Shared.module.css'
 import app from '../styles/Landing.module.css'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +9,7 @@ import { cf } from '../utils'
 // TODO complete this component
 const App = ({ children }) => {
 	const navigate = useNavigate()
-	const { checkForSignin, setShowConnectAccount, user } = useReach()
+	const { checkForSignIn, setShowConnectAccount, user } = useReach()
 	const { isAuthenticated, authUser } = useAuth()
 	return (
 		<div>
@@ -19,7 +20,8 @@ const App = ({ children }) => {
 					s.flex,
 					s.spaceXBetween,
 					s.spaceYCenter,
-					app.header
+					app.header,
+					g.empty
 				)}
 			>
 				<div
@@ -35,7 +37,7 @@ const App = ({ children }) => {
 						<li
 							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
 							onClick={() => {
-								checkForSignin(() => {
+								checkForSignIn(() => {
 									navigate('/new-loan')
 								})
 							}}
@@ -45,7 +47,7 @@ const App = ({ children }) => {
 						<li
 							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
 							onClick={() => {
-								checkForSignin(() => {
+								checkForSignIn(() => {
 									navigate('/loans')
 								})
 							}}

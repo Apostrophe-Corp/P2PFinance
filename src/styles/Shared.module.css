@@ -1,287 +1,294 @@
+
+
+a {
+	font-family: inherit !important;
+	text-decoration: inherit !important;
+}
+
 .window {
-    min-height: 100vh;
+	min-height: 100vh;
 }
 
 .p0 {
-    padding: 0 !important;
+	padding: 0 !important;
 }
 
 .m0 {
-    margin: 0 !important;
+	margin: 0 !important;
 }
 
 .g0 {
-    gap: 0 !important;
+	gap: 0 !important;
 }
 
 .p5 {
-    padding: 5px !important;
+	padding: 5px !important;
 }
 
 .m5 {
-    margin: 5px !important;
+	margin: 5px !important;
 }
 
 .g5 {
-    gap: 5px !important;
+	gap: 5px !important;
 }
 
 .p10 {
-    padding: 10px !important;
+	padding: 10px !important;
 }
 
 .m10 {
-    margin: 10px !important;
+	margin: 10px !important;
 }
 
 .g10 {
-    gap: 10px !important;
+	gap: 10px !important;
 }
 
 .bRad5 {
-    border-radius: 5px !important;
+	border-radius: 5px !important;
 }
 
 .bRad10 {
-    border-radius: 10px !important;
+	border-radius: 10px !important;
 }
 
 .pX10 {
-    padding-left: 10px;
-    padding-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .pY10 {
-    padding-top: 10px;
-    padding-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .pX5 {
-    padding-left: 5px;
-    padding-right: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .pY5 {
-    padding-top: 5px;
-    padding-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .wMax {
-    width: 100% !important;
+	width: 100% !important;
 }
 
 .hMax {
-    height: 100% !important;
+	height: 100% !important;
 }
 
 .w50 {
-    width: 50% !important;
+	width: 50% !important;
 }
 
 .h50 {
-    height: 50% !important;
+	height: 50% !important;
 }
 
 .dInlineBlock {
-    display: inline-block !important;
+	display: inline-block !important;
 }
 
 .flex {
-    display: flex !important;
-    flex-wrap: wrap !important;
+	display: flex !important;
+	flex-wrap: wrap !important;
 }
 
 .flex_nowrap {
-    flex-wrap: nowrap !important;
+	flex-wrap: nowrap !important;
 }
 
 .flex_dColumn {
-    flex-direction: column !important;
+	flex-direction: column !important;
 }
 
 .flexCenter {
-    justify-content: center !important;
-    align-items: center !important;
+	justify-content: center !important;
+	align-items: center !important;
 }
 
 .flexStart {
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
+	justify-content: flex-start !important;
+	align-items: flex-start !important;
 }
 
 .flexEnd {
-    justify-content: flex-end !important;
-    align-items: flex-end !important;
+	justify-content: flex-end !important;
+	align-items: flex-end !important;
 }
 
 .flexLeft {
-    justify-content: flex-start !important;
-    align-items: center !important;
+	justify-content: flex-start !important;
+	align-items: center !important;
 }
 
 .flexRight {
-    justify-content: flex-end !important;
-    align-items: center !important;
+	justify-content: flex-end !important;
+	align-items: center !important;
 }
 
 .flexTop {
-    justify-content: center !important;
-    align-items: flex-start !important;
+	justify-content: center !important;
+	align-items: flex-start !important;
 }
 
 .flexButton {
-    justify-content: center !important;
-    align-items: flex-end !important;
+	justify-content: center !important;
+	align-items: flex-end !important;
 }
 
 .spaceXBetween {
-    justify-content: space-between !important;
+	justify-content: space-between !important;
 }
 
 .spaceYBetween {
-    align-items: space-between !important;
+	align-items: space-between !important;
 }
 
 .spaceXAround {
-    justify-content: space-around !important;
+	justify-content: space-around !important;
 }
 
 .spaceYAround {
-    align-items: space-around !important;
+	align-items: space-around !important;
 }
 
 .spaceYCenter {
-    align-items: center !important;
+	align-items: center !important;
 }
 
 .spaceXEvenly {
-    justify-content: space-evenly !important;
+	justify-content: space-evenly !important;
 }
 
 .spaceYEvenly {
-    align-items: space-evenly !important;
+	align-items: space-evenly !important;
 }
 
 .g5 {
-    gap: 5px !important;
+	gap: 5px !important;
 }
 
 .g10 {
-    gap: 10px !important;
+	gap: 10px !important;
 }
 
 .container {
-    padding: 10px 70px;
+	padding: 10px 70px;
 }
 
-.tCenter{
-    text-align: center;
+.tCenter {
+	text-align: center;
 }
 
 /* -----------------Media-Queries---------------------- */
 @media only screen and (max-width: 900px) and (min-width: 761px) {
-    .container {
-            padding: 10px 50px;
-    }
+	.container {
+		padding: 10px 50px;
+	}
 
-    .w900_100 {
-            width: 100% !important;
-    }
+	.w900_100 {
+		width: 100% !important;
+	}
 
-    .w900_50 {
-            width: 50% !important;
-    }
+	.w900_50 {
+		width: 50% !important;
+	}
 
-    .p900_x20 {
-            padding-right: 20px !important;
-            padding-left: 20px !important;
-    }
+	.p900_x20 {
+		padding-right: 20px !important;
+		padding-left: 20px !important;
+	}
 }
 
 @media only screen and (max-width: 760px) and (min-width: 481px) {
-    .container {
-            padding: 10px 30px;
-    }
+	.container {
+		padding: 10px 30px;
+	}
 
-    .w760_100 {
-            width: 100% !important;
-    }
+	.w760_100 {
+		width: 100% !important;
+	}
 
-    .w760_50 {
-            width: 50% !important;
-    }
+	.w760_50 {
+		width: 50% !important;
+	}
 
-    .p760_x20 {
-            padding-right: 20px !important;
-            padding-left: 20px !important;
-    }
+	.p760_x20 {
+		padding-right: 20px !important;
+		padding-left: 20px !important;
+	}
 
-    .p760_x10 {
-            padding-right: 10px !important;
-            padding-left: 10px !important;
-    }
+	.p760_x10 {
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+	}
 }
 
 @media only screen and (max-width: 480px) and (min-width: 361px) {
-    .container {
-            padding: 10px 10px;
-    }
+	.container {
+		padding: 10px 10px;
+	}
 
-    .w480_100 {
-            width: 100% !important;
-    }
+	.w480_100 {
+		width: 100% !important;
+	}
 
-    .w480_50 {
-            width: 50% !important;
-    }
+	.w480_50 {
+		width: 50% !important;
+	}
 
-    .p480_y50 {
-            padding-top: 50px !important;
-            padding-bottom: 50px !important;
-    }
+	.p480_y50 {
+		padding-top: 50px !important;
+		padding-bottom: 50px !important;
+	}
 
-    .p480_x50 {
-            padding-right: 50px !important;
-            padding-left: 50px !important;
-    }
+	.p480_x50 {
+		padding-right: 50px !important;
+		padding-left: 50px !important;
+	}
 
-    .p480_x20 {
-            padding-right: 20px !important;
-            padding-left: 20px !important;
-    }
+	.p480_x20 {
+		padding-right: 20px !important;
+		padding-left: 20px !important;
+	}
 
-    .p480_x10 {
-            padding-right: 10px !important;
-            padding-left: 10px !important;
-    }
+	.p480_x10 {
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+	}
 }
 
 @media only screen and (max-width: 360px) {
-    .container {
-            padding: 5px 5px;
-    }
+	.container {
+		padding: 5px 5px;
+	}
 
-    .w360_100 {
-            width: 100% !important;
-    }
+	.w360_100 {
+		width: 100% !important;
+	}
 
-    .p360_y10 {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-    }
+	.p360_y10 {
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
+	}
 
-    .p360_x10 {
-            padding-right: 10px !important;
-            padding-left: 10px !important;
-    }
+	.p360_x10 {
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+	}
 
-    .p360_y10 {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-    }
+	.p360_y10 {
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
+	}
 
-    .p360_x10 {
-            padding-right: 10px !important;
-            padding-left: 10px !important;
-    }
+	.p360_x10 {
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+	}
 }

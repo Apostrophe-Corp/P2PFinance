@@ -313,7 +313,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const checkForSignin = async (func) => {
+	const checkForSignIn = async (func) => {
 		if (!user.account) {
 			const connect = await alertThis({
 				message: 'Connect your wallet and try that again',
@@ -418,7 +418,7 @@ const ReachContextProvider = ({ children }) => {
 		alertThis,
 		lend,
 		repay,
-		checkForSignin,
+		checkForSignIn,
 		create,
 	}
 

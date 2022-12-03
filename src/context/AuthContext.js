@@ -6,7 +6,7 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
 	const { alertThis } = useReach()
-	const [isAuthenticated, setIsAuthenticated] = useState({})
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [authUser, setAuthUser] = useState({})
 
 	const signIn = async (address, cb=null) => {
