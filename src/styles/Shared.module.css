@@ -295,5 +295,6 @@ a {
 	background: url(../assets/images/hidden.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
+	min-height: inherit;
 }

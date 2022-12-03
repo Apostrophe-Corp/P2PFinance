@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -20,7 +20,7 @@ const PrivateRoute = ({ child }) => {
 	const { alertThis, user } = useReach()
 	const navigate = useNavigate()
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const verifyAuth = async () => {
 			if (!user.account) {
 				navigate('/')
