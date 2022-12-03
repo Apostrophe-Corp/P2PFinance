@@ -6,7 +6,7 @@ export const request = async ({
 	body = {},
 } = {}) => {
 	if (method === 'GET')
-		return (await fetch(`${serverURI}/${path}`))
+		return await fetch(`${serverURI}/${path}`)
 			.then((res) => res.json())
 			.then((data) => ({ ...data, success: true }))
 			.catch((error) => {
@@ -16,15 +16,13 @@ export const request = async ({
 					error,
 				}
 			})
-	return (
-		await fetch(`${serverURI}/${path}`, {
+	return await fetch(`${serverURI}/${path}`, {
 			method,
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(body),
-		})
-	)
+		})	
 		.then((res) => res.json())
 		.then((data) => ({ ...data, success: true }))
 		.catch((error) => {
