@@ -10,7 +10,7 @@ export const request = async ({
 			.then((res) => res.json())
 			.then((data) => ({ ...data, success: true }))
 			.catch((error) => {
-				console.log({ error })
+				// console.log({ error })
 				return {
 					success: false,
 					error,
@@ -26,7 +26,7 @@ export const request = async ({
 		.then((res) => res.json())
 		.then((data) => ({ ...data, success: true }))
 		.catch((error) => {
-			console.log({ error })
+			// console.log({ error })
 			return {
 				success: false,
 				error,

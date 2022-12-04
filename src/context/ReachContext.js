@@ -120,6 +120,7 @@ const ReachContextProvider = ({ children }) => {
 			// 	adminCtc,
 			// 	JSON.parse(process.env.REACT_APP_ADMIN_CONTRACT_INFO)
 			// )
+			account.setGasLimit(5000000)
 			setUser({
 				account,
 				balance: async (tokenID = null) => {

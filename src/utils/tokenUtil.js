@@ -8,9 +8,8 @@ const savedNFTs = {}
 export const getTokenInfo = async (asset, address) => {
 	if (savedTokens[asset]) return savedTokens[asset]
 
-	const { result: { name = '', symbol = '', logo = '', ...result } = {} } = await fetch(
-		`${alchemyTokURI}/${alchemyKEY}`,
-		{
+	const { result: { name = '', symbol = '', logo = '', ...result } = {} } =
+		await fetch(`${alchemyTokURI}/${alchemyKEY}`, {
 			method: 'POST',
 			headers: {
 				accept: 'application/json',
@@ -22,17 +21,21 @@ export const getTokenInfo = async (asset, address) => {
 				method: 'alchemy_getTokenMetadata',
 				params: [String(address)],
 			}),
-		}
-	)
-		.then((res) => res.json())
-		.then((data) => ({ ...data, success: true }))
-		.catch((error) => {
-			console.log({ error })
-			return {
-				success: false,
-				error,
-			}
 		})
+			.then((res) => {
+				return res.json()
+			})
+			.then((data) => {
+				console.log(data)
+				return { ...data, success: true }
+			})
+			.catch((error) => {
+				console.log({ error })
+				return {
+					success: false,
+					error,
+				}
+			})
 	if (result.success) {
 		savedTokens[asset] = { name, symbol, logo, result } // store the token data
 	}
@@ -41,9 +44,13 @@ export const getTokenInfo = async (asset, address) => {
 
 export const getNFTInfo = async (asset, address) => {
 	if (savedNFTs[asset]) return savedNFTs[asset]
-
+	// console.log(
+	// 	`${alchemyNFTURI}/${alchemyKEY}/getNFTMetadata?contractAddress=${String(
+	// 		address
+	// 	)}&tokenId=${asset}&refreshCache=false`
+	// )
 	const {
-		media: [{ gateway = '', raw = '' }] = [],
+		media: [{ gateway = '', raw = '' } = {}] = [],
 		contractMetadata: { name = '', symbol = '' } = {},
 		metadata: { image = '', name: title = '' } = {},
 		...result
@@ -58,16 +65,21 @@ export const getNFTInfo = async (asset, address) => {
 			},
 		}
 	)
-		.then((res) => res.json())
-		.then((data) => ({ ...data, success: true }))
+		.then((res) => {
+			return res.json()
+		})
+		.then((data) => {
+			console.log(data)
+			return { ...data, success: true }
+		})
 		.catch((error) => {
-			console.log({ error })
+			// console.log({ error })
 			return {
 				success: false,
 				error,
 			}
 		})
-	
+
 	if (result.success) {
 		savedNFTs[asset] = {
 			media: { gateway, raw, image },

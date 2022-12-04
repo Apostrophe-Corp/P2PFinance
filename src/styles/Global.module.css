@@ -111,6 +111,10 @@
     transition: all 0.5s;
 }
 
+input{
+    outline: none;
+}
+
 body {
     font-family: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI',
             Roboto, 'Helvetica Neue', Arial, sans-serif !important;

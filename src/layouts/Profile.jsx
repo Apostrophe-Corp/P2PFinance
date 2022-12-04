@@ -46,12 +46,12 @@ const Profile = () => {
 	}, [authUser.address, authUser.username])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10)}>
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 				<UserProfile user={authUser} />
 			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
+				<div className={cf(s.wMax, s.flex, s.flexCenter, l.headers)}>
 					<div
 						className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}
 					>
@@ -133,7 +133,7 @@ const Profile = () => {
 						/>
 					))}
 			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
 				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 					<div
 						className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}

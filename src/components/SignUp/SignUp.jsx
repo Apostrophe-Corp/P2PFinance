@@ -11,6 +11,13 @@ const reach = loadStdlib({
 	REACH_NO_WARN: 'Y',
 	REACH_CONNECTOR_MODE: 'ETH',
 })
+reach.setWalletFallback(
+	reach.walletFallback({
+		providerEnv: {
+			ETH_NODE_URI: 'https://matic-mubai.chainstacklabs.com',
+		},
+	})
+)
 
 const SignUp = () => {
 	const pfpRef = useRef()
@@ -33,15 +40,16 @@ const SignUp = () => {
 
 	const save = async (e) => {
 		e.preventDefault()
-		const owned = await reach.balanceOf(user.account, contract)
-		const owned_ = await reach.balanceOf(user.account, pfp)
-		if (!(owned || owned_)) {
-			alertThis({
-				message: "You don't seem to own this NFT",
-				forConfirmation: false,
-			})
-			return
-		}
+		// const [, owned] = await reach.balancesOf(user.address, [null, pfp])
+		// const owned = reach.formatCurrency(await reach.balanceOf(user.address), 4)
+		// console.log({ owned })
+		// if (!owned) {
+		// 	alertThis({
+		// 		message: "You don't seem to own this NFT",
+		// 		forConfirmation: false,
+		// 	})
+		// 	return
+		// }
 		const registered = await request({
 			path: `/users/${user.address}`,
 			method: 'GET',
@@ -65,7 +73,11 @@ const SignUp = () => {
 
 	useEffect(() => {
 		let timer = undefined
-		if (pfp && contract && timer === undefined) {
+		if (pfp && contract) {
+			if (typeof timer == 'number') {
+				clearTimeout(timer)
+				timer = undefined
+			}
 			timer = setTimeout(() => {
 				setPfps([pfpRef, pfp, contract, false])
 				clearTimeout(timer)

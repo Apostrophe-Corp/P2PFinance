@@ -12,18 +12,22 @@ export const setPfps = async (...others) => {
 			const opts = others[i]
 			const ref = opts[0]
 			const nftInfo = await getNFTInfo(opts[1], opts[2])
+			// console.log({ nftInfo })
 			const pfp =
-				nftInfo?.media?.gateway ??
-				nftInfo?.media?.image ??
 				(nftInfo?.media?.raw
 					? nftInfo?.media?.raw.indexOf('ipfs://') === 0
 						? 'https://gateway.ipfs.io/ipfs/' + nftInfo?.media?.raw.slice(7)
 						: nftInfo?.media?.raw
-					: '')
+					: '') ??
+				nftInfo?.media?.gateway ??
+				nftInfo?.media?.image
+			// console.log({ pfp })
 			const blur = opts[3]
 			ref.current.style.background = `${
-				blur ? 'rgba(255,255,255,.4)' : 'transparent'
-			}, url(${pfp}))`
+				blur
+					? 'linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)) ,'
+					: ''
+			}url(${pfp})`
 			ref.current.style.backgroundPosition = 'center'
 			ref.current.style.backgroundRepeat = 'no-repeat'
 			ref.current.style.backgroundSize = 'contain'

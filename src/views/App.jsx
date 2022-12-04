@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { useReach, useAuth } from '../hooks'
 import { cf } from '../utils'
 
-// TODO complete this component
 const App = ({ children }) => {
 	const navigate = useNavigate()
 	const { checkForSignIn, setShowConnectAccount, user } = useReach()
@@ -56,22 +55,26 @@ const App = ({ children }) => {
 						</li>
 					</ul>
 				</div>
-				<button
-					className={cf(s.w480_100, s.w360_100, app.connectAccount)}
-					onClick={() => {
-						!isAuthenticated ? navigate('/sign-up') : navigate('/account')
-					}}
-				>
-					{isAuthenticated ? authUser.username : `Sign Up`}
-				</button>
-				<button
-					className={cf(s.w480_100, s.w360_100, app.connectAccount)}
-					onClick={() => {
-						setShowConnectAccount(true)
-					}}
-				>
-					{!user.account ? 'Connect Wallet' : user.address}
-				</button>
+				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+					<button
+						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
+						onClick={() => {
+							checkForSignIn(() => {
+							!isAuthenticated ? navigate('/sign-up') : navigate('/account')
+							})
+						}}
+					>
+						{isAuthenticated ? authUser.username : `Sign Up`}
+					</button>
+					<button
+						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
+						onClick={() => {
+							setShowConnectAccount(true)
+						}}
+					>
+						{!user.account ? 'Connect Wallet' : user.address}
+					</button>
+				</div>
 			</div>
 			{children}
 			<div className={cf(s.container, s.flex, s.wMax, app.footer)}>

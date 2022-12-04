@@ -13,28 +13,16 @@ const Profile = ({ user }) => {
 	})
 	const [pfp, setPfp] = useState(0)
 	const [address, setAddress] = useState('')
-	let previewTimer = undefined
 
 	const handleInputChange = (e) => {
 		const name = e.currentTarget.name
-		if (name === pfp) setPfp(e.currentTarget.value)
+		if (name === 'pfp') setPfp(e.currentTarget.value)
 		else setAddress(e.currentTarget.value)
 	}
 
 	const preview = async (e) => {
 		e.preventDefault()
-		const clearTimer = () => {
-			clearTimeout(previewTimer)
-			previewTimer = undefined
-		}
 		setPfps([pfpRef, pfp, address, false])
-		if (previewTimer !== undefined) {
-			clearTimer()
-		}
-		previewTimer = setTimeout(() => {
-			setPfps([pfpRef, pfpData.pfp, pfpData.address, false])
-			clearTimer()
-		}, 10000)
 	}
 
 	const save = async (e) => {
@@ -61,11 +49,24 @@ const Profile = ({ user }) => {
 	}
 
 	useEffect(() => {
+		if (!(pfp && address))
+			setPfps([pfpRef, pfpData.pfp, pfpData.address, false])
+	}, [pfp, address, pfpData.pfp, pfpData.address])
+
+	useEffect(() => {
 		setPfps([pfpRef, pfpData.pfp, pfpData.address, false])
-	}, [pfpData])
+	}, [pfpData.pfp, pfpData.address])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter, p.profileContainer)}>
+		<div
+			className={cf(
+				s.wMax,
+				s.flex,
+				s.flexCenter,
+				s['flex_dColumn'],
+				p.profileContainer
+			)}
+		>
 			<div
 				className={cf(s.flex, s.flexCenter, p.pfp)}
 				ref={pfpRef}
@@ -74,10 +75,7 @@ const Profile = ({ user }) => {
 				<span className={cf(s.dInlineBlock, s.flex, s.flexCenter)}>
 					{user.username}
 				</span>
-				<form
-					className={cf(s.wMax, s.flex, s.flexCenter, p.form)}
-					onSubmit={save}
-				>
+				<div className={cf(s.wMax, s.flex, s.flexCenter, p.form)}>
 					<label
 						htmlFor='pfp'
 						className={cf(s.wMax, s.flex, s.flexCenter, p.label)}
@@ -113,17 +111,20 @@ const Profile = ({ user }) => {
 							type='button'
 							className={cf(p.previewBtn)}
 							onClick={preview}
+							disabled={!(pfp && address)}
 						>
 							Preview
 						</button>
 						<button
-							type='submit'
+							type='button'
 							className={cf(p.saveBtn)}
+							disabled={!(pfp && address)}
+							onClick={save}
 						>
 							Save
 						</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	)

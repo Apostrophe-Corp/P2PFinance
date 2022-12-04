@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import s from '../styles/Shared.module.css'
 import l from '../styles/Loan.module.css'
+import lg from '../styles/Landing.module.css'
 import { cf, request } from '../utils'
 import { Advert } from '../components/Advert'
 
@@ -30,8 +31,13 @@ const Loans = () => {
 	}, [])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter, l.loanContainer)}>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+		<div className={cf(s.wMax, s.flex, s['flex_dColumn'], l.loanContainer, s.p10)}>
+			<div className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.catchPhrase)}>
+				<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseTextBlk)}>
+					Give someone a helping hand.
+				</h1>
+			</div>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
 						className={cf(
