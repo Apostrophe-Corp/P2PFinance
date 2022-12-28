@@ -5,8 +5,12 @@ import {
 	ALGO_WalletConnect as WalletConnect,
 	ALGO_MakePeraConnect as MakePeraConnect,
 	ALGO_PeraConnect as PeraConnect,
+	unsafeAllowMultipleStdlibs,
+	// ALGO_MakeWalletConnect as MakeWalletConnect,
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
+// import WalletConnect from '@walletconnect/client'
+// import QRCodeModal from 'algorand-walletconnect-qrcode-modal'
 import {
 	loanCtc,
 	//  adminCtc
@@ -19,8 +23,10 @@ import { LoadingPreview } from '../components/LoadingPreview'
 const reach = loadStdlib({
 	...process.env,
 	REACH_NO_WARN: 'Y',
-	REACH_CONNECTOR_MODE: 'ETH',
+	REACH_CONNECTOR_MODE: process.env.REACT_APP_REACH_CONNECTOR_MODE,
 })
+
+unsafeAllowMultipleStdlibs()
 const providerEnv = 'TestNet'
 
 const waitingPro = {}
@@ -173,6 +179,10 @@ const ReachContextProvider = ({ children }) => {
 				break
 			case 'WalletConnect':
 				instantReach.setWalletFallback(
+					// instantReach.walletFallback({
+					// 	providerEnv,
+					// 	WalletConnect: MakeWalletConnect(WalletConnect, QRCodeModal),
+					// })
 					instantReach.walletFallback({ providerEnv, WalletConnect })
 				)
 				break

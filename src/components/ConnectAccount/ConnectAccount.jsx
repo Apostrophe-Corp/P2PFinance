@@ -48,7 +48,7 @@ const ConnectAccount = () => {
 					)}
 				</div>
 				<div className={cf(s.w50, s.w480_100, s.w360_100, ca.wallet)}></div>
-				{!process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH' ? (
+				{!(process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH') ? (
 					<div
 						className={cf(
 							s.w50,
@@ -60,7 +60,7 @@ const ConnectAccount = () => {
 							ca.connect
 						)}
 					>
-						<div
+						{/* <div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
 								connectToWallet('PeraConnect')
@@ -72,7 +72,7 @@ const ConnectAccount = () => {
 									Pera Algo Wallet
 								</span>
 							</div>
-						</div>
+						</div> */}
 						<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
@@ -108,7 +108,7 @@ const ConnectAccount = () => {
 							<div className={cf(ca.walletIcon)}></div>
 							<div className={cf(s.wMax, ca.walletName)}>
 								<span className={cf(s.wMax, s.dInlineBlock, ca.walletNameText)}>
-									Connect with Mnemonic
+									Mnemonic
 								</span>
 							</div>
 						</div>
