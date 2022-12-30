@@ -17,7 +17,7 @@ const Profile = () => {
 
 		const getLoans = async () => {
 			const res = await request({
-				path: '/loans',
+				path: 'loans',
 				method: 'POST',
 				body: {
 					searchTerm: authUser.username,

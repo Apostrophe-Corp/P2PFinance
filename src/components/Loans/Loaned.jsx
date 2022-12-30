@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
-import { cf, setPfps, getTokenInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo } from '../../utils'
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
@@ -11,41 +11,35 @@ const Loaned = ({ loan }) => {
 	const pfpRef = useRef()
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-	const [maturation, setMaturation] = useState(loan.maturation)
+	const [maturation, setMaturation] = useState(Number(loan.maturation))
 
 	useEffect(() => {
-		setPfps(
-			[uCRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, true],
-			[pfpRef, loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract, false]
-		)
-	}, [loan?.borrowerInfo?.pfp, loan?.borrowerInfo?.pfpContract])
+		const pfp = Number(loan?.borrowerInfo?.pfp)
+		setPFPs([[uCRef, pfp, true], [pfpRef, pfp, false]])
+	}, [loan?.borrowerInfo?.pfp])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(
-				loan.tokenRequested,
-				loan.tokenContract
-			)
+			const assetData = await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
-				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
-			const collateralData = await getTokenInfo(
-				loan.tokenOffered,
-				loan.tokenContract
-			)
+			const collateralData = await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
-					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
+					collateralData?.unit ? `, ${collateralData.unit}` : ''
 				}`
 			)
 		}
 		updateValues()
-	}, [loan.tokenContract, loan.tokenOffered, loan.tokenRequested])
+	}, [loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		const maturationTimer = setInterval(async () => {
-			const currentTime = await instantReach.getNetworkTime()
-			const blocksRemaining = loan.maturation - currentTime
+			const currentTime = instantReach.bigNumberToNumber(
+				await instantReach.getNetworkTime()
+			)
+			const blocksRemaining = Number(loan.maturation) - currentTime
 			setMaturation(blocksRemaining)
 		}, 5000)
 
@@ -83,7 +77,7 @@ const Loaned = ({ loan }) => {
 								l.quantity
 							)}
 						>
-							{loan.amountRequested}
+							{loan?.amountRequested}
 						</span>
 						<span
 							className={cf(
@@ -95,7 +89,7 @@ const Loaned = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{assetName ?? 'Loading'}
+							{assetName ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -109,7 +103,7 @@ const Loaned = ({ loan }) => {
 								l.quantity
 							)}
 						>
-							{loan.amountOffered}
+							{loan?.amountOffered}
 						</span>
 						<span
 							className={cf(
@@ -121,7 +115,7 @@ const Loaned = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{collateral ?? 'Loading'}
+							{collateral ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -147,7 +141,7 @@ const Loaned = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{assetName ?? 'Loading'}
+							{assetName ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

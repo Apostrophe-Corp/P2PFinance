@@ -1,91 +1,19 @@
-const alchemyTokURI = process.env.REACT_APP_ALCHEMY_TOK_API_URI
-const alchemyNFTURI = process.env.REACT_APP_ALCHEMY_NFT_API_URI
-const alchemyKEY = process.env.REACT_APP_ALCHEMY_API_KEY
+import { Arc69 } from './arc'
 
-const savedTokens = {}
-const savedNFTs = {}
+const savedASAs = {}
+const arc = new Arc69()
 
-export const getTokenInfo = async (asset, address) => {
-	if (savedTokens[asset]) return savedTokens[asset]
+/**
+ * @param asset ASA ID
+ * @returns An Object: { name, unit, url, result } | {}
+ */
+export const getASAInfo = async (asset) => {
+	if (savedASAs[asset]) return savedASAs[asset]
 
-	const { result: { name = '', symbol = '', logo = '', ...result } = {} } =
-		await fetch(`${alchemyTokURI}/${alchemyKEY}`, {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-			},
-			body: JSON.stringify({
-				id: Number(asset),
-				jsonrpc: '2.0',
-				method: 'alchemy_getTokenMetadata',
-				params: [String(address)],
-			}),
-		})
-			.then((res) => {
-				return res.json()
-			})
-			.then((data) => {
-				console.log(data)
-				return { ...data, success: true }
-			})
-			.catch((error) => {
-				console.log({ error })
-				return {
-					success: false,
-					error,
-				}
-			})
+	const { result: { name = '', 'unit-name': unit, url = '', ...result } = {} } =
+		await arc.fetch(asset)
 	if (result.success) {
-		savedTokens[asset] = { name, symbol, logo, result } // store the token data
+		savedASAs[asset] = { name, unit, url, result } // store the token data
 	}
-	return savedTokens[asset] ?? {} // the token data
-}
-
-export const getNFTInfo = async (asset, address) => {
-	if (savedNFTs[asset]) return savedNFTs[asset]
-	// console.log(
-	// 	`${alchemyNFTURI}/${alchemyKEY}/getNFTMetadata?contractAddress=${String(
-	// 		address
-	// 	)}&tokenId=${asset}&refreshCache=false`
-	// )
-	const {
-		media: [{ gateway = '', raw = '' } = {}] = [],
-		contractMetadata: { name = '', symbol = '' } = {},
-		metadata: { image = '', name: title = '' } = {},
-		...result
-	} = await fetch(
-		`${alchemyNFTURI}/${alchemyKEY}/getNFTMetadata?contractAddress=${String(
-			address
-		)}&tokenId=${asset}&refreshCache=false`,
-		{
-			method: 'GET',
-			headers: {
-				accept: 'application/json',
-			},
-		}
-	)
-		.then((res) => {
-			return res.json()
-		})
-		.then((data) => {
-			console.log(data)
-			return { ...data, success: true }
-		})
-		.catch((error) => {
-			// console.log({ error })
-			return {
-				success: false,
-				error,
-			}
-		})
-
-	if (result.success) {
-		savedNFTs[asset] = {
-			media: { gateway, raw, image },
-			token: { name, symbol, title },
-			result,
-		} // store the NFT data
-	}
-	return savedNFTs[asset] ?? {} // the NFT data
+	return savedASAs[asset] ?? {} // the token data
 }

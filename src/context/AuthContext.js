@@ -9,18 +9,18 @@ const AuthContextProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [authUser, setAuthUser] = useState({})
 
-	const signIn = async (address, cb=null) => {
+	const signIn = async (address, cb = null) => {
 		startWaiting()
 		const res = await request({
-			path: `/users/${address}`,
+			path: `users/${address}`,
 			method: 'GET',
 		})
 
 		stopWaiting()
-		if (res.success) {			
+		if (res.success) {
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
-			cb != null && cb()			
+			cb != null && cb()
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -36,24 +36,23 @@ const AuthContextProvider = ({ children }) => {
 		return res.success
 	}
 
-	const signUp = async ({ username, address, pfp, pfpContract }, cb=null) => {
+	const signUp = async (username, address, pfp, cb = null) => {
 		startWaiting()
 		const res = await request({
-			path: `/users`,
+			path: `users`,
 			method: 'POST',
 			body: {
 				username,
 				address,
 				pfp,
-				pfpContract,
 			},
 		})
 
 		stopWaiting()
 		if (res.success) {
 			setIsAuthenticated(true)
-			setAuthUser({ username, address, pfp, pfpContract })
-			cb != null && cb()
+			setAuthUser({ username, address, pfp })
+			if (cb !== null) cb()
 			alertThis({
 				message: 'Success',
 				forConfirmation: false,
@@ -68,7 +67,7 @@ const AuthContextProvider = ({ children }) => {
 		return res.success
 	}
 
-	const signOut = async (cb=null) => {
+	const signOut = async (cb = null) => {
 		if (isAuthenticated) {
 			cb != null && cb()
 			setIsAuthenticated(false)

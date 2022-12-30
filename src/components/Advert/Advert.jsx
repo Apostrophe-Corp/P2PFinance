@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf, setPfps, getTokenInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo } from '../../utils'
 
 const Advert = ({ ad }) => {
 	const uCRef = useRef()
@@ -12,35 +12,33 @@ const Advert = ({ ad }) => {
 	const [collateral, setCollateral] = useState('')
 
 	useEffect(() => {
-		setPfps(
-			[uCRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, true],
-			[pfpRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, false]
-		)
-	}, [ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract])
+		const pfp = Number(ad?.borrowerInfo?.pfp)
+		setPFPs([
+			[uCRef, pfp, true],
+			[pfpRef, pfp, false],
+		])
+	}, [ad?.borrowerInfo?.pfp])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(ad.tokenRequested, ad.tokenContract)
+			const assetData = await getASAInfo(Number(ad.tokenRequested))
 			setAssetName(
-				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
-			const collateralData = await getTokenInfo(
-				ad.tokenOffered,
-				ad.tokenContract
-			)
+			const collateralData = await getASAInfo(Number(ad.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
-					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
+					collateralData?.unit ? `, (${collateralData.unit})` : ''
 				}`
 			)
 		}
 		updateValues()
-	}, [ad.tokenContract, ad.tokenOffered, ad.tokenRequested])
+	}, [ad.tokenOffered, ad.tokenRequested])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
 			<div
-				className={cf(s.flex, s.flex_dColumn, l.userContainer)}
+				className={cf(s.flex, s.flex_dColumn, l.userDetail)}
 				ref={uCRef}
 			>
 				<div
@@ -53,123 +51,119 @@ const Advert = ({ ad }) => {
 					</span>
 				</div>
 			</div>
-			<div className={cf(s.flex, s.flexCenter, s.flex_dColumn)}>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.amountRequested}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{assetName ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.amountOffered}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{collateral ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.paymentAmount}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{assetName ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.maturation}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Blocks
-						</span>
-					</div>
-				</div>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<button
-						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
-						onClick={() => {
-							lend(ad.id, ad.contractInfo, ad.amountRequested, ad.tokenRequested)
-						}}
-					>
-						Lend
-					</button>
-				</div>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.amountRequested}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{assetName ?? 'Loading...'}
+				</span>
+			</div>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.amountOffered}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{collateral ?? 'Loading...'}
+				</span>
+			</div>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.paymentAmount}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{assetName ?? 'Loading...'}
+				</span>
+			</div>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.maturation}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					Blocks
+				</span>
+			</div>
+			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+				<button
+					className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
+					onClick={() => {
+						lend(ad.id, ad.contractInfo, ad.amountRequested, ad.tokenRequested)
+					}}
+				>
+					Lend
+				</button>
 			</div>
 		</div>
 	)

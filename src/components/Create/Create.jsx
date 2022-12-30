@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
-import { setPfps, cf } from '../../utils'
+import { setPFPs, cf } from '../../utils'
 import previewImg from '../../assets/images/logo.jpg' // TODO change this image
 
 const Create = () => {
-	const { mintNFT } = useReach()
+	const { create } = useReach()
 	const [loanParams, setLoanParams] = useState({})
 
 	const previewRef = useRef()
@@ -22,23 +22,15 @@ const Create = () => {
 		const name = e.currentTarget.name
 		let value = e.currentTarget.value
 
-		if (name === 'offeredContract' || name === 'tokenContract') {
-			value = String(value)
-			setLoanParams({
-				...loanParams,
-				[name]: value,
-			})
-		} else {
-			value = Number(value)
-			setLoanParams({
-				...loanParams,
-				[name]: value,
-			})
-		}
+		value = Number(value)
+		setLoanParams({
+			...loanParams,
+			[name]: value,
+		})
 
-		if (loanParams['tokenOffered'] && loanParams['offeredContract']) {
-			setPfps([previewRef, loanParams['tokenOffered'], loanParams['offeredContract'], false])
-		}else{
+		if (loanParams['tokenOffered']) {
+			setPFPs([[previewRef, loanParams['tokenOffered'], false]])
+		} else {
 			setPreviewBgs()
 		}
 
@@ -48,7 +40,7 @@ const Create = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		// console.log(nftParams)
-		mintNFT(loanParams)
+		create(loanParams)
 	}
 
 	return (
@@ -104,23 +96,9 @@ const Create = () => {
 						>
 							<span className={cf(cr8.formText)}>Loan Token ID</span>
 							<input
-								type='text'
+								type='number'
 								name='tokenRequested'
 								id='tokenRequested'
-								onInput={handleInput}
-								placeholder=''
-								className={cf(cr8.formInput)}
-							/>
-						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='tokenContract'
-						>
-							<span className={cf(cr8.formText)}>Loan Token Contract</span>
-							<input
-								type='text'
-								name='tokenContract'
-								id='tokenContract'
 								onInput={handleInput}
 								placeholder=''
 								className={cf(cr8.formInput)}
@@ -160,25 +138,9 @@ const Create = () => {
 						>
 							<span className={cf(cr8.formText)}>Collateral Token ID</span>
 							<input
-								type='text'
+								type='number'
 								name='tokenOffered'
 								id='tokenOffered'
-								onInput={handleInput}
-								placeholder=''
-								className={cf(cr8.formInput)}
-							/>
-						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='offeredContract'
-						>
-							<span className={cf(cr8.formText)}>
-								Collateral Token Contract
-							</span>
-							<input
-								type='text'
-								name='offeredContract'
-								id='offeredContract'
 								onInput={handleInput}
 								placeholder=''
 								className={cf(cr8.formInput)}
@@ -218,12 +180,10 @@ const Create = () => {
 								disabled={
 									!(
 										loanParams.tokenRequested &&
-										loanParams.tokenOffered &&
 										loanParams.amountOffered &&
 										loanParams.amountRequested &&
 										loanParams.paymentAmount &&
-										loanParams.offeredContract &&
-										loanParams.tokenContract &&
+										loanParams.tokenOffered &&
 										loanParams.maturation
 									)
 								}

@@ -13,7 +13,7 @@ const Loans = () => {
 		const getLoans = async () => {
 			retriever = setInterval(async () => {
 				const loansRes = await request({
-					path: `/loans`,
+					path: `loans`,
 					method: 'GET',
 				})
 				if (loansRes.success) {
@@ -31,7 +31,9 @@ const Loans = () => {
 	}, [])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s['flex_dColumn'], l.loanContainer, s.p10)}>
+		<div
+			className={cf(s.wMax, s.flex, s['flex_dColumn'], l.loanContainer, s.p10)}
+		>
 			<div className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.catchPhrase)}>
 				<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseTextBlk)}>
 					Give someone a helping hand.
@@ -109,7 +111,14 @@ const Loans = () => {
 					</span>
 				</div>
 			</div>
-			{loans && loans.map((el) => <Advert ad={el} />)}
+			
+				{loans &&
+					loans.map((el, i) => (
+						<Advert
+							ad={el}
+							key={i}
+						/>
+					))}
 		</div>
 	)
 }

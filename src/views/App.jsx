@@ -60,11 +60,11 @@ const App = ({ children }) => {
 						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 						onClick={() => {
 							checkForSignIn(() => {
-							!isAuthenticated ? navigate('/sign-up') : navigate('/account')
+							(await signIn(user.address)) ? navigate('/sign-up') : navigate('/account')
 							})
 						}}
 					>
-						{isAuthenticated ? authUser.username : `Sign Up`}
+						{isAuthenticated ? authUser.username : `Sign In`}
 					</button>
 					<button
 						className={cf(s.w480_100, s.w360_100, app.connectAccount)}

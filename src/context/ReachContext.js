@@ -71,11 +71,13 @@ const ReachContextProvider = ({ children }) => {
 		prompt = false,
 		persist = false,
 		neutral = false,
+		callback = null,
+		canClear = false,
 	} = {}) => {
 		await sleep(300)
 		promiseOfConfirmation?.resolve && promiseOfConfirmation.resolve()
-		const result = await new Promise((resolve) => {
-			setPromiseOfConfirmation({ resolve })
+		const result = await new Promise((resolve, reject) => {
+			setPromiseOfConfirmation({ resolve, reject })
 			setAlertInfo((previous) => ({
 				message,
 				accept,
@@ -84,75 +86,49 @@ const ReachContextProvider = ({ children }) => {
 				prompt,
 				persist,
 				neutral,
+				callback,
+				canClear,
 			}))
 			setShowAlert((lastState) => true)
-		})
+		}).catch((message) => setShowAlert((lastState) => false))
+		if (result === undefined) setShowAlert((lastState) => false)
 		return result
 	}
 
-	const startWaiting = async () => {
+	const startWaiting = async (monitor = true) => {
 		const shouldDisplay = (display) => {
 			setShowPreloader(display)
 			if (display) setProcessing(display)
 		}
+		let waiter = undefined
 		try {
 			await new Promise((resolve, reject) => {
 				waitingPro['resolve'] = resolve
 				waitingPro['reject'] = reject
 				shouldDisplay(true)
+				if (monitor) {
+					waiter = setTimeout(() => {
+						alertThis({
+							message: `This process is taking longer than expected. Please consider clearing the cookies used by this site, refresh and reconnect your wallet, then try this again if need be`,
+							forConfirmation: false,
+						})
+						clearTimeout(waiter)
+					}, 120000)
+				}
 			})
 			shouldDisplay(false)
 		} catch (error) {
 			shouldDisplay(false)
+		}
+		if (monitor) {
+			clearTimeout(waiter)
+			waiter = undefined
 		}
 	}
 
 	const stopWaiting = (mode = true) => {
 		if (mode && waitingPro.resolve) waitingPro.resolve()
 		else if (waitingPro.reject) waitingPro.reject()
-	}
-
-	const connectToWalletETH = async () => {
-		try {
-			reach.setWalletFallback(
-				reach.walletFallback({
-					providerEnv: {
-						ETH_NODE_URI: 'https://matic-mubai.chainstacklabs.com',
-					},
-				})
-			)
-			const account = await reach.getDefaultAccount()
-			// const adminConn = account.contract(
-			// 	adminCtc,
-			// 	JSON.parse(process.env.REACT_APP_ADMIN_CONTRACT_INFO)
-			// )
-			account.setGasLimit(5000000)
-			setUser({
-				account,
-				balance: async (tokenID = null) => {
-					const balAtomic = tokenID
-						? await reach.balanceOf(account, tokenID)
-						: await reach.balanceOf(account)
-					const balance = reach.formatCurrency(balAtomic, 4)
-					return balance
-				},
-				address: reach.formatAddress(account.getAddress()),
-			})
-			// setAdminConnection(adminConn)
-			stopWaiting()
-			alertThis({
-				message: 'Connection to wallet was successful',
-				forConfirmation: false,
-			})
-		} catch (error) {
-			console.error({ error })
-			stopWaiting(false)
-			alertThis({
-				message:
-					'An error occurred, unable to connect to wallet. Please try again',
-				forConfirmation: false,
-			})
-		}
 	}
 
 	const connectToWallet = async (
@@ -255,7 +231,7 @@ const ReachContextProvider = ({ children }) => {
 			await ctc.a.Lender.lend()
 
 			const res = await request({
-				path: `/loans/${id}`,
+				path: `loans/${id}`,
 				method: 'PATCH',
 				body: {
 					lender: String(user.address),
@@ -293,10 +269,14 @@ const ReachContextProvider = ({ children }) => {
 	}
 
 	const repay = async (loanCtcInfo, asset) => {
-		const payAmount = await alertThis({
+		const payAmountIn = await alertThis({
 			message: 'Enter the repay amount',
 			prompt: true,
+			callback: (x) => !isNaN(x),
+			canClear: true,
 		})
+		if (payAmountIn === undefined) return null
+		const payAmount = Number(payAmountIn)
 
 		const userAssetBalance = await reach.balanceOf(user.account, asset)
 		const enough = userAssetBalance >= payAmount
@@ -378,23 +358,24 @@ const ReachContextProvider = ({ children }) => {
 		try {
 			const ctc = user.account.contract(loanCtc)
 			ctc.p.B({
-				getParams: {
+				getParams: () => ({
 					collateral: Number(loanParams['amountOffered']),
 					principal: Number(loanParams['amountRequested']),
 					amount: Number(loanParams['paymentAmount']),
 					maturation: Number(loanParams['maturation']),
-					tokCollateral: reach.formatAddress(loanParams['offeredContract']),
-					tokLoan: reach.formatAddress(loanParams['tokenContract']),
-					address: reach.formatAddress(user.address),
-				},
+					tokCollateral: Number(loanParams['tokenOffered']),
+					tokLoan: Number(loanParams['tokenRequested']),
+					address: String(user.address),
+				}),
 				created: async (created) => {
 					let rewardSent = false
 					const res = await request({
-						path: `/loans`,
+						path: `loans`,
 						method: 'POST',
 						body: {
 							...loanParams,
 							contractInfo: JSON.stringify(await ctc.getInfo()),
+							borrower: String(user.address),
 							created,
 						},
 					})
@@ -434,10 +415,7 @@ const ReachContextProvider = ({ children }) => {
 	const ReachContextValue = {
 		// ...states
 		user,
-		connectToWallet:
-			process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH'
-				? connectToWalletETH
-				: connectToWallet,
+		connectToWallet,
 		promiseOfConfirmation,
 		setPromiseOfConfirmation,
 		alertInfo,

@@ -1,28 +1,21 @@
-import { getNFTInfo } from './tokenUtil'
+import { getASAInfo } from './tokenUtil'
 
 /**
  * Sets the background of the element ref to that of the user's pfp
- * @param  {...any} others An array of arrays - [][ref, asset, address, blur]...
+ * @param {any} others An array of arrays - [][ref, asset, blur]...
  */
-export const setPfps = async (...others) => {
+export const setPFPs = async (others) => {
 	if (others) {
 		const oLen = others.length
 		let i = 0
 		for (i; i < oLen; i++) {
 			const opts = others[i]
 			const ref = opts[0]
-			const nftInfo = await getNFTInfo(opts[1], opts[2])
+			const nftInfo = await getASAInfo(opts[1])
 			// console.log({ nftInfo })
-			const pfp =
-				(nftInfo?.media?.raw
-					? nftInfo?.media?.raw.indexOf('ipfs://') === 0
-						? 'https://gateway.ipfs.io/ipfs/' + nftInfo?.media?.raw.slice(7)
-						: nftInfo?.media?.raw
-					: '') ??
-				nftInfo?.media?.gateway ??
-				nftInfo?.media?.image
+			const pfp = nftInfo?.url ?? ''
 			// console.log({ pfp })
-			const blur = opts[3]
+			const blur = opts[2]
 			ref.current.style.background = `${
 				blur
 					? 'linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)) ,'

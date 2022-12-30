@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf, setPfps, getTokenInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo } from '../../utils'
 import { loanCtc } from '../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
@@ -18,46 +18,40 @@ const Borrowed = ({ loan }) => {
 	const [maturation, setMaturation] = useState(loan.maturation)
 
 	useEffect(() => {
-		setPfps(
-			[uCRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, true],
-			[pfpRef, loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract, false]
-		)
-	}, [loan?.lenderInfo?.pfp, loan?.lenderInfo?.pfpContract])
+		const pfp = Number(loan?.borrowerInfo?.pfp)
+		setPFPs([[uCRef, pfp, true], [pfpRef, pfp, false]])
+	}, [loan?.borrowerInfo?.pfp])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(
-				loan.tokenRequested,
-				loan.tokenContract
-			)
+			const assetData = await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
-				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
-			const collateralData = await getTokenInfo(
-				loan.tokenOffered,
-				loan.tokenContract
-			)
+			const collateralData = await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
-					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
+					collateralData?.unit ? `, ${collateralData.unit}` : ''
 				}`
 			)
 		}
 		updateValues()
-	}, [loan.tokenContract, loan.tokenOffered, loan.tokenRequested])
+	}, [loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		const ctc = instantReach.contract(loanCtc, JSON.parse(loan.contractInfo))
 		const outStandingTimer = setInterval(async () => {
-			const amountPaid = await ctc.v.LoanViews.amountPaid()?.[1]
+			const amountPaid = Number((await ctc.v.LoanViews.amountPaid())?.[1])
 			console.log(amountPaid)
-			const outstanding = loan.paymentAmount - amountPaid
+			const outstanding = Number(loan.paymentAmount) - amountPaid
 			setOutStanding(outstanding)
 		}, 5000)
 
 		const maturationTimer = setInterval(async () => {
-			const currentTime = await instantReach.getNetworkTime()
-			const blocksRemaining = loan.maturation - currentTime
+			const currentTime = instantReach.bigNumberToNumber(
+				await instantReach.getNetworkTime()
+			)
+			const blocksRemaining = Number(loan.maturation) - currentTime
 			setMaturation(blocksRemaining)
 		}, 5000)
 
@@ -96,7 +90,7 @@ const Borrowed = ({ loan }) => {
 								l.quantity
 							)}
 						>
-							{loan.amountRequested}
+							{loan?.amountRequested}
 						</span>
 						<span
 							className={cf(
@@ -108,7 +102,7 @@ const Borrowed = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{assetName ?? 'Loading'}
+							{assetName ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -134,7 +128,7 @@ const Borrowed = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{collateral ?? 'Loading'}
+							{collateral ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -160,7 +154,7 @@ const Borrowed = ({ loan }) => {
 								l.assetName
 							)}
 						>
-							{assetName ?? 'Loading'}
+							{assetName ?? 'Loading...'}
 						</span>
 					</div>
 					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -194,7 +188,7 @@ const Borrowed = ({ loan }) => {
 					<button
 						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
 						onClick={() => {
-							repay(loan.contractInfo, loan.tokenRequested)
+							repay(loan.contractInfo, Number(loan.tokenRequested))
 						}}
 					>
 						Repay

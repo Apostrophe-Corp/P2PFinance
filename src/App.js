@@ -15,26 +15,20 @@ import { Create } from './components/Create'
 import { cf } from './utils'
 import s from './styles/Shared.module.css'
 
-const PrivateRoute = ({ child }) => {
+const PrivateRoute = ({ children }) => {
 	const { isAuthenticated, signIn } = useAuth()
 	const { alertThis, user } = useReach()
 	const navigate = useNavigate()
 
 	useEffect(
 		() => {
+			if (!user.address) navigate('/')
 			if (!isAuthenticated) {
 				alertThis({
-					message: 'You are not signed in. Would you like to do so?',
-					accept: 'Sign in',
-					decline: 'Not now',
-				}).then(async (accept) => {
-					if (accept) {
-						const stay = await signIn(user.address)
-						if (!stay) navigate('/')
-					} else {
-						navigate('/')
-					}
+					message: 'You are not signed in',
+					forConfirmation: false,
 				})
+				navigate('/')
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
@@ -44,10 +38,42 @@ const PrivateRoute = ({ child }) => {
 	return (
 		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
 			{isAuthenticated ? (
-			{child}
+				<>{children}</>
 			) : (
-				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
-				</div>
+				<div
+					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
+				></div>
+			)}
+		</div>
+	)
+}
+
+const DepRoute = ({ children }) => {
+	const { alertThis, user } = useReach()
+	const navigate = useNavigate()
+
+	useEffect(
+		() => {
+			if (!user.address) {
+				alertThis({
+					message: 'Your wallet is not connected',
+					forConfirmation: false,
+				})
+				navigate('/')
+			}
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[]
+	)
+
+	return (
+		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
+			{user.address ? (
+				<>{children}</>
+			) : (
+				<div
+					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
+				></div>
 			)}
 		</div>
 	)
@@ -71,7 +97,7 @@ const App = () => {
 							path='/loans'
 							element={
 								<AppView>
-									<PrivateRoute child={<Loans />} />
+									<PrivateRoute children={<Loans />} />
 								</AppView>
 							}
 						/>
@@ -79,7 +105,7 @@ const App = () => {
 							path='/account'
 							element={
 								<AppView>
-									<PrivateRoute child={<Profile />} />
+									<PrivateRoute children={<Profile />} />
 								</AppView>
 							}
 						/>
@@ -87,7 +113,7 @@ const App = () => {
 							path='/new-loan'
 							element={
 								<AppView>
-									<PrivateRoute child={<Create />} />
+									<PrivateRoute children={<Create />} />
 								</AppView>
 							}
 						/>
@@ -95,7 +121,10 @@ const App = () => {
 							path='/sign-up'
 							element={
 								<AppView>
-									<SignUp />
+									{/* <SignUp /> */}
+									<DepRoute>
+										<SignUp />
+									</DepRoute>
 								</AppView>
 							}
 						/>
