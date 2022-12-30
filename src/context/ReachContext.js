@@ -68,8 +68,11 @@ const ReachContextProvider = ({ children }) => {
 	const sleep = (m) => new Promise((resolve) => setTimeout(resolve, m))
 
 	const fmtCurrency = async (tok, amt) => {
-		const { decimals } = await getASAInfo(tok)
-		const newAmt = amt * 10 ** Number(decimals)
+		const { decimals = 0 } = await getASAInfo(tok)
+		console.log({decimals})
+		const power = 10 ** Number(decimals)
+		const newAmt = amt * power
+		console.log({newAmt})
 		return Number(newAmt)
 	}
 
@@ -346,10 +349,10 @@ const ReachContextProvider = ({ children }) => {
 		startWaiting()
 		const userBal = await reach.balanceOf(
 			user.account,
-			loanParams['tokenOffered']
+			Number(loanParams['tokenOffered'])
 		)
 
-		if (reach.formatCurrency(userBal, 4) < loanParams['amountOffered']) {
+		if (userBal < Number(loanParams['amountOffered'])) {
 			stopWaiting()
 			alertThis({
 				message: 'Your collateral balance is insufficient for the loan',
@@ -370,6 +373,26 @@ const ReachContextProvider = ({ children }) => {
 			const ctc = user.account.contract(loanCtc)
 			const tokReq = Number(loanParams['tokenRequested'])
 			const tokOff = Number(loanParams['tokenOffered'])
+			console.log(
+				await (async () => ({
+					tokLoan: Number(loanParams['tokenRequested']),
+					principal: await fmtCurrency(
+						tokReq,
+						Number(loanParams['amountRequested'])
+					),
+					amount: await fmtCurrency(
+						tokReq,
+						Number(loanParams['paymentAmount'])
+					),
+					maturation: Number(loanParams['maturation']),
+					tokCollateral: Number(loanParams['tokenOffered']),
+					collateral: await fmtCurrency(
+						tokOff,
+						Number(loanParams['amountOffered'])
+					),
+					address: String(user.address),
+				}))()
+			)
 			ctc.p.B({
 				getParams: async () => ({
 					tokLoan: Number(loanParams['tokenRequested']),
@@ -397,8 +420,16 @@ const ReachContextProvider = ({ children }) => {
 						body: {
 							...loanParams,
 							contractInfo: JSON.stringify(await ctc.getInfo()),
+							tokenRequested: tokReq,
+							tokenOffered: tokOff,
+							amountRequested: Number(loanParams['amountRequested']),
+							amountOffered: Number(loanParams['amountOffered']),
+							paymentAmount: Number(loanParams['paymentAmount']),
+							maturation: Number(loanParams['maturation']),
 							borrower: String(user.address),
-							created,
+							lender: '',
+							created: true,
+							resolved: false,
 						},
 					})
 					// try {

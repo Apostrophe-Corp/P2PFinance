@@ -20,10 +20,10 @@ const Profile = () => {
 				path: 'loans',
 				method: 'POST',
 				body: {
-					searchTerm: authUser.username,
+					searchTerm: String(authUser.username),
 				},
 			})
-
+			console.log(res, String(authUser.username))
 			if (res.success) {
 				const tempLoans = res.loans
 				const borrowed = tempLoans.filter(
