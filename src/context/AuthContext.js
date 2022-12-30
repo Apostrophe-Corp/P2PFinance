@@ -75,12 +75,33 @@ const AuthContextProvider = ({ children }) => {
 		}
 	}
 
+	const updateUser = async (address) => {
+		const res = await request({
+			path: `users/${address}`,
+			method: 'GET',
+		})
+
+		if (res.success) {
+			setAuthUser(res.user)
+			alertThis({
+				message: 'Success',
+				forConfirmation: false,
+			})
+		} else {
+			alertThis({
+				message: `Failed to update profile. Error message: ${res.error.message}`,
+				forConfirmation: false,
+			})
+		}
+	}
+
 	const auth = {
 		isAuthenticated,
 		authUser,
 		signIn,
 		signUp,
 		signOut,
+		updateUser,
 	}
 
 	return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>

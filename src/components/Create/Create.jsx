@@ -18,7 +18,7 @@ const Create = () => {
 		previewRef.current.style.backgroundSize = 'contain'
 	}
 
-	const handleInput = (e) => {
+	const handleChange = (e) => {
 		const name = e.currentTarget.name
 		let value = e.currentTarget.value
 
@@ -28,9 +28,9 @@ const Create = () => {
 			[name]: value,
 		})
 
-		if (loanParams['tokenOffered']) {
-			setPFPs([[previewRef, loanParams['tokenOffered'], false]])
-		} else {
+		if (value && name === 'tokenOffered') {
+			setPFPs([[previewRef, Number(value), false]])
+		} else if (!value) {
 			setPreviewBgs()
 		}
 
@@ -62,9 +62,7 @@ const Create = () => {
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
 						Some dummy text...
 					</h1>
-					<h2 className={cf(cr8.callOutSub)}>
-						Some dummy text...
-					</h2>
+					<h2 className={cf(cr8.callOutSub)}>Some dummy text...</h2>
 				</div>
 				<div
 					className={cf(
@@ -98,7 +96,7 @@ const Create = () => {
 								type='number'
 								name='tokenRequested'
 								id='tokenRequested'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -112,7 +110,7 @@ const Create = () => {
 								type='number'
 								name='amountRequested'
 								id='amountRequested'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -126,7 +124,7 @@ const Create = () => {
 								type='number'
 								name='paymentAmount'
 								id='paymentAmount'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -140,7 +138,7 @@ const Create = () => {
 								type='number'
 								name='tokenOffered'
 								id='tokenOffered'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -154,7 +152,7 @@ const Create = () => {
 								type='number'
 								name='amountOffered'
 								id='amountOffered'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -168,7 +166,7 @@ const Create = () => {
 								type='number'
 								name='maturation'
 								id='maturation'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>

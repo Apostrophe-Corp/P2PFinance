@@ -22,13 +22,19 @@ const Advert = ({ ad }) => {
 	useEffect(() => {
 		const updateValues = async () => {
 			const assetData = await getASAInfo(Number(ad.tokenRequested))
+			// console.log(assetData)
 			setAssetName(
-				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
+				`${assetData?.name}${
+					assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
+				}`
 			)
 			const collateralData = await getASAInfo(Number(ad.tokenOffered))
+			// console.log(collateralData)
 			setCollateral(
 				`${collateralData?.name}${
-					collateralData?.unit ? `, (${collateralData.unit})` : ''
+					collateralData?.['unit-name']
+						? `, (${collateralData?.['unit-name']})`
+						: ''
 				}`
 			)
 		}
@@ -74,7 +80,9 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{`${
+						assetName && assetName !== 'undefined' ? assetName : 'Loading...'
+					}`}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -100,7 +108,9 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{collateral ?? 'Loading...'}
+					{`${
+						collateral && collateral !== 'undefined' ? collateral : 'Loading...'
+					}`}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -126,7 +136,9 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{`${
+						assetName && assetName !== 'undefined' ? assetName : 'Loading...'
+					}`}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import p from '../../styles/Profile.module.css'
 import s from '../../styles/Shared.module.css'
-import { useReach } from '../../hooks'
+import { useReach, useAuth } from '../../hooks'
 import { cf, request, setPFPs } from '../../utils'
 
 const Profile = ({ user }) => {
-	const { alertThis } = useReach()
+	const { alertThis, user: thisUser } = useReach()
+	const { updateUser } = useAuth()
 	const pfpRef = useRef()
 	const [pfpData, setPfpData] = useState({
 		pfp: user.pfp,
@@ -26,13 +27,14 @@ const Profile = ({ user }) => {
 		e.preventDefault()
 		const cPfp = pfp
 		const result = await request({
-			path: 'users',
+			path: `users/${String(thisUser.address)}`,
 			method: 'PATCH',
 			body: {
 				pfp,
 			},
 		})
 
+		if (result.success) await updateUser(String(thisUser.address))
 		alertThis({
 			message: result.success
 				? 'PFP successfully updated'

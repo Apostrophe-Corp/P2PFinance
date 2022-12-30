@@ -41,6 +41,7 @@ export class Arc69 {
 				// 	return noteObject
 				// }
 				const params = transaction['asset-config-transaction']['params']
+				// console.log({params})
 				if (params['name']) {
 					rData['name'] = params['name']
 				}
@@ -57,10 +58,11 @@ export class Arc69 {
 					}
 					rData['url'] = params['url']
 				}
+				return { ...rData, success: true }
 			} catch (err) {
 				// console.log('Oh well...')
 			}
 		}
-		return { success: true, ...rData }
+		return { ...rData, success: true }
 	}
 }

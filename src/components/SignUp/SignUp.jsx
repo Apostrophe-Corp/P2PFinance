@@ -126,7 +126,7 @@ const SignUp = () => {
 								type='text'
 								name='username'
 								id='username'
-								onInput={handleInputChange}
+								onChange={handleInputChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -140,7 +140,7 @@ const SignUp = () => {
 								type='number'
 								name='pfp'
 								id='pfp'
-								onInput={handleInputChange}
+								onChange={handleInputChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
