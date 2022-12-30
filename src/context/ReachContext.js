@@ -15,7 +15,7 @@ import {
 	loanCtc,
 	//  adminCtc
 } from '../contracts'
-import { request } from '../utils'
+import { request, getASAInfo } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 import { LoadingPreview } from '../components/LoadingPreview'
@@ -66,6 +66,12 @@ const ReachContextProvider = ({ children }) => {
 	const [loanedLoans, setLoanedLoans] = useState([])
 
 	const sleep = (m) => new Promise((resolve) => setTimeout(resolve, m))
+
+	const fmtCurrency = async (tok, amt) => {
+		const { decimals } = await getASAInfo(tok)
+		const newAmt = amt * 10 ** Number(decimals)
+		return Number(newAmt)
+	}
 
 	const alertThis = async ({
 		message = 'Confirm Action',
@@ -212,7 +218,7 @@ const ReachContextProvider = ({ children }) => {
 	const lend = async (id, loanCtcInfo, loanAmount, asset) => {
 		let rewardSent = false
 		const userAssetBalance = await reach.balanceOf(user.account, asset)
-		const enough = userAssetBalance >= loanAmount
+		const enough = userAssetBalance >= (await fmtCurrency(asset, loanAmount))
 
 		if (!enough) {
 			alertThis({
@@ -280,7 +286,7 @@ const ReachContextProvider = ({ children }) => {
 			canClear: true,
 		})
 		if (payAmountIn === undefined) return null
-		const payAmount = Number(payAmountIn)
+		const payAmount = await fmtCurrency(asset, Number(payAmountIn))
 
 		const userAssetBalance = await reach.balanceOf(user.account, asset)
 		const enough = userAssetBalance >= payAmount
@@ -340,10 +346,11 @@ const ReachContextProvider = ({ children }) => {
 		startWaiting()
 		const userBal = await reach.balanceOf(
 			user.account,
-			loanParams['offeredContract']
+			loanParams['tokenOffered']
 		)
 
 		if (reach.formatCurrency(userBal, 4) < loanParams['amountOffered']) {
+			stopWaiting()
 			alertThis({
 				message: 'Your collateral balance is insufficient for the loan',
 				forConfirmation: false,
@@ -361,14 +368,25 @@ const ReachContextProvider = ({ children }) => {
 		}
 		try {
 			const ctc = user.account.contract(loanCtc)
+			const tokReq = Number(loanParams['tokenRequested'])
+			const tokOff = Number(loanParams['tokenOffered'])
 			ctc.p.B({
-				getParams: () => ({
-					collateral: Number(loanParams['amountOffered']),
-					principal: Number(loanParams['amountRequested']),
-					amount: Number(loanParams['paymentAmount']),
+				getParams: async () => ({
+					tokLoan: Number(loanParams['tokenRequested']),
+					principal: await fmtCurrency(
+						tokReq,
+						Number(loanParams['amountRequested'])
+					),
+					amount: await fmtCurrency(
+						tokReq,
+						Number(loanParams['paymentAmount'])
+					),
 					maturation: Number(loanParams['maturation']),
 					tokCollateral: Number(loanParams['tokenOffered']),
-					tokLoan: Number(loanParams['tokenRequested']),
+					collateral: await fmtCurrency(
+						tokOff,
+						Number(loanParams['amountOffered'])
+					),
 					address: String(user.address),
 				}),
 				created: async (created) => {

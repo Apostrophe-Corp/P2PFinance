@@ -47,6 +47,9 @@ export class Arc69 {
 				if (params['unit-name']) {
 					rData['unit-name'] = params['unit-name']
 				}
+				if (params['decimals']) {
+					rData['decimals'] = params['decimals']
+				}
 				if (params['url']) {
 					if (params['url'].indexOf('ipfs://') === 0) {
 						params['url'] =
