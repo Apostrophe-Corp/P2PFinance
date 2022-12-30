@@ -16,7 +16,7 @@ import { cf } from './utils'
 import s from './styles/Shared.module.css'
 
 const PrivateRoute = ({ children }) => {
-	const { isAuthenticated, signIn } = useAuth()
+	const { isAuthenticated } = useAuth()
 	const { alertThis, user } = useReach()
 	const navigate = useNavigate()
 

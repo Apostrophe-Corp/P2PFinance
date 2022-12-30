@@ -9,7 +9,7 @@ import { cf } from '../utils'
 const App = ({ children }) => {
 	const navigate = useNavigate()
 	const { checkForSignIn, setShowConnectAccount, user } = useReach()
-	const { isAuthenticated, authUser } = useAuth()
+	const { isAuthenticated, authUser, signIn } = useAuth()
 	return (
 		<div>
 			<div
@@ -59,8 +59,8 @@ const App = ({ children }) => {
 					<button
 						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 						onClick={() => {
-							checkForSignIn(() => {
-							(await signIn(user.address)) ? navigate('/sign-up') : navigate('/account')
+							checkForSignIn(async () => {
+							!(isAuthenticated || await signIn(user.address)) ? navigate('/sign-up') : navigate('/account')
 							})
 						}}
 					>

@@ -49,7 +49,7 @@ export const main = Reach.App(() => {
 	B.pay([[collateral, tokCollateral]])
 	B.interact.created(thisConsensusTime())
 
-	const [_, advertIsLive] = makeDeadline(ADVERTDEADLINE)
+	const end = thisConsensusTime() + ADVERTDEADLINE
 	const [loanAccepted, lender] = parallelReduce([false, B])
 		.invariant(
 			balance(tokCollateral) == collateral,
@@ -59,7 +59,7 @@ export const main = Reach.App(() => {
 			balance(tokLoan) == (loanAccepted ? loanInfo.principal : 0),
 			'Loan balance not right'
 		)
-		.while(advertIsLive() && !loanAccepted)
+		.while(thisConsensusTime() <= end && !loanAccepted)
 		.api_(Lender.lend, () => {
 			return [
 				[0, [loanInfo.principal, tokLoan]],
@@ -79,7 +79,7 @@ export const main = Reach.App(() => {
 		transfer(balance(tokLoan), tokLoan).to(B)
 	}
 
-	const [q_, keepGoing] = makeDeadline(loanInfo.maturation)
+	const end_ = thisConsensusTime() + loanInfo.maturation
 	const amountPaid = parallelReduce(0)
 		.invariant(
 			balance(tokCollateral) == collateral,
@@ -94,7 +94,7 @@ export const main = Reach.App(() => {
 			LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
 			LoanViews.amountPaid.set(amountPaid)
 		})
-		.while(keepGoing() && amountPaid < loanInfo.amount)
+		.while(thisConsensusTime() <= end && amountPaid < loanInfo.amount)
 		.api_(Borrower.repay, (amt) => {
 			check(this == B, 'You are not the Borrower')
 			const excess =

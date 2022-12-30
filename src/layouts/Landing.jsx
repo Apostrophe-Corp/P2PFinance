@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useReach, useAuth } from '../hooks'
+import { useReach } from '../hooks'
 import s from '../styles/Shared.module.css'
 import lg from '../styles/Landing.module.css'
 import { cf } from '../utils'
@@ -12,7 +12,6 @@ const Landing = () => {
 		checkForSignIn,
 		// alertThis
 	} = useReach()
-	const { signIn } = useAuth()
 	return (
 		<div className={cf(s.wMax, s.window)}>
 			<div

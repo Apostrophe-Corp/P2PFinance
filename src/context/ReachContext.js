@@ -61,6 +61,10 @@ const ReachContextProvider = ({ children }) => {
 		useState(false),
 	]
 
+	const [adverts, setAdverts] = useState([])
+	const [borrowedLoans, setBorrowedLoans] = useState([])
+	const [loanedLoans, setLoanedLoans] = useState([])
+
 	const sleep = (m) => new Promise((resolve) => setTimeout(resolve, m))
 
 	const alertThis = async ({
@@ -435,6 +439,12 @@ const ReachContextProvider = ({ children }) => {
 		repay,
 		checkForSignIn,
 		create,
+		adverts,
+		setAdverts,
+		borrowedLoans,
+		setBorrowedLoans,
+		loanedLoans,
+		setLoanedLoans,
 	}
 
 	return (

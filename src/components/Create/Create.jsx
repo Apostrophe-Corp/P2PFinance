@@ -60,11 +60,10 @@ const Create = () => {
 					)}
 				>
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
-						Some dummy text...Some dummy text...Some dummy text...Some dummy
-						text...
+						Some dummy text...
 					</h1>
 					<h2 className={cf(cr8.callOutSub)}>
-						Some dummy text...Some dummy text...Some dummy text...
+						Some dummy text...
 					</h2>
 				</div>
 				<div

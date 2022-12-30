@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import s from '../styles/Shared.module.css'
 import l from '../styles/Loan.module.css'
 import lg from '../styles/Landing.module.css'
 import { cf, request } from '../utils'
 import { Advert } from '../components/Advert'
+import { useReach } from '../hooks'
 
 const Loans = () => {
-	const [loans, setLoans] = useState([])
+	const { adverts: loans, setAdverts: setLoans } = useReach()
 
 	useEffect(() => {
 		let retriever = undefined
@@ -28,7 +29,7 @@ const Loans = () => {
 			clearInterval(retriever)
 			retriever = undefined
 		}
-	}, [])
+	}, [setLoans])
 
 	return (
 		<div
@@ -111,14 +112,14 @@ const Loans = () => {
 					</span>
 				</div>
 			</div>
-			
-				{loans &&
-					loans.map((el, i) => (
-						<Advert
-							ad={el}
-							key={i}
-						/>
-					))}
+
+			{loans &&
+				loans.map((el, i) => (
+					<Advert
+						ad={el}
+						key={i}
+					/>
+				))}
 		</div>
 	)
 }

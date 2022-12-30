@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import s from '../styles/Shared.module.css'
 import l from '../styles/Loan.module.css'
-import { useAuth } from '../hooks'
+import { useAuth, useReach } from '../hooks'
 import { cf, request } from '../utils'
 import { Profile as UserProfile } from '../components/Profile'
 import { Borrowed, Loaned } from '../components/Loans'
 
 const Profile = () => {
-	const [borrowedLoans, setBorrowedLoans] = useState()
-	const [loanedLoans, setLoanedLoans] = useState()
+	const { borrowedLoans, setBorrowedLoans, loanedLoans, setLoanedLoans } =
+		useReach()
 
 	const { authUser } = useAuth()
 
@@ -43,7 +43,7 @@ const Profile = () => {
 			clearInterval(retriever)
 			retriever = undefined
 		}
-	}, [authUser.address, authUser.username])
+	}, [authUser.address, authUser.username, setBorrowedLoans, setLoanedLoans])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10)}>
