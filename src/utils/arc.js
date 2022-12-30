@@ -58,7 +58,7 @@ export class Arc69 {
 					rData['url'] = params['url']
 				}
 			} catch (err) {
-				console.log('Oh well...')
+				// console.log('Oh well...')
 			}
 		}
 		return { success: true, ...rData }
