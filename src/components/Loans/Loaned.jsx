@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
-import { cf, setPFPs, getASAInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo, viewASA } from '../../utils'
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
@@ -76,8 +76,12 @@ const Loaned = ({ loan }) => {
 					s.flexCenter,
 					l.detail,
 					l.bNone,
-					l.d17
+					l.d17,
+					l.asa
 				)}
+				onClick={() => {
+					viewASA(loan.tokenRequested)
+				}}
 			>
 				<span
 					className={cf(
@@ -105,7 +109,17 @@ const Loaned = ({ loan }) => {
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					l.d17,
+					l.asa
+				)}
+				onClick={() => {
+					viewASA(loan.tokenOffered)
+				}}
 			>
 				<span
 					className={cf(
@@ -133,7 +147,17 @@ const Loaned = ({ loan }) => {
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					l.d17,
+					l.asa
+				)}
+				onClick={() => {
+					viewASA(loan.tokenRequested)
+				}}
 			>
 				<span
 					className={cf(

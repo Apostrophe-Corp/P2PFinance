@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf, setPFPs, getASAInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo, viewASA } from '../../utils'
 
 const Advert = ({ ad }) => {
 	const uCRef = useRef()
@@ -60,7 +60,17 @@ const Advert = ({ ad }) => {
 				</div>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.bNone)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					l.bNone,
+					l.asa
+				)}
+				onClick={() => {
+					viewASA(ad.tokenRequested)
+				}}
 			>
 				<span
 					className={cf(
@@ -89,7 +99,12 @@ const Advert = ({ ad }) => {
 					}`}
 				</span>
 			</div>
-			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+			<div
+				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				onClick={() => {
+					viewASA(ad.tokenOffered)
+				}}
+			>
 				<span
 					className={cf(
 						s.wMax,
@@ -113,11 +128,18 @@ const Advert = ({ ad }) => {
 					)}
 				>
 					{`${
-						collateral && collateral !== 'undefined' ? collateral : 'Collateral Token'
+						collateral && collateral !== 'undefined'
+							? collateral
+							: 'Collateral Token'
 					}`}
 				</span>
 			</div>
-			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+			<div
+				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				onClick={() => {
+					viewASA(ad.tokenRequested)
+				}}
+			>
 				<span
 					className={cf(
 						s.wMax,

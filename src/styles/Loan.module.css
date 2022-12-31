@@ -90,6 +90,19 @@
 	-webkit-text-fill-color: transparent;
 }
 
+.asa {
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background-color: #fff;
+	transition: all 0.2s !important;
+}
+
+.asa:hover {
+	box-shadow: 0 0 10px 5px rgba(128, 0, 255, 0.5);
+	transform: scale(1.05, 1.05);
+}
+
 @media only screen and (max-width: 900px) and (min-width: 761px) {
 }
 @media only screen and (max-width: 760px) and (min-width: 481px) {

@@ -116,7 +116,7 @@ export const main = Reach.App(() => {
 					},
 				]
 			})
-
+		
 		transfer(balance(tokCollateral), tokCollateral).to(
 			amountPaid < loanInfo.amount ? lender : B
 		)

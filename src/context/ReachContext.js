@@ -15,7 +15,7 @@ import {
 	loanCtc,
 	//  adminCtc
 } from '../contracts'
-import { request, getASAInfo } from '../utils'
+import { request, fmtCurrency } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 import { LoadingPreview } from '../components/LoadingPreview'
@@ -66,15 +66,6 @@ const ReachContextProvider = ({ children }) => {
 	const [loanedLoans, setLoanedLoans] = useState([])
 
 	const sleep = (m) => new Promise((resolve) => setTimeout(resolve, m))
-
-	const fmtCurrency = async (tok, amt) => {
-		const { decimals = 0 } = await getASAInfo(tok)
-		console.log({ decimals })
-		const power = 10 ** Number(decimals)
-		const newAmt = amt * power
-		console.log({ newAmt })
-		return Number(newAmt)
-	}
 
 	const alertThis = async ({
 		message = 'Confirm Action',
@@ -327,16 +318,22 @@ const ReachContextProvider = ({ children }) => {
 						resolved: true,
 					},
 				})
-			}
-			stopWaiting()
-			if (res.success) {
+				stopWaiting()
+				if (res.success) {
+					alertThis({
+						message: `Success!`,
+						forConfirmation: false,
+					})
+				} else {
+					alertThis({
+						message: `Failed to update your information on the server. Error message: ${res.error.message}`,
+						forConfirmation: false,
+					})
+				}
+			} else {
+				stopWaiting()
 				alertThis({
 					message: `Success!`,
-					forConfirmation: false,
-				})
-			} else {
-				alertThis({
-					message: `Failed to update your information on the server. Error message: ${res.error.message}`,
 					forConfirmation: false,
 				})
 			}
