@@ -15,8 +15,9 @@
 
 .userDetail {
 	width: 25%;
-	/* border-radius: 5px; */
+	border-radius: 5px;
 	border: 0px solid #000;
+	overflow: hidden;
 }
 
 .detail {
@@ -24,14 +25,63 @@
 	border-left: 1px solid rgb(162, 0, 255);
 }
 
-
 .userPfp {
 	height: 100px;
 	width: 100px;
-	border: none;
+}
+
+.username {
+	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: 5px;
 }
 
 .usernameText {
 	color: #fff;
+}
+
+.bNone {
+	border: none !important;
+}
+
+.lend {
+	/* align-items: stretch !important; */
+}
+
+.lendBtn {
+	padding: 10px;
+	border-radius: 10px;
+	border: 0.5px solid rgb(0, 145, 255);
+	background-color: rgb(106, 0, 255);
+	color: rgb(255, 255, 255);
+	box-shadow: 0 5px 10px 5px rgb(122, 112, 137);
+	font-weight: 700;
+	font-size: 16px;
+	text-overflow: ellipsis !important;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-align: center;
+	transition: all 0.2s;
+}
+
+.lendBtn:hover {
+	background-color: rgb(49, 0, 118);
+}
+
+@media only screen and (max-width: 900px) and (min-width: 761px) {
+}
+@media only screen and (max-width: 760px) and (min-width: 481px) {
+}
+@media only screen and (max-width: 480px) and (min-width: 361px) {
+	.lend {
+		width: 100% !important;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.lend {
+		width: 100% !important;
+	}
+
+	.userDetail {
+		width: 100% !important;
+	}
 }

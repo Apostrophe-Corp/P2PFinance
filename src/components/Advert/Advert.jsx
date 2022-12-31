@@ -59,7 +59,9 @@ const Advert = ({ ad }) => {
 					</span>
 				</div>
 			</div>
-			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+			<div
+				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.bNone)}
+			>
 				<span
 					className={cf(
 						s.wMax,
@@ -169,11 +171,17 @@ const Advert = ({ ad }) => {
 					Blocks
 				</span>
 			</div>
-			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, s.p10, l.detail)}>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, s.p5, l.detail, l.lend)}>
 				<button
-					className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
+					className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter, l.lendBtn
+					)}
 					onClick={() => {
-						lend(ad.id, ad.contractInfo, ad.amountRequested, ad.tokenRequested)
+						lend(
+							Number(ad.id),
+							ad.contractInfo,
+							Number(ad.amountRequested),
+							Number(ad.tokenRequested)
+						)
 					}}
 				>
 					Lend

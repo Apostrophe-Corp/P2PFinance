@@ -77,48 +77,48 @@ export const main = Reach.App(() => {
 		exit()
 	} else {
 		transfer(balance(tokLoan), tokLoan).to(B)
+
+		const end_ = thisConsensusTime() + loanInfo.maturation
+		const amountPaid = parallelReduce(0)
+			.invariant(
+				balance(tokCollateral) == collateral,
+				'Collateral balance not right'
+			)
+			.invariant(balance(tokLoan) == amountPaid, 'Loan balance not right')
+			.invariant(
+				amountPaid <= loanInfo.amount,
+				'Amount paid is greater than repayment amount'
+			)
+			.define(() => {
+				LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
+				LoanViews.amountPaid.set(amountPaid)
+			})
+			.while(thisConsensusTime() <= end && amountPaid < loanInfo.amount)
+			.api_(Borrower.repay, (amt) => {
+				check(this == B, 'You are not the Borrower')
+				const excess =
+					amt + amountPaid > loanInfo.amount
+						? amt + amountPaid - loanInfo.amount
+						: 0
+				const payAmt = amt - excess
+				return [
+					[0, [payAmt, tokLoan]],
+					(notify) => {
+						notify(amountPaid)
+						return amountPaid + payAmt
+					},
+				]
+			})
+
+		transfer(balance(tokCollateral), tokCollateral).to(
+			amountPaid < loanInfo.amount ? lender : B
+		)
+		transfer(balance(tokLoan), tokLoan).to(
+			amountPaid < loanInfo.amount ? B : lender
+		)
+		transfer(balance()).to(B)
+
+		commit()
+		exit()
 	}
-
-	const end_ = thisConsensusTime() + loanInfo.maturation
-	const amountPaid = parallelReduce(0)
-		.invariant(
-			balance(tokCollateral) == collateral,
-			'Collateral balance not right'
-		)
-		.invariant(balance(tokLoan) == amountPaid, 'Loan balance not right')
-		.invariant(
-			amountPaid <= loanInfo.amount,
-			'Amount paid is greater than repayment amount'
-		)
-		.define(() => {
-			LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
-			LoanViews.amountPaid.set(amountPaid)
-		})
-		.while(thisConsensusTime() <= end && amountPaid < loanInfo.amount)
-		.api_(Borrower.repay, (amt) => {
-			check(this == B, 'You are not the Borrower')
-			const excess =
-				amt + amountPaid > loanInfo.amount
-					? amt + amountPaid - loanInfo.amount
-					: 0
-			const payAmt = amt - excess
-			return [
-				[0, [payAmt, tokLoan]],
-				(notify) => {
-					notify(amountPaid)
-					return amountPaid + payAmt
-				},
-			]
-		})
-
-	transfer(balance(tokCollateral), tokCollateral).to(
-		amountPaid < loanInfo.amount ? lender : B
-	)
-	transfer(balance(tokLoan), tokLoan).to(
-		amountPaid < loanInfo.amount ? B : lender
-	)
-	transfer(balance()).to(B)
-
-	commit()
-	exit()
 })

@@ -288,7 +288,7 @@ export async function B(ctcTop, interact) {
             to: v491,
             tok: v493
             });
-          const v619 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0');
+          const v619 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0');
           const v620 = v527;
           const v626 = v615;
           const v627 = v534;
@@ -303,20 +303,20 @@ export async function B(ctcTop, interact) {
             sim_r.isHalt = false;
             }
           else {
-            const v731 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-            const v732 = v731[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+            const v731 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+            const v732 = v731[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
             const v734 = stdlib.lt(v619, v509);
             const v735 = v734 ? v525 : v491;
             const v741 = stdlib.sub(v732, v732);
             const v743 = stdlib.Array_set(v731, '0', v741);
-            const v744 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v743);
+            const v744 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v743);
             sim_r.txns.push({
               kind: 'from',
               to: v735,
               tok: v492
               });
-            const v745 = v744[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-            const v746 = v745[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+            const v745 = v744[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+            const v746 = v745[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
             const v749 = v734 ? v491 : v525;
             sim_r.txns.push({
               kind: 'from',
@@ -454,7 +454,7 @@ export async function B(ctcTop, interact) {
     const v614 = stdlib.Array_set(v605, '0', v612);
     const v615 = stdlib.Array_set(v533, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:79:55:application', stdlib.UInt_max, '1'), v614);
     ;
-    let v619 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0');
+    let v619 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0');
     let v620 = v527;
     let v626 = v615;
     let v627 = v534;
@@ -477,11 +477,11 @@ export async function B(ctcTop, interact) {
         }));
       const {data: [v685], secs: v687, time: v686, didSend: v327, from: v684 } = txn5;
       undefined /* setApiDetails */;
-      const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:98:22:spread', stdlib.UInt_max, '0')];
+      const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:97:30:spread', stdlib.UInt_max, '0')];
       const v690 = stdlib.addressEq(v684, v491);
       stdlib.assert(v690, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./src/contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)'],
+        fs: ['at ./src/contracts/loan.rsh:98:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)'],
         msg: 'You are not the Borrower',
         who: 'B'
         });
@@ -493,15 +493,15 @@ export async function B(ctcTop, interact) {
         v695 = v698;
         }
       else {
-        v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+        v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
         }
       const v699 = stdlib.safeSub(v689, v695);
       ;
-      const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1')];
-      const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '0')];
+      const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1')];
+      const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '0')];
       const v706 = stdlib.add(v705, v699);
       const v708 = stdlib.Array_set(v704, '0', v706);
-      const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1'), v708);
+      const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1'), v708);
       ;
       let v716;
       if (v694) {
@@ -509,7 +509,7 @@ export async function B(ctcTop, interact) {
         v716 = v719;
         }
       else {
-        v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+        v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
         }
       const v720 = stdlib.safeSub(v689, v716);
       await txn5.getOutput('Borrower_repay', 'v619', ctc1, v619);
@@ -528,16 +528,16 @@ export async function B(ctcTop, interact) {
       continue;
       
       }
-    const v731 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-    const v732 = v731[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+    const v731 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+    const v732 = v731[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
     const v734 = stdlib.lt(v619, v509);
     const v735 = v734 ? v525 : v491;
     const v741 = stdlib.sub(v732, v732);
     const v743 = stdlib.Array_set(v731, '0', v741);
-    const v744 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v743);
+    const v744 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v743);
     ;
-    const v745 = v744[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-    const v746 = v745[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+    const v745 = v744[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+    const v746 = v745[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
     const v749 = v734 ? v491 : v525;
     ;
     ;
@@ -575,7 +575,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
   const v651 = ctc.selfAddress();
   const v653 = stdlib.protect(ctc6, await interact.in(), {
     at: './src/contracts/loan.rsh:1:23:application',
-    fs: ['at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)'],
+    fs: ['at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)'],
     msg: 'in',
     who: 'Borrower_repay'
     });
@@ -583,7 +583,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
   const v656 = stdlib.addressEq(v651, v491);
   stdlib.assert(v656, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./src/contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)'],
+    fs: ['at ./src/contracts/loan.rsh:98:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)'],
     msg: 'You are not the Borrower',
     who: 'Borrower_repay'
     });
@@ -596,7 +596,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
     v675 = v678;
     }
   else {
-    v675 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+    v675 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
     }
   const v679 = stdlib.safeSub(v654, v675);
   
@@ -607,7 +607,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
     out_tys: [ctc6],
-    pay: [stdlib.checkedBigNumberify('./src/contracts/loan.rsh:106:34:decimal', stdlib.UInt_max, '0'), [[v679, v493]]],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan.rsh:105:42:decimal', stdlib.UInt_max, '0'), [[v679, v493]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
@@ -620,7 +620,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
         kind: 'api',
         who: "Borrower_repay"
         });
-      const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:98:22:spread', stdlib.UInt_max, '0')];
+      const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:97:30:spread', stdlib.UInt_max, '0')];
       const v692 = stdlib.safeAdd(v689, v619);
       const v694 = stdlib.gt(v692, v509);
       let v695;
@@ -629,15 +629,15 @@ export async function _Borrower_repay5(ctcTop, interact) {
         v695 = v698;
         }
       else {
-        v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+        v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
         }
       const v699 = stdlib.safeSub(v689, v695);
       ;
-      const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1')];
-      const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '0')];
+      const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1')];
+      const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '0')];
       const v706 = stdlib.add(v705, v699);
       const v708 = stdlib.Array_set(v704, '0', v706);
-      const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1'), v708);
+      const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1'), v708);
       sim_r.txns.push({
         amt: v699,
         kind: 'to',
@@ -649,7 +649,7 @@ export async function _Borrower_repay5(ctcTop, interact) {
         v716 = v719;
         }
       else {
-        v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+        v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
         }
       const v720 = stdlib.safeSub(v689, v716);
       const v722 = await txn1.getOutput('Borrower_repay', 'v619', ctc2, v619);
@@ -666,19 +666,19 @@ export async function _Borrower_repay5(ctcTop, interact) {
         sim_r.isHalt = false;
         }
       else {
-        const v981 = v709[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-        const v982 = v981[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+        const v981 = v709[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+        const v982 = v981[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
         const v984 = v977 ? v525 : v491;
         const v985 = stdlib.sub(v982, v982);
         const v986 = stdlib.Array_set(v981, '0', v985);
-        const v987 = stdlib.Array_set(v709, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v986);
+        const v987 = stdlib.Array_set(v709, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v986);
         sim_r.txns.push({
           kind: 'from',
           to: v984,
           tok: v492
           });
-        const v988 = v987[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-        const v989 = v988[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+        const v988 = v987[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+        const v989 = v988[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
         const v990 = v977 ? v491 : v525;
         sim_r.txns.push({
           kind: 'from',
@@ -713,11 +713,11 @@ export async function _Borrower_repay5(ctcTop, interact) {
     }));
   const {data: [v685], secs: v687, time: v686, didSend: v327, from: v684 } = txn1;
   undefined /* setApiDetails */;
-  const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:98:22:spread', stdlib.UInt_max, '0')];
+  const v689 = v685[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:97:30:spread', stdlib.UInt_max, '0')];
   const v690 = stdlib.addressEq(v684, v491);
   stdlib.assert(v690, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./src/contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)', 'at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)'],
+    fs: ['at ./src/contracts/loan.rsh:98:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)', 'at ./src/contracts/loan.rsh:97:53:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:53:function exp)'],
     msg: 'You are not the Borrower',
     who: 'Borrower_repay'
     });
@@ -729,15 +729,15 @@ export async function _Borrower_repay5(ctcTop, interact) {
     v695 = v698;
     }
   else {
-    v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+    v695 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
     }
   const v699 = stdlib.safeSub(v689, v695);
   ;
-  const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1')];
-  const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '0')];
+  const v704 = v626[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1')];
+  const v705 = v704[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '0')];
   const v706 = stdlib.add(v705, v699);
   const v708 = stdlib.Array_set(v704, '0', v706);
-  const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:42:dot', stdlib.UInt_max, '1'), v708);
+  const v709 = stdlib.Array_set(v626, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:50:dot', stdlib.UInt_max, '1'), v708);
   ;
   let v716;
   if (v694) {
@@ -745,14 +745,14 @@ export async function _Borrower_repay5(ctcTop, interact) {
     v716 = v719;
     }
   else {
-    v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:103:43:decimal', stdlib.UInt_max, '0');
+    v716 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:102:51:decimal', stdlib.UInt_max, '0');
     }
   const v720 = stdlib.safeSub(v689, v716);
   const v722 = await txn1.getOutput('Borrower_repay', 'v619', ctc2, v619);
   if (v327) {
     stdlib.protect(ctc7, await interact.out(v685, v722), {
-      at: './src/contracts/loan.rsh:98:23:application',
-      fs: ['at ./src/contracts/loan.rsh:98:23:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:23:function exp)', 'at ./src/contracts/loan.rsh:108:47:application call to "notify" (defined at: ./src/contracts/loan.rsh:107:42:function exp)', 'at ./src/contracts/loan.rsh:107:42:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:107:42:function exp)'],
+      at: './src/contracts/loan.rsh:97:31:application',
+      fs: ['at ./src/contracts/loan.rsh:97:31:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:97:31:function exp)', 'at ./src/contracts/loan.rsh:107:55:application call to "notify" (defined at: ./src/contracts/loan.rsh:106:50:function exp)', 'at ./src/contracts/loan.rsh:106:50:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:106:50:function exp)'],
       msg: 'out',
       who: 'Borrower_repay'
       });
@@ -772,15 +772,15 @@ export async function _Borrower_repay5(ctcTop, interact) {
     return;
     }
   else {
-    const v981 = v709[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-    const v982 = v981[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+    const v981 = v709[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+    const v982 = v981[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
     const v984 = v977 ? v525 : v491;
     const v985 = stdlib.sub(v982, v982);
     const v986 = stdlib.Array_set(v981, '0', v985);
-    const v987 = stdlib.Array_set(v709, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v986);
+    const v987 = stdlib.Array_set(v709, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v986);
     ;
-    const v988 = v987[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-    const v989 = v988[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+    const v988 = v987[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+    const v989 = v988[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
     const v990 = v977 ? v491 : v525;
     ;
     ;
@@ -867,29 +867,29 @@ export async function _Lender_lend7(ctcTop, interact) {
           to: v491,
           tok: v493
           });
-        const v1047 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0');
+        const v1047 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0');
         const v1049 = v1003;
         const v1050 = v534;
-        const v1052 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0'), v509);
+        const v1052 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0'), v509);
         const v1053 = v996 ? v1052 : false;
         if (v1053) {
-          const v1054 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0'), v509);
+          const v1054 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0'), v509);
           sim_r.isHalt = false;
           }
         else {
-          const v1056 = v1003[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-          const v1057 = v1056[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+          const v1056 = v1003[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+          const v1057 = v1056[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
           const v1059 = v1052 ? v557 : v491;
           const v1060 = stdlib.sub(v1057, v1057);
           const v1061 = stdlib.Array_set(v1056, '0', v1060);
-          const v1062 = stdlib.Array_set(v1003, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v1061);
+          const v1062 = stdlib.Array_set(v1003, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v1061);
           sim_r.txns.push({
             kind: 'from',
             to: v1059,
             tok: v492
             });
-          const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-          const v1064 = v1063[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+          const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+          const v1064 = v1063[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
           const v1065 = v1052 ? v491 : v557;
           sim_r.txns.push({
             kind: 'from',
@@ -959,25 +959,25 @@ export async function _Lender_lend7(ctcTop, interact) {
     const v1002 = stdlib.Array_set(v999, '0', v1001);
     const v1003 = stdlib.Array_set(v572, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:79:55:application', stdlib.UInt_max, '1'), v1002);
     ;
-    const v1047 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0');
+    const v1047 = stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0');
     const v1049 = v1003;
     const v1050 = v534;
-    const v1052 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0'), v509);
+    const v1052 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0'), v509);
     const v1053 = v996 ? v1052 : false;
     if (v1053) {
-      const v1054 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:83:43:decimal', stdlib.UInt_max, '0'), v509);
+      const v1054 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan.rsh:82:51:decimal', stdlib.UInt_max, '0'), v509);
       return;
       }
     else {
-      const v1056 = v1003[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
-      const v1057 = v1056[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:25:application', stdlib.UInt_max, '0')];
+      const v1056 = v1003[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
+      const v1057 = v1056[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:33:application', stdlib.UInt_max, '0')];
       const v1059 = v1052 ? v557 : v491;
       const v1060 = stdlib.sub(v1057, v1057);
       const v1061 = stdlib.Array_set(v1056, '0', v1060);
-      const v1062 = stdlib.Array_set(v1003, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:114:59:application', stdlib.UInt_max, '0'), v1061);
+      const v1062 = stdlib.Array_set(v1003, stdlib.checkedBigNumberify('./src/contracts/loan.rsh:113:67:application', stdlib.UInt_max, '0'), v1061);
       ;
-      const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '1')];
-      const v1064 = v1063[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:117:25:application', stdlib.UInt_max, '0')];
+      const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '1')];
+      const v1064 = v1063[stdlib.checkedBigNumberify('./src/contracts/loan.rsh:116:33:application', stdlib.UInt_max, '0')];
       const v1065 = v1052 ? v491 : v557;
       ;
       ;
@@ -1046,13 +1046,13 @@ export const _stateSourceMap = {
     who: 'Module'
     },
   4: {
-    at: './src/contracts/loan.rsh:122:9:after expr stmt',
+    at: './src/contracts/loan.rsh:121:17:after expr stmt',
     fs: [],
     msg: null,
     who: 'Module'
     },
   5: {
-    at: './src/contracts/loan.rsh:83:42:after expr stmt semicolon',
+    at: './src/contracts/loan.rsh:82:50:after expr stmt semicolon',
     fs: [],
     msg: null,
     who: 'Module'
