@@ -39,6 +39,7 @@ const Profile = () => {
 						(el) => el.lender === authUser.address
 					)
 					setLoanedLoans(loaned)
+					// console.log({ tempLoans, borrowed, loaned })
 				}
 			}
 		}

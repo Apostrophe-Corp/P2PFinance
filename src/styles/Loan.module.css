@@ -84,16 +84,15 @@
 		),
 		rgb(152, 0, 223);
 	background-clip: text;
-	font-size: 18px;
-	font-weight: 650;
+	font-size: 15px;
+	font-weight: 450;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
 .asa {
 	cursor: pointer;
-	border: none;
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	background-color: #fff;
 	transition: all 0.2s !important;
 }
