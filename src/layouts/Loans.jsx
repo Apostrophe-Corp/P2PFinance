@@ -111,7 +111,9 @@ const Loans = () => {
 						Duration
 					</span>
 				</div>
-				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.lend)}
+				>
 					<span
 						className={cf(
 							s.wMax,

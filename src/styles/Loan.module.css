@@ -75,6 +75,7 @@
 	}
 	.lend {
 		width: 100% !important;
+		border: none !important;
 	}
 
 	.detail:not(.lend) {
@@ -84,11 +85,11 @@
 @media only screen and (max-width: 480px) and (min-width: 361px) {
 	.lend {
 		width: 100% !important;
-		border: none;
+		border: none !important;
 	}
 
-	.detail:last-of-type{
-		border: none;
+	.userDetail + .detail{
+		border: none !important;
 	}
 
 	.detail:not(.lend) {
@@ -102,6 +103,7 @@
 @media only screen and (max-width: 360px) {
 	.lend {
 		width: 100% !important;
+		border: none !important;
 	}
 
 	.detail:not(.lend) {
