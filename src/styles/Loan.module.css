@@ -84,6 +84,11 @@
 @media only screen and (max-width: 480px) and (min-width: 361px) {
 	.lend {
 		width: 100% !important;
+		border: none;
+	}
+
+	.detail:last-of-type{
+		border: none;
 	}
 
 	.detail:not(.lend) {
