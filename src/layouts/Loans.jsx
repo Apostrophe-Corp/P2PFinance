@@ -37,10 +37,10 @@ const Loans = () => {
 		>
 			<div className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.catchPhrase)}>
 				<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseTextBlk)}>
-					Give someone a helping hand.
+					Give a helping hand.
 				</h1>
 			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
 						className={cf(

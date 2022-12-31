@@ -85,7 +85,7 @@ const Advert = ({ ad }) => {
 					)}
 				>
 					{`${
-						assetName && assetName !== 'undefined' ? assetName : 'Loading...'
+						assetName && assetName !== 'undefined' ? assetName : 'Loan Token'
 					}`}
 				</span>
 			</div>
@@ -113,7 +113,7 @@ const Advert = ({ ad }) => {
 					)}
 				>
 					{`${
-						collateral && collateral !== 'undefined' ? collateral : 'Loading...'
+						collateral && collateral !== 'undefined' ? collateral : 'Collateral Token'
 					}`}
 				</span>
 			</div>
@@ -141,7 +141,7 @@ const Advert = ({ ad }) => {
 					)}
 				>
 					{`${
-						assetName && assetName !== 'undefined' ? assetName : 'Loading...'
+						assetName && assetName !== 'undefined' ? assetName : 'Loan Token'
 					}`}
 				</span>
 			</div>

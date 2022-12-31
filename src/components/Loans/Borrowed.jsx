@@ -109,7 +109,7 @@ const Borrowed = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -135,7 +135,7 @@ const Borrowed = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{collateral ?? 'Loading...'}
+					{collateral ?? 'Collateral Token'}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -161,7 +161,7 @@ const Borrowed = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

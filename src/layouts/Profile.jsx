@@ -58,7 +58,7 @@ const Profile = () => {
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 				<UserProfile user={authUser} />
 			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
 				<div
 					className={cf(
 						s.flex,
@@ -153,7 +153,7 @@ const Profile = () => {
 						key={i}
 					/>
 				))}
-			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
 						className={cf(
@@ -239,15 +239,15 @@ const Profile = () => {
 					>
 						Offset
 					</span>
-				</div>				
+				</div>
 			</div>
-			{ borrowedLoans &&
-					borrowedLoans.map((el, i) => (
-						<Borrowed
-							loan={el}
-							key={i}
-						/>
-					))}
+			{borrowedLoans &&
+				borrowedLoans.map((el, i) => (
+					<Borrowed
+						loan={el}
+						key={i}
+					/>
+				))}
 		</div>
 	)
 }

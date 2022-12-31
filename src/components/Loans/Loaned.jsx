@@ -101,7 +101,7 @@ const Loaned = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div
@@ -129,7 +129,7 @@ const Loaned = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{collateral ?? 'Loading...'}
+					{collateral ?? 'Collateral Token'}
 				</span>
 			</div>
 			<div
@@ -157,7 +157,7 @@ const Loaned = ({ loan }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loading...'}
+					{assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div

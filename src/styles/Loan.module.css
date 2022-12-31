@@ -67,12 +67,27 @@
 	background-color: rgb(49, 0, 118);
 }
 
-.d17{
+.d17 {
 	width: 17%;
 }
 
-.d32{
+.d32 {
 	width: 32%;
+}
+
+.header {
+	composes: branding from './Landing.module.css';
+	background: linear-gradient(
+			to bottom right,
+			rgb(152, 0, 223),
+			rgba(0, 119, 255, 0.5)
+		),
+		rgb(152, 0, 223);
+	background-clip: text;
+	font-size: 18px;
+	font-weight: 650;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 @media only screen and (max-width: 900px) and (min-width: 761px) {
@@ -96,7 +111,7 @@
 		border: none !important;
 	}
 
-	.userDetail + .detail{
+	.userDetail + .detail {
 		border: none !important;
 	}
 
