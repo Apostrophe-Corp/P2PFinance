@@ -70,6 +70,16 @@
 @media only screen and (max-width: 900px) and (min-width: 761px) {
 }
 @media only screen and (max-width: 760px) and (min-width: 481px) {
+	.userDetail {
+		width: 32% !important;
+	}
+	.lend {
+		width: 100% !important;
+	}
+
+	.detail:not(.lend) {
+		width: 17% !important;
+	}
 }
 @media only screen and (max-width: 480px) and (min-width: 361px) {
 	.lend {
