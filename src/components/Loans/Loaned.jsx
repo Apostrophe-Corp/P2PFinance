@@ -9,8 +9,8 @@ const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 const Loaned = ({ loan }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
-	const [assetName, setAssetName] = useState('')
-	const [collateral, setCollateral] = useState('')
+	const [assetName, setAssetName] = useState('Loan Token')
+	const [collateral, setCollateral] = useState('Collateral Token')
 	const [maturation, setMaturation] = useState(Number(loan.maturation))
 
 	useEffect(() => {

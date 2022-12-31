@@ -8,8 +8,8 @@ const Advert = ({ ad }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const { lend } = useReach()
-	const [assetName, setAssetName] = useState('')
-	const [collateral, setCollateral] = useState('')
+	const [assetName, setAssetName] = useState('Loan Token')
+	const [collateral, setCollateral] = useState('Collateral Token')
 
 	useEffect(() => {
 		const pfp = Number(ad?.borrowerInfo?.pfp)
