@@ -75,10 +75,22 @@
 	.lend {
 		width: 100% !important;
 	}
+
+	.detail:not(.lend) {
+		width: 25% !important;
+	}
+
+	.userDetail {
+		width: 100% !important;
+	}
 }
 @media only screen and (max-width: 360px) {
 	.lend {
 		width: 100% !important;
+	}
+
+	.detail:not(.lend) {
+		width: 25% !important;
 	}
 
 	.userDetail {
