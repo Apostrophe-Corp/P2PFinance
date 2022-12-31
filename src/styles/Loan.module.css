@@ -4,19 +4,34 @@
 	border: 1px solid rgb(162, 0, 255);
 	border-radius: 5px;
 	margin-bottom: 5px;
+	align-items: stretch !important;
 }
 
 .loanContainer {
 	justify-content: space-evenly;
 	align-items: center;
-    min-height: inherit;
+	min-height: inherit;
 }
 
 .userDetail {
-	width: 40%;
+	width: 25%;
+	/* border-radius: 5px; */
+	border: 0px solid #000;
 }
 
 .detail {
 	width: 15%;
 	border-left: 1px solid rgb(162, 0, 255);
+}
+
+
+.userPfp {
+	height: 100px;
+	width: 100px;
+	border: none;
+	border-radius: 5px;
+}
+
+.usernameText {
+	color: #fff;
 }

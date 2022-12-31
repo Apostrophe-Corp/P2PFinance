@@ -18,12 +18,12 @@ export const setPFPs = async (others) => {
 			const blur = opts[2]
 			ref.current.style.background = `${
 				blur
-					? 'linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)) ,'
+					? 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.4)) ,'
 					: ''
 			}url(${pfp})`
 			ref.current.style.backgroundPosition = 'center'
 			ref.current.style.backgroundRepeat = 'no-repeat'
-			ref.current.style.backgroundSize = 'contain'
+			ref.current.style.backgroundSize = blur ? 'cover' : 'contain'
 		}
 	}
 }

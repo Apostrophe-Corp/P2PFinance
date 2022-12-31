@@ -25,13 +25,17 @@ const Profile = () => {
 			})
 			console.log(res, String(authUser.username))
 			if (res.success) {
-				const tempLoans = res.loans
-				const borrowed = tempLoans.filter(
-					(el) => el.borrower === authUser.address
-				)
-				setBorrowedLoans(borrowed)
-				const loaned = tempLoans.filter((el) => el.lender === authUser.address)
-				setLoanedLoans(loaned)
+				if (res.loans) {
+					const tempLoans = res.loans
+					const borrowed = tempLoans.filter(
+						(el) => el.borrower === authUser.address
+					)
+					setBorrowedLoans(borrowed)
+					const loaned = tempLoans.filter(
+						(el) => el.lender === authUser.address
+					)
+					setLoanedLoans(loaned)
+				}
 			}
 		}
 

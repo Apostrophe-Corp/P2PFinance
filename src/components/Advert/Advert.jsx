@@ -24,18 +24,20 @@ const Advert = ({ ad }) => {
 			const assetData = await getASAInfo(Number(ad.tokenRequested))
 			// console.log(assetData)
 			setAssetName(
-				`${assetData?.name}${
-					assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
-				}`
+				`${assetData?.name}`
+				// `${assetData?.name}${
+				// 	assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
+				// }`
 			)
 			const collateralData = await getASAInfo(Number(ad.tokenOffered))
 			// console.log(collateralData)
 			setCollateral(
-				`${collateralData?.name}${
-					collateralData?.['unit-name']
-						? `, (${collateralData?.['unit-name']})`
-						: ''
-				}`
+				`${collateralData?.name}`
+				// `${collateralData?.name}${
+				// 	collateralData?.['unit-name']
+				// 		? `, (${collateralData?.['unit-name']})`
+				// 		: ''
+				// }`
 			)
 		}
 		updateValues()
@@ -167,7 +169,7 @@ const Advert = ({ ad }) => {
 					Blocks
 				</span>
 			</div>
-			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, s.p10, l.detail)}>
 				<button
 					className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
 					onClick={() => {
