@@ -142,7 +142,7 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						Duration
+						Maturation
 					</span>
 				</div>
 			</div>

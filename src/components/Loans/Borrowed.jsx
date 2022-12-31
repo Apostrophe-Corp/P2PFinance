@@ -44,7 +44,9 @@ const Borrowed = ({ loan }) => {
 	useEffect(() => {
 		const ctc = instantReach.contract(loanCtc, JSON.parse(loan.contractInfo))
 		const outStandingTimer = setInterval(async () => {
-			const amountPaid = Number((await ctc.v.LoanViews.amountPaid())?.[1])
+			const amountPaid = instantReach.bigNumberToNumber(
+				(await ctc.v.LoanViews.amountPaid())?.[1]
+			)
 			console.log(amountPaid)
 			const outstanding = Number(loan.paymentAmount) - amountPaid
 			setOutStanding(outstanding)
@@ -54,15 +56,17 @@ const Borrowed = ({ loan }) => {
 			const currentTime = instantReach.bigNumberToNumber(
 				await instantReach.getNetworkTime()
 			)
-			const blocksRemaining = Number(loan.maturation) - currentTime
-			setMaturation(blocksRemaining)
+			const blocksRemaining =
+				Number(loan.created) + Number(loan.maturation) - currentTime
+
+			setMaturation(blocksRemaining > 0 ? blocksRemaining : 'Ended')
 		}, 5000)
 
 		return () => {
 			clearInterval(outStandingTimer)
 			clearInterval(maturationTimer)
 		}
-	}, [loan.contractInfo, loan.maturation, loan.paymentAmount])
+	}, [loan.contractInfo, loan.created, loan.maturation, loan.paymentAmount])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
@@ -173,18 +177,20 @@ const Borrowed = ({ loan }) => {
 				>
 					{maturation}
 				</span>
-				<span
-					className={cf(
-						s.wMax,
-						s.flex,
-						s.flexCenter,
-						s.p5,
-						s.dInlineBlock,
-						l.assetName
-					)}
-				>
-					Blocks
-				</span>
+				{maturation !== 'Ended' && (
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Blocks
+					</span>
+				)}
 			</div>
 			<div
 				className={cf(

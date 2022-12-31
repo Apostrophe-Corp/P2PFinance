@@ -24,7 +24,7 @@ const Advert = ({ ad }) => {
 			const assetData = await getASAInfo(Number(ad.tokenRequested))
 			// console.log(assetData)
 			setAssetName(
-				`${assetData?.['unit-name']}`
+				`${assetData?.['name']}`
 				// `${assetData?.name}${
 				// 	assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
 				// }`
@@ -32,7 +32,7 @@ const Advert = ({ ad }) => {
 			const collateralData = await getASAInfo(Number(ad.tokenOffered))
 			// console.log(collateralData)
 			setCollateral(
-				`${collateralData?.['unit-name']}`
+				`${collateralData?.['name']}`
 				// `${collateralData?.name}${
 				// 	collateralData?.['unit-name']
 				// 		? `, (${collateralData?.['unit-name']})`

@@ -42,14 +42,16 @@ const Loaned = ({ loan }) => {
 			const currentTime = instantReach.bigNumberToNumber(
 				await instantReach.getNetworkTime()
 			)
-			const blocksRemaining = Number(loan.maturation) - currentTime
-			setMaturation(blocksRemaining)
+			const blocksRemaining =
+				Number(loan.created) + Number(loan.maturation) - currentTime
+
+			setMaturation(blocksRemaining > 0 ? blocksRemaining : 'Ended')
 		}, 5000)
 
 		return () => {
 			clearInterval(maturationTimer)
 		}
-	}, [loan.maturation])
+	}, [loan.created, loan.maturation])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
@@ -173,18 +175,20 @@ const Loaned = ({ loan }) => {
 				>
 					{maturation}
 				</span>
-				<span
-					className={cf(
-						s.wMax,
-						s.flex,
-						s.flexCenter,
-						s.p5,
-						s.dInlineBlock,
-						l.assetName
-					)}
-				>
-					Blocks
-				</span>
+				{maturation !== 'Ended' && (
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Blocks
+					</span>
+				)}
 			</div>
 		</div>
 	)
