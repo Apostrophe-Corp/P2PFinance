@@ -69,10 +69,10 @@ const ReachContextProvider = ({ children }) => {
 
 	const fmtCurrency = async (tok, amt) => {
 		const { decimals = 0 } = await getASAInfo(tok)
-		console.log({decimals})
+		console.log({ decimals })
 		const power = 10 ** Number(decimals)
 		const newAmt = amt * power
-		console.log({newAmt})
+		console.log({ newAmt })
 		return Number(newAmt)
 	}
 
@@ -281,7 +281,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const repay = async (loanCtcInfo, asset) => {
+	const repay = async (id, loanCtcInfo, asset) => {
 		const payAmountIn = await alertThis({
 			message: 'Enter the repay amount',
 			prompt: true,
@@ -302,7 +302,7 @@ const ReachContextProvider = ({ children }) => {
 			return
 		}
 		const agreed = await alertThis({
-			message: `You're about to repay ${payAmount} of asset (${asset}). Proceed?`,
+			message: `You're about to repay ${payAmountIn} of asset (${asset}). Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
 		})
@@ -311,13 +311,35 @@ const ReachContextProvider = ({ children }) => {
 
 		startWaiting()
 		try {
+			let res = undefined
 			const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
-			await ctc.a.Borrower.repay()
+			const [repaid, paid, original] = await ctc.a.Borrower.repay(payAmount)
+			const [paid_, original_] = [
+				reach.bigNumberToNumber(paid),
+				reach.bigNumberToNumber(original),
+			]
+			console.log({ repaid, paid_, original_ })
+			if (repaid || paid_ >= original) {
+				res = await request({
+					path: `loans/${id}`,
+					method: 'PATCH',
+					body: {
+						resolved: true,
+					},
+				})
+			}
 			stopWaiting()
-			alertThis({
-				message: 'Success',
-				forConfirmation: false,
-			})
+			if (res.success) {
+				alertThis({
+					message: `Success!`,
+					forConfirmation: false,
+				})
+			} else {
+				alertThis({
+					message: `Failed to update your information on the server. Error message: ${res.error.message}`,
+					forConfirmation: false,
+				})
+			}
 		} catch (error) {
 			console.log({ error })
 			stopWaiting()

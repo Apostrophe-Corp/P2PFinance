@@ -8,7 +8,7 @@ export const request = async ({
 	if (method === 'GET')
 		return await fetch(`${serverURI}/${path}`)
 			.then((res) => res.json())
-			.then((data) => ({ ...data, success: true }))
+			.then((data) => ({ ...data, success: data?.success ?? true }))
 			.catch((error) => {
 				// console.log({ error })
 				return {
@@ -24,7 +24,7 @@ export const request = async ({
 		body: JSON.stringify(body),
 	})
 		.then((res) => res.json())
-		.then((data) => ({ ...data, success: true }))
+		.then((data) => ({ ...data, success: data?.success ?? true }))
 		.catch((error) => {
 			// console.log({ error })
 			return {

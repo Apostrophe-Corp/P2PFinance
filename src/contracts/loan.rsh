@@ -15,7 +15,7 @@ const ParamsType = Object({
 	address: Address,
 })
 
-const ADVERTDEADLINE = 50
+const ADVERTDEADLINE = 23351
 
 export const main = Reach.App(() => {
 	const B = Participant('B', {
@@ -26,10 +26,11 @@ export const main = Reach.App(() => {
 		lend: Fun([], Bool),
 	})
 	const Borrower = API('Borrower', {
-		repay: Fun([UInt], UInt),
+		repay: Fun([UInt], Tuple(Bool, UInt, UInt)),
 	})
 
 	const LoanViews = View('LoanViews', {
+		isLive: Bool,
 		loanPaid: Bool,
 		amountPaid: UInt,
 	})
@@ -59,6 +60,11 @@ export const main = Reach.App(() => {
 			balance(tokLoan) == (loanAccepted ? loanInfo.principal : 0),
 			'Loan balance not right'
 		)
+		.define(() => {
+			LoanViews.isLive.set(
+				(thisConsensusTime() <= end && !loanAccepted) || loanAccepted
+			)
+		})
 		.while(thisConsensusTime() <= end && !loanAccepted)
 		.api_(Lender.lend, () => {
 			return [
@@ -93,7 +99,7 @@ export const main = Reach.App(() => {
 				LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
 				LoanViews.amountPaid.set(amountPaid)
 			})
-			.while(thisConsensusTime() <= end && amountPaid < loanInfo.amount)
+			.while(thisConsensusTime() <= end_ && amountPaid < loanInfo.amount)
 			.api_(Borrower.repay, (amt) => {
 				check(this == B, 'You are not the Borrower')
 				const excess =
@@ -104,8 +110,9 @@ export const main = Reach.App(() => {
 				return [
 					[0, [payAmt, tokLoan]],
 					(notify) => {
-						notify(amountPaid)
-						return amountPaid + payAmt
+						const totalPaid = amountPaid + payAmt
+						notify([totalPaid >= loanInfo.amount, totalPaid, loanInfo.amount])
+						return totalPaid
 					},
 				]
 			})

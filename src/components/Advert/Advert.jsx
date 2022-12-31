@@ -171,9 +171,23 @@ const Advert = ({ ad }) => {
 					Blocks
 				</span>
 			</div>
-			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, s.p5, l.detail, l.lend)}>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					s.p5,
+					l.detail,
+					l.lend
+				)}
+			>
 				<button
-					className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter, l.lendBtn
+					className={cf(
+						s.wMax,
+						s.dInlineBlock,
+						s.flex,
+						s.flexCenter,
+						l.lendBtn
 					)}
 					onClick={() => {
 						lend(

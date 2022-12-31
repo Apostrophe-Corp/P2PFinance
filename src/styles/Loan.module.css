@@ -67,6 +67,14 @@
 	background-color: rgb(49, 0, 118);
 }
 
+.d17{
+	width: 17%;
+}
+
+.d32{
+	width: 32%;
+}
+
 @media only screen and (max-width: 900px) and (min-width: 761px) {
 }
 @media only screen and (max-width: 760px) and (min-width: 481px) {

@@ -16,14 +16,18 @@ const Profile = () => {
 		let retriever = undefined
 
 		const getLoans = async () => {
+			// const res = await request({
+			// 	path: 'loans',
+			// 	method: 'POST',
+			// 	body: {
+			// 		searchTerm: String(authUser.username),
+			// 	},
+			// })
+			// console.log(res, String(authUser.username))
 			const res = await request({
-				path: 'loans',
-				method: 'POST',
-				body: {
-					searchTerm: String(authUser.username),
-				},
+				path: `loans`,
+				method: 'GET',
 			})
-			console.log(res, String(authUser.username))
 			if (res.success) {
 				if (res.loans) {
 					const tempLoans = res.loans
@@ -55,171 +59,195 @@ const Profile = () => {
 				<UserProfile user={authUser} />
 			</div>
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
-				<div className={cf(s.wMax, s.flex, s.flexCenter, l.headers)}>
-					<div
-						className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}
+				<div
+					className={cf(
+						s.flex,
+						s.flex_dColumn,
+						s.flexCenter,
+						l.userDetail,
+						l.d32
+					)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
 					>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Borrower
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Amount
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Collateral
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Payment
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Duration
-						</span>
-					</div>
+						Borrower
+					</span>
 				</div>
-				{loanedLoans &&
-					loanedLoans.map((el, i) => (
-						<Loaned
-							loan={el}
-							key={i}
-						/>
-					))}
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Amount
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Collateral
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Payment
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Duration
+					</span>
+				</div>
 			</div>
+			{loanedLoans &&
+				loanedLoans.map((el, i) => (
+					<Loaned
+						loan={el}
+						key={i}
+					/>
+				))}
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<div
-						className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
 					>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Lender
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Amount
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Collateral
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Outstanding
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Maturation
-						</span>
-					</div>
+						Lender
+					</span>
 				</div>
-				{borrowedLoans &&
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Amount
+					</span>
+				</div>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Collateral
+					</span>
+				</div>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Outstanding
+					</span>
+				</div>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Maturation
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.lend)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Offset
+					</span>
+				</div>				
+			</div>
+			{ borrowedLoans &&
 					borrowedLoans.map((el, i) => (
 						<Borrowed
 							loan={el}
 							key={i}
 						/>
 					))}
-			</div>
 		</div>
 	)
 }
