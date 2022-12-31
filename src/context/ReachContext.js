@@ -447,7 +447,7 @@ const ReachContextProvider = ({ children }) => {
 							maturation: Number(loanParams['maturation']),
 							borrower: String(user.address),
 							lender: '',
-							created: true,
+							created: true, // TODO change this to - reach.bigNumberToNumber(created)
 							resolved: false,
 						},
 					})
