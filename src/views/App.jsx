@@ -41,7 +41,7 @@ const App = ({ children }) => {
 								})
 							}}
 						>
-							Create
+							Make Ad
 						</li>
 						<li
 							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}

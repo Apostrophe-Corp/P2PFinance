@@ -315,6 +315,7 @@
 @media only screen and (max-width: 900px) and (min-width: 761px) {
 	.header {
 		padding: 10px 80px;
+		justify-content: space-evenly !important;
 	}
 
 	.hero {
@@ -325,6 +326,7 @@
 @media only screen and (max-width: 760px) and (min-width: 481px) {
 	.header {
 		padding: 10px 60px;
+		justify-content: space-evenly !important;
 	}
 
 	.hero {
@@ -335,6 +337,7 @@
 @media only screen and (max-width: 480px) and (min-width: 361px) {
 	.header {
 		padding: 10px 40px;
+		justify-content: center !important;
 	}
 
 	.hero {
@@ -353,6 +356,7 @@
 @media only screen and (max-width: 360px) {
 	.header {
 		padding: 10px 20px;
+		justify-content: center !important;
 	}
 	.hero {
 		height: 80vh;
