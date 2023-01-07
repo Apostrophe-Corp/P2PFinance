@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from '../styles/Shared.module.css'
 import l from '../styles/Loan.module.css'
 import { useAuth, useReach } from '../hooks'
@@ -11,6 +11,12 @@ const Profile = () => {
 		useReach()
 
 	const { authUser } = useAuth()
+	const [message, setMessage] = useState(
+		!loanedLoans.length ? 'Loading...' : ''
+	)
+	const [message_, setMessage_] = useState(
+		!loanedLoans.length ? 'Loading...' : ''
+	)
 
 	useEffect(() => {
 		let retriever = undefined
@@ -37,10 +43,14 @@ const Profile = () => {
 					const borrowed = tempLoans.filter(
 						(el) => el.borrower === authUser.address
 					)
+					setMessage(
+						borrowed.loans.length ? '' : `You've not been given a loan yet`
+					)
 					setBorrowedLoans(borrowed)
 					const loaned = tempLoans.filter(
 						(el) => el.lender === authUser.address
 					)
+					setMessage(loaned.loans.length ? '' : `You've not given a loan yet`)
 					setLoanedLoans(loaned)
 					// console.log({ tempLoans, borrowed, loaned })
 				}
@@ -150,13 +160,20 @@ const Profile = () => {
 					</span>
 				</div>
 			</div>
-			{loanedLoans &&
+			{loanedLoans.length ? (
 				loanedLoans.map((el, i) => (
 					<Loaned
 						loan={el}
 						key={i}
 					/>
-				))}
+				))
+			) : (
+				<div
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+				>
+					<h1>{message}</h1>
+				</div>
+			)}
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
@@ -245,13 +262,20 @@ const Profile = () => {
 					</span>
 				</div>
 			</div>
-			{borrowedLoans &&
+			{borrowedLoans.length ? (
 				borrowedLoans.map((el, i) => (
 					<Borrowed
 						loan={el}
 						key={i}
 					/>
-				))}
+				))
+			) : (
+				<div
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+				>
+					<h1>{message_}</h1>
+				</div>
+			)}
 		</div>
 	)
 }

@@ -312,7 +312,7 @@ const ReachContextProvider = ({ children }) => {
 				reach.bigNumberToNumber(paid),
 				reach.bigNumberToNumber(original),
 			]
-			console.log({ repaid, paid_, original_ })
+			// console.log({ repaid, paid_, original_ })
 			if (repaid || paid_ >= original) {
 				res = await request({
 					path: `loans/${id}`,
@@ -486,28 +486,6 @@ const ReachContextProvider = ({ children }) => {
 			})
 		}
 	}
-
-	useEffect(() => {
-		let retriever = undefined
-		const getLoans = async () => {
-			retriever = setInterval(async () => {
-				const loansRes = await request({
-					path: `loans`,
-					method: 'GET',
-				})
-				if (loansRes.success) {
-					setAdverts(loansRes.loans)
-					clearInterval(retriever)
-					retriever = undefined
-				}
-			}, 10000)
-		}
-		getLoans()
-		return () => {
-			clearInterval(retriever)
-			retriever = undefined
-		}
-	}, [setAdverts])
 
 	const ReachContextValue = {
 		// ...states

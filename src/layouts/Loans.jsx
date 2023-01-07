@@ -1,39 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import s from '../styles/Shared.module.css'
 import l from '../styles/Loan.module.css'
 import lg from '../styles/Landing.module.css'
-import { cf } from '../utils'
+import { cf, request } from '../utils'
 import { Advert } from '../components/Advert'
 import { useReach } from '../hooks'
 
 const Loans = () => {
-	const { adverts: loans } = useReach()
+	const { adverts: loans, setAdverts: setLoans } = useReach()
+	const [message, setMessage] = useState(!loans.length ? 'Loading...' : '')
 
-	// useEffect(() => {
-	// 	let retriever = undefined
-	// 	const getLoans = async () => {
-	// 		retriever = setInterval(async () => {
-	// 			const loansRes = await request({
-	// 				path: `loans`,
-	// 				method: 'GET',
-	// 			})
-	// 			if (loansRes.success) {
-	// 				setLoans(loansRes.loans)
-	// 				clearInterval(retriever)
-	// 				retriever = undefined
-	// 			}
-	// 		}, 10000)
-	// 	}
-	// 	getLoans()
-	// 	return () => {
-	// 		clearInterval(retriever)
-	// 		retriever = undefined
-	// 	}
-	// }, [setLoans])
+	useEffect(() => {
+		let retriever = undefined
+		const getLoans = async () => {
+			retriever = setInterval(async () => {
+				const loansRes = await request({
+					path: `loans`,
+					method: 'GET',
+				})
+				if (loansRes.success) {
+					setLoans(loansRes.loans)
+					setMessage(loansRes.loans.length ? '' : 'There are no Ads yet')
+					clearInterval(retriever)
+					retriever = undefined
+				}
+			}, 5000)
+		}
+		getLoans()
+		return () => {
+			clearInterval(retriever)
+			retriever = undefined
+		}
+	}, [setLoans])
 
 	return (
 		<div
-			className={cf(s.wMax, s.flex, s['flex_dColumn'], l.loanContainer, s.p10)}
+			className={cf(
+				s.wMax,
+				s.flex,
+				s['flex_dColumn'],
+				s.flexTop,
+				l.loanContainer,
+				s.p10
+			)}
 		>
 			<div className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.catchPhrase)}>
 				<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseTextBlk)}>
@@ -140,13 +149,20 @@ const Loans = () => {
 					</div>
 				</div>
 
-				{loans &&
+				{loans.length ? (
 					loans.map((el, i) => (
 						<Advert
 							ad={el}
 							key={i}
 						/>
-					))}
+					))
+				) : (
+					<div
+						className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+					>
+						<h1>{message}</h1>
+					</div>
+				)}
 			</div>
 		</div>
 	)

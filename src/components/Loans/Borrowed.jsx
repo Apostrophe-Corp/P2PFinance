@@ -55,7 +55,7 @@ const Borrowed = ({ loan }) => {
 					  )
 					: Number(loan.paymentAmount)
 
-			console.log(amountPaid)
+			// console.log(amountPaid)
 			const outstanding = Number(loan.paymentAmount) - amountPaid
 			// console.log(await parseCurrency(amountPaid))
 			setOutStanding(outstanding)
