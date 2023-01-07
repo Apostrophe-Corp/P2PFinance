@@ -37,7 +37,7 @@ const Loans = () => {
 			clearInterval(retriever)
 			retriever = undefined
 		}
-	}, [setLoans])
+	}, [loans?.length, setLoans])
 
 	return (
 		<div
