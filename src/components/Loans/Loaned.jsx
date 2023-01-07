@@ -203,7 +203,7 @@ const Loaned = ({ loan }) => {
 				>
 					{maturation}
 				</span>
-				{maturation !== 'Ended' && (
+				{typeof maturation === 'number' && (
 					<span
 						className={cf(
 							s.wMax,
