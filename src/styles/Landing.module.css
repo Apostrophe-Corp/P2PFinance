@@ -77,12 +77,19 @@
 }
 
 .hero {
-	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-		url(../assets/images/contractLand.jpg);
-	background-position: center;
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			transparent,
+			transparent,
+			rgba(128, 0, 255, 0.3)
+		),
+		url(../assets/images/main.jpg);
+	background-position: right;
 	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: 140vh;
+	background-size: contain;
+	text-align: left !important;
+	min-height: 100vh;
 }
 
 .heroWelcome {
@@ -94,8 +101,7 @@
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	font-size: var(--font-size-0);
-	text-align: center;
-	color: rgba(255, 255, 255, 0.8);
+	color: rgba(115, 0, 255, 0.788);
 }
 
 .catchPhrase {
@@ -106,14 +112,14 @@
 	/* -----Imported-styles----- */
 	max-width: 10em;
 	margin: var(--spacing-6) 0 0;
-	background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
-		linear-gradient(25deg, #c67df4 23%, #fff 60%);
+	background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dd00ff 98%),
+		linear-gradient(30deg, #a200ff 23%, #a200ff 30%);
 	letter-spacing: 0.01em;
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	/* ------------------------- */
-	text-align: center;
+	/* text-align: center; */
 	font-size: 70px;
 }
 
@@ -127,7 +133,7 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	/* ------------------------- */
-	text-align: center;
+	/* text-align: center; */
 	font-size: 60px;
 }
 
@@ -136,15 +142,16 @@
 }
 
 .introText {
-	color: rgba(255, 255, 255, 0.7);
-	text-align: center;
+	color: rgba(102, 0, 255, 0.7);
+	/* text-align: center; */
 	max-width: 30em;
 }
 
 .forestParent {
 	opacity: 1;
-	box-shadow: 0 0 10px 5px rgb(0, 0, 0);
-	background: linear-gradient(to bottom, transparent, rgb(93, 0, 154)), #000;
+	/* box-shadow: 0 0 10px 5px rgba(186, 154, 218, 0.3); */
+	background: linear-gradient(to bottom, transparent, rgb(85, 0, 255)),
+		rgba(128, 0, 255, 0.3);
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
@@ -155,7 +162,7 @@
 
 .forestText {
 	font-weight: var(--font-weight-bold-5);
-	color: var(--title);
+	color: rgb(255, 255, 255);
 	font-size: 50px;
 }
 
@@ -165,10 +172,12 @@
 }
 
 .card {
-	color: #fff;
+	color: #000;
+	/* color: #fff; */
+	background: linear-gradient(to bottom, #fff, rgba(81, 0, 255, 0.5));
 	max-width: 300px;
 	padding: 10px;
-	background-color: rgb(11, 0, 21);
+	/* background-color: rgb(11, 0, 21); */
 	border-radius: 20px;
 	margin-bottom: 20px;
 	cursor: pointer;
@@ -176,7 +185,10 @@
 
 .cardAction {
 	font-size: 20px;
-	color: rgba(255, 255, 255, 0.5);
+	/* color: rgba(255, 255, 255, 0.5); */
+	/* color: rgba(0, 0, 0, 0.5); */
+	color: rgb(85, 0, 255, 0.5);
+	font-weight: 700;
 	text-transform: uppercase;
 }
 
@@ -191,17 +203,19 @@
 }
 
 .cardDescription {
-	font-size: 15px;
-	color: rgba(255, 255, 255, 0.5);
+	font-size: 16px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.5);
 }
 
 .cardIcon {
 	padding-top: 10px;
+	/* background-color: red; */
 }
 
 .community {
-	box-shadow: 0 0 10px 5px rgb(93, 0, 154);
-	background-color: rgb(93, 0, 154);
+	box-shadow: 0 0 10px 5px rgb(85, 0, 255);
+	background-color: rgb(85, 0, 255);
 	color: #fff !important;
 	padding-bottom: 100px;
 }
@@ -319,7 +333,7 @@
 	}
 
 	.hero {
-		min-height: 95vh;
+		min-height: 100vh;
 	}
 }
 
@@ -330,7 +344,7 @@
 	}
 
 	.hero {
-		min-height: 90vh;
+		min-height: 80vh;
 	}
 }
 
@@ -341,7 +355,7 @@
 	}
 
 	.hero {
-		min-height: 90vh;
+		min-height: 80vh;
 	}
 
 	.catchPhraseText {
@@ -359,7 +373,7 @@
 		justify-content: center !important;
 	}
 	.hero {
-		height: 80vh;
+		min-height: 70vh;
 	}
 
 	.catchPhraseText {

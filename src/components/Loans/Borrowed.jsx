@@ -239,20 +239,26 @@ const Borrowed = ({ loan }) => {
 					l.lend
 				)}
 			>
-				<button
-					className={cf(
-						s.wMax,
-						s.dInlineBlock,
-						s.flex,
-						s.flexCenter,
-						l.lendBtn
-					)}
-					onClick={() => {
-						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
-					}}
-				>
-					Repay
-				</button>
+				{outStanding ? (
+					<button
+						className={cf(
+							s.wMax,
+							s.dInlineBlock,
+							s.flex,
+							s.flexCenter,
+							l.lendBtn
+						)}
+						onClick={() => {
+							repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
+						}}
+					>
+						Repay
+					</button>
+				) : (
+					<div
+						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
+					></div>
+				)}
 			</div>
 		</div>
 	)

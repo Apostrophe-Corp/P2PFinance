@@ -8,12 +8,12 @@ export const request = async ({
 	if (method === 'GET')
 		return await fetch(`${serverURI}/${path}`)
 			.then((res) => res.json())
-			.then((data) => ({ ...data, success: data?.success ?? true }))
+			.then((data) => ({ ...data[0], success: data?.[0]?.success ?? true }))
 			.catch((error) => {
 				// console.log({ error })
 				return {
+					...error[0],
 					success: false,
-					error,
 				}
 			})
 	return await fetch(`${serverURI}/${path}`, {
@@ -24,12 +24,12 @@ export const request = async ({
 		body: JSON.stringify(body),
 	})
 		.then((res) => res.json())
-		.then((data) => ({ ...data, success: data?.success ?? true }))
+		.then((data) => ({ ...data[0], success: data?.[0]?.success ?? true }))
 		.catch((error) => {
 			// console.log({ error })
 			return {
+				...error[0],
 				success: false,
-				error,
 			}
 		})
 }

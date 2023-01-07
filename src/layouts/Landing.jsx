@@ -29,7 +29,7 @@ const Landing = () => {
 						s.wMax,
 						s.p10,
 						s.flex,
-						s.flexCenter,
+						s.flexLeft,
 						s.g10,
 						lg.heroWelcome
 					)}
@@ -38,14 +38,12 @@ const Landing = () => {
 						Welcome to Urgent2K
 					</h2>
 				</div>
-				<div
-					className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.catchPhrase)}
-				>
+				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.catchPhrase)}>
 					<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseText)}>
 						A Fully Decentralized P2P Loaning Platform.
 					</h1>
 				</div>
-				<div className={cf(s.wMax, s.p10, s.flex, s.flexCenter, lg.intro)}>
+				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.intro)}>
 					<h2 className={cf(s.wMax, s.p0, s.m0, lg.introText)}>
 						Some dummy text...Some dummy text...Some dummy text...Some dummy
 						text...

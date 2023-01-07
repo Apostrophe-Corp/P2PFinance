@@ -42,6 +42,15 @@ const Profile = () => {
 					// console.log({ tempLoans, borrowed, loaned })
 				}
 			}
+
+			const res_ = await request({
+				path: 'loans',
+				method: 'POST',
+				body: {
+					searchTerm: authUser.username
+				}
+			})
+			console.log({res_})
 		}
 
 		retriever = setInterval(async () => {

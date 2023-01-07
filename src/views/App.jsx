@@ -31,41 +31,49 @@ const App = ({ children }) => {
 				>
 					Urgent2K
 				</div>
-				<div className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}>
-					<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter)}>
-						<li
-							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
-							onClick={() => {
-								checkForSignIn(() => {
-									navigate('/new-loan')
-								})
-							}}
-						>
-							Make Ad
-						</li>
-						<li
-							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
-							onClick={() => {
-								checkForSignIn(() => {
-									navigate('/loans')
-								})
-							}}
-						>
-							Lend
-						</li>
-					</ul>
-				</div>
-				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
-					<button
-						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
-						onClick={() => {
-							checkForSignIn(async () => {
-							!(isAuthenticated || await signIn(user.address)) ? navigate('/sign-up') : navigate('/account')
-							})
-						}}
+				{user.address && isAuthenticated && (
+					<div
+						className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}
 					>
-						{isAuthenticated ? authUser.username : `Sign In`}
-					</button>
+						<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter)}>
+							<li
+								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
+								onClick={() => {
+									checkForSignIn(() => {
+										navigate('/new-loan')
+									})
+								}}
+							>
+								Make Ad
+							</li>
+							<li
+								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
+								onClick={() => {
+									checkForSignIn(() => {
+										navigate('/loans')
+									})
+								}}
+							>
+								Lend
+							</li>
+						</ul>
+					</div>
+				)}
+				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+					{user.address && (
+						<button
+							className={cf(s.w480_100, s.w360_100, app.connectAccount)}
+							onClick={() => {
+								checkForSignIn(async () => {
+									!(isAuthenticated || (await signIn(user.address)))
+										? navigate('/sign-up')
+										: navigate('/account')
+								})
+							}}
+						>
+							{isAuthenticated ? authUser.username : `Sign In`}
+						</button>
+					)}
 					<button
 						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 						onClick={() => {

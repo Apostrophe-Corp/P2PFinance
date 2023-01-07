@@ -26,43 +26,46 @@ export class Arc69 {
 		}
 
 		// Sort the most recent `acfg` transactions first.
-		transactions.sort((a, b) => b['round-time'] - a['round-time'])
 
-		// Attempt to parse each `acf` transaction's note for ARC69 metadata.
-		const rData = {}
-		for (const transaction of transactions) {
-			try {
-				// const noteBase64 = transaction.note
-				// const noteString = atob(noteBase64)
-				// 	.trim()
-				// 	.replace(/[^ -~]+/g, '')
-				// const noteObject = JSON.parse(noteString)
-				// if (noteObject.standard === 'arc69') {
-				// 	return noteObject
-				// }
-				const params = transaction['asset-config-transaction']['params']
-				// console.log({params})
-				if (params['name']) {
-					rData['name'] = params['name']
-				}
-				if (params['unit-name']) {
-					rData['unit-name'] = params['unit-name']
-				}
-				if (params['decimals']) {
-					rData['decimals'] = params['decimals']
-				}
-				if (params['url']) {
-					if (params['url'].indexOf('ipfs://') === 0) {
-						params['url'] =
-							'https://gateway.ipfs.io/ipfs/' + params['url'].slice(7)
+		if (transactions) {
+			transactions.sort((a, b) => b['round-time'] - a['round-time'])
+
+			// Attempt to parse each `acf` transaction's note for ARC69 metadata.
+			const rData = {}
+			for (const transaction of transactions) {
+				try {
+					// const noteBase64 = transaction.note
+					// const noteString = atob(noteBase64)
+					// 	.trim()
+					// 	.replace(/[^ -~]+/g, '')
+					// const noteObject = JSON.parse(noteString)
+					// if (noteObject.standard === 'arc69') {
+					// 	return noteObject
+					// }
+					const params = transaction['asset-config-transaction']['params']
+					// console.log({params})
+					if (params['name']) {
+						rData['name'] = params['name']
 					}
-					rData['url'] = params['url']
+					if (params['unit-name']) {
+						rData['unit-name'] = params['unit-name']
+					}
+					if (params['decimals']) {
+						rData['decimals'] = params['decimals']
+					}
+					if (params['url']) {
+						if (params['url'].indexOf('ipfs://') === 0) {
+							params['url'] =
+								'https://gateway.ipfs.io/ipfs/' + params['url'].slice(7)
+						}
+						rData['url'] = params['url']
+					}
+					return { ...rData, success: true }
+				} catch (err) {
+					// console.log('Oh well...')
 				}
-				return { ...rData, success: true }
-			} catch (err) {
-				// console.log('Oh well...')
 			}
-		}
-		return { ...rData, success: true }
+			return { ...rData, success: true }
+		} else return { success: false }
 	}
 }

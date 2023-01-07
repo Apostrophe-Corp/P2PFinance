@@ -16,6 +16,7 @@ const AuthContextProvider = ({ children }) => {
 			method: 'GET',
 		})
 
+		// console.log({ res })
 		stopWaiting()
 		if (res.success) {
 			setIsAuthenticated(true)
@@ -26,11 +27,21 @@ const AuthContextProvider = ({ children }) => {
 				forConfirmation: false,
 			})
 		} else {
-			alertThis({
-				message: `Sign-in failed. Error message: ${res.error.message}`,
-				forConfirmation: false,
-			})
-			setAuthUser({})
+			if (res?.message === 'resource not found' || res?.error === 404) {
+				alertThis({
+					message: `No account was found for your wallet address, please sign up`,
+					forConfirmation: false,
+				})
+				setAuthUser({})
+			} else {
+				alertThis({
+					message: `Sign-in failed. Error message: ${
+						res.error.message ?? res.message
+					}`,
+					forConfirmation: false,
+				})
+				setAuthUser({})
+			}
 		}
 
 		return res.success
@@ -59,7 +70,9 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} else {
 			alertThis({
-				message: `Sign-up failed. Error message: ${res.error.message}`,
+				message: `Sign-up failed. Error message: ${
+					res.error.message ?? res.message
+				}`,
 				forConfirmation: false,
 			})
 		}
