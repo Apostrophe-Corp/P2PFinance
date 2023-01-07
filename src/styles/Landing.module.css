@@ -80,8 +80,6 @@
 	background: linear-gradient(
 			to bottom,
 			transparent,
-			transparent,
-			transparent,
 			rgba(128, 0, 255, 0.3)
 		),
 		url(../assets/images/main.jpg);
@@ -112,8 +110,8 @@
 	/* -----Imported-styles----- */
 	max-width: 10em;
 	margin: var(--spacing-6) 0 0;
-	background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dd00ff 98%),
-		linear-gradient(30deg, #a200ff 23%, #a200ff 30%);
+	background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #e600ff 98%),
+		linear-gradient(30deg, #6a00ff 23%, #a600ff 30%);
 	letter-spacing: 0.01em;
 	background-clip: text;
 	-webkit-background-clip: text;
@@ -174,7 +172,7 @@
 .card {
 	color: #000;
 	/* color: #fff; */
-	background: linear-gradient(to bottom, #fff, rgba(81, 0, 255, 0.5));
+	background: linear-gradient(to bottom, #fff, rgba(179, 0, 255, 0.715));
 	max-width: 300px;
 	padding: 10px;
 	/* background-color: rgb(11, 0, 21); */
