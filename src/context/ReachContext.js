@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
 	loadStdlib,
 	ALGO_MyAlgoConnect as MyAlgoConnect,
@@ -62,6 +62,7 @@ const ReachContextProvider = ({ children }) => {
 	]
 
 	const [adverts, setAdverts] = useState([])
+	const [userAdverts, setUserAdverts] = useState([])
 	const [borrowedLoans, setBorrowedLoans] = useState([])
 	const [loanedLoans, setLoanedLoans] = useState([])
 
@@ -529,6 +530,8 @@ const ReachContextProvider = ({ children }) => {
 		create,
 		adverts,
 		setAdverts,
+		userAdverts,
+		setUserAdverts,
 		borrowedLoans,
 		setBorrowedLoans,
 		loanedLoans,

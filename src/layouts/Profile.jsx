@@ -7,8 +7,15 @@ import { Profile as UserProfile } from '../components/Profile'
 import { Borrowed, Loaned } from '../components/Loans'
 
 const Profile = () => {
-	const { borrowedLoans, setBorrowedLoans, loanedLoans, setLoanedLoans } =
-		useReach()
+	const {
+		borrowedLoans,
+		setBorrowedLoans,
+		loanedLoans,
+		setLoanedLoans,
+		userAdverts,
+		setUserAdverts,
+		adverts,
+	} = useReach()
 
 	const { authUser } = useAuth()
 	const [message, setMessage] = useState(
@@ -16,6 +23,9 @@ const Profile = () => {
 	)
 	const [message_, setMessage_] = useState(
 		!loanedLoans.length ? 'Loading...' : ''
+	)
+	const [message__, setMessage__] = useState(
+		!userAdverts.length ? 'Loading...' : ''
 	)
 
 	useEffect(() => {
@@ -55,6 +65,19 @@ const Profile = () => {
 					// console.log({ tempLoans, borrowed, loaned })
 				}
 			}
+
+			if (adverts) {
+				const presentAdverts = adverts
+				const remainingAdverts = presentAdverts.filter(
+					(el) => el.borrowerInfo.username === authUser.username
+				)
+				setUserAdverts([...remainingAdverts])
+				setMessage__(
+					remainingAdverts?.length ? '' : `You have not created an Ad yet`
+				)
+			} else {
+				setMessage__(adverts?.length ? '' : `You have not created an Ad yet`)
+			}
 		}
 
 		retriever = setInterval(async () => {
@@ -65,7 +88,14 @@ const Profile = () => {
 			clearInterval(retriever)
 			retriever = undefined
 		}
-	}, [authUser.address, authUser.username, setBorrowedLoans, setLoanedLoans])
+	}, [
+		adverts,
+		authUser.address,
+		authUser.username,
+		setBorrowedLoans,
+		setLoanedLoans,
+		setUserAdverts,
+	])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10)}>
@@ -92,7 +122,109 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						Borrower
+						Adverts
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Amount
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Collateral
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Payment
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Maturation
+					</span>
+				</div>
+			</div>
+			{userAdverts.length ? (
+				userAdverts.map((el, i) => (
+					<Loaned
+						loan={el}
+						key={i}
+					/>
+				))
+			) : (
+				<div
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+				>
+					<h1>{message__}</h1>
+				</div>
+			)}
+			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
+				<div
+					className={cf(
+						s.flex,
+						s.flex_dColumn,
+						s.flexCenter,
+						l.userDetail,
+						l.d32
+					)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Borrower (Loaned)
 					</span>
 				</div>
 				<div
@@ -186,7 +318,7 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						You
+						You (Debts)
 					</span>
 				</div>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
