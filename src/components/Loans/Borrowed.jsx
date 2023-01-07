@@ -19,6 +19,7 @@ const Borrowed = ({ loan }) => {
 	const [collateral, setCollateral] = useState('')
 	const [outStanding, setOutStanding] = useState(0)
 	const [maturation, setMaturation] = useState(0)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const pfp = Number(loan?.borrowerInfo?.pfp)
@@ -59,6 +60,7 @@ const Borrowed = ({ loan }) => {
 			const outstanding = Number(loan.paymentAmount) - amountPaid
 			// console.log(await parseCurrency(amountPaid))
 			setOutStanding(outstanding)
+			setLoading(false)
 		}, 5000)
 
 		const maturationTimer = setInterval(async () => {
@@ -257,7 +259,11 @@ const Borrowed = ({ loan }) => {
 					onClick={() => {
 						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
 					}}
-					disabled={!(!loan.resolved && maturation !== 'Ended')}
+					disabled={
+						loading === true
+							? true
+							: !(!loan.resolved && maturation !== 'Ended')
+					}
 				>
 					Repay
 				</button>
