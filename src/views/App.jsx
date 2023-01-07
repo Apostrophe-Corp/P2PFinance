@@ -8,7 +8,7 @@ import { cf } from '../utils'
 
 const App = ({ children }) => {
 	const navigate = useNavigate()
-	const { checkForSignIn, setShowConnectAccount, user } = useReach()
+	const { checkForSignIn, setShowConnectAccount, user, alertThis } = useReach()
 	const { isAuthenticated, authUser, signIn } = useAuth()
 	return (
 		<div>
@@ -77,7 +77,12 @@ const App = ({ children }) => {
 					<button
 						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
 						onClick={() => {
-							setShowConnectAccount(true)
+							!user.address
+								? setShowConnectAccount(true)
+								: alertThis({
+										message: 'You are connected',
+										forConfirmation: false,
+								  })
 						}}
 					>
 						{!user.account ? 'Connect Wallet' : user.address}

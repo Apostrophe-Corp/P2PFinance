@@ -27,10 +27,7 @@ const Loans = () => {
 					)
 					clearInterval(retriever)
 					retriever = undefined
-				} else if (
-					loansRes?.message === 'resource not found' ||
-					loansRes?.error === 404
-				) {
+				} else if (!loans?.length) {
 					setMessage('There are no Ads yet')
 				}
 			}, 5000)
