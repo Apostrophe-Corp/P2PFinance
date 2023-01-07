@@ -17,8 +17,8 @@ const Borrowed = ({ loan }) => {
 	)
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-	const [outStanding, setOutStanding] = useState(loan.paymentAmount)
-	const [maturation, setMaturation] = useState(loan.maturation)
+	const [outStanding, setOutStanding] = useState(0)
+	const [maturation, setMaturation] = useState(0)
 
 	useEffect(() => {
 		const pfp = Number(loan?.borrowerInfo?.pfp)
@@ -57,7 +57,7 @@ const Borrowed = ({ loan }) => {
 
 			console.log(amountPaid)
 			const outstanding = Number(loan.paymentAmount) - amountPaid
-			console.log(await parseCurrency(amountPaid))
+			// console.log(await parseCurrency(amountPaid))
 			setOutStanding(outstanding)
 		}, 5000)
 
@@ -239,26 +239,21 @@ const Borrowed = ({ loan }) => {
 					l.lend
 				)}
 			>
-				{outStanding ? (
-					<button
-						className={cf(
-							s.wMax,
-							s.dInlineBlock,
-							s.flex,
-							s.flexCenter,
-							l.lendBtn
-						)}
-						onClick={() => {
-							repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
-						}}
-					>
-						Repay
-					</button>
-				) : (
-					<div
-						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
-					></div>
-				)}
+				<button
+					className={cf(
+						s.wMax,
+						s.dInlineBlock,
+						s.flex,
+						s.flexCenter,
+						l.lendBtn
+					)}
+					onClick={() => {
+						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
+					}}
+					disabled={loan.resolved || !(outStanding && maturation !== 'Ended')}
+				>
+					Repay
+				</button>
 			</div>
 		</div>
 	)

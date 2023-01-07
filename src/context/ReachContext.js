@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	loadStdlib,
 	ALGO_MyAlgoConnect as MyAlgoConnect,
@@ -250,6 +250,9 @@ const ReachContextProvider = ({ children }) => {
 
 			stopWaiting()
 			if (res.success) {
+				const presentAdverts = adverts
+				const remainingAdverts = presentAdverts.filter((el) => el.id !== id)
+				setAdverts([...remainingAdverts])
 				alertThis({
 					message: `Success!${
 						rewardSent ? ` You've also received some loyalty tokens` : ''
@@ -392,26 +395,26 @@ const ReachContextProvider = ({ children }) => {
 			const ctc = user.account.contract(loanCtc)
 			const tokReq = Number(loanParams['tokenRequested'])
 			const tokOff = Number(loanParams['tokenOffered'])
-			console.log(
-				await (async () => ({
-					tokLoan: Number(loanParams['tokenRequested']),
-					principal: await fmtCurrency(
-						tokReq,
-						Number(loanParams['amountRequested'])
-					),
-					amount: await fmtCurrency(
-						tokReq,
-						Number(loanParams['paymentAmount'])
-					),
-					maturation: Number(loanParams['maturation']),
-					tokCollateral: Number(loanParams['tokenOffered']),
-					collateral: await fmtCurrency(
-						tokOff,
-						Number(loanParams['amountOffered'])
-					),
-					address: String(user.address),
-				}))()
-			)
+			// console.log(
+			// 	await (async () => ({
+			// 		tokLoan: Number(loanParams['tokenRequested']),
+			// 		principal: await fmtCurrency(
+			// 			tokReq,
+			// 			Number(loanParams['amountRequested'])
+			// 		),
+			// 		amount: await fmtCurrency(
+			// 			tokReq,
+			// 			Number(loanParams['paymentAmount'])
+			// 		),
+			// 		maturation: Number(loanParams['maturation']),
+			// 		tokCollateral: Number(loanParams['tokenOffered']),
+			// 		collateral: await fmtCurrency(
+			// 			tokOff,
+			// 			Number(loanParams['amountOffered'])
+			// 		),
+			// 		address: String(user.address),
+			// 	}))()
+			// )
 			ctc.p.B({
 				getParams: async () => ({
 					tokLoan: Number(loanParams['tokenRequested']),
@@ -483,6 +486,28 @@ const ReachContextProvider = ({ children }) => {
 			})
 		}
 	}
+
+	useEffect(() => {
+		let retriever = undefined
+		const getLoans = async () => {
+			retriever = setInterval(async () => {
+				const loansRes = await request({
+					path: `loans`,
+					method: 'GET',
+				})
+				if (loansRes.success) {
+					setAdverts(loansRes.loans)
+					clearInterval(retriever)
+					retriever = undefined
+				}
+			}, 10000)
+		}
+		getLoans()
+		return () => {
+			clearInterval(retriever)
+			retriever = undefined
+		}
+	}, [setAdverts])
 
 	const ReachContextValue = {
 		// ...states

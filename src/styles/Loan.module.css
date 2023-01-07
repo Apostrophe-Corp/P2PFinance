@@ -76,6 +76,16 @@
 	background-color: rgb(49, 0, 118);
 }
 
+.lendBtn:disabled {
+	background-color: grey;
+	color: white;
+	border-color: white;
+}
+
+.lendBtn:disabled:hover {
+	cursor: not-allowed !important;
+}
+
 .d17 {
 	width: 17%;
 }

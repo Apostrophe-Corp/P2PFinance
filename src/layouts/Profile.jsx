@@ -25,8 +25,11 @@ const Profile = () => {
 			// })
 			// console.log(res, String(authUser.username))
 			const res = await request({
-				path: `loans`,
-				method: 'GET',
+				path: 'loans',
+				method: 'POST',
+				body: {
+					searchTerm: authUser.username,
+				},
 			})
 			if (res.success) {
 				if (res.loans) {
@@ -42,20 +45,11 @@ const Profile = () => {
 					// console.log({ tempLoans, borrowed, loaned })
 				}
 			}
-
-			const res_ = await request({
-				path: 'loans',
-				method: 'POST',
-				body: {
-					searchTerm: authUser.username
-				}
-			})
-			console.log({res_})
 		}
 
 		retriever = setInterval(async () => {
 			await getLoans()
-		}, 10000)
+		}, 5000)
 
 		return () => {
 			clearInterval(retriever)
@@ -175,7 +169,7 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						Lender
+						You
 					</span>
 				</div>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
