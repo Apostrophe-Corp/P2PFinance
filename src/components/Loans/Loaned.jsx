@@ -39,19 +39,23 @@ const Loaned = ({ loan }) => {
 
 	useEffect(() => {
 		const maturationTimer = setInterval(async () => {
-			const currentTime = instantReach.bigNumberToNumber(
-				await instantReach.getNetworkTime()
-			)
-			const blocksRemaining =
-				Number(loan.created) + Number(loan.maturation) - currentTime
-
-			setMaturation(blocksRemaining > 0 ? blocksRemaining : 'Ended')
+			if (!loan.resolved) {
+				const currentTime = instantReach.bigNumberToNumber(
+					await instantReach.getNetworkTime()
+				)
+				const blocksRemaining =
+					Number(loan.created) + Number(loan.maturation) - currentTime
+				if (blocksRemaining > 0) setMaturation(blocksRemaining)
+				else setMaturation('Ended (Forfeited)')
+			} else {
+				setMaturation('Ended (Paid)')
+			}
 		}, 5000)
 
 		return () => {
 			clearInterval(maturationTimer)
 		}
-	}, [loan.created, loan.maturation])
+	}, [loan.created, loan.maturation, loan.resolved])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
