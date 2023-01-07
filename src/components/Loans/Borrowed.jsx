@@ -68,7 +68,13 @@ const Borrowed = ({ loan }) => {
 			const blocksRemaining =
 				Number(loan.created) + Number(loan.maturation) - currentTime
 
-			setMaturation(blocksRemaining > 0 ? blocksRemaining : 'Ended')
+			setMaturation(
+				outStanding === 0
+					? 'Ended'
+					: blocksRemaining > 0
+					? blocksRemaining
+					: 'Ended'
+			)
 		}, 5000)
 
 		return () => {
@@ -82,6 +88,7 @@ const Borrowed = ({ loan }) => {
 		loan.maturation,
 		loan.paymentAmount,
 		loan.tokenRequested,
+		outStanding,
 		user.account,
 	])
 
@@ -250,7 +257,7 @@ const Borrowed = ({ loan }) => {
 					onClick={() => {
 						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
 					}}
-					disabled={loan.resolved || !(outStanding && maturation !== 'Ended')}
+					disabled={!(!loan.resolved && maturation !== 'Ended')}
 				>
 					Repay
 				</button>
