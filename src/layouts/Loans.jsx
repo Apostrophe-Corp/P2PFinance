@@ -8,7 +8,9 @@ import { useReach } from '../hooks'
 
 const Loans = () => {
 	const { adverts: loans, setAdverts: setLoans } = useReach()
-	const [message, setMessage] = useState(!loans.length ? 'Loading...' : '')
+	const [message, setMessage] = useState(
+		!loans.length ? 'Loading...' : 'There are no Ads yet'
+	)
 
 	useEffect(() => {
 		let retriever = undefined
@@ -20,9 +22,16 @@ const Loans = () => {
 				})
 				if (loansRes.success) {
 					setLoans(loansRes.loans)
-					setMessage(loansRes.loans.length ? '' : 'There are no Ads yet')
+					setMessage(
+						loansRes.loans.length ? 'Loading...' : 'There are no Ads yet'
+					)
 					clearInterval(retriever)
 					retriever = undefined
+				} else if (
+					loansRes?.message === 'resource not found' ||
+					loansRes?.error === 404
+				) {
+					setMessage('There are no Ads yet')
 				}
 			}, 5000)
 		}

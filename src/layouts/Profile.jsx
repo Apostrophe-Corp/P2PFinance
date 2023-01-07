@@ -54,13 +54,13 @@ const Profile = () => {
 						(el) => el.borrower === authUser.address
 					)
 					setMessage_(
-						borrowed?.loans?.length ? '' : `You've not been given a loan yet`
+						borrowed?.loans?.length ? 'Loading...' : `You've not been given a loan yet`
 					)
 					setBorrowedLoans(borrowed)
 					const loaned = tempLoans.filter(
 						(el) => el.lender === authUser.address
 					)
-					setMessage(loaned?.loans?.length ? '' : `You've not given a loan yet`)
+					setMessage(loaned?.loans?.length ? 'Loading...' : `You've not given a loan yet`)
 					setLoanedLoans(loaned)
 					// console.log({ tempLoans, borrowed, loaned })
 				}
@@ -73,10 +73,10 @@ const Profile = () => {
 				)
 				setUserAdverts([...remainingAdverts])
 				setMessage__(
-					remainingAdverts?.length ? '' : `You have not created an Ad yet`
+					remainingAdverts?.length ? 'Loading...' : `You have no active Ads`
 				)
 			} else {
-				setMessage__(adverts?.length ? '' : `You have not created an Ad yet`)
+				setMessage__(adverts?.length ? 'Loading...' : `You have no active Ads`)
 			}
 		}
 
