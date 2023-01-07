@@ -224,13 +224,13 @@ const ReachContextProvider = ({ children }) => {
 
 				if (!enough) {
 					alertThis({
-						message: `Your balance of asset: ${assetInfo?.name} (${assetInfo?.unit}), ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
+						message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
 						forConfirmation: false,
 					})
 					return
 				}
 				const agreed = await alertThis({
-					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name} (${assetInfo?.unit}), ASA ID: #${asset}. Proceed?`,
+					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Proceed?`,
 					accept: 'Yes',
 					decline: 'No',
 				})
@@ -310,13 +310,13 @@ const ReachContextProvider = ({ children }) => {
 
 		if (!enough) {
 			alertThis({
-				message: `Your balance of asset: ${assetInfo?.name} (${assetInfo?.unit}), ASA ID: #${asset} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
+				message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
 				forConfirmation: false,
 			})
 			return
 		}
 		const agreed = await alertThis({
-			message: `You're about to repay ${payAmountIn} of asset: ${assetInfo?.name} (${assetInfo?.unit}), ASA ID: #${asset}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
+			message: `You're about to repay ${payAmountIn} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
 		})
