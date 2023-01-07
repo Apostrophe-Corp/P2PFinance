@@ -43,14 +43,14 @@ const Profile = () => {
 					const borrowed = tempLoans.filter(
 						(el) => el.borrower === authUser.address
 					)
-					setMessage(
-						borrowed.loans.length ? '' : `You've not been given a loan yet`
+					setMessage_(
+						borrowed?.loans?.length ? '' : `You've not been given a loan yet`
 					)
 					setBorrowedLoans(borrowed)
 					const loaned = tempLoans.filter(
 						(el) => el.lender === authUser.address
 					)
-					setMessage(loaned.loans.length ? '' : `You've not given a loan yet`)
+					setMessage(loaned?.loans?.length ? '' : `You've not given a loan yet`)
 					setLoanedLoans(loaned)
 					// console.log({ tempLoans, borrowed, loaned })
 				}

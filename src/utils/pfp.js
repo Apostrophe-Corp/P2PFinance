@@ -9,21 +9,25 @@ export const setPFPs = async (others) => {
 		const oLen = others.length
 		let i = 0
 		for (i; i < oLen; i++) {
-			const opts = others[i]
-			const ref = opts[0]
-			const nftInfo = await getASAInfo(opts[1])
-			// console.log({ nftInfo, opts1: opts[1] })
-			const pfp = nftInfo?.url ?? ''
-			// console.log({ pfp })
-			const blur = opts[2]
-			ref.current.style.background = `${
-				blur
-					? 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.4)) ,'
-					: ''
-			}url(${pfp})`
-			ref.current.style.backgroundPosition = 'center'
-			ref.current.style.backgroundRepeat = 'no-repeat'
-			ref.current.style.backgroundSize = blur ? 'cover' : 'contain'
+			try {
+				const opts = others[i]
+				const ref = opts[0]
+				const nftInfo = await getASAInfo(opts[1])
+				// console.log({ nftInfo, opts1: opts[1] })
+				const pfp = nftInfo?.url ?? ''
+				// console.log({ pfp })
+				const blur = opts[2]
+				ref.current.style.background = `${
+					blur
+						? 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.4)) ,'
+						: ''
+				}url(${pfp})`
+				ref.current.style.backgroundPosition = 'center'
+				ref.current.style.backgroundRepeat = 'no-repeat'
+				ref.current.style.backgroundSize = blur ? 'cover' : 'contain'
+			} catch (error) {
+				// Do nothing
+			}
 		}
 	}
 }

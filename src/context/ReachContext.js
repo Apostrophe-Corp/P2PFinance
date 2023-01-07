@@ -210,68 +210,85 @@ const ReachContextProvider = ({ children }) => {
 	}
 
 	const lend = async (id, loanCtcInfo, loanAmount, asset) => {
-		let rewardSent = false
-		const userAssetBalance = await reach.balanceOf(user.account, asset)
-		const enough = userAssetBalance >= (await fmtCurrency(asset, loanAmount))
-
-		if (!enough) {
-			alertThis({
-				message: `Your balance of asset (${asset}): ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
-				forConfirmation: false,
-			})
-			return
-		}
-		const agreed = await alertThis({
-			message: `You're about to lend ${loanAmount} of asset (${asset}). Proceed?`,
-			accept: 'Yes',
-			decline: 'No',
+		const res = await request({
+			path: `loans/${id}`,
 		})
+		if (res.success) {
+			if (res.loan?.lender === '') {
+				let rewardSent = false
+				const userAssetBalance = await reach.balanceOf(user.account, asset)
+				const enough =
+					userAssetBalance >= (await fmtCurrency(asset, loanAmount))
 
-		if (!agreed) return
+				if (!enough) {
+					alertThis({
+						message: `Your balance of asset (${asset}): ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
+						forConfirmation: false,
+					})
+					return
+				}
+				const agreed = await alertThis({
+					message: `You're about to lend ${loanAmount} of asset (${asset}). Proceed?`,
+					accept: 'Yes',
+					decline: 'No',
+				})
 
-		startWaiting()
-		try {
-			const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
-			await ctc.a.Lender.lend()
+				if (!agreed) return
 
-			const res = await request({
-				path: `loans/${id}`,
-				method: 'PATCH',
-				body: {
-					lender: String(user.address),
-				},
-			})
+				startWaiting()
+				try {
+					const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
+					await ctc.a.Lender.lend()
 
-			// try {
-			// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
-			// } catch (error) {
-			// 	console.log({ error })
-			// }
+					const res = await request({
+						path: `loans/${id}`,
+						method: 'PATCH',
+						body: {
+							lender: String(user.address),
+						},
+					})
 
-			stopWaiting()
-			if (res.success) {
+					// try {
+					// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
+					// } catch (error) {
+					// 	console.log({ error })
+					// }
+
+					stopWaiting()
+					if (res.success) {
+						const presentAdverts = adverts
+						const remainingAdverts = presentAdverts.filter((el) => el.id !== id)
+						setAdverts([...remainingAdverts])
+						alertThis({
+							message: `Success!${
+								rewardSent ? ` You've also received some loyalty tokens` : ''
+							}`,
+							forConfirmation: false,
+						})
+					} else {
+						alertThis({
+							message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.error.message}`,
+							forConfirmation: false,
+						})
+					}
+				} catch (error) {
+					console.log({ error })
+					stopWaiting()
+					alertThis({
+						message: 'Unable to process your request',
+						forConfirmation: false,
+					})
+				}
+			} else {
 				const presentAdverts = adverts
 				const remainingAdverts = presentAdverts.filter((el) => el.id !== id)
 				setAdverts([...remainingAdverts])
 				alertThis({
-					message: `Success!${
-						rewardSent ? ` You've also received some loyalty tokens` : ''
-					}`,
-					forConfirmation: false,
-				})
-			} else {
-				alertThis({
-					message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.error.message}`,
+					message:
+						"Woah!!! Isn't this fascinating, someone just lend to this advert",
 					forConfirmation: false,
 				})
 			}
-		} catch (error) {
-			console.log({ error })
-			stopWaiting()
-			alertThis({
-				message: 'Unable to process your request',
-				forConfirmation: false,
-			})
 		}
 	}
 
@@ -308,9 +325,9 @@ const ReachContextProvider = ({ children }) => {
 			let res = undefined
 			const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
 			const [repaid, paid, original] = await ctc.a.Borrower.repay(payAmount)
-			const [paid_, original_] = [
+			const [paid_] = [
 				reach.bigNumberToNumber(paid),
-				reach.bigNumberToNumber(original),
+				// reach.bigNumberToNumber(original),
 			]
 			// console.log({ repaid, paid_, original_ })
 			if (repaid || paid_ >= original) {
