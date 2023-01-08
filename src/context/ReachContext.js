@@ -218,6 +218,20 @@ const ReachContextProvider = ({ children }) => {
 		})
 		if (res.success) {
 			if (res.loan?.lender === '') {
+				let rewardSent = false
+				const userAssetBalance = await reach.balanceOf(user.account, asset)
+				const enough =
+					userAssetBalance >= (await fmtCurrency(asset, loanAmount))
+
+				if (!enough) {
+					stopWaiting()
+					alertThis({
+						message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
+						forConfirmation: false,
+					})
+					return
+				}
+				
 				if (!(await user.account.tokenAccepted(Number(asset)))) {
 					stopWaiting()
 					alertThis({
@@ -245,19 +259,7 @@ const ReachContextProvider = ({ children }) => {
 						return
 					}
 				}
-				let rewardSent = false
-				const userAssetBalance = await reach.balanceOf(user.account, asset)
-				const enough =
-					userAssetBalance >= (await fmtCurrency(asset, loanAmount))
 
-				if (!enough) {
-					stopWaiting()
-					alertThis({
-						message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
-						forConfirmation: false,
-					})
-					return
-				}
 				stopWaiting()
 				const agreed = await alertThis({
 					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Proceed?`,
