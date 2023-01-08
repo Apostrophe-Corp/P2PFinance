@@ -14,6 +14,7 @@
 .reach/
 
 test_index.rsh
+package-lock.json
 
 # misc
 .env
