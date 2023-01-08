@@ -210,7 +210,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const lend = async (id, loanCtcInfo, loanAmount, asset) => {
+	const lend = async (id, loanCtcInfo, loanAmount, asset, collateral) => {
 		startWaiting()
 		const assetInfo = await getASAInfo(Number(asset))
 		const res = await request({
@@ -231,8 +231,8 @@ const ReachContextProvider = ({ children }) => {
 					})
 					return
 				}
-				
-				if (!(await user.account.tokenAccepted(Number(asset)))) {
+
+				if (!(await user.account.tokenAccepted(Number(collateral)))) {
 					stopWaiting()
 					alertThis({
 						message:
@@ -241,7 +241,7 @@ const ReachContextProvider = ({ children }) => {
 						persist: true,
 					})
 					try {
-						await user.account.tokenAccept(Number(asset))
+						await user.account.tokenAccept(Number(collateral))
 						alertThis({
 							message: 'Opt-In confirmed',
 							forConfirmation: false,
