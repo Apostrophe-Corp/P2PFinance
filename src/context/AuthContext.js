@@ -36,7 +36,7 @@ const AuthContextProvider = ({ children }) => {
 			} else {
 				alertThis({
 					message: `Sign-in failed. Error message: ${
-						res.error.message ?? res.message
+						res.message ?? 'resource not found'
 					}`,
 					forConfirmation: false,
 				})
