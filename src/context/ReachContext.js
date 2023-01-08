@@ -248,7 +248,6 @@ const ReachContextProvider = ({ children }) => {
 							persist: true,
 						})
 						await new Promise((resolve) => setTimeout(resolve, 2000))
-						startWaiting()
 					} catch (error) {
 						console.log({ error })
 						alertThis({
@@ -260,7 +259,6 @@ const ReachContextProvider = ({ children }) => {
 					}
 				}
 
-				stopWaiting()
 				const agreed = await alertThis({
 					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Proceed?`,
 					accept: 'Yes',
