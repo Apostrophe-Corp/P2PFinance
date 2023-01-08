@@ -217,6 +217,30 @@ const ReachContextProvider = ({ children }) => {
 		})
 		if (res.success) {
 			if (res.loan?.lender === '') {
+				if (!(await user.account.tokenAccepted(Number(asset)))) {
+					alertThis({
+						message: 'Please confirm the opt-in of the collateral ASA on your wallet',
+						forConfirmation: false,
+						persist: true,
+					})
+					try {
+						await user.account.tokenAccept(Number(asset))
+						alertThis({
+							message: 'Opt-In confirmed',
+							forConfirmation: false,
+							persist: true,
+						})
+						await new Promise((resolve) => setTimeout(resolve, 2000))
+					} catch (error) {
+						console.log({ error })
+						alertThis({
+							message:
+								'Opt-In failed and as such you cannot give this loan. But you can try again',
+							forConfirmation: false,
+						})
+						return
+					}
+				}
 				let rewardSent = false
 				const userAssetBalance = await reach.balanceOf(user.account, asset)
 				const enough =
@@ -417,8 +441,7 @@ const ReachContextProvider = ({ children }) => {
 			const tokReq = Number(loanParams['tokenRequested'])
 			const tokOff = Number(loanParams['tokenOffered'])
 
-			success = await reach.withDisconnect(async () => {
-				let suc = false
+			await reach.withDisconnect(async () => {
 				await ctc.p.B({
 					getParams: async () => ({
 						tokLoan: Number(loanParams['tokenRequested']),
@@ -473,7 +496,7 @@ const ReachContextProvider = ({ children }) => {
 								}`,
 								forConfirmation: false,
 							})
-							suc = true
+							success = true
 						} else {
 							alertThis({
 								message: `Failed to upload Advert information. Error message: ${res.error.message}`,
@@ -483,7 +506,6 @@ const ReachContextProvider = ({ children }) => {
 						reach.disconnect(null)
 					},
 				})
-				return suc
 			})
 		} catch (error) {
 			console.log({ error })
