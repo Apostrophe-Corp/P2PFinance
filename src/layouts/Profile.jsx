@@ -31,15 +31,26 @@ const Profile = () => {
 	useEffect(() => {
 		let retriever = undefined
 
+		const quickCheck = async () => {
+			const loansRes = await request({
+				path: `loans`,
+				method: 'GET',
+			})
+			if (loansRes.success) {
+				const presentAdverts = loansRes.loans
+				const remainingAdverts = presentAdverts.filter(
+					(el) => el.borrowerInfo.username === authUser.username
+				)
+				setUserAdverts([...remainingAdverts])
+				setMessage__(
+					loansRes.loans.length ? 'Loading...' : 'You have no active Ads'
+				)
+				clearInterval(retriever)
+				retriever = undefined
+			}
+		}
+
 		const getLoans = async () => {
-			// const res = await request({
-			// 	path: 'loans',
-			// 	method: 'POST',
-			// 	body: {
-			// 		searchTerm: String(authUser.username),
-			// 	},
-			// })
-			// console.log(res, String(authUser.username))
 			const res = await request({
 				path: 'loans',
 				method: 'POST',
@@ -54,34 +65,26 @@ const Profile = () => {
 						(el) => el.borrower === authUser.address
 					)
 					setMessage_(
-						borrowed?.loans?.length ? 'Loading...' : `You've not been given a loan yet`
+						borrowed?.loans?.length
+							? 'Loading...'
+							: `You've not been given a loan yet`
 					)
 					setBorrowedLoans(borrowed)
 					const loaned = tempLoans.filter(
 						(el) => el.lender === authUser.address
 					)
-					setMessage(loaned?.loans?.length ? 'Loading...' : `You've not given a loan yet`)
+					setMessage(
+						loaned?.loans?.length ? 'Loading...' : `You've not given a loan yet`
+					)
 					setLoanedLoans(loaned)
 					// console.log({ tempLoans, borrowed, loaned })
 				}
-			}
-
-			if (adverts) {
-				const presentAdverts = adverts
-				const remainingAdverts = presentAdverts.filter(
-					(el) => el.borrowerInfo.username === authUser.username
-				)
-				setUserAdverts([...remainingAdverts])
-				setMessage__(
-					remainingAdverts?.length ? 'Loading...' : `You have no active Ads`
-				)
-			} else {
-				setMessage__(adverts?.length ? 'Loading...' : `You have no active Ads`)
 			}
 		}
 
 		retriever = setInterval(async () => {
 			await getLoans()
+			await quickCheck()
 		}, 5000)
 
 		return () => {
@@ -195,6 +198,7 @@ const Profile = () => {
 					<Loaned
 						loan={el}
 						key={i}
+						ad={true}
 					/>
 				))
 			) : (
@@ -318,7 +322,7 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						You (Debts)
+						You (Borrowed)
 					</span>
 				</div>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

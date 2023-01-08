@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
@@ -6,6 +7,7 @@ import { setPFPs, cf } from '../../utils'
 import previewImg from '../../assets/images/logo.jpg' // TODO change this image
 
 const Create = () => {
+	const navigate = useNavigate()
 	const { create } = useReach()
 	const [loanParams, setLoanParams] = useState({})
 
@@ -37,10 +39,10 @@ const Create = () => {
 		e.currentTarget.value = value
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// console.log(nftParams)
-		create(loanParams)
+		;(await create(loanParams)) && navigate('/account')
 	}
 
 	return (

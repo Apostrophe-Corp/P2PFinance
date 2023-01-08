@@ -6,7 +6,7 @@ import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 
-const Loaned = ({ loan }) => {
+const Loaned = ({ loan, ad = false }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const [assetName, setAssetName] = useState('Loan Token')
@@ -38,24 +38,26 @@ const Loaned = ({ loan }) => {
 	}, [loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
-		const maturationTimer = setInterval(async () => {
-			if (!loan.resolved) {
-				const currentTime = instantReach.bigNumberToNumber(
-					await instantReach.getNetworkTime()
-				)
-				const blocksRemaining =
-					Number(loan.created) + Number(loan.maturation) - currentTime
-				if (blocksRemaining > 0) setMaturation(blocksRemaining)
-				else setMaturation('Ended (Forfeited)')
-			} else {
-				setMaturation('Ended (Paid)')
-			}
-		}, 5000)
+		let maturationTimer
+		if (!ad)
+			maturationTimer = setInterval(async () => {
+				if (!loan.resolved) {
+					const currentTime = instantReach.bigNumberToNumber(
+						await instantReach.getNetworkTime()
+					)
+					const blocksRemaining =
+						Number(loan.created) + Number(loan.maturation) - currentTime
+					if (blocksRemaining > 0) setMaturation(blocksRemaining)
+					else setMaturation('Ended (Forfeited)')
+				} else {
+					setMaturation('Ended (Paid)')
+				}
+			}, 5000)
 
 		return () => {
-			clearInterval(maturationTimer)
+			if (!ad) clearInterval(maturationTimer)
 		}
-	}, [loan.created, loan.maturation, loan.resolved])
+	}, [ad, loan.created, loan.maturation, loan.resolved])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>

@@ -389,6 +389,7 @@ const ReachContextProvider = ({ children }) => {
 
 	const create = async (loanParams) => {
 		startWaiting()
+		let success = false
 		const userBal = await reach.balanceOf(
 			user.account,
 			Number(loanParams['tokenOffered'])
@@ -415,87 +416,74 @@ const ReachContextProvider = ({ children }) => {
 			const ctc = user.account.contract(loanCtc)
 			const tokReq = Number(loanParams['tokenRequested'])
 			const tokOff = Number(loanParams['tokenOffered'])
-			// console.log(
-			// 	await (async () => ({
-			// 		tokLoan: Number(loanParams['tokenRequested']),
-			// 		principal: await fmtCurrency(
-			// 			tokReq,
-			// 			Number(loanParams['amountRequested'])
-			// 		),
-			// 		amount: await fmtCurrency(
-			// 			tokReq,
-			// 			Number(loanParams['paymentAmount'])
-			// 		),
-			// 		maturation: Number(loanParams['maturation']),
-			// 		tokCollateral: Number(loanParams['tokenOffered']),
-			// 		collateral: await fmtCurrency(
-			// 			tokOff,
-			// 			Number(loanParams['amountOffered'])
-			// 		),
-			// 		address: String(user.address),
-			// 	}))()
-			// )
-			ctc.p.B({
-				getParams: async () => ({
-					tokLoan: Number(loanParams['tokenRequested']),
-					principal: await fmtCurrency(
-						tokReq,
-						Number(loanParams['amountRequested'])
-					),
-					amount: await fmtCurrency(
-						tokReq,
-						Number(loanParams['paymentAmount'])
-					),
-					maturation: Number(loanParams['maturation']),
-					tokCollateral: Number(loanParams['tokenOffered']),
-					collateral: await fmtCurrency(
-						tokOff,
-						Number(loanParams['amountOffered'])
-					),
-					address: String(user.address),
-				}),
-				created: async (created) => {
-					let rewardSent = false
-					const res = await request({
-						path: `loans`,
-						method: 'POST',
-						body: {
-							...loanParams,
-							contractInfo: JSON.stringify(await ctc.getInfo()),
-							tokenRequested: tokReq,
-							tokenOffered: tokOff,
-							amountRequested: Number(loanParams['amountRequested']),
-							amountOffered: Number(loanParams['amountOffered']),
-							paymentAmount: Number(loanParams['paymentAmount']),
-							maturation: Number(loanParams['maturation']),
-							borrower: String(user.address),
-							lender: '',
-							created: reach.bigNumberToNumber(created),
-							resolved: false,
-						},
-					})
-					// try {
-					// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
-					// 		reach.formatAddress(user.address)
-					// 	)
-					// } catch (error) {
-					// 	console.log({ error })
-					// }
-					stopWaiting()
-					if (res.success) {
-						alertThis({
-							message: `Success!${
-								rewardSent ? ` You've also received some loyalty tokens` : ''
-							}`,
-							forConfirmation: false,
+
+			success = await reach.withDisconnect(async () => {
+				let suc = false
+				await ctc.p.B({
+					getParams: async () => ({
+						tokLoan: Number(loanParams['tokenRequested']),
+						principal: await fmtCurrency(
+							tokReq,
+							Number(loanParams['amountRequested'])
+						),
+						amount: await fmtCurrency(
+							tokReq,
+							Number(loanParams['paymentAmount'])
+						),
+						maturation: Number(loanParams['maturation']),
+						tokCollateral: Number(loanParams['tokenOffered']),
+						collateral: await fmtCurrency(
+							tokOff,
+							Number(loanParams['amountOffered'])
+						),
+						address: String(user.address),
+					}),
+					created: async (created) => {
+						let rewardSent = false
+						const res = await request({
+							path: `loans`,
+							method: 'POST',
+							body: {
+								...loanParams,
+								contractInfo: JSON.stringify(await ctc.getInfo()),
+								tokenRequested: tokReq,
+								tokenOffered: tokOff,
+								amountRequested: Number(loanParams['amountRequested']),
+								amountOffered: Number(loanParams['amountOffered']),
+								paymentAmount: Number(loanParams['paymentAmount']),
+								maturation: Number(loanParams['maturation']),
+								borrower: String(user.address),
+								lender: '',
+								created: reach.bigNumberToNumber(created),
+								resolved: false,
+							},
 						})
-					} else {
-						alertThis({
-							message: `Failed to upload Advert information. Error message: ${res.error.message}`,
-							forConfirmation: false,
-						})
-					}
-				},
+						// try {
+						// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
+						// 		reach.formatAddress(user.address)
+						// 	)
+						// } catch (error) {
+						// 	console.log({ error })
+						// }
+						stopWaiting()
+						if (res.success) {
+							alertThis({
+								message: `Success!${
+									rewardSent ? ` You've also received some loyalty tokens` : ''
+								}`,
+								forConfirmation: false,
+							})
+							suc = true
+						} else {
+							alertThis({
+								message: `Failed to upload Advert information. Error message: ${res.error.message}`,
+								forConfirmation: false,
+							})
+						}
+						reach.disconnect(null)
+					},
+				})
+				return suc
 			})
 		} catch (error) {
 			console.log({ error })
@@ -505,6 +493,7 @@ const ReachContextProvider = ({ children }) => {
 				forConfirmation: false,
 			})
 		}
+		return success
 	}
 
 	const ReachContextValue = {

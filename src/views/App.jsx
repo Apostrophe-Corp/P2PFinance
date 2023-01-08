@@ -19,6 +19,7 @@ const App = ({ children }) => {
 					s.flex,
 					s.spaceXBetween,
 					s.spaceYCenter,
+					s.g10,
 					app.header,
 					g.empty
 				)}
@@ -35,7 +36,7 @@ const App = ({ children }) => {
 					<div
 						className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}
 					>
-						<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter)}>
+						<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter, s.g10)}>
 							<li
 								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
 								onClick={() => {
@@ -44,7 +45,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Make Ad
+								Create Ad
 							</li>
 							<li
 								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
@@ -54,7 +55,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Lend
+								Loan
 							</li>
 						</ul>
 					</div>
@@ -62,7 +63,7 @@ const App = ({ children }) => {
 				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
 					{user.address && (
 						<button
-							className={cf(s.w480_100, s.w360_100, app.connectAccount)}
+							className={cf(app.connectAccount)}
 							onClick={() => {
 								checkForSignIn(async () => {
 									!(isAuthenticated || (await signIn(user.address)))
@@ -74,19 +75,21 @@ const App = ({ children }) => {
 							{isAuthenticated ? authUser.username : `Sign In`}
 						</button>
 					)}
-					<button
-						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
-						onClick={() => {
-							!user.address
-								? setShowConnectAccount(true)
-								: alertThis({
-										message: 'You are connected',
-										forConfirmation: false,
-								  })
-						}}
-					>
-						{!user.account ? 'Connect Wallet' : user.address}
-					</button>
+					{!user.account && (
+						<button
+							className={cf(app.connectAccount)}
+							onClick={() => {
+								!user.address
+									? setShowConnectAccount(true)
+									: alertThis({
+											message: 'You are connected',
+											forConfirmation: false,
+									  })
+							}}
+						>
+							{!user.account ? 'Connect Wallet' : user.address}
+						</button>
+					)}
 				</div>
 			</div>
 			{children}
