@@ -221,7 +221,8 @@ const ReachContextProvider = ({ children }) => {
 				if (!(await user.account.tokenAccepted(Number(asset)))) {
 					stopWaiting()
 					alertThis({
-						message: 'Please confirm the opt-in of the collateral ASA on your wallet',
+						message:
+							'Please confirm the opt-in of the collateral ASA on your wallet',
 						forConfirmation: false,
 						persist: true,
 					})
@@ -233,6 +234,7 @@ const ReachContextProvider = ({ children }) => {
 							persist: true,
 						})
 						await new Promise((resolve) => setTimeout(resolve, 2000))
+						startWaiting()
 					} catch (error) {
 						console.log({ error })
 						alertThis({
