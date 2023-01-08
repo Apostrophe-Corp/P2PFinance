@@ -23,7 +23,6 @@ import { LoadingPreview } from '../components/LoadingPreview'
 const reach = loadStdlib({
 	...process.env,
 	REACH_NO_WARN: 'Y',
-	REACH_CONNECTOR_MODE: process.env.REACT_APP_REACH_CONNECTOR_MODE,
 })
 
 unsafeAllowMultipleStdlibs()
