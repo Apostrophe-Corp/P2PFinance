@@ -211,6 +211,7 @@ const ReachContextProvider = ({ children }) => {
 	}
 
 	const lend = async (id, loanCtcInfo, loanAmount, asset) => {
+		startWaiting()
 		const assetInfo = await getASAInfo(Number(asset))
 		const res = await request({
 			path: `loans/${id}`,
@@ -218,6 +219,7 @@ const ReachContextProvider = ({ children }) => {
 		if (res.success) {
 			if (res.loan?.lender === '') {
 				if (!(await user.account.tokenAccepted(Number(asset)))) {
+					stopWaiting()
 					alertThis({
 						message: 'Please confirm the opt-in of the collateral ASA on your wallet',
 						forConfirmation: false,
@@ -247,12 +249,14 @@ const ReachContextProvider = ({ children }) => {
 					userAssetBalance >= (await fmtCurrency(asset, loanAmount))
 
 				if (!enough) {
+					stopWaiting()
 					alertThis({
 						message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
 						forConfirmation: false,
 					})
 					return
 				}
+				stopWaiting()
 				const agreed = await alertThis({
 					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Proceed?`,
 					accept: 'Yes',
