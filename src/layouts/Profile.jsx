@@ -64,7 +64,7 @@ const Profile = () => {
 				if (res.loans) {
 					const tempLoans = res.loans
 					const borrowed = tempLoans.filter(
-						(el) => el.borrower === authUser.address
+						(el) => el.borrower === authUser.address && el.lender !== ''
 					)
 					setMessage_(
 						borrowed?.loans?.length
