@@ -15,6 +15,7 @@ const Profile = () => {
 		userAdverts,
 		setUserAdverts,
 		adverts,
+		setAdverts,
 	} = useReach()
 
 	const { authUser } = useAuth()
@@ -38,6 +39,7 @@ const Profile = () => {
 			})
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
+				setAdverts(loansRes.loans)
 				const remainingAdverts = presentAdverts.filter(
 					(el) => el.borrowerInfo.username === authUser.username
 				)
@@ -82,19 +84,19 @@ const Profile = () => {
 			}
 		}
 
-		retriever = setInterval(async () => {
-			await getLoans()
-			await quickCheck()
+		retriever = setInterval(() => {
+			getLoans()
+			quickCheck()
 		}, 5000)
 
 		return () => {
 			clearInterval(retriever)
-			retriever = undefined
 		}
 	}, [
 		adverts,
 		authUser.address,
 		authUser.username,
+		setAdverts,
 		setBorrowedLoans,
 		setLoanedLoans,
 		setUserAdverts,

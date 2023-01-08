@@ -72,10 +72,10 @@ const Borrowed = ({ loan }) => {
 
 			setMaturation(
 				outStanding === 0
-					? 'Ended'
+					? '...'
 					: blocksRemaining > 0
 					? blocksRemaining
-					: 'Ended'
+					: '...'
 			)
 		}, 5000)
 
@@ -221,9 +221,9 @@ const Borrowed = ({ loan }) => {
 						l.quantity
 					)}
 				>
-					{maturation}
+					{loading ? 'Loading...' : maturation}
 				</span>
-				{maturation !== 'Ended' && (
+				{!loading && maturation !== '...' && (
 					<span
 						className={cf(
 							s.wMax,
@@ -262,7 +262,7 @@ const Borrowed = ({ loan }) => {
 					disabled={
 						loading === true
 							? true
-							: !(!loan.resolved && maturation !== 'Ended')
+							: !(!loan.resolved && maturation !== '...')
 					}
 				>
 					Repay

@@ -42,7 +42,7 @@ const Create = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// console.log(nftParams)
-		;(await create(loanParams)) && navigate('/account')
+		if (await create(loanParams)) navigate('/account')
 	}
 
 	return (

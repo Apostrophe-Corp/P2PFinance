@@ -15,27 +15,26 @@ const Loans = () => {
 	useEffect(() => {
 		let retriever = undefined
 		const getLoans = async () => {
-			retriever = setInterval(async () => {
-				const loansRes = await request({
-					path: `loans`,
-					method: 'GET',
-				})
-				if (loansRes.success) {
-					setLoans(loansRes.loans)
-					setMessage(
-						loansRes.loans.length ? 'Loading...' : 'There are no Ads yet'
-					)
-					clearInterval(retriever)
-					retriever = undefined
-				} else if (!loans?.length) {
-					setMessage('There are no Ads yet')
-				}
-			}, 5000)
+			const loansRes = await request({
+				path: `loans`,
+				method: 'GET',
+			})
+			if (loansRes.success) {
+				setLoans(loansRes.loans)
+				setMessage(
+					loansRes.loans.length ? 'Loading...' : 'There are no Ads yet'
+				)
+				clearInterval(retriever)
+				retriever = undefined
+			} else if (!loans?.length) {
+				setMessage('There are no Ads yet')
+			}
 		}
-		getLoans()
+
+		retriever = setInterval(getLoans, 5000)
+
 		return () => {
 			clearInterval(retriever)
-			retriever = undefined
 		}
 	}, [loans?.length, setLoans])
 
