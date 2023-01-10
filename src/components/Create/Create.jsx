@@ -166,7 +166,7 @@ const Create = () => {
 							/>
 						</label>
 						<ASASelect
-							mode={'Quick Select Collateral ASA'}
+							mode={'Collateral ASA'}
 							handler={(x) => {
 								setOffered(x)
 
@@ -186,13 +186,14 @@ const Create = () => {
 									...loanParams,
 									tokenOffered: 10458941,
 								})
-							}}
+							} }
+							mono={true}
 						/>
 						<label
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenOffered'
 						>
-							<span className={cf(cr8.formText)}>Collateral Token ID</span>
+							<span className={cf(cr8.formText)}>Other Collateral ASA</span>
 							<input
 								type='number'
 								name='tokenOffered'
