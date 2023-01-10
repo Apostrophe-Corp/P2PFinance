@@ -5,11 +5,16 @@ import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
 import { setPFPs, cf } from '../../utils'
 import previewImg from '../../assets/images/logo.jpg' // TODO change this image
+import { ASASelect } from '../ASASelect'
 
 const Create = () => {
 	const navigate = useNavigate()
 	const { create } = useReach()
 	const [loanParams, setLoanParams] = useState({})
+	const [selected, setSelected] = useState(true)
+	const [offered, setOffered] = useState(true)
+	const [unSelected, setUnSelected] = useState(false)
+	const [unSelected_, setUnSelected_] = useState(false)
 
 	const previewRef = useRef()
 
@@ -24,7 +29,7 @@ const Create = () => {
 		const name = e.currentTarget.name
 		let value = e.currentTarget.value
 
-		value = Number(value)
+		value = Number(value) < 0 ? 0 : Number(value)
 		setLoanParams({
 			...loanParams,
 			[name]: value,
@@ -32,8 +37,15 @@ const Create = () => {
 
 		if (value && name === 'tokenOffered') {
 			setPFPs([[previewRef, Number(value), false]])
+			setOffered(false)
+			setUnSelected_(true)
 		} else if (!value) {
 			setPreviewBgs()
+		}
+
+		if (name === 'tokenRequested') {
+			setUnSelected(true)
+			setSelected(false)
 		}
 
 		e.currentTarget.value = value
@@ -42,7 +54,7 @@ const Create = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// console.log(nftParams)
-		if (await create(loanParams)) navigate('/account')
+		;(await create(loanParams, selected, offered)) && navigate('/account')
 	}
 
 	return (
@@ -87,8 +99,29 @@ const Create = () => {
 							ref={previewRef}
 						></div>
 						<span className={cf(cr8.sideNote)}>
-							Preview only available for image NFTs
+							Collateral image NFT preview
 						</span>
+						<ASASelect
+							mode={'Quick Select Loan ASA'}
+							handler={(x) => {
+								setSelected(x)
+							}}
+							name='loan'
+							unSelected={unSelected}
+							activate={() => {
+								setUnSelected(false)
+								setLoanParams({
+									...loanParams,
+									tokenRequested: '',
+								})
+							}}
+							setASA={() => {
+								setLoanParams({
+									...loanParams,
+									tokenRequested: 10458941,
+								})
+							}}
+						/>
 						<label
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenRequested'
@@ -98,8 +131,9 @@ const Create = () => {
 								type='number'
 								name='tokenRequested'
 								id='tokenRequested'
+								value={loanParams?.tokenRequested ?? ''}
 								onChange={handleChange}
-								placeholder=''
+								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
@@ -131,6 +165,29 @@ const Create = () => {
 								className={cf(cr8.formInput)}
 							/>
 						</label>
+						<ASASelect
+							mode={'Quick Select Collateral ASA'}
+							handler={(x) => {
+								setOffered(x)
+
+								setPreviewBgs()
+							}}
+							name='collateral'
+							unSelected={unSelected_}
+							activate={() => {
+								setUnSelected_(false)
+								setLoanParams({
+									...loanParams,
+									tokenOffered: '',
+								})
+							}}
+							setASA={() => {
+								setLoanParams({
+									...loanParams,
+									tokenOffered: 10458941,
+								})
+							}}
+						/>
 						<label
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenOffered'
@@ -140,8 +197,9 @@ const Create = () => {
 								type='number'
 								name='tokenOffered'
 								id='tokenOffered'
+								value={loanParams?.tokenOffered ?? ''}
 								onChange={handleChange}
-								placeholder=''
+								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
@@ -169,25 +227,46 @@ const Create = () => {
 								name='maturation'
 								id='maturation'
 								onChange={handleChange}
-								placeholder=''
+								placeholder='1 ~ 3.7 secs ∴ 1hr ~ 973, 1d ~ 23351'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
-						<div className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}>
+						<div
+							className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}
+							// onClick={() => {
+							// 	console.log({
+							// 		'selected || loanParams.tokenRequested':
+							// 			selected || loanParams.tokenRequested,
+							// 		amountOffered: loanParams.amountOffered ? true : false,
+							// 		amountRequested: loanParams.amountRequested ? true : false,
+							// 		paymentAmount: loanParams.paymentAmount ? true : false,
+							// 		'(offered || loanParams.tokenOffered)':
+							// 			offered || loanParams.tokenOffered,
+							// 		maturation: loanParams.maturation ? true : false,
+							// 		'r!=o':
+							// 			Number(loanParams?.tokenRequested ?? 0) !==
+							// 			Number(loanParams?.tokenOffered ?? 0),
+							// 	})
+							// }}
+						>
 							<button
 								type='submit'
 								disabled={
 									!(
-										loanParams.tokenRequested &&
+										(selected || loanParams.tokenRequested) &&
 										loanParams.amountOffered &&
 										loanParams.amountRequested &&
+										Number(loanParams?.paymentAmount ?? 0) >
+											Number(loanParams?.amountRequested ?? 0) &&
 										loanParams.paymentAmount &&
-										loanParams.tokenOffered &&
-										loanParams.maturation
+										(offered || loanParams.tokenOffered) &&
+										loanParams.maturation &&
+										Number(loanParams?.tokenRequested ?? 0) !==
+											Number(loanParams?.tokenOffered ?? 0)
 									)
 								}
 							>
-								Create Advert
+								Complete Application
 							</button>
 						</div>
 					</form>

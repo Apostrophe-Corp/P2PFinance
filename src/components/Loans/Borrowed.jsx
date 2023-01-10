@@ -3,7 +3,7 @@ import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
 import { cf, setPFPs, getASAInfo, parseCurrency, viewASA } from '../../utils'
-import { loanCtc } from '../../contracts'
+import { algo_nnt, nnt_algo, nnt_nnt } from '../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
@@ -13,7 +13,10 @@ const Borrowed = ({ loan }) => {
 	const pfpRef = useRef()
 	const { repay, user } = useReach()
 	const [ctc] = useState(
-		user.account.contract(loanCtc, JSON.parse(loan.contractInfo))
+		user.account.contract(
+			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
+			JSON.parse(loan.contractInfo)
+		)
 	)
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
@@ -22,20 +25,24 @@ const Borrowed = ({ loan }) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		const pfp = Number(loan?.borrowerInfo?.pfp)
+		const pfp = Number(loan?.lenderInfo?.pfp)
 		setPFPs([
 			[uCRef, pfp, true],
 			[pfpRef, pfp, false],
 		])
-	}, [loan?.borrowerInfo?.pfp])
+	}, [loan?.lenderInfo?.pfp])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getASAInfo(Number(loan.tokenRequested))
+			const assetData = loan.selected
+				? { name: 'ALGO' }
+				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
-			const collateralData = await getASAInfo(Number(loan.tokenOffered))
+			const collateralData = loan.offered
+				? { name: 'ALGO' }
+				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
 					collateralData?.unit ? `, ${collateralData.unit}` : ''
@@ -43,17 +50,19 @@ const Borrowed = ({ loan }) => {
 			)
 		}
 		updateValues()
-	}, [loan.tokenOffered, loan.tokenRequested])
+	}, [loan.offered, loan.selected, loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		const outStandingTimer = setInterval(async () => {
 			const amountPaid_ = (await ctc.v.LoanViews.amountPaid())?.[1]
 			const amountPaid =
 				amountPaid_ !== null
-					? await parseCurrency(
-							Number(loan.tokenRequested),
-							instantReach.bigNumberToNumber(amountPaid_)
-					  )
+					? loan.offered
+						? instantReach.formatCurrency(amountPaid_)
+						: await parseCurrency(
+								Number(loan.tokenRequested),
+								instantReach.bigNumberToNumber(amountPaid_)
+						  )
 					: Number(loan.paymentAmount)
 
 			// console.log(amountPaid)
@@ -88,6 +97,7 @@ const Borrowed = ({ loan }) => {
 		loan.contractInfo,
 		loan.created,
 		loan.maturation,
+		loan.offered,
 		loan.paymentAmount,
 		loan.tokenRequested,
 		outStanding,
@@ -260,9 +270,7 @@ const Borrowed = ({ loan }) => {
 						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
 					}}
 					disabled={
-						loading === true
-							? true
-							: !(!loan.resolved && maturation !== '...')
+						loading === true ? true : !(!loan.resolved && maturation !== '...')
 					}
 				>
 					Repay

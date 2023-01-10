@@ -1,0 +1,80 @@
+.signIn {
+	color: #000000;
+	margin: 0;
+	width: 100%;
+	text-align: left;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.type {
+	width: 100%;
+	display: flex;
+	gap: 10px;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.typeLabel {
+	position: relative;
+	display: block;
+	padding: 10px;
+	text-align: left;
+	border-radius: 5px;
+	width: 100%;
+	border: 2px solid #be78e4;
+	cursor: pointer;
+}
+
+.typeLabelSpan {
+	margin-top: 10px;
+	font-size: 12px;
+	color: #363738;
+	display: block;
+}
+
+.checkIcon,
+.checkIcon1 {
+	font-size: 28px;
+	margin-left: auto;
+	position: absolute;
+	top: 7px;
+	right: 5px;
+	width: 30px;
+}
+
+.checkIcon {
+	display: none;
+	color: #56147a;
+}
+
+.checkIcon1 {
+	display: block;
+	color: #9b34b5;
+}
+
+/* Radio buttons */
+.radioBtn {
+	display: none;
+}
+
+.radioBtn:checked + label {
+	background-color: rgb(243, 230, 255);
+	border: 2px solid #56147a;
+}
+
+.radioBtn:checked + label .checkIcon {
+	display: inline-block;
+}
+
+.radioBtn:checked.unSelected + label,
+.radioBtn.unSelected + label {
+	background-color: transparent !important;
+	border: 2px solid #be78e4 !important;
+}
+
+.radioBtn:checked.unSelected + label .checkIcon,
+.radioBtn.unSelected + label .checkIcon {
+	display: none !important;
+}

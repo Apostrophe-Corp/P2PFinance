@@ -45,7 +45,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Create Ad
+								Apply for a Loan
 							</li>
 							<li
 								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
@@ -55,7 +55,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Loan
+								Give out Loans
 							</li>
 						</ul>
 					</div>

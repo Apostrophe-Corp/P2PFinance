@@ -12,8 +12,11 @@ import { PeraWalletConnect } from '@perawallet/connect'
 // import WalletConnect from '@walletconnect/client'
 // import QRCodeModal from 'algorand-walletconnect-qrcode-modal'
 import {
-	loanCtc,
+	// loanCtc,
 	//  adminCtc
+	algo_nnt,
+	nnt_algo,
+	nnt_nnt,
 } from '../contracts'
 import { request, fmtCurrency, getASAInfo } from '../utils'
 import { Alert } from '../components/Alert'
@@ -210,7 +213,15 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const lend = async (id, loanCtcInfo, loanAmount, asset, collateral) => {
+	const lend = async (
+		id,
+		loanCtcInfo,
+		loanAmount,
+		asset,
+		collateral,
+		selected,
+		offered
+	) => {
 		startWaiting()
 		const assetInfo = await getASAInfo(Number(asset))
 		const res = await request({
@@ -219,48 +230,56 @@ const ReachContextProvider = ({ children }) => {
 		if (res.success) {
 			if (res.loan?.lender === '') {
 				let rewardSent = false
-				const userAssetBalance = await reach.balanceOf(user.account, asset)
-				const enough =
-					userAssetBalance >= (await fmtCurrency(asset, loanAmount))
+				const userAssetBalance = offered
+					? reach.formatCurrency(await reach.balanceOf(user.account), 4)
+					: await reach.balanceOf(user.account, asset)
+				const enough = userAssetBalance >= loanAmount
 
 				if (!enough) {
-					stopWaiting()
 					alertThis({
-						message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for the loan amount of: ${loanAmount}`,
+						message: `Your ${offered ? 'ALGO ' : ''}balance${
+							offered ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+						} - ${userAssetBalance}, is insufficient for a repayment of: ${loanAmount}`,
 						forConfirmation: false,
 					})
 					return
 				}
 
-				if (!(await user.account.tokenAccepted(Number(collateral)))) {
-					stopWaiting()
-					alertThis({
-						message:
-							'Please confirm the opt-in of the collateral ASA on your wallet',
-						forConfirmation: false,
-						persist: true,
-					})
-					try {
-						await user.account.tokenAccept(Number(collateral))
+				if (!offered) {
+					if (!(await user.account.tokenAccepted(Number(collateral)))) {
+						stopWaiting()
 						alertThis({
-							message: 'Opt-In confirmed',
+							message:
+								'Please confirm the opt-in of the collateral ASA on your wallet',
 							forConfirmation: false,
 							persist: true,
 						})
-						await new Promise((resolve) => setTimeout(resolve, 2000))
-					} catch (error) {
-						console.log({ error })
-						alertThis({
-							message:
-								'Opt-In failed and as such you cannot give this loan. But you can try again',
-							forConfirmation: false,
-						})
-						return
+						try {
+							await user.account.tokenAccept(Number(collateral))
+							alertThis({
+								message: 'Opt-In confirmed',
+								forConfirmation: false,
+								persist: true,
+							})
+							await new Promise((resolve) => setTimeout(resolve, 2000))
+						} catch (error) {
+							console.log({ error })
+							alertThis({
+								message:
+									'Opt-In failed and as such you cannot give this loan. But you can try again',
+								forConfirmation: false,
+							})
+							return
+						}
 					}
 				}
 
 				const agreed = await alertThis({
-					message: `You're about to lend ${loanAmount} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Proceed?`,
+					message: `You're about to lend ${loanAmount}${
+						offered
+							? ' ALGO'
+							: ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+					}. Proceed?`,
 					accept: 'Yes',
 					decline: 'No',
 				})
@@ -269,7 +288,10 @@ const ReachContextProvider = ({ children }) => {
 
 				startWaiting()
 				try {
-					const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
+					const ctc = user.account.contract(
+						offered ? nnt_algo : selected ? algo_nnt : nnt_nnt,
+						JSON.parse(loanCtcInfo)
+					)
 					await ctc.a.Lender.lend()
 
 					const res = await request({
@@ -324,7 +346,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const repay = async (id, loanCtcInfo, asset) => {
+	const repay = async (id, loanCtcInfo, asset, selected, offered) => {
 		const assetInfo = await getASAInfo(Number(asset))
 		const payAmountIn = await alertThis({
 			message: 'Enter the repay amount',
@@ -333,20 +355,28 @@ const ReachContextProvider = ({ children }) => {
 			canClear: true,
 		})
 		if (payAmountIn === undefined) return null
-		const payAmount = await fmtCurrency(asset, Number(payAmountIn))
+		const payAmount = offered
+			? reach.parseCurrency(payAmountIn)
+			: await fmtCurrency(asset, Number(payAmountIn))
 
-		const userAssetBalance = await reach.balanceOf(user.account, asset)
+		const userAssetBalance = offered
+			? reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			: await reach.balanceOf(user.account, asset)
 		const enough = userAssetBalance >= payAmount
 
 		if (!enough) {
 			alertThis({
-				message: `Your balance of asset: ${assetInfo?.name}, ASA ID: #${asset} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
+				message: `Your ${offered ? 'ALGO ' : ''}balance${
+					offered ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+				} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
 				forConfirmation: false,
 			})
 			return
 		}
 		const agreed = await alertThis({
-			message: `You're about to repay ${payAmountIn} of asset: ${assetInfo?.name}, ASA ID: #${asset}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
+			message: `You're about to repay ${payAmountIn}${
+				offered ? ' ALGO' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+			}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
 		})
@@ -356,8 +386,13 @@ const ReachContextProvider = ({ children }) => {
 		startWaiting()
 		try {
 			let res = undefined
-			const ctc = user.account.contract(loanCtc, JSON.parse(loanCtcInfo))
-			const [repaid, paid, original] = await ctc.a.Borrower.repay(payAmount)
+			const ctc = user.account.contract(
+				offered ? nnt_algo : selected ? algo_nnt : nnt_nnt,
+				JSON.parse(loanCtcInfo)
+			)
+			const [repaid, paid, original] = await ctc.a.Borrower.repay(
+				offered ? reach.parseCurrency(payAmountIn) : payAmount
+			)
 			const [paid_] = [
 				reach.bigNumberToNumber(paid),
 				// reach.bigNumberToNumber(original),
@@ -417,21 +452,36 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const create = async (loanParams) => {
+	const create = async (loanParams, selected, offered) => {
 		startWaiting()
 		let success = false
-		const userBal = await reach.balanceOf(
-			user.account,
-			Number(loanParams['tokenOffered'])
-		)
+		if (!offered) {
+			const userBal = await reach.balanceOf(
+				user.account,
+				Number(loanParams['tokenOffered'])
+			)
 
-		if (userBal < Number(loanParams['amountOffered'])) {
-			stopWaiting()
-			alertThis({
-				message: 'Your collateral balance is insufficient for the loan',
-				forConfirmation: false,
-			})
-			return
+			if (userBal < Number(loanParams['amountOffered'])) {
+				stopWaiting()
+				alertThis({
+					message: 'Your collateral balance is insufficient for the loan',
+					forConfirmation: false,
+				})
+				return
+			}
+		} else {
+			const userBal = await reach.balanceOf(user.account)
+
+			if (
+				reach.formatCurrency(userBal, 4) < Number(loanParams['amountOffered'])
+			) {
+				stopWaiting()
+				alertThis({
+					message: 'Your collateral balance is insufficient for the loan',
+					forConfirmation: false,
+				})
+				return
+			}
 		}
 
 		const optKeys = Object.keys(loanParams)
@@ -443,30 +493,66 @@ const ReachContextProvider = ({ children }) => {
 			if (loanParams[key]) creationOpts[key] = loanParams[key]
 		}
 		try {
-			const ctc = user.account.contract(loanCtc)
-			const tokReq = Number(loanParams['tokenRequested'])
-			const tokOff = Number(loanParams['tokenOffered'])
+			const ctc = user.account.contract(
+				selected ? algo_nnt : offered ? nnt_algo : nnt_nnt
+			)
+			const tokReq = Number(loanParams['tokenRequested'] ?? 0)
+			const tokOff = Number(loanParams['tokenOffered'] ?? 0)
 
-			await reach.withDisconnect(async () => {
+			success = await reach.withDisconnect(async () => {
 				await ctc.p.B({
-					getParams: async () => ({
-						tokLoan: Number(loanParams['tokenRequested']),
-						principal: await fmtCurrency(
-							tokReq,
-							Number(loanParams['amountRequested'])
-						),
-						amount: await fmtCurrency(
-							tokReq,
-							Number(loanParams['paymentAmount'])
-						),
-						maturation: Number(loanParams['maturation']),
-						tokCollateral: Number(loanParams['tokenOffered']),
-						collateral: await fmtCurrency(
-							tokOff,
-							Number(loanParams['amountOffered'])
-						),
-						address: String(user.address),
-					}),
+					getParams: async () =>
+						selected
+							? {
+									principal: reach.parseCurrency(
+										Number(loanParams['amountRequested'])
+									),
+									amount: reach.parseCurrency(
+										Number(loanParams['paymentAmount'])
+									),
+									maturation: Number(loanParams['maturation']),
+									tokCollateral: Number(loanParams['tokenOffered']),
+									collateral: await fmtCurrency(
+										tokOff,
+										Number(loanParams['amountOffered'])
+									),
+									address: String(user.address),
+							  }
+							: offered
+							? {
+									tokLoan: Number(loanParams['tokenRequested']),
+									principal: await fmtCurrency(
+										tokReq,
+										Number(loanParams['amountRequested'])
+									),
+									amount: await fmtCurrency(
+										tokReq,
+										Number(loanParams['paymentAmount'])
+									),
+									maturation: Number(loanParams['maturation']),
+									collateral: reach.parseCurrency(
+										Number(loanParams['amountOffered'])
+									),
+									address: String(user.address),
+							  }
+							: {
+									tokLoan: Number(loanParams['tokenRequested']),
+									principal: await fmtCurrency(
+										tokReq,
+										Number(loanParams['amountRequested'])
+									),
+									amount: await fmtCurrency(
+										tokReq,
+										Number(loanParams['paymentAmount'])
+									),
+									maturation: Number(loanParams['maturation']),
+									tokCollateral: Number(loanParams['tokenOffered']),
+									collateral: await fmtCurrency(
+										tokOff,
+										Number(loanParams['amountOffered'])
+									),
+									address: String(user.address),
+							  },
 					created: async (created) => {
 						let rewardSent = false
 						const res = await request({
@@ -485,6 +571,8 @@ const ReachContextProvider = ({ children }) => {
 								lender: '',
 								created: reach.bigNumberToNumber(created),
 								resolved: false,
+								selected,
+								offered,
 							},
 						})
 						// try {
@@ -502,14 +590,14 @@ const ReachContextProvider = ({ children }) => {
 								}`,
 								forConfirmation: false,
 							})
-							success = true
+							reach.disconnect(true)
 						} else {
 							alertThis({
 								message: `Failed to upload Advert information. Error message: ${res.error.message}`,
 								forConfirmation: false,
 							})
+							reach.disconnect(false)
 						}
-						reach.disconnect(null)
 					},
 				})
 			})

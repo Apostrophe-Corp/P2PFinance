@@ -23,11 +23,15 @@ const Loaned = ({ loan, ad = false }) => {
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getASAInfo(Number(loan.tokenRequested))
+			const assetData = loan.selected
+				? { name: 'ALGO' }
+				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
-			const collateralData = await getASAInfo(Number(loan.tokenOffered))
+			const collateralData = loan.offered
+				? { name: 'ALGO' }
+				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
 					collateralData?.unit ? `, ${collateralData.unit}` : ''
@@ -35,7 +39,7 @@ const Loaned = ({ loan, ad = false }) => {
 			)
 		}
 		updateValues()
-	}, [loan.tokenOffered, loan.tokenRequested])
+	}, [loan.offered, loan.selected, loan.tokenOffered, loan.tokenRequested])
 
 	useEffect(() => {
 		let maturationTimer
