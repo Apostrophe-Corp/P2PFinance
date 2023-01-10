@@ -75,7 +75,7 @@ const Advert = ({ ad }) => {
 					ad.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(ad.tokenRequested)
+					return ad.selected ? false : viewASA(ad.tokenRequested)
 				}}
 			>
 				<span
@@ -118,7 +118,7 @@ const Advert = ({ ad }) => {
 					ad.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(ad.tokenOffered)
+					return ad.offered ? false : viewASA(ad.tokenOffered)
 				}}
 			>
 				<span
@@ -161,7 +161,7 @@ const Advert = ({ ad }) => {
 					ad.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(ad.tokenRequested)
+					return ad.selected ? false : viewASA(ad.tokenRequested)
 				}}
 			>
 				<span

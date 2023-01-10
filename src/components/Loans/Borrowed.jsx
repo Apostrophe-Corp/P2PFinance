@@ -93,26 +93,45 @@ const Borrowed = ({ loan, ad = false }) => {
 		let maturationTimer
 		if (!ad)
 			maturationTimer = setInterval(async () => {
-				const currentTime = instantReach.bigNumberToNumber(
-					await instantReach.getNetworkTime()
-				)
-				const blocksRemaining =
-					Number(loan.created) + Number(loan.maturation) - currentTime
-				const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
-				setStatus(
-					contractStatus === false
-						? false
-						: contractStatus === null
-						? true
-						: true
-				)
-				setMaturation(
-					contractStatus === false
-						? blocksRemaining
-						: contractStatus === null
-						? 'Loan has been resolved'
-						: 'Loan has been resolved'
-				)
+				const beginBlock_ = (await ctc.v.LoanViews.beginBlock())?.[1]
+				if (beginBlock_ !== null) {
+					const beginBlock = instantReach.bigNumberToNumber(beginBlock_)
+					const currentTime = instantReach.bigNumberToNumber(
+						await instantReach.getNetworkTime()
+					)
+					const blocksRemaining =
+						Number(beginBlock) + Number(loan.maturation) - currentTime
+					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
+					setStatus(
+						contractStatus === false
+							? false
+							: contractStatus === null
+							? true
+							: true
+					)
+					setMaturation(
+						contractStatus === false
+							? blocksRemaining
+							: contractStatus === null
+							? 'Loan has been resolved'
+							: 'Loan has been resolved'
+					)
+				} else {
+					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
+					setStatus(
+						contractStatus === false
+							? false
+							: contractStatus === null
+							? true
+							: true
+					)
+					if (contractStatus === null || contractStatus === true) {
+						if (!ad) clearInterval(maturationTimer)
+						setMaturation('Loan has been resolved')
+					} else {
+						setMaturation('Unable to evaluate maturation')
+					}
+				}
 			}, 5000)
 
 		return () => {
@@ -156,7 +175,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenRequested)
+					return ad.selected ? false : viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -193,7 +212,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenOffered)
+					return ad.offered ? false : viewASA(loan.tokenOffered)
 				}}
 			>
 				<span
@@ -230,7 +249,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenRequested)
+					return ad.selected ? false : viewASA(loan.tokenRequested)
 				}}
 			>
 				<span

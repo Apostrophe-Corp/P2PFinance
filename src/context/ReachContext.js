@@ -316,7 +316,6 @@ const ReachContextProvider = ({ children }) => {
 						JSON.parse(loanCtcInfo)
 					)
 					await ctc.a.Lender.lend()
-
 					const res = await request({
 						path: `loans/${id}`,
 						method: 'PATCH',

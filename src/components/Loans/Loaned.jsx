@@ -52,7 +52,10 @@ const Loaned = ({ loan, ad = false }) => {
 					const blocksRemaining =
 						Number(loan.created) + Number(loan.maturation) - currentTime
 					if (blocksRemaining > 0) setMaturation(blocksRemaining)
-					else setMaturation('Deadline exceeded, unable to pay, collateral is now yours')
+					else
+						setMaturation(
+							'Deadline exceeded, unable to pay, collateral is now yours'
+						)
 				} else {
 					setMaturation('Deadline exceeded, full amount paid')
 				}
@@ -90,7 +93,7 @@ const Loaned = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenRequested)
+					return ad.selected ? false : viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -128,7 +131,7 @@ const Loaned = ({ loan, ad = false }) => {
 					loan.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenOffered)
+					return ad.offered ? false : viewASA(loan.tokenOffered)
 				}}
 			>
 				<span
@@ -166,7 +169,7 @@ const Loaned = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					viewASA(loan.tokenRequested)
+					return ad.selected ? false : viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
