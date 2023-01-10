@@ -259,7 +259,9 @@ const ReachContextProvider = ({ children }) => {
 					alertThis({
 						message: `Your ${selected ? 'ALGO ' : ''}balance${
 							selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
-						} - ${Number(userAssetBalance)}, is insufficient for a repayment of: ${loanAmount}`,
+						} - ${Number(
+							userAssetBalance
+						)}, is insufficient for a repayment of: ${loanAmount}`,
 						forConfirmation: false,
 					})
 					return
@@ -393,7 +395,9 @@ const ReachContextProvider = ({ children }) => {
 			alertThis({
 				message: `Your ${selected ? 'ALGO ' : ''}balance${
 					selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
-				} - ${Number(userAssetBalance)}, is insufficient for a repayment of: ${payAmountIn}`,
+				} - ${Number(
+					userAssetBalance
+				)}, is insufficient for a repayment of: ${payAmountIn}`,
 				forConfirmation: false,
 			})
 			return

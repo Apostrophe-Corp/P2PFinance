@@ -52,9 +52,9 @@ const Loaned = ({ loan, ad = false }) => {
 					const blocksRemaining =
 						Number(loan.created) + Number(loan.maturation) - currentTime
 					if (blocksRemaining > 0) setMaturation(blocksRemaining)
-					else setMaturation('Ended (Forfeited)')
+					else setMaturation('Deadline exceeded, unable to pay, collateral is now yours')
 				} else {
-					setMaturation('Ended (Paid)')
+					setMaturation('Deadline exceeded, full amount paid')
 				}
 			}, 5000)
 

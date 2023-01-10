@@ -20,9 +20,10 @@ const Borrowed = ({ loan, ad = false }) => {
 	)
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-	const [outStanding, setOutStanding] = useState(0)
-	const [maturation, setMaturation] = useState(Number(loan.maturation))
+	const [outStanding, setOutStanding] = useState('Loading...')
+	const [maturation, setMaturation] = useState('Loading...')
 	const [loading, setLoading] = useState(true)
+	const [status, setStatus] = useState(true)
 
 	useEffect(() => {
 		if (ad && loan?.borrowerInfo) {
@@ -97,13 +98,20 @@ const Borrowed = ({ loan, ad = false }) => {
 				)
 				const blocksRemaining =
 					Number(loan.created) + Number(loan.maturation) - currentTime
-
+				const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
+				setStatus(
+					contractStatus === false
+						? false
+						: contractStatus === null
+						? true
+						: true
+				)
 				setMaturation(
-					outStanding === 0
-						? '...'
-						: blocksRemaining > 0
+					contractStatus === false
 						? blocksRemaining
-						: '...'
+						: contractStatus === null
+						? 'Loan has been resolved'
+						: 'Loan has been resolved'
 				)
 			}, 5000)
 
@@ -263,7 +271,7 @@ const Borrowed = ({ loan, ad = false }) => {
 				>
 					{ad ? loan.maturation : loading ? 'Loading...' : maturation}
 				</span>
-				{(ad || (!loading && maturation !== '...')) && (
+				{(ad || !status) && (
 					<span
 						className={cf(
 							s.wMax,
@@ -296,10 +304,10 @@ const Borrowed = ({ loan, ad = false }) => {
 						s.flexCenter,
 						l.lendBtn
 					)}
-					onClick={() => {
+					onClick={async () => {
 						ad
 							? close(loan.id, loan.contractInfo, loan.selected, loan.offered)
-							: repay(
+							: await repay(
 									loan.id,
 									loan.contractInfo,
 									Number(loan.tokenRequested),
@@ -307,13 +315,7 @@ const Borrowed = ({ loan, ad = false }) => {
 									loan.offered
 							  )
 					}}
-					disabled={
-						ad
-							? false
-							: loading === true
-							? true
-							: !(!loan.resolved && maturation !== '...')
-					}
+					disabled={ad ? false : status}
 					id={`${ad ? 'ad' : 'loan'}-btn-${ad.id}-${ad.borrower}`}
 				>
 					{ad ? 'Drop Ad' : 'Repay'}
