@@ -8,10 +8,10 @@ import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 
-const Borrowed = ({ loan }) => {
+const Borrowed = ({ loan, ad }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
-	const { repay, user } = useReach()
+	const { repay, close, user } = useReach()
 	const [ctc] = useState(
 		user.account.contract(
 			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
@@ -25,23 +25,32 @@ const Borrowed = ({ loan }) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		const pfp = Number(loan?.lenderInfo?.pfp)
-		setPFPs([
-			[uCRef, pfp, true],
-			[pfpRef, pfp, false],
-		])
-	}, [loan?.lenderInfo?.pfp])
+		console.log({ loan })
+		if (ad && loan?.borrowerInfo) {
+			const pfp = Number(loan?.borrowerInfo?.pfp)
+			setPFPs([
+				[uCRef, pfp, true],
+				[pfpRef, pfp, false],
+			])
+		} else if (!ad && loan?.lenderInfo) {
+			const pfp = Number(loan?.lenderInfo?.pfp)
+			setPFPs([
+				[uCRef, pfp, true],
+				[pfpRef, pfp, false],
+			])
+		}
+	}, [ad, loan])
 
 	useEffect(() => {
 		const updateValues = async () => {
 			const assetData = loan.selected
-				? { name: 'ALGO' }
+				? { name: 'ALGO', unit: 'ALGO' }
 				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
 			const collateralData = loan.offered
-				? { name: 'ALGO' }
+				? { name: 'ALGO', unit: 'ALGO' }
 				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
@@ -72,27 +81,30 @@ const Borrowed = ({ loan }) => {
 			setLoading(false)
 		}, 5000)
 
-		const maturationTimer = setInterval(async () => {
-			const currentTime = instantReach.bigNumberToNumber(
-				await instantReach.getNetworkTime()
-			)
-			const blocksRemaining =
-				Number(loan.created) + Number(loan.maturation) - currentTime
+		let maturationTimer
+		if (!ad)
+			maturationTimer = setInterval(async () => {
+				const currentTime = instantReach.bigNumberToNumber(
+					await instantReach.getNetworkTime()
+				)
+				const blocksRemaining =
+					Number(loan.created) + Number(loan.maturation) - currentTime
 
-			setMaturation(
-				outStanding === 0
-					? '...'
-					: blocksRemaining > 0
-					? blocksRemaining
-					: '...'
-			)
-		}, 5000)
+				setMaturation(
+					outStanding === 0
+						? '...'
+						: blocksRemaining > 0
+						? blocksRemaining
+						: '...'
+				)
+			}, 5000)
 
 		return () => {
 			clearInterval(outStandingTimer)
-			clearInterval(maturationTimer)
+			if (!ad) clearInterval(maturationTimer)
 		}
 	}, [
+		ad,
 		ctc.v.LoanViews,
 		loan.contractInfo,
 		loan.created,
@@ -116,7 +128,7 @@ const Borrowed = ({ loan }) => {
 				></div>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, l.username)}>
 					<span className={cf(s.dInlineBlock, s.p5, l.usernameText)}>
-						{loan?.lenderInfo?.username}
+						{loan?.[`${ad ? 'borrowerInfo' : 'lenderInfo'}`]?.username}
 					</span>
 				</div>
 			</div>
@@ -267,13 +279,25 @@ const Borrowed = ({ loan }) => {
 						l.lendBtn
 					)}
 					onClick={() => {
-						repay(loan.id, loan.contractInfo, Number(loan.tokenRequested))
+						ad
+							? close(loan.id, loan.contractInfo, loan.selected, loan.offered)
+							: repay(
+									loan.id,
+									loan.contractInfo,
+									Number(loan.tokenRequested),
+									loan.selected,
+									loan.offered
+							  )
 					}}
 					disabled={
-						loading === true ? true : !(!loan.resolved && maturation !== '...')
+						ad
+							? false
+							: loading === true
+							? true
+							: !(!loan.resolved && maturation !== '...')
 					}
 				>
-					Repay
+					{ad ? 'Drop Ad' : 'Repay'}
 				</button>
 			</div>
 		</div>

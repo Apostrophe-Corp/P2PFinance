@@ -24,13 +24,13 @@ const Loaned = ({ loan, ad = false }) => {
 	useEffect(() => {
 		const updateValues = async () => {
 			const assetData = loan.selected
-				? { name: 'ALGO' }
+				? { name: 'ALGO', unit: 'ALGO' }
 				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
 			const collateralData = loan.offered
-				? { name: 'ALGO' }
+				? { name: 'ALGO', unit: 'ALGO' }
 				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${

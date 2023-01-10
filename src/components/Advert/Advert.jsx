@@ -217,7 +217,9 @@ const Advert = ({ ad }) => {
 							ad.contractInfo,
 							Number(ad.amountRequested),
 							Number(ad.tokenRequested),
-							Number(ad.tokenOffered)
+							Number(ad.tokenOffered),
+							ad.selected,
+							ad.offered
 						)
 					}}
 				>

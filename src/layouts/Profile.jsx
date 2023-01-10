@@ -40,6 +40,7 @@ const Profile = () => {
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
 				setAdverts(loansRes.loans)
+				console.log(loansRes.loans)
 				const remainingAdverts = presentAdverts.filter(
 					(el) => el.borrowerInfo.username === authUser.username
 				)
@@ -108,15 +109,7 @@ const Profile = () => {
 				<UserProfile user={authUser} />
 			</div>
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
-				<div
-					className={cf(
-						s.flex,
-						s.flex_dColumn,
-						s.flexCenter,
-						l.userDetail,
-						l.d32
-					)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -127,12 +120,10 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						Adverts
+						Your Adverts
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -146,9 +137,7 @@ const Profile = () => {
 						Amount
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -162,9 +151,7 @@ const Profile = () => {
 						Collateral
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -178,9 +165,7 @@ const Profile = () => {
 						Payment
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -194,10 +179,26 @@ const Profile = () => {
 						Maturation
 					</span>
 				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.lend)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Drop
+					</span>
+				</div>
 			</div>
 			{userAdverts.length ? (
 				userAdverts.map((el, i) => (
-					<Loaned
+					<Borrowed
 						loan={el}
 						key={i}
 						ad={true}

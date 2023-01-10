@@ -213,6 +213,23 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
+	const checkForSignIn = async (func) => {
+		if (!user.account) {
+			const connect = await alertThis({
+				message: 'Connect your wallet and try that again',
+				accept: 'Connect now',
+				decline: 'Not now',
+			})
+
+			if (connect) {
+				setShowConnectAccount(true)
+			}
+			return
+		} else {
+			func()
+		}
+	}
+
 	const lend = async (
 		id,
 		loanCtcInfo,
@@ -321,7 +338,7 @@ const ReachContextProvider = ({ children }) => {
 						})
 					} else {
 						alertThis({
-							message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res.error.message}`,
+							message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res?.message}`,
 							forConfirmation: false,
 						})
 					}
@@ -414,7 +431,7 @@ const ReachContextProvider = ({ children }) => {
 					})
 				} else {
 					alertThis({
-						message: `Failed to update your information on the server. Error message: ${res.error.message}`,
+						message: `Failed to update your information on the server. Error message: ${res?.message}`,
 						forConfirmation: false,
 					})
 				}
@@ -435,20 +452,38 @@ const ReachContextProvider = ({ children }) => {
 		}
 	}
 
-	const checkForSignIn = async (func) => {
-		if (!user.account) {
-			const connect = await alertThis({
-				message: 'Connect your wallet and try that again',
-				accept: 'Connect now',
-				decline: 'Not now',
+	const close = async (id, loanCtcInfo, selected, offered) => {
+		startWaiting()
+		try {
+			let res = undefined
+			const ctc = user.account.contract(
+				offered ? nnt_algo : selected ? algo_nnt : nnt_nnt,
+				JSON.parse(loanCtcInfo)
+			)
+			await ctc.a.Borrower.close()
+			res = await request({
+				path: `loans/${id}`,
+				method: 'DELETE',
 			})
-
-			if (connect) {
-				setShowConnectAccount(true)
+			stopWaiting()
+			if (res.success) {
+				alertThis({
+					message: `Success!`,
+					forConfirmation: false,
+				})
+			} else {
+				alertThis({
+					message: `Failed to update your information on the server. Error message: ${res?.message}`,
+					forConfirmation: false,
+				})
 			}
-			return
-		} else {
-			func()
+		} catch (error) {
+			console.log({ error })
+			stopWaiting()
+			alertThis({
+				message: 'Unable to process your request',
+				forConfirmation: false,
+			})
 		}
 	}
 
@@ -593,7 +628,7 @@ const ReachContextProvider = ({ children }) => {
 							reach.disconnect(true)
 						} else {
 							alertThis({
-								message: `Failed to upload Advert information. Error message: ${res.error.message}`,
+								message: `Failed to upload Advert information. Error message: ${res?.message}`,
 								forConfirmation: false,
 							})
 							reach.disconnect(false)
@@ -633,6 +668,7 @@ const ReachContextProvider = ({ children }) => {
 		alertThis,
 		lend,
 		repay,
+		close,
 		checkForSignIn,
 		create,
 		adverts,
