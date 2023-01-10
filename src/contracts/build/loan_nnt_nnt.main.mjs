@@ -31,18 +31,18 @@ export function _getViews(s, viewlib) {
   
   const LoanViews_amountPaid = async (i, svs, args) => {
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'))) {
-      const [v528, v529, v530, v531, v532, v541, v545, v546] = svs;
+      const [v597, v598, v599, v600, v601, v610, v614, v615] = svs;
       stdlib.assert(false, 'illegal view')
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '5'))) {
-      const [v528, v529, v530, v546, v562, v641, v680, v681, v688, v689, v712] = svs;
+      const [v597, v598, v599, v615, v630, v799, v838, v839, v846, v847, v870] = svs;
       return (await ((async () => {
         
         
-        return v681;}))(...args));
+        return v839;}))(...args));
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'))) {
-      const [v528, v529, v530, v532, v545, v546, v561, v570, v571, v603] = svs;
+      const [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661] = svs;
       stdlib.assert(false, 'illegal view')
       }
     
@@ -50,40 +50,40 @@ export function _getViews(s, viewlib) {
     };
   const LoanViews_isLive = async (i, svs, args) => {
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'))) {
-      const [v528, v529, v530, v531, v532, v541, v545, v546] = svs;
+      const [v597, v598, v599, v600, v601, v610, v614, v615] = svs;
       stdlib.assert(false, 'illegal view')
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '5'))) {
-      const [v528, v529, v530, v546, v562, v641, v680, v681, v688, v689, v712] = svs;
+      const [v597, v598, v599, v615, v630, v799, v838, v839, v846, v847, v870] = svs;
       return (await ((async () => {
         
         
-        return v641;}))(...args));
+        return v799;}))(...args));
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'))) {
-      const [v528, v529, v530, v532, v545, v546, v561, v570, v571, v603] = svs;
+      const [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661] = svs;
       return (await ((async () => {
         
         
-        return v603;}))(...args));
+        return v661;}))(...args));
       }
     
     stdlib.assert(false, 'illegal view')
     };
   const LoanViews_loanPaid = async (i, svs, args) => {
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '1'))) {
-      const [v528, v529, v530, v531, v532, v541, v545, v546] = svs;
+      const [v597, v598, v599, v600, v601, v610, v614, v615] = svs;
       stdlib.assert(false, 'illegal view')
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '5'))) {
-      const [v528, v529, v530, v546, v562, v641, v680, v681, v688, v689, v712] = svs;
+      const [v597, v598, v599, v615, v630, v799, v838, v839, v846, v847, v870] = svs;
       return (await ((async () => {
         
         
-        return v712;}))(...args));
+        return v870;}))(...args));
       }
     if (stdlib.eq(i, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'))) {
-      const [v528, v529, v530, v532, v545, v546, v561, v570, v571, v603] = svs;
+      const [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661] = svs;
       stdlib.assert(false, 'illegal view')
       }
     
@@ -112,7 +112,7 @@ export function _getViews(s, viewlib) {
     views: {
       1: [ctc0, ctc1, ctc1, ctc2, ctc3, ctc6, ctc2, ctc2],
       5: [ctc0, ctc1, ctc1, ctc2, ctc0, ctc4, ctc2, ctc2, ctc6, ctc2, ctc4],
-      7: [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc2, ctc6, ctc2, ctc4]
+      7: [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc4, ctc0, ctc4, ctc6, ctc2, ctc4]
       }
     };
   
@@ -151,86 +151,90 @@ export async function B(ctcTop, interact) {
     });
   const ctc5 = stdlib.T_Null;
   const ctc6 = stdlib.T_Tuple([]);
-  const ctc7 = stdlib.T_Bool;
-  const ctc8 = stdlib.T_Tuple([ctc1]);
-  const ctc9 = stdlib.T_Tuple([ctc7, ctc1, ctc1]);
-  const ctc10 = stdlib.T_Tuple([ctc1, ctc1, ctc7]);
-  const ctc11 = stdlib.T_Array(ctc10, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '2'));
+  const ctc7 = stdlib.T_Data({
+    Borrower_close0_101: ctc6,
+    Lender_lend0_101: ctc6
+    });
+  const ctc8 = stdlib.T_Bool;
+  const ctc9 = stdlib.T_Tuple([ctc1]);
+  const ctc10 = stdlib.T_Tuple([ctc8, ctc1, ctc1]);
+  const ctc11 = stdlib.T_Tuple([ctc1, ctc1, ctc8]);
+  const ctc12 = stdlib.T_Array(ctc11, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '2'));
   
   
-  const v502 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
-  const v503 = [v502, v502];
-  const v509 = stdlib.protect(ctc3, await interact.getParams(), {
-    at: './src/contracts/loan_nnt_nnt.rsh:42:43:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:40:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:40:19:function exp)'],
+  const v571 = [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'), false];
+  const v572 = [v571, v571];
+  const v578 = stdlib.protect(ctc3, await interact.getParams(), {
+    at: './src/contracts/loan_nnt_nnt.rsh:41:43:application',
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:39:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:39:19:function exp)'],
     msg: 'getParams',
     who: 'B'
     });
-  const v510 = v509.address;
-  const v511 = v509.amount;
-  const v512 = v509.collateral;
-  const v513 = v509.maturation;
-  const v514 = v509.principal;
-  const v515 = v509.tokCollateral;
-  const v516 = v509.tokLoan;
-  const v524 = stdlib.lt(v514, v511);
-  stdlib.assert(v524, {
-    at: './src/contracts/loan_nnt_nnt.rsh:44:23:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:40:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:40:19:function exp)'],
+  const v579 = v578.address;
+  const v580 = v578.amount;
+  const v581 = v578.collateral;
+  const v582 = v578.maturation;
+  const v583 = v578.principal;
+  const v584 = v578.tokCollateral;
+  const v585 = v578.tokLoan;
+  const v593 = stdlib.lt(v583, v580);
+  stdlib.assert(v593, {
+    at: './src/contracts/loan_nnt_nnt.rsh:43:23:application',
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:39:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:39:19:function exp)'],
     msg: null,
     who: 'B'
     });
-  const v525 = stdlib.tokenEq(v515, v516);
-  const v526 = v525 ? false : true;
-  stdlib.assert(v526, {
-    at: './src/contracts/loan_nnt_nnt.rsh:45:23:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:40:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:40:19:function exp)'],
+  const v594 = stdlib.tokenEq(v584, v585);
+  const v595 = v594 ? false : true;
+  stdlib.assert(v595, {
+    at: './src/contracts/loan_nnt_nnt.rsh:44:23:application',
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:39:15:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:39:19:function exp)'],
     msg: null,
     who: 'B'
     });
   
-  const v527 = {
-    address: v510,
-    amount: v511,
-    maturation: v513,
-    principal: v514
+  const v596 = {
+    address: v579,
+    amount: v580,
+    maturation: v582,
+    principal: v583
     };
   
   const txn1 = await (ctc.sendrecv({
-    args: [v515, v516, v512, v527],
+    args: [v584, v585, v581, v596],
     evt_cnt: 4,
     funcNum: 0,
-    lct: stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'),
+    lct: stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'),
     onlyIf: true,
     out_tys: [ctc2, ctc2, ctc1, ctc4],
-    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:decimal', stdlib.UInt_max, '0'), []],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:decimal', stdlib.UInt_max, '0'), []],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v529, v530, v531, v532], secs: v534, time: v533, didSend: v51, from: v528 } = txn1;
+      const {data: [v598, v599, v600, v601], secs: v603, time: v602, didSend: v51, from: v597 } = txn1;
       
-      const v535 = v503[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0')];
-      const v536 = stdlib.Array_set(v535, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'));
-      const v537 = stdlib.Array_set(v503, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'), v536);
-      const v539 = v537[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '1')];
-      const v540 = stdlib.Array_set(v539, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'));
-      const v541 = stdlib.Array_set(v537, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '1'), v540);
+      const v604 = v572[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0')];
+      const v605 = stdlib.Array_set(v604, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'));
+      const v606 = stdlib.Array_set(v572, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'), v605);
+      const v608 = v606[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '1')];
+      const v609 = stdlib.Array_set(v608, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'));
+      const v610 = stdlib.Array_set(v606, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '1'), v609);
       sim_r.txns.push({
         amt: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
         kind: 'init',
-        tok: v529
+        tok: v598
         });
       sim_r.txns.push({
         amt: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
         kind: 'init',
-        tok: v530
+        tok: v599
         });
       ;
-      const v545 = v532.principal;
-      const v546 = v532.amount;
+      const v614 = v601.principal;
+      const v615 = v601.amount;
       sim_r.isHalt = false;
       
       return sim_r;
@@ -240,17 +244,17 @@ export async function B(ctcTop, interact) {
     tys: [ctc2, ctc2, ctc1, ctc4],
     waitIfNotPresent: false
     }));
-  const {data: [v529, v530, v531, v532], secs: v534, time: v533, didSend: v51, from: v528 } = txn1;
-  const v535 = v503[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0')];
-  const v536 = stdlib.Array_set(v535, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'));
-  const v537 = stdlib.Array_set(v503, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'), v536);
-  const v539 = v537[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '1')];
-  const v540 = stdlib.Array_set(v539, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '0'));
-  const v541 = stdlib.Array_set(v537, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:47:11:dot', stdlib.UInt_max, '1'), v540);
-  const v543 = stdlib.tokenEq(v530, v529);
-  const v544 = v543 ? false : true;
-  stdlib.assert(v544, {
-    at: './src/contracts/loan_nnt_nnt.rsh:47:11:dot',
+  const {data: [v598, v599, v600, v601], secs: v603, time: v602, didSend: v51, from: v597 } = txn1;
+  const v604 = v572[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0')];
+  const v605 = stdlib.Array_set(v604, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'));
+  const v606 = stdlib.Array_set(v572, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'), v605);
+  const v608 = v606[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '1')];
+  const v609 = stdlib.Array_set(v608, '0', stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '0'));
+  const v610 = stdlib.Array_set(v606, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:46:11:dot', stdlib.UInt_max, '1'), v609);
+  const v612 = stdlib.tokenEq(v599, v598);
+  const v613 = v612 ? false : true;
+  stdlib.assert(v613, {
+    at: './src/contracts/loan_nnt_nnt.rsh:46:11:dot',
     fs: [],
     msg: 'non-network tokens distinct',
     who: 'B'
@@ -258,127 +262,121 @@ export async function B(ctcTop, interact) {
   ;
   ;
   ;
-  const v545 = v532.principal;
-  const v546 = v532.amount;
-  const v547 = stdlib.lt(v545, v546);
-  stdlib.assert(v547, {
-    at: './src/contracts/loan_nnt_nnt.rsh:48:16:application',
+  const v614 = v601.principal;
+  const v615 = v601.amount;
+  const v616 = stdlib.lt(v614, v615);
+  stdlib.assert(v616, {
+    at: './src/contracts/loan_nnt_nnt.rsh:47:16:application',
     fs: [],
     msg: null,
     who: 'B'
     });
   const txn2 = await (ctc.sendrecv({
-    args: [v528, v529, v530, v531, v532, v541, v545, v546],
+    args: [v597, v598, v599, v600, v601, v610, v614, v615],
     evt_cnt: 0,
     funcNum: 1,
-    lct: v533,
+    lct: v602,
     onlyIf: true,
     out_tys: [],
-    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0'), [[v531, v529]]],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0'), [[v600, v598]]],
     sim_p: (async (txn2) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [], secs: v550, time: v549, didSend: v61, from: v548 } = txn2;
+      const {data: [], secs: v619, time: v618, didSend: v61, from: v617 } = txn2;
       
       ;
-      const v551 = v541[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0')];
-      const v552 = v551[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0')];
-      const v553 = stdlib.add(v552, v531);
-      const v555 = stdlib.Array_set(v551, '0', v553);
-      const v556 = stdlib.Array_set(v541, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0'), v555);
+      const v620 = v610[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0')];
+      const v621 = v620[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0')];
+      const v622 = stdlib.add(v621, v600);
+      const v624 = stdlib.Array_set(v620, '0', v622);
+      const v625 = stdlib.Array_set(v610, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0'), v624);
       sim_r.txns.push({
-        amt: v531,
+        amt: v600,
         kind: 'to',
-        tok: v529
+        tok: v598
         });
       
-      const v561 = stdlib.safeAdd(v549, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:18:24:decimal', stdlib.UInt_max, '23351'));
-      const v562 = v528;
-      const v563 = false;
-      const v564 = v549;
-      const v570 = v556;
-      const v571 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:38:9:after expr stmt', stdlib.UInt_max, '0');
+      const v629 = true;
+      const v630 = v597;
+      const v631 = false;
+      const v632 = v618;
+      const v638 = v625;
+      const v639 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:37:9:after expr stmt', stdlib.UInt_max, '0');
       
       if (await (async () => {
-        const v591 = stdlib.le(v564, v561);
-        const v592 = v563 ? false : true;
-        const v593 = v591 ? v592 : false;
+        const v655 = v631 ? false : v629;
         
-        return v593;})()) {
-        const v600 = stdlib.le(v564, v561);
-        const v601 = v563 ? false : true;
-        const v602 = v600 ? v601 : false;
-        const v603 = v602 ? true : v563;
+        return v655;})()) {
+        const v660 = v631 ? false : v629;
+        const v661 = v660 ? true : v631;
         sim_r.isHalt = false;
         }
       else {
-        const v638 = stdlib.le(v564, v561);
-        const v639 = v563 ? false : true;
-        const v640 = v638 ? v639 : false;
-        const v641 = v640 ? true : v563;
-        if (v563) {
-          const v667 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '1')];
-          const v668 = v667[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '0')];
-          const v674 = stdlib.sub(v668, v668);
-          const v676 = stdlib.Array_set(v667, '0', v674);
-          const v677 = stdlib.Array_set(v570, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:55:application', stdlib.UInt_max, '1'), v676);
+        const v798 = v631 ? false : v629;
+        const v799 = v798 ? true : v631;
+        if (v631) {
+          const v825 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+          const v826 = v825[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+          const v832 = stdlib.sub(v826, v826);
+          const v834 = stdlib.Array_set(v825, '0', v832);
+          const v835 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v834);
           sim_r.txns.push({
             kind: 'from',
-            to: v528,
-            tok: v530
+            to: v597,
+            tok: v599
             });
-          const v679 = v532.maturation;
-          const v680 = stdlib.safeAdd(v564, v679);
-          const v681 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0');
-          const v682 = v564;
-          const v688 = v677;
-          const v689 = v571;
+          const v837 = v601.maturation;
+          const v838 = stdlib.safeAdd(v632, v837);
+          const v839 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+          const v840 = v632;
+          const v846 = v835;
+          const v847 = v639;
           
           if (await (async () => {
-            const v707 = stdlib.le(v682, v680);
-            const v709 = stdlib.lt(v681, v546);
-            const v710 = v707 ? v709 : false;
+            const v865 = stdlib.le(v840, v838);
+            const v867 = stdlib.lt(v839, v615);
+            const v868 = v865 ? v867 : false;
             
-            return v710;})()) {
-            const v712 = stdlib.ge(v681, v546);
+            return v868;})()) {
+            const v870 = stdlib.ge(v839, v615);
             sim_r.isHalt = false;
             }
           else {
-            const v800 = v688[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-            const v801 = v800[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-            const v803 = stdlib.lt(v681, v546);
-            const v804 = v803 ? v562 : v528;
-            const v810 = stdlib.sub(v801, v801);
-            const v812 = stdlib.Array_set(v800, '0', v810);
-            const v813 = stdlib.Array_set(v688, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v812);
+            const v958 = v846[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v959 = v958[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v961 = stdlib.lt(v839, v615);
+            const v962 = v961 ? v630 : v597;
+            const v968 = stdlib.sub(v959, v959);
+            const v970 = stdlib.Array_set(v958, '0', v968);
+            const v971 = stdlib.Array_set(v846, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v970);
             sim_r.txns.push({
               kind: 'from',
-              to: v804,
-              tok: v529
+              to: v962,
+              tok: v598
               });
-            const v814 = v813[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-            const v815 = v814[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-            const v818 = v803 ? v528 : v562;
+            const v972 = v971[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+            const v973 = v972[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+            const v976 = v961 ? v597 : v630;
             sim_r.txns.push({
               kind: 'from',
-              to: v818,
-              tok: v530
+              to: v976,
+              tok: v599
               });
             sim_r.txns.push({
               kind: 'from',
-              to: v528,
+              to: v597,
               tok: undefined /* Nothing */
               });
             sim_r.txns.push({
               kind: 'halt',
-              tok: v530
+              tok: v599
               })
             sim_r.txns.push({
               kind: 'halt',
-              tok: v529
+              tok: v598
               })
             sim_r.txns.push({
               kind: 'halt',
@@ -387,25 +385,25 @@ export async function B(ctcTop, interact) {
             sim_r.isHalt = true;
             }}
         else {
-          const v643 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:80:33:application', stdlib.UInt_max, '0')];
-          const v644 = v643[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:80:33:application', stdlib.UInt_max, '0')];
+          const v801 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+          const v802 = v801[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
           sim_r.txns.push({
             kind: 'from',
-            to: v528,
-            tok: v529
+            to: v597,
+            tok: v598
             });
           sim_r.txns.push({
             kind: 'from',
-            to: v528,
+            to: v597,
             tok: undefined /* Nothing */
             });
           sim_r.txns.push({
             kind: 'halt',
-            tok: v530
+            tok: v599
             })
           sim_r.txns.push({
             kind: 'halt',
-            tok: v529
+            tok: v598
             })
           sim_r.txns.push({
             kind: 'halt',
@@ -417,196 +415,487 @@ export async function B(ctcTop, interact) {
       }),
     soloSend: true,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc2, ctc2, ctc1, ctc4, ctc11, ctc1, ctc1],
+    tys: [ctc0, ctc2, ctc2, ctc1, ctc4, ctc12, ctc1, ctc1],
     waitIfNotPresent: false
     }));
-  const {data: [], secs: v550, time: v549, didSend: v61, from: v548 } = txn2;
+  const {data: [], secs: v619, time: v618, didSend: v61, from: v617 } = txn2;
   ;
-  const v551 = v541[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0')];
-  const v552 = v551[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0')];
-  const v553 = stdlib.add(v552, v531);
-  const v555 = stdlib.Array_set(v551, '0', v553);
-  const v556 = stdlib.Array_set(v541, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:50:11:dot', stdlib.UInt_max, '0'), v555);
+  const v620 = v610[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0')];
+  const v621 = v620[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0')];
+  const v622 = stdlib.add(v621, v600);
+  const v624 = stdlib.Array_set(v620, '0', v622);
+  const v625 = stdlib.Array_set(v610, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:49:11:dot', stdlib.UInt_max, '0'), v624);
   ;
-  const v557 = stdlib.addressEq(v528, v548);
-  stdlib.assert(v557, {
-    at: './src/contracts/loan_nnt_nnt.rsh:50:11:dot',
+  const v626 = stdlib.addressEq(v597, v617);
+  stdlib.assert(v626, {
+    at: './src/contracts/loan_nnt_nnt.rsh:49:11:dot',
     fs: [],
     msg: 'sender correct',
     who: 'B'
     });
-  stdlib.protect(ctc5, await interact.created(v549), {
-    at: './src/contracts/loan_nnt_nnt.rsh:51:27:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:51:27:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:51:27:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:51:27:application call to "liftedInteract" (defined at: ./src/contracts/loan_nnt_nnt.rsh:51:27:application)'],
+  stdlib.protect(ctc5, await interact.created(v618), {
+    at: './src/contracts/loan_nnt_nnt.rsh:50:27:application',
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:50:27:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:50:27:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:50:27:application call to "liftedInteract" (defined at: ./src/contracts/loan_nnt_nnt.rsh:50:27:application)'],
     msg: 'created',
     who: 'B'
     });
   
-  const v561 = stdlib.safeAdd(v549, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:18:24:decimal', stdlib.UInt_max, '23351'));
-  let v562 = v528;
-  let v563 = false;
-  let v564 = v549;
-  let v570 = v556;
-  let v571 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:38:9:after expr stmt', stdlib.UInt_max, '0');
+  let v629 = true;
+  let v630 = v597;
+  let v631 = false;
+  let v632 = v618;
+  let v638 = v625;
+  let v639 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:37:9:after expr stmt', stdlib.UInt_max, '0');
   
   let txn3 = txn2;
   while (await (async () => {
-    const v591 = stdlib.le(v564, v561);
-    const v592 = v563 ? false : true;
-    const v593 = v591 ? v592 : false;
+    const v655 = v631 ? false : v629;
     
-    return v593;})()) {
-    const v600 = stdlib.le(v564, v561);
-    const v601 = v563 ? false : true;
-    const v602 = v600 ? v601 : false;
-    const v603 = v602 ? true : v563;
+    return v655;})()) {
+    const v660 = v631 ? false : v629;
+    const v661 = v660 ? true : v631;
     const txn4 = await (ctc.recv({
       didSend: false,
       evt_cnt: 1,
       funcNum: 5,
-      out_tys: [ctc6],
+      out_tys: [ctc7],
       timeoutAt: undefined /* mto */,
       waitIfNotPresent: false
       }));
-    const {data: [v615], secs: v617, time: v616, didSend: v148, from: v614 } = txn4;
-    undefined /* setApiDetails */;
-    ;
-    const v624 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1')];
-    const v625 = v624[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '0')];
-    const v626 = stdlib.add(v625, v545);
-    const v628 = stdlib.Array_set(v624, '0', v626);
-    const v629 = stdlib.Array_set(v570, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1'), v628);
-    ;
-    const v630 = true;
-    await txn4.getOutput('Lender_lend', 'v630', ctc7, v630);
-    const cv562 = v614;
-    const cv563 = true;
-    const cv564 = v616;
-    const cv570 = v629;
-    const cv571 = v571;
-    
-    v562 = cv562;
-    v563 = cv563;
-    v564 = cv564;
-    v570 = cv570;
-    v571 = cv571;
-    
-    txn3 = txn4;
-    continue;
+    const {data: [v698], secs: v700, time: v699, didSend: v204, from: v697 } = txn4;
+    switch (v698[0]) {
+      case 'Borrower_close0_101': {
+        const v701 = v698[1];
+        undefined /* setApiDetails */;
+        ;
+        ;
+        const v734 = null;
+        await txn4.getOutput('Borrower_close', 'v734', ctc5, v734);
+        const cv629 = false;
+        const cv630 = v630;
+        const cv631 = v631;
+        const cv632 = v699;
+        const cv638 = v638;
+        const cv639 = v639;
+        
+        v629 = cv629;
+        v630 = cv630;
+        v631 = cv631;
+        v632 = cv632;
+        v638 = cv638;
+        v639 = cv639;
+        
+        txn3 = txn4;
+        continue;
+        break;
+        }
+      case 'Lender_lend0_101': {
+        const v749 = v698[1];
+        undefined /* setApiDetails */;
+        ;
+        const v775 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1')];
+        const v776 = v775[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '0')];
+        const v777 = stdlib.add(v776, v614);
+        const v779 = stdlib.Array_set(v775, '0', v777);
+        const v780 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1'), v779);
+        ;
+        const v790 = true;
+        await txn4.getOutput('Lender_lend', 'v790', ctc8, v790);
+        const cv629 = v629;
+        const cv630 = v697;
+        const cv631 = true;
+        const cv632 = v699;
+        const cv638 = v780;
+        const cv639 = v639;
+        
+        v629 = cv629;
+        v630 = cv630;
+        v631 = cv631;
+        v632 = cv632;
+        v638 = cv638;
+        v639 = cv639;
+        
+        txn3 = txn4;
+        continue;
+        break;
+        }
+      }
     
     }
-  const v638 = stdlib.le(v564, v561);
-  const v639 = v563 ? false : true;
-  const v640 = v638 ? v639 : false;
-  const v641 = v640 ? true : v563;
-  if (v563) {
-    const v667 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '1')];
-    const v668 = v667[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '0')];
-    const v674 = stdlib.sub(v668, v668);
-    const v676 = stdlib.Array_set(v667, '0', v674);
-    const v677 = stdlib.Array_set(v570, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:55:application', stdlib.UInt_max, '1'), v676);
+  const v798 = v631 ? false : v629;
+  const v799 = v798 ? true : v631;
+  if (v631) {
+    const v825 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+    const v826 = v825[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+    const v832 = stdlib.sub(v826, v826);
+    const v834 = stdlib.Array_set(v825, '0', v832);
+    const v835 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v834);
     ;
-    const v679 = v532.maturation;
-    const v680 = stdlib.safeAdd(v564, v679);
-    let v681 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0');
-    let v682 = v564;
-    let v688 = v677;
-    let v689 = v571;
+    const v837 = v601.maturation;
+    const v838 = stdlib.safeAdd(v632, v837);
+    let v839 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+    let v840 = v632;
+    let v846 = v835;
+    let v847 = v639;
     
     let txn4 = txn3;
     while (await (async () => {
-      const v707 = stdlib.le(v682, v680);
-      const v709 = stdlib.lt(v681, v546);
-      const v710 = v707 ? v709 : false;
+      const v865 = stdlib.le(v840, v838);
+      const v867 = stdlib.lt(v839, v615);
+      const v868 = v865 ? v867 : false;
       
-      return v710;})()) {
-      const v712 = stdlib.ge(v681, v546);
+      return v868;})()) {
+      const v870 = stdlib.ge(v839, v615);
       const txn5 = await (ctc.recv({
         didSend: false,
         evt_cnt: 1,
         funcNum: 4,
-        out_tys: [ctc8],
+        out_tys: [ctc9],
         timeoutAt: undefined /* mto */,
         waitIfNotPresent: false
         }));
-      const {data: [v747], secs: v749, time: v748, didSend: v357, from: v746 } = txn5;
+      const {data: [v905], secs: v907, time: v906, didSend: v422, from: v904 } = txn5;
       undefined /* setApiDetails */;
-      const v751 = v747[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:103:30:spread', stdlib.UInt_max, '0')];
-      const v752 = stdlib.addressEq(v746, v528);
-      stdlib.assert(v752, {
+      const v909 = v905[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:104:30:spread', stdlib.UInt_max, '0')];
+      const v910 = stdlib.addressEq(v904, v597);
+      stdlib.assert(v910, {
         at: 'reach standard library:57:5:application',
-        fs: ['at ./src/contracts/loan_nnt_nnt.rsh:104:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)'],
+        fs: ['at ./src/contracts/loan_nnt_nnt.rsh:105:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)'],
         msg: 'You are not the Borrower',
         who: 'B'
         });
-      const v754 = stdlib.safeAdd(v751, v681);
-      const v756 = stdlib.gt(v754, v546);
-      let v757;
-      if (v756) {
-        const v760 = stdlib.safeSub(v754, v546);
-        v757 = v760;
+      const v912 = stdlib.safeAdd(v909, v839);
+      const v914 = stdlib.gt(v912, v615);
+      let v915;
+      if (v914) {
+        const v918 = stdlib.safeSub(v912, v615);
+        v915 = v918;
         }
       else {
-        v757 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+        v915 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
         }
-      const v761 = stdlib.safeSub(v751, v757);
+      const v919 = stdlib.safeSub(v909, v915);
       ;
-      const v766 = v688[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1')];
-      const v767 = v766[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '0')];
-      const v768 = stdlib.add(v767, v761);
-      const v770 = stdlib.Array_set(v766, '0', v768);
-      const v771 = stdlib.Array_set(v688, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1'), v770);
+      const v924 = v846[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1')];
+      const v925 = v924[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '0')];
+      const v926 = stdlib.add(v925, v919);
+      const v928 = stdlib.Array_set(v924, '0', v926);
+      const v929 = stdlib.Array_set(v846, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1'), v928);
       ;
-      let v778;
-      if (v756) {
-        const v781 = stdlib.safeSub(v754, v546);
-        v778 = v781;
+      let v936;
+      if (v914) {
+        const v939 = stdlib.safeSub(v912, v615);
+        v936 = v939;
         }
       else {
-        v778 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+        v936 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
         }
-      const v782 = stdlib.safeSub(v751, v778);
-      const v784 = stdlib.safeAdd(v681, v782);
-      const v786 = stdlib.ge(v784, v546);
-      const v788 = [v786, v784, v546];
-      await txn5.getOutput('Borrower_repay', 'v788', ctc9, v788);
-      const cv681 = v784;
-      const cv682 = v748;
-      const cv688 = v771;
-      const cv689 = v689;
+      const v940 = stdlib.safeSub(v909, v936);
+      const v942 = stdlib.safeAdd(v839, v940);
+      const v944 = stdlib.ge(v942, v615);
+      const v946 = [v944, v942, v615];
+      await txn5.getOutput('Borrower_repay', 'v946', ctc10, v946);
+      const cv839 = v942;
+      const cv840 = v906;
+      const cv846 = v929;
+      const cv847 = v847;
       
-      v681 = cv681;
-      v682 = cv682;
-      v688 = cv688;
-      v689 = cv689;
+      v839 = cv839;
+      v840 = cv840;
+      v846 = cv846;
+      v847 = cv847;
       
       txn4 = txn5;
       continue;
       
       }
-    const v800 = v688[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-    const v801 = v800[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-    const v803 = stdlib.lt(v681, v546);
-    const v804 = v803 ? v562 : v528;
-    const v810 = stdlib.sub(v801, v801);
-    const v812 = stdlib.Array_set(v800, '0', v810);
-    const v813 = stdlib.Array_set(v688, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v812);
+    const v958 = v846[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+    const v959 = v958[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+    const v961 = stdlib.lt(v839, v615);
+    const v962 = v961 ? v630 : v597;
+    const v968 = stdlib.sub(v959, v959);
+    const v970 = stdlib.Array_set(v958, '0', v968);
+    const v971 = stdlib.Array_set(v846, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v970);
     ;
-    const v814 = v813[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-    const v815 = v814[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-    const v818 = v803 ? v528 : v562;
+    const v972 = v971[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+    const v973 = v972[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+    const v976 = v961 ? v597 : v630;
     ;
     ;
     return;
     }
   else {
-    const v643 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:80:33:application', stdlib.UInt_max, '0')];
-    const v644 = v643[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:80:33:application', stdlib.UInt_max, '0')];
+    const v801 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+    const v802 = v801[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
     ;
     ;
     return;
     }
   
+  
+  
+  };
+export async function _Borrower_close7(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for _Borrower_close7 expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for _Borrower_close7 expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const ctc0 = stdlib.T_Address;
+  const ctc1 = stdlib.T_Token;
+  const ctc2 = stdlib.T_UInt;
+  const ctc3 = stdlib.T_Object({
+    address: ctc0,
+    amount: ctc2,
+    maturation: ctc2,
+    principal: ctc2
+    });
+  const ctc4 = stdlib.T_Bool;
+  const ctc5 = stdlib.T_Tuple([ctc2, ctc2, ctc4]);
+  const ctc6 = stdlib.T_Array(ctc5, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '2'));
+  const ctc7 = stdlib.T_Tuple([]);
+  const ctc8 = stdlib.T_Data({
+    Borrower_close0_101: ctc7,
+    Lender_lend0_101: ctc7
+    });
+  const ctc9 = stdlib.T_Null;
+  
+  
+  const [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'), [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc4, ctc0, ctc4, ctc6, ctc2, ctc4]);
+  const v664 = stdlib.protect(ctc7, await interact.in(), {
+    at: './src/contracts/loan_nnt_nnt.rsh:1:23:application',
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:76:21:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:76:21:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:52:62:application call to "runBorrower_close0_101" (defined at: ./src/contracts/loan_nnt_nnt.rsh:76:21:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:52:62:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:52:62:function exp)'],
+    msg: 'in',
+    who: 'Borrower_close'
+    });
+  const v668 = ['Borrower_close0_101', v664];
+  
+  const txn1 = await (ctc.sendrecv({
+    args: [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661, v668],
+    evt_cnt: 1,
+    funcNum: 5,
+    lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
+    onlyIf: true,
+    out_tys: [ctc8],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:76:21:decimal', stdlib.UInt_max, '0'), [[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:64:26:decimal', stdlib.UInt_max, '0'), v599]]],
+    sim_p: (async (txn1) => {
+      const sim_r = { txns: [], mapRefs: [], maps: [] };
+      let sim_txn_ctr = stdlib.UInt_max;
+      const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
+      
+      
+      const {data: [v698], secs: v700, time: v699, didSend: v204, from: v697 } = txn1;
+      
+      switch (v698[0]) {
+        case 'Borrower_close0_101': {
+          const v701 = v698[1];
+          sim_r.txns.push({
+            kind: 'api',
+            who: "Borrower_close"
+            });
+          ;
+          ;
+          const v734 = null;
+          const v735 = await txn1.getOutput('Borrower_close', 'v734', ctc9, v734);
+          
+          const v1425 = false;
+          const v1426 = v630;
+          const v1427 = v631;
+          const v1429 = v638;
+          const v1430 = v639;
+          const v1431 = v631 ? false : false;
+          if (v1431) {
+            const v1433 = true;
+            sim_r.isHalt = false;
+            }
+          else {
+            const v1435 = v631;
+            if (v631) {
+              const v1436 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+              const v1437 = v1436[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+              const v1438 = stdlib.sub(v1437, v1437);
+              const v1439 = stdlib.Array_set(v1436, '0', v1438);
+              const v1440 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v1439);
+              sim_r.txns.push({
+                kind: 'from',
+                to: v597,
+                tok: v599
+                });
+              const v1441 = v601.maturation;
+              const v1442 = stdlib.safeAdd(v699, v1441);
+              const v1488 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+              const v1490 = v1440;
+              const v1491 = v639;
+              const v1492 = stdlib.le(v699, v1442);
+              const v1493 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+              const v1494 = v1492 ? v1493 : false;
+              if (v1494) {
+                const v1495 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+                sim_r.isHalt = false;
+                }
+              else {
+                const v1497 = v1440[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+                const v1498 = v1497[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+                const v1500 = v1493 ? v630 : v597;
+                const v1501 = stdlib.sub(v1498, v1498);
+                const v1502 = stdlib.Array_set(v1497, '0', v1501);
+                const v1503 = stdlib.Array_set(v1440, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1502);
+                sim_r.txns.push({
+                  kind: 'from',
+                  to: v1500,
+                  tok: v598
+                  });
+                const v1504 = v1503[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+                const v1505 = v1504[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+                const v1506 = v1493 ? v597 : v630;
+                sim_r.txns.push({
+                  kind: 'from',
+                  to: v1506,
+                  tok: v599
+                  });
+                sim_r.txns.push({
+                  kind: 'from',
+                  to: v597,
+                  tok: undefined /* Nothing */
+                  });
+                sim_r.txns.push({
+                  kind: 'halt',
+                  tok: v599
+                  })
+                sim_r.txns.push({
+                  kind: 'halt',
+                  tok: v598
+                  })
+                sim_r.txns.push({
+                  kind: 'halt',
+                  tok: undefined /* Nothing */
+                  })
+                sim_r.isHalt = true;
+                }}
+            else {
+              const v1486 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+              const v1487 = v1486[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+              sim_r.txns.push({
+                kind: 'from',
+                to: v597,
+                tok: v598
+                });
+              sim_r.txns.push({
+                kind: 'from',
+                to: v597,
+                tok: undefined /* Nothing */
+                });
+              sim_r.txns.push({
+                kind: 'halt',
+                tok: v599
+                })
+              sim_r.txns.push({
+                kind: 'halt',
+                tok: v598
+                })
+              sim_r.txns.push({
+                kind: 'halt',
+                tok: undefined /* Nothing */
+                })
+              sim_r.isHalt = true;
+              }}
+          break;
+          }
+        case 'Lender_lend0_101': {
+          const v749 = v698[1];
+          
+          break;
+          }
+        }
+      return sim_r;
+      }),
+    soloSend: false,
+    timeoutAt: undefined /* mto */,
+    tys: [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc4, ctc0, ctc4, ctc6, ctc2, ctc4, ctc8],
+    waitIfNotPresent: false
+    }));
+  const {data: [v698], secs: v700, time: v699, didSend: v204, from: v697 } = txn1;
+  switch (v698[0]) {
+    case 'Borrower_close0_101': {
+      const v701 = v698[1];
+      undefined /* setApiDetails */;
+      ;
+      ;
+      const v734 = null;
+      const v735 = await txn1.getOutput('Borrower_close', 'v734', ctc9, v734);
+      if (v204) {
+        stdlib.protect(ctc9, await interact.out(v701, v735), {
+          at: './src/contracts/loan_nnt_nnt.rsh:76:22:application',
+          fs: ['at ./src/contracts/loan_nnt_nnt.rsh:76:22:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:76:22:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:77:28:application call to "ret" (defined at: ./src/contracts/loan_nnt_nnt.rsh:76:44:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:76:44:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:76:44:function exp)'],
+          msg: 'out',
+          who: 'Borrower_close'
+          });
+        }
+      else {
+        }
+      
+      const v1425 = false;
+      const v1426 = v630;
+      const v1427 = v631;
+      const v1429 = v638;
+      const v1430 = v639;
+      const v1431 = v631 ? false : false;
+      if (v1431) {
+        const v1433 = true;
+        return;
+        }
+      else {
+        const v1435 = v631;
+        if (v631) {
+          const v1436 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+          const v1437 = v1436[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+          const v1438 = stdlib.sub(v1437, v1437);
+          const v1439 = stdlib.Array_set(v1436, '0', v1438);
+          const v1440 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v1439);
+          ;
+          const v1441 = v601.maturation;
+          const v1442 = stdlib.safeAdd(v699, v1441);
+          const v1488 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+          const v1490 = v1440;
+          const v1491 = v639;
+          const v1492 = stdlib.le(v699, v1442);
+          const v1493 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+          const v1494 = v1492 ? v1493 : false;
+          if (v1494) {
+            const v1495 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+            return;
+            }
+          else {
+            const v1497 = v1440[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v1498 = v1497[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v1500 = v1493 ? v630 : v597;
+            const v1501 = stdlib.sub(v1498, v1498);
+            const v1502 = stdlib.Array_set(v1497, '0', v1501);
+            const v1503 = stdlib.Array_set(v1440, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1502);
+            ;
+            const v1504 = v1503[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+            const v1505 = v1504[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+            const v1506 = v1493 ? v597 : v630;
+            ;
+            ;
+            return;
+            }}
+        else {
+          const v1486 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+          const v1487 = v1486[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:81:33:application', stdlib.UInt_max, '0')];
+          ;
+          ;
+          return;
+          }}
+      break;
+      }
+    case 'Lender_lend0_101': {
+      const v749 = v698[1];
+      return;
+      break;
+      }
+    }
   
   
   };
@@ -628,133 +917,133 @@ export async function _Borrower_repay5(ctcTop, interact) {
   const ctc8 = stdlib.T_Null;
   
   
-  const [v528, v529, v530, v546, v562, v641, v680, v681, v688, v689, v712] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '5'), [ctc0, ctc1, ctc1, ctc2, ctc0, ctc3, ctc2, ctc2, ctc5, ctc2, ctc3]);
-  const v713 = ctc.selfAddress();
-  const v715 = stdlib.protect(ctc6, await interact.in(), {
+  const [v597, v598, v599, v615, v630, v799, v838, v839, v846, v847, v870] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '5'), [ctc0, ctc1, ctc1, ctc2, ctc0, ctc3, ctc2, ctc2, ctc5, ctc2, ctc3]);
+  const v871 = ctc.selfAddress();
+  const v873 = stdlib.protect(ctc6, await interact.in(), {
     at: './src/contracts/loan_nnt_nnt.rsh:1:23:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)'],
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)'],
     msg: 'in',
     who: 'Borrower_repay'
     });
-  const v716 = v715[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:1:23:application', stdlib.UInt_max, '0')];
-  const v718 = stdlib.addressEq(v713, v528);
-  stdlib.assert(v718, {
+  const v874 = v873[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:1:23:application', stdlib.UInt_max, '0')];
+  const v876 = stdlib.addressEq(v871, v597);
+  stdlib.assert(v876, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:104:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)'],
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:105:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)'],
     msg: 'You are not the Borrower',
     who: 'Borrower_repay'
     });
-  const v720 = stdlib.safeAdd(v716, v681);
-  const v722 = stdlib.gt(v720, v546);
+  const v878 = stdlib.safeAdd(v874, v839);
+  const v880 = stdlib.gt(v878, v615);
   
-  let v737;
-  if (v722) {
-    const v740 = stdlib.safeSub(v720, v546);
-    v737 = v740;
+  let v895;
+  if (v880) {
+    const v898 = stdlib.safeSub(v878, v615);
+    v895 = v898;
     }
   else {
-    v737 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+    v895 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
     }
-  const v741 = stdlib.safeSub(v716, v737);
+  const v899 = stdlib.safeSub(v874, v895);
   
   const txn1 = await (ctc.sendrecv({
-    args: [v528, v529, v530, v546, v562, v641, v680, v681, v688, v689, v712, v715],
+    args: [v597, v598, v599, v615, v630, v799, v838, v839, v846, v847, v870, v873],
     evt_cnt: 1,
     funcNum: 4,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
     out_tys: [ctc6],
-    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:111:42:decimal', stdlib.UInt_max, '0'), [[v741, v530]]],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:112:42:decimal', stdlib.UInt_max, '0'), [[v899, v599]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v747], secs: v749, time: v748, didSend: v357, from: v746 } = txn1;
+      const {data: [v905], secs: v907, time: v906, didSend: v422, from: v904 } = txn1;
       
       sim_r.txns.push({
         kind: 'api',
         who: "Borrower_repay"
         });
-      const v751 = v747[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:103:30:spread', stdlib.UInt_max, '0')];
-      const v754 = stdlib.safeAdd(v751, v681);
-      const v756 = stdlib.gt(v754, v546);
-      let v757;
-      if (v756) {
-        const v760 = stdlib.safeSub(v754, v546);
-        v757 = v760;
+      const v909 = v905[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:104:30:spread', stdlib.UInt_max, '0')];
+      const v912 = stdlib.safeAdd(v909, v839);
+      const v914 = stdlib.gt(v912, v615);
+      let v915;
+      if (v914) {
+        const v918 = stdlib.safeSub(v912, v615);
+        v915 = v918;
         }
       else {
-        v757 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+        v915 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
         }
-      const v761 = stdlib.safeSub(v751, v757);
+      const v919 = stdlib.safeSub(v909, v915);
       ;
-      const v766 = v688[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1')];
-      const v767 = v766[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '0')];
-      const v768 = stdlib.add(v767, v761);
-      const v770 = stdlib.Array_set(v766, '0', v768);
-      const v771 = stdlib.Array_set(v688, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1'), v770);
+      const v924 = v846[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1')];
+      const v925 = v924[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '0')];
+      const v926 = stdlib.add(v925, v919);
+      const v928 = stdlib.Array_set(v924, '0', v926);
+      const v929 = stdlib.Array_set(v846, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1'), v928);
       sim_r.txns.push({
-        amt: v761,
+        amt: v919,
         kind: 'to',
-        tok: v530
+        tok: v599
         });
-      let v778;
-      if (v756) {
-        const v781 = stdlib.safeSub(v754, v546);
-        v778 = v781;
+      let v936;
+      if (v914) {
+        const v939 = stdlib.safeSub(v912, v615);
+        v936 = v939;
         }
       else {
-        v778 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+        v936 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
         }
-      const v782 = stdlib.safeSub(v751, v778);
-      const v784 = stdlib.safeAdd(v681, v782);
-      const v786 = stdlib.ge(v784, v546);
-      const v788 = [v786, v784, v546];
-      const v789 = await txn1.getOutput('Borrower_repay', 'v788', ctc7, v788);
+      const v940 = stdlib.safeSub(v909, v936);
+      const v942 = stdlib.safeAdd(v839, v940);
+      const v944 = stdlib.ge(v942, v615);
+      const v946 = [v944, v942, v615];
+      const v947 = await txn1.getOutput('Borrower_repay', 'v946', ctc7, v946);
       
-      const v1053 = v784;
-      const v1055 = v771;
-      const v1056 = v689;
-      const v1057 = stdlib.le(v748, v680);
-      const v1058 = stdlib.lt(v784, v546);
-      const v1059 = v1057 ? v1058 : false;
-      if (v1059) {
+      const v1589 = v942;
+      const v1591 = v929;
+      const v1592 = v847;
+      const v1593 = stdlib.le(v906, v838);
+      const v1594 = stdlib.lt(v942, v615);
+      const v1595 = v1593 ? v1594 : false;
+      if (v1595) {
         sim_r.isHalt = false;
         }
       else {
-        const v1062 = v771[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-        const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-        const v1065 = v1058 ? v562 : v528;
-        const v1066 = stdlib.sub(v1063, v1063);
-        const v1067 = stdlib.Array_set(v1062, '0', v1066);
-        const v1068 = stdlib.Array_set(v771, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v1067);
+        const v1598 = v929[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+        const v1599 = v1598[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+        const v1601 = v1594 ? v630 : v597;
+        const v1602 = stdlib.sub(v1599, v1599);
+        const v1603 = stdlib.Array_set(v1598, '0', v1602);
+        const v1604 = stdlib.Array_set(v929, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1603);
         sim_r.txns.push({
           kind: 'from',
-          to: v1065,
-          tok: v529
+          to: v1601,
+          tok: v598
           });
-        const v1069 = v1068[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-        const v1070 = v1069[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-        const v1071 = v1058 ? v528 : v562;
+        const v1605 = v1604[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+        const v1606 = v1605[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+        const v1607 = v1594 ? v597 : v630;
         sim_r.txns.push({
           kind: 'from',
-          to: v1071,
-          tok: v530
+          to: v1607,
+          tok: v599
           });
         sim_r.txns.push({
           kind: 'from',
-          to: v528,
+          to: v597,
           tok: undefined /* Nothing */
           });
         sim_r.txns.push({
           kind: 'halt',
-          tok: v530
+          tok: v599
           })
         sim_r.txns.push({
           kind: 'halt',
-          tok: v529
+          tok: v598
           })
         sim_r.txns.push({
           kind: 'halt',
@@ -769,51 +1058,51 @@ export async function _Borrower_repay5(ctcTop, interact) {
     tys: [ctc0, ctc1, ctc1, ctc2, ctc0, ctc3, ctc2, ctc2, ctc5, ctc2, ctc3, ctc6],
     waitIfNotPresent: false
     }));
-  const {data: [v747], secs: v749, time: v748, didSend: v357, from: v746 } = txn1;
+  const {data: [v905], secs: v907, time: v906, didSend: v422, from: v904 } = txn1;
   undefined /* setApiDetails */;
-  const v751 = v747[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:103:30:spread', stdlib.UInt_max, '0')];
-  const v752 = stdlib.addressEq(v746, v528);
-  stdlib.assert(v752, {
+  const v909 = v905[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:104:30:spread', stdlib.UInt_max, '0')];
+  const v910 = stdlib.addressEq(v904, v597);
+  stdlib.assert(v910, {
     at: 'reach standard library:57:5:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:104:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:103:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:53:function exp)'],
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:105:38:application call to "check" (defined at: reach standard library:49:32:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:104:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:53:function exp)'],
     msg: 'You are not the Borrower',
     who: 'Borrower_repay'
     });
-  const v754 = stdlib.safeAdd(v751, v681);
-  const v756 = stdlib.gt(v754, v546);
-  let v757;
-  if (v756) {
-    const v760 = stdlib.safeSub(v754, v546);
-    v757 = v760;
+  const v912 = stdlib.safeAdd(v909, v839);
+  const v914 = stdlib.gt(v912, v615);
+  let v915;
+  if (v914) {
+    const v918 = stdlib.safeSub(v912, v615);
+    v915 = v918;
     }
   else {
-    v757 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+    v915 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
     }
-  const v761 = stdlib.safeSub(v751, v757);
+  const v919 = stdlib.safeSub(v909, v915);
   ;
-  const v766 = v688[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1')];
-  const v767 = v766[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '0')];
-  const v768 = stdlib.add(v767, v761);
-  const v770 = stdlib.Array_set(v766, '0', v768);
-  const v771 = stdlib.Array_set(v688, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:50:dot', stdlib.UInt_max, '1'), v770);
+  const v924 = v846[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1')];
+  const v925 = v924[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '0')];
+  const v926 = stdlib.add(v925, v919);
+  const v928 = stdlib.Array_set(v924, '0', v926);
+  const v929 = stdlib.Array_set(v846, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:50:dot', stdlib.UInt_max, '1'), v928);
   ;
-  let v778;
-  if (v756) {
-    const v781 = stdlib.safeSub(v754, v546);
-    v778 = v781;
+  let v936;
+  if (v914) {
+    const v939 = stdlib.safeSub(v912, v615);
+    v936 = v939;
     }
   else {
-    v778 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:108:51:decimal', stdlib.UInt_max, '0');
+    v936 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:109:51:decimal', stdlib.UInt_max, '0');
     }
-  const v782 = stdlib.safeSub(v751, v778);
-  const v784 = stdlib.safeAdd(v681, v782);
-  const v786 = stdlib.ge(v784, v546);
-  const v788 = [v786, v784, v546];
-  const v789 = await txn1.getOutput('Borrower_repay', 'v788', ctc7, v788);
-  if (v357) {
-    stdlib.protect(ctc8, await interact.out(v747, v789), {
-      at: './src/contracts/loan_nnt_nnt.rsh:103:31:application',
-      fs: ['at ./src/contracts/loan_nnt_nnt.rsh:103:31:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:103:31:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:114:55:application call to "notify" (defined at: ./src/contracts/loan_nnt_nnt.rsh:112:50:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:112:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:112:50:function exp)'],
+  const v940 = stdlib.safeSub(v909, v936);
+  const v942 = stdlib.safeAdd(v839, v940);
+  const v944 = stdlib.ge(v942, v615);
+  const v946 = [v944, v942, v615];
+  const v947 = await txn1.getOutput('Borrower_repay', 'v946', ctc7, v946);
+  if (v422) {
+    stdlib.protect(ctc8, await interact.out(v905, v947), {
+      at: './src/contracts/loan_nnt_nnt.rsh:104:31:application',
+      fs: ['at ./src/contracts/loan_nnt_nnt.rsh:104:31:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:104:31:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:115:55:application call to "notify" (defined at: ./src/contracts/loan_nnt_nnt.rsh:113:50:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:113:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:113:50:function exp)'],
       msg: 'out',
       who: 'Borrower_repay'
       });
@@ -821,26 +1110,26 @@ export async function _Borrower_repay5(ctcTop, interact) {
   else {
     }
   
-  const v1053 = v784;
-  const v1055 = v771;
-  const v1056 = v689;
-  const v1057 = stdlib.le(v748, v680);
-  const v1058 = stdlib.lt(v784, v546);
-  const v1059 = v1057 ? v1058 : false;
-  if (v1059) {
+  const v1589 = v942;
+  const v1591 = v929;
+  const v1592 = v847;
+  const v1593 = stdlib.le(v906, v838);
+  const v1594 = stdlib.lt(v942, v615);
+  const v1595 = v1593 ? v1594 : false;
+  if (v1595) {
     return;
     }
   else {
-    const v1062 = v771[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-    const v1063 = v1062[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-    const v1065 = v1058 ? v562 : v528;
-    const v1066 = stdlib.sub(v1063, v1063);
-    const v1067 = stdlib.Array_set(v1062, '0', v1066);
-    const v1068 = stdlib.Array_set(v771, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v1067);
+    const v1598 = v929[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+    const v1599 = v1598[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+    const v1601 = v1594 ? v630 : v597;
+    const v1602 = stdlib.sub(v1599, v1599);
+    const v1603 = stdlib.Array_set(v1598, '0', v1602);
+    const v1604 = stdlib.Array_set(v929, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1603);
     ;
-    const v1069 = v1068[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-    const v1070 = v1069[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-    const v1071 = v1058 ? v528 : v562;
+    const v1605 = v1604[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+    const v1606 = v1605[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+    const v1607 = v1594 ? v597 : v630;
     ;
     ;
     return;
@@ -868,198 +1157,218 @@ export async function _Lender_lend7(ctcTop, interact) {
   const ctc5 = stdlib.T_Tuple([ctc2, ctc2, ctc4]);
   const ctc6 = stdlib.T_Array(ctc5, stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '2'));
   const ctc7 = stdlib.T_Tuple([]);
-  const ctc8 = stdlib.T_Null;
+  const ctc8 = stdlib.T_Data({
+    Borrower_close0_101: ctc7,
+    Lender_lend0_101: ctc7
+    });
+  const ctc9 = stdlib.T_Null;
   
   
-  const [v528, v529, v530, v532, v545, v546, v561, v570, v571, v603] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'), [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc2, ctc6, ctc2, ctc4]);
-  const v606 = stdlib.protect(ctc7, await interact.in(), {
+  const [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661] = await ctc.getState(stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7'), [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc4, ctc0, ctc4, ctc6, ctc2, ctc4]);
+  const v672 = stdlib.protect(ctc7, await interact.in(), {
     at: './src/contracts/loan_nnt_nnt.rsh:1:23:application',
-    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:69:39:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:69:39:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:69:39:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:69:39:function exp)'],
+    fs: ['at ./src/contracts/loan_nnt_nnt.rsh:66:39:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:66:39:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:52:62:application call to "runLender_lend0_101" (defined at: ./src/contracts/loan_nnt_nnt.rsh:66:22:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:52:62:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:52:62:function exp)'],
     msg: 'in',
     who: 'Lender_lend'
     });
+  const v676 = ['Lender_lend0_101', v672];
   
   const txn1 = await (ctc.sendrecv({
-    args: [v528, v529, v530, v532, v545, v546, v561, v570, v571, v603, v606],
+    args: [v597, v598, v599, v601, v614, v615, v629, v630, v631, v638, v639, v661, v676],
     evt_cnt: 1,
     funcNum: 5,
     lct: stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '0'),
     onlyIf: true,
-    out_tys: [ctc7],
-    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:71:34:decimal', stdlib.UInt_max, '0'), [[v545, v530]]],
+    out_tys: [ctc8],
+    pay: [stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:68:34:decimal', stdlib.UInt_max, '0'), [[v614, v599]]],
     sim_p: (async (txn1) => {
       const sim_r = { txns: [], mapRefs: [], maps: [] };
       let sim_txn_ctr = stdlib.UInt_max;
       const getSimTokCtr = () => { sim_txn_ctr = sim_txn_ctr.sub(1); return sim_txn_ctr; };
       
       
-      const {data: [v615], secs: v617, time: v616, didSend: v148, from: v614 } = txn1;
+      const {data: [v698], secs: v700, time: v699, didSend: v204, from: v697 } = txn1;
       
-      sim_r.txns.push({
-        kind: 'api',
-        who: "Lender_lend"
-        });
-      ;
-      const v624 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1')];
-      const v625 = v624[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '0')];
-      const v626 = stdlib.add(v625, v545);
-      const v628 = stdlib.Array_set(v624, '0', v626);
-      const v629 = stdlib.Array_set(v570, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1'), v628);
-      sim_r.txns.push({
-        amt: v545,
-        kind: 'to',
-        tok: v530
-        });
-      const v630 = true;
-      const v631 = await txn1.getOutput('Lender_lend', 'v630', ctc4, v630);
-      
-      const v1072 = v614;
-      const v1075 = v629;
-      const v1076 = v571;
-      const v1077 = stdlib.le(v616, v561);
-      const v1079 = v1077 ? false : false;
-      if (v1079) {
-        const v1083 = true;
-        sim_r.isHalt = false;
-        }
-      else {
-        const v1087 = true;
-        const v1088 = v629[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '1')];
-        const v1089 = v1088[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '0')];
-        const v1090 = stdlib.sub(v1089, v1089);
-        const v1091 = stdlib.Array_set(v1088, '0', v1090);
-        const v1092 = stdlib.Array_set(v629, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:55:application', stdlib.UInt_max, '1'), v1091);
-        sim_r.txns.push({
-          kind: 'from',
-          to: v528,
-          tok: v530
-          });
-        const v1093 = v532.maturation;
-        const v1094 = stdlib.safeAdd(v616, v1093);
-        const v1140 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0');
-        const v1142 = v1092;
-        const v1143 = v571;
-        const v1144 = stdlib.le(v616, v1094);
-        const v1145 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0'), v546);
-        const v1146 = v1144 ? v1145 : false;
-        if (v1146) {
-          const v1147 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0'), v546);
-          sim_r.isHalt = false;
+      switch (v698[0]) {
+        case 'Borrower_close0_101': {
+          const v701 = v698[1];
+          
+          break;
           }
-        else {
-          const v1149 = v1092[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-          const v1150 = v1149[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-          const v1152 = v1145 ? v614 : v528;
-          const v1153 = stdlib.sub(v1150, v1150);
-          const v1154 = stdlib.Array_set(v1149, '0', v1153);
-          const v1155 = stdlib.Array_set(v1092, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v1154);
+        case 'Lender_lend0_101': {
+          const v749 = v698[1];
+          sim_r.txns.push({
+            kind: 'api',
+            who: "Lender_lend"
+            });
+          ;
+          const v775 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1')];
+          const v776 = v775[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '0')];
+          const v777 = stdlib.add(v776, v614);
+          const v779 = stdlib.Array_set(v775, '0', v777);
+          const v780 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1'), v779);
+          sim_r.txns.push({
+            amt: v614,
+            kind: 'to',
+            tok: v599
+            });
+          const v790 = true;
+          const v791 = await txn1.getOutput('Lender_lend', 'v790', ctc4, v790);
+          
+          const v1691 = v697;
+          const v1700 = true;
+          const v1701 = v780[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+          const v1702 = v1701[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+          const v1703 = stdlib.sub(v1702, v1702);
+          const v1704 = stdlib.Array_set(v1701, '0', v1703);
+          const v1705 = stdlib.Array_set(v780, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v1704);
           sim_r.txns.push({
             kind: 'from',
-            to: v1152,
-            tok: v529
+            to: v597,
+            tok: v599
             });
-          const v1156 = v1155[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-          const v1157 = v1156[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-          const v1158 = v1145 ? v528 : v614;
-          sim_r.txns.push({
-            kind: 'from',
-            to: v1158,
-            tok: v530
-            });
-          sim_r.txns.push({
-            kind: 'from',
-            to: v528,
-            tok: undefined /* Nothing */
-            });
-          sim_r.txns.push({
-            kind: 'halt',
-            tok: v530
-            })
-          sim_r.txns.push({
-            kind: 'halt',
-            tok: v529
-            })
-          sim_r.txns.push({
-            kind: 'halt',
-            tok: undefined /* Nothing */
-            })
-          sim_r.isHalt = true;
-          }}
+          const v1706 = v601.maturation;
+          const v1707 = stdlib.safeAdd(v699, v1706);
+          const v1753 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+          const v1755 = v1705;
+          const v1756 = v639;
+          const v1757 = stdlib.le(v699, v1707);
+          const v1758 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+          const v1759 = v1757 ? v1758 : false;
+          if (v1759) {
+            const v1760 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+            sim_r.isHalt = false;
+            }
+          else {
+            const v1762 = v1705[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v1763 = v1762[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+            const v1765 = v1758 ? v697 : v597;
+            const v1766 = stdlib.sub(v1763, v1763);
+            const v1767 = stdlib.Array_set(v1762, '0', v1766);
+            const v1768 = stdlib.Array_set(v1705, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1767);
+            sim_r.txns.push({
+              kind: 'from',
+              to: v1765,
+              tok: v598
+              });
+            const v1769 = v1768[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+            const v1770 = v1769[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+            const v1771 = v1758 ? v597 : v697;
+            sim_r.txns.push({
+              kind: 'from',
+              to: v1771,
+              tok: v599
+              });
+            sim_r.txns.push({
+              kind: 'from',
+              to: v597,
+              tok: undefined /* Nothing */
+              });
+            sim_r.txns.push({
+              kind: 'halt',
+              tok: v599
+              })
+            sim_r.txns.push({
+              kind: 'halt',
+              tok: v598
+              })
+            sim_r.txns.push({
+              kind: 'halt',
+              tok: undefined /* Nothing */
+              })
+            sim_r.isHalt = true;
+            }
+          break;
+          }
+        }
       return sim_r;
       }),
     soloSend: false,
     timeoutAt: undefined /* mto */,
-    tys: [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc2, ctc6, ctc2, ctc4, ctc7],
+    tys: [ctc0, ctc1, ctc1, ctc3, ctc2, ctc2, ctc4, ctc0, ctc4, ctc6, ctc2, ctc4, ctc8],
     waitIfNotPresent: false
     }));
-  const {data: [v615], secs: v617, time: v616, didSend: v148, from: v614 } = txn1;
-  undefined /* setApiDetails */;
-  ;
-  const v624 = v570[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1')];
-  const v625 = v624[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '0')];
-  const v626 = stdlib.add(v625, v545);
-  const v628 = stdlib.Array_set(v624, '0', v626);
-  const v629 = stdlib.Array_set(v570, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:54:54:dot', stdlib.UInt_max, '1'), v628);
-  ;
-  const v630 = true;
-  const v631 = await txn1.getOutput('Lender_lend', 'v630', ctc4, v630);
-  if (v148) {
-    stdlib.protect(ctc8, await interact.out(v615, v631), {
-      at: './src/contracts/loan_nnt_nnt.rsh:69:23:application',
-      fs: ['at ./src/contracts/loan_nnt_nnt.rsh:69:23:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:69:23:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:73:47:application call to "notify" (defined at: ./src/contracts/loan_nnt_nnt.rsh:72:42:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:72:42:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:72:42:function exp)'],
-      msg: 'out',
-      who: 'Lender_lend'
-      });
-    }
-  else {
-    }
-  
-  const v1072 = v614;
-  const v1075 = v629;
-  const v1076 = v571;
-  const v1077 = stdlib.le(v616, v561);
-  const v1079 = v1077 ? false : false;
-  if (v1079) {
-    const v1083 = true;
-    return;
-    }
-  else {
-    const v1087 = true;
-    const v1088 = v629[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '1')];
-    const v1089 = v1088[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:33:application', stdlib.UInt_max, '0')];
-    const v1090 = stdlib.sub(v1089, v1089);
-    const v1091 = stdlib.Array_set(v1088, '0', v1090);
-    const v1092 = stdlib.Array_set(v629, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:85:55:application', stdlib.UInt_max, '1'), v1091);
-    ;
-    const v1093 = v532.maturation;
-    const v1094 = stdlib.safeAdd(v616, v1093);
-    const v1140 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0');
-    const v1142 = v1092;
-    const v1143 = v571;
-    const v1144 = stdlib.le(v616, v1094);
-    const v1145 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0'), v546);
-    const v1146 = v1144 ? v1145 : false;
-    if (v1146) {
-      const v1147 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:88:51:decimal', stdlib.UInt_max, '0'), v546);
+  const {data: [v698], secs: v700, time: v699, didSend: v204, from: v697 } = txn1;
+  switch (v698[0]) {
+    case 'Borrower_close0_101': {
+      const v701 = v698[1];
       return;
+      break;
       }
-    else {
-      const v1149 = v1092[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-      const v1150 = v1149[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:33:application', stdlib.UInt_max, '0')];
-      const v1152 = v1145 ? v614 : v528;
-      const v1153 = stdlib.sub(v1150, v1150);
-      const v1154 = stdlib.Array_set(v1149, '0', v1153);
-      const v1155 = stdlib.Array_set(v1092, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:120:67:application', stdlib.UInt_max, '0'), v1154);
+    case 'Lender_lend0_101': {
+      const v749 = v698[1];
+      undefined /* setApiDetails */;
       ;
-      const v1156 = v1155[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '1')];
-      const v1157 = v1156[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:123:33:application', stdlib.UInt_max, '0')];
-      const v1158 = v1145 ? v528 : v614;
+      const v775 = v638[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1')];
+      const v776 = v775[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '0')];
+      const v777 = stdlib.add(v776, v614);
+      const v779 = stdlib.Array_set(v775, '0', v777);
+      const v780 = stdlib.Array_set(v638, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:52:62:dot', stdlib.UInt_max, '1'), v779);
       ;
+      const v790 = true;
+      const v791 = await txn1.getOutput('Lender_lend', 'v790', ctc4, v790);
+      if (v204) {
+        stdlib.protect(ctc9, await interact.out(v749, v791), {
+          at: './src/contracts/loan_nnt_nnt.rsh:66:23:application',
+          fs: ['at ./src/contracts/loan_nnt_nnt.rsh:66:23:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:66:23:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:70:47:application call to "notify" (defined at: ./src/contracts/loan_nnt_nnt.rsh:69:42:function exp)', 'at ./src/contracts/loan_nnt_nnt.rsh:69:42:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:69:42:function exp)'],
+          msg: 'out',
+          who: 'Lender_lend'
+          });
+        }
+      else {
+        }
+      
+      const v1691 = v697;
+      const v1700 = true;
+      const v1701 = v780[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '1')];
+      const v1702 = v1701[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:33:application', stdlib.UInt_max, '0')];
+      const v1703 = stdlib.sub(v1702, v1702);
+      const v1704 = stdlib.Array_set(v1701, '0', v1703);
+      const v1705 = stdlib.Array_set(v780, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:86:55:application', stdlib.UInt_max, '1'), v1704);
       ;
-      return;
-      }}
+      const v1706 = v601.maturation;
+      const v1707 = stdlib.safeAdd(v699, v1706);
+      const v1753 = stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0');
+      const v1755 = v1705;
+      const v1756 = v639;
+      const v1757 = stdlib.le(v699, v1707);
+      const v1758 = stdlib.lt(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+      const v1759 = v1757 ? v1758 : false;
+      if (v1759) {
+        const v1760 = stdlib.ge(stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:89:51:decimal', stdlib.UInt_max, '0'), v615);
+        return;
+        }
+      else {
+        const v1762 = v1705[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+        const v1763 = v1762[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:33:application', stdlib.UInt_max, '0')];
+        const v1765 = v1758 ? v697 : v597;
+        const v1766 = stdlib.sub(v1763, v1763);
+        const v1767 = stdlib.Array_set(v1762, '0', v1766);
+        const v1768 = stdlib.Array_set(v1705, stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:121:67:application', stdlib.UInt_max, '0'), v1767);
+        ;
+        const v1769 = v1768[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '1')];
+        const v1770 = v1769[stdlib.checkedBigNumberify('./src/contracts/loan_nnt_nnt.rsh:124:33:application', stdlib.UInt_max, '0')];
+        const v1771 = v1758 ? v597 : v697;
+        ;
+        ;
+        return;
+        }
+      break;
+      }
+    }
   
   
+  };
+export async function Borrower_close(ctcTop, interact) {
+  if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
+    return Promise.reject(new Error(`The backend for Borrower_close expects to receive a contract as its first argument.`));}
+  if (typeof(interact) !== 'object') {
+    return Promise.reject(new Error(`The backend for Borrower_close expects to receive an interact object as its second argument.`));}
+  const ctc = ctcTop._initialize();
+  const stdlib = ctc.stdlib;
+  const step = await ctc.getCurrentStep()
+  if (step == 7) {return _Borrower_close7(ctcTop, interact);}
+  throw stdlib.apiStateMismatchError({ _stateSourceMap }, [stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, '7')], stdlib.checkedBigNumberify('<builtin>', stdlib.UInt_max, step))
   };
 export async function Borrower_repay(ctcTop, interact) {
   if (typeof(ctcTop) !== 'object' || ctcTop._initialize === undefined) {
@@ -1085,61 +1394,61 @@ export async function Lender_lend(ctcTop, interact) {
   };
 const _ALGO = {
   ABI: {
-    impure: [`Borrower_repay(uint64)(byte,uint64,uint64)`, `Lender_lend()byte`],
+    impure: [`Borrower_close()byte[0]`, `Borrower_repay(uint64)(byte,uint64,uint64)`, `Lender_lend()byte`],
     pure: [`LoanViews_amountPaid()uint64`, `LoanViews_isLive()byte`, `LoanViews_loanPaid()byte`],
-    sigs: [`Borrower_repay(uint64)(byte,uint64,uint64)`, `Lender_lend()byte`, `LoanViews_amountPaid()uint64`, `LoanViews_isLive()byte`, `LoanViews_loanPaid()byte`]
+    sigs: [`Borrower_close()byte[0]`, `Borrower_repay(uint64)(byte,uint64,uint64)`, `Lender_lend()byte`, `LoanViews_amountPaid()uint64`, `LoanViews_isLive()byte`, `LoanViews_loanPaid()byte`]
     },
   GlobalNumByteSlice: 3,
   GlobalNumUint: 0,
   LocalNumByteSlice: 0,
   LocalNumUint: 0,
-  appApproval: `ByAOAAEEBQgHKCAwoI0G9q6A9APZ9qi8Btfx250HvvOm1wMmAwEBAQAAIjUAMRhBBjIqZEkiWzUBIQRbNQI2GgAXSUEAnSI1BCM1BkkhCgxAADlJIQsMQAAqSSEMDEAACiEMEkQ2GgFCASUhCxJENAElEkQpZChkUEk1A1dhCDUHQgXYIQoSRCpCAHNJIQ0MQAAZIQ0SRDQBJRJEKWQoZFBJNQNXkwE1B0IFsIGPxsUqEkQ0AUkhBQxAABQhBRJEKWQoZFBJNQNXqgE1B0IFjCUSRClkKGRQSTUDV1gBNQdCBXk2GgIXNQQ2GgM2GgEXSSQMQAGeSSUMQACTJRJEIQU0ARJENARJIhJMNAISEUQpZChkUEk1A0lJIQZbNf+BaFs1/leAIjX9STUFNfyABGiSZGM0/FCwNP1XERE1+zT+NP+IBVSACQAAAAAAAAJ2AbAoNQc0A1cAIDQDIQdbNP80A1cwODT+NAOBcFs0A4F4WzEAIzIGNP00+0kiWzT+CBZcAFwRNAOBogFbQgJ5SCU0ARJENARJIhJMNAISEUQpZChkUEk1A0lKSVcAIDX/IQZbNf4hCFs1/YFhWzX8V2kiNftJNQU1+oAEzjxwZjT6ULA0+hc1+TEANP8SRDT5NPwISTX4NP0NSTX3QQAKNPg0/Qk19kIAAyI19jT5NPYJNfU0+1cRETX0NPU0/ogEiTT3QQAKNPg0/Qk180IAAyI18zT8NPk08wkINfKACAAAAAAAAAMUNPI0/Q8WUQcINPIWUDT9FlBQsDTyNP0PFlEHCDTyFlA0/RZQNQc0/zQDIQdbNP40/TQDVzggNANXWAEXNAOBWVs08jIGNPs09EkiWzT1CBZcAFwRNAOBiwFbQgJ8SSMMQACFIxJEIzQBEkQ0BEkiEkw0AhIRRClkKGRQSTUDSUpXACA1/yEHWzX+IQhbNf1XcCI1/IAEmouRdLA0/FcAETX7NP00/ogDujT/MQASRDT/NP40AyEGWzQDVzg4NAOBkgFbNAOBmgFbMgaBt7YBCDT/IjIGNPw0+0kiWzT9CBZcAFwAIkIA6UghCYgDXSI0ARJENARJIhJMNAISEURJNQVJSiJbNf8hBFs1/oEQWzX9Vxg4NfyABPGSWIo0/xZQNP4WUDT9FlA0/FCwgRGvSTX7SVBJNfpJVwARIQSvXABcAEk1+UlXEREhBK9cAFwRNfg0/jT/E0QhCYgC7rEisgEishIkshAyCrIUNP+yEbMhCYgC1rEisgEishIkshAyCrIUNP6yEbM0/CEIWzX3NPwhB1s19jT3NPYMRDEANP8WUDT+FlA0/RZQNPxQNPhQNPcWUDT2FlApSwFXAH9nKEsBV38jZ0gjNQEyBjUCQgIoNf81/jX9Nfw1+zX6Nfk1+DX3NfY19TX0NP00+g40/BQQQQA8NPQ09RZQNPYWUDT3UDT4FlA0+RZQNPoWUDT+UDT/FlAoUClLAVcAf2coSwFXfyxnSCEFNQEyBjUCQgHINPxBAEk0/lcREUk18yJbNfKxIrIBNPKyEiSyEDT0shQ09rIRszT0NPU09jT5NPs0/DT9NPchBlsIIjT9NP408zTySQkWXABcETT/QgBasSKyATT+VwARIluyEiSyEDT0shQ09bIRs7EisgE0/7III7IQNPSyB7OxIrIBIrISJLIQMgmyFTIKshQ09rIRs7EisgEishIkshAyCbIVMgqyFDT1shGzQgEFNf81/jX9Nfw1+zX6Nfk1+DX3NfY19TT8NPgMNfQ0/TT7DjT0EEEATjT8NPgPNfM09TT2FlA09xZQNPgWUDT5UDT6FlEHCFA0+xZQNPwWUDT+UDT/FlA08xZRBwhQKUsBVwB/ZyhLAVd/FWdIJTUBMgY1AkIAqjT+VwARSTXzIls18rEisgE08rISJLIQNPU0+TT0TbIUNPayEbOxIrIBNP408zTySQkWXABcAFcRESJbshIkshA0+TT1NPRNshQ097IRs7EisgE0/7III7IQNPWyB7OxIrIBIrISJLIQMgmyFTIKshQ097IRs7EisgEishIkshAyCbIVMgqyFDT2shGzQgAAMRklEkSxIrIBIrIII7IQMgmyCTIKsgezQgAFMRkiEkQqNAEWNAIWUGc0BkEACoAEFR98dTQHULA0AEkjCDIEEkQxFhJEI0MxGSISREL/3yIxNBJEgQMxNRJEIjE2EkQiMTcSRCI1ASI1AkL/rjQASUojCDUAOAcyChJEOBAjEkQ4CBJEiTQASUpJIwg1ADgUMgoSRDgQJBJEOBFPAhJEOBISRIk=`,
+  appApproval: `ByAPAAEEBQgHICgwoI0G2faovAbX8dudB56S1pUIvvOm1wP2roD0AyYDAQEBAAAiNQAxGEEGiipkSSJbNQEhBFs1AjYaABdJQQC4IjUEIzUGSSEKDEAAP0khCwxAAB9JIQwMQAAOIQwSRCo1/yk0/1BCAKshCxJENhoBQgF1IQoSRDQBJRJEKWQoZFBJNQNXYQg1B0IGIkkhDQxAAC5JIQ4MQAAOIQ4SRCo1/yg0/1BCAGwhDRJENAElEkQpZChkUEk1A1eTATUHQgXtgY/GxSoSRDQBSSEFDEAAFCEFEkQpZChkUEk1A1fEATUHQgXJJRJEKWQoZFBJNQNXWAE1B0IFtjYaAhc1BDYaAzYaARdJJAxAAeFJJQxAANYlEkQhBTQBEkQ0BEkiEkw0AhIRRClkKGRQSTUDSUpKSlcAIDX/IQZbNf4hB1s1/VcwODX8gWhbNfuBcFs1+leaIjX5gbwBWzX4STUFNfeABLGZIkU091CwNPciVUAAL4AIAAAAAAAAAt6wKjUHNP80/jT9NPw0+zT6IjQDV3kgNANXmQEXMgY0+TT4QgK7NPlXERE19jT7NP2IBT+ACQAAAAAAAAMWAbAoNQc0/zT+NP00/DT7NPo0A1d4ARcxACMyBjT5NPZJIls0+wgWXABcETT4QgJzSCU0ARJENARJIhJMNAISEUQpZChkUEk1A0lKSVcAIDX/IQdbNf4hCFs1/YFhWzX8V2kiNftJNQU1+oAEzjxwZjT6ULA0+hc1+TEANP8SRDT5NPwISTX4NP0NSTX3QQAKNPg0/Qk19kIAAyI19jT5NPYJNfU0+1cRETX0NPU0/ogEgzT3QQAKNPg0/Qk180IAAyI18zT8NPk08wkINfKACAAAAAAAAAOyNPI0/Q8WUQcINPIWUDT9FlBQsDTyNP0PFlEHCDTyFlA0/RZQNQc0/zQDIQZbNP40/TQDVzggNANXWAEXNAOBWVs08jIGNPs09EkiWzT1CBZcAFwRNAOBiwFbQgJ2SSMMQAB/IxJEIzQBEkQ0BEkiEkw0AhIRRClkKGRQSTUDSUpXACA1/yEGWzX+IQhbNf1XcCI1/IAEmouRdLA0/FcAETX7NP00/ogDtDT/MQASRDT/NP40AyEHWzQDVzg4NAOBkgFbNAOBmgFbIzT/IjIGNPw0+0kiWzT9CBZcAFwAIkIA6UghCYgDXSI0ARJENARJIhJMNAISEURJNQVJSiJbNf8hBFs1/oEQWzX9Vxg4NfyABPGSWIo0/xZQNP4WUDT9FlA0/FCwgRGvSTX7SVBJNfpJVwARIQSvXABcAEk1+UlXEREhBK9cAFwRNfg0/jT/E0QhCYgC7rEisgEishIkshAyCrIUNP+yEbMhCYgC1rEisgEishIkshAyCrIUNP6yEbM0/CEIWzX3NPwhBls19jT3NPYMRDEANP8WUDT+FlA0/RZQNPxQNPhQNPcWUDT2FlApSwFXAH9nKEsBV38jZ0gjNQEyBjUCQgIoNf81/jX9Nfw1+zX6Nfk1+DX3NfY19TX0NPwUNPoQQQA/NPQ09RZQNPYWUDT3UDT4FlA0+RZQKFA0+1ApUDT+UDT/FlAoUClLAVcAf2coSwFXf0ZnSCEFNQEyBjUCQgHINPxBAEk0/lcREUk18yJbNfKxIrIBNPKyEiSyEDT0shQ09rIRszT0NPU09jT5NPs0/DT9NPchB1sIIjT9NP408zTySQkWXABcETT/QgBasSKyATT+VwARIluyEiSyEDT0shQ09bIRs7EisgE0/7III7IQNPSyB7OxIrIBIrISJLIQMgmyFTIKshQ09rIRs7EisgEishIkshAyCbIVMgqyFDT1shGzQgEFNf81/jX9Nfw1+zX6Nfk1+DX3NfY19TT8NPgMNfQ0/TT7DjT0EEEATjT8NPgPNfM09TT2FlA09xZQNPgWUDT5UDT6FlEHCFA0+xZQNPwWUDT+UDT/FlA08xZRBwhQKUsBVwB/ZyhLAVd/FWdIJTUBMgY1AkIAqjT+VwARSTXzIls18rEisgE08rISJLIQNPU0+TT0TbIUNPayEbOxIrIBNP408zTySQkWXABcAFcRESJbshIkshA0+TT1NPRNshQ097IRs7EisgE0/7III7IQNPWyB7OxIrIBIrISJLIQMgmyFTIKshQ097IRs7EisgEishIkshAyCbIVMgqyFDT2shGzQgAAMRklEkSxIrIBIrIII7IQMgmyCTIKsgezQgAFMRkiEkQqNAEWNAIWUGc0BkEACoAEFR98dTQHULA0AEkjCDIEEkQxFhJEI0MxGSISREL/3yIxNBJEgQMxNRJEIjE2EkQiMTcSRCI1ASI1AkL/rjQASUojCDUAOAcyChJEOBAjEkQ4CBJEiTQASUpJIwg1ADgUMgoSRDgQJBJEOBFPAhJEOBISRIk=`,
   appClear: `Bw==`,
   companionInfo: null,
   extraPages: 0,
   mapDataKeys: 0,
   mapDataSize: 0,
   stateKeys: 2,
-  stateSize: 171,
+  stateSize: 197,
   unsupported: [],
   version: 11,
   warnings: []
   };
 const _ETH = {
-  ABI: `[{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"address payable","name":"elem1","type":"address"},{"internalType":"address payable","name":"elem2","type":"address"},{"internalType":"uint256","name":"elem3","type":"uint256"},{"components":[{"internalType":"address payable","name":"_address","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint256","name":"_maturation","type":"uint256"},{"internalType":"uint256","name":"_principal","type":"uint256"}],"internalType":"struct T8","name":"elem4","type":"tuple"}],"internalType":"struct T10","name":"v1175","type":"tuple"}],"stateMutability":"payable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"msg","type":"uint256"}],"name":"ReachError","type":"error"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"address payable","name":"elem1","type":"address"},{"internalType":"address payable","name":"elem2","type":"address"},{"internalType":"uint256","name":"elem3","type":"uint256"},{"components":[{"internalType":"address payable","name":"_address","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint256","name":"_maturation","type":"uint256"},{"internalType":"uint256","name":"_principal","type":"uint256"}],"internalType":"struct T8","name":"elem4","type":"tuple"}],"indexed":false,"internalType":"struct T10","name":"_a","type":"tuple"}],"name":"_reach_e0","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"indexed":false,"internalType":"struct T2","name":"_a","type":"tuple"}],"name":"_reach_e1","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T2","name":"elem1","type":"tuple"}],"indexed":false,"internalType":"struct T3","name":"_a","type":"tuple"}],"name":"_reach_e4","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"bool","name":"elem1","type":"bool"}],"indexed":false,"internalType":"struct T4","name":"_a","type":"tuple"}],"name":"_reach_e5","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bool","name":"v0","type":"bool"}],"name":"_reach_oe_v630","type":"event"},{"anonymous":false,"inputs":[{"components":[{"internalType":"bool","name":"elem0","type":"bool"},{"internalType":"uint256","name":"elem1","type":"uint256"},{"internalType":"uint256","name":"elem2","type":"uint256"}],"indexed":false,"internalType":"struct T0","name":"v0","type":"tuple"}],"name":"_reach_oe_v788","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"uint256","name":"v1167","type":"uint256"}],"name":"Borrower_repay","outputs":[{"components":[{"internalType":"bool","name":"elem0","type":"bool"},{"internalType":"uint256","name":"elem1","type":"uint256"},{"internalType":"uint256","name":"elem2","type":"uint256"}],"internalType":"struct T0","name":"","type":"tuple"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"Lender_lend","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"LoanViews_amountPaid","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"LoanViews_isLive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"LoanViews_loanPaid","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCreationTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCurrentState","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCurrentTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T2","name":"v1177","type":"tuple"}],"name":"_reachp_1","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T2","name":"elem1","type":"tuple"}],"internalType":"struct T3","name":"v1188","type":"tuple"}],"name":"_reachp_4","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"bool","name":"elem1","type":"bool"}],"internalType":"struct T4","name":"v1194","type":"tuple"}],"name":"_reachp_5","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"stateMutability":"payable","type":"receive"}]`,
-  Bytecode: `0x608062002b9c38819003601f8101601f191683016001600160401b038111848210176200060f578392829160405283398101039061010082126200076e576040519160a08301906001600160401b038211848310176200060f57608091604052825184526200007160208401620007ab565b60208501526200008460408401620007ab565b604085015260608301516060850152607f1901126200076e5760e060405191620000ae8362000773565b620000bc60808201620007ab565b835260a0810151602084015260c081015160408401520151606082015260808201524360035560405160c0810181811060018060401b038211176200060f5760009160a09160405282815262000111620007c0565b6020820152826040820152826060820152826080820152015260405190620001398262000773565b62000143620007c0565b82526200014f620007e1565b60208301526200015e620007e1565b60408301526200016d620007e1565b606083015260ff6004541662000755577f0afc6dfb8e46904d26b470c9776dbda504ff03bf5751054892c18288aa52c9e46101206040513381528351602082015260018060a01b03602085015116604082015260018060a01b03604085015116606082015260608401516080820152620001f0608085015160a083019062000828565ba18051801590811562000748575b50156200072f5760008251526000602083510152600060408351015281516020830151528151602080840151015260208201518051604060208201519101511515604051916200024e836200078f565b600083526020830152604082015262000266620007e1565b9160005b60028110620006f557505081528060408401526020810151604060208201519101511515604051916200029d836200078f565b6000835260208301526040820152620002b5620007e1565b9160005b60028110620006a55750506020820152606083015260018060a01b0360408201511660018060a01b03602083015116146000146200069d5760005b156200068457346200066b5760808101516020606082015191015111156200065257604051916001600160401b036101008401908111908411176200060f57602091606060809261010086016040526000865260008587015260006040870152600082870152604051620003688162000773565b6000815260008682015260006040820152600083820152848701526200038d620007e1565b60a0870152600060c0870152600060e087015233865260018060a01b0385840151168587015260018060a01b03604084015116604087015281830151828701528383015184870152015160a0850152606082820151015160c08501520151015160e08201526001600055436001556040519033602083015260018060a01b03602082015116604083015260018060a01b0360408201511660608301526060810151608083015262000447608082015160a084019062000828565b60a0810151600061012084015b60028210620006255760c08401516101e086015260e08401516102008087019190915285528461022081016001600160401b038111828210176200060f5760405280516001600160401b0381116200060f57600254600181811c9116801562000604575b6020821014620005ee57601f811162000584575b50602091601f82116001146200051a579181926000926200050e575b50508160011b916000199060031b1c1916176002555b60405161231f90816200087d8239f35b015190508280620004e8565b601f19821692600260005260206000209160005b8581106200056b5750836001951062000551575b505050811b01600255620004fe565b015160001960f88460031b161c1916905582808062000542565b919260206001819286850151815501940192016200052e565b60026000527f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace601f830160051c81019160208410620005e3575b601f0160051c01905b818110620005d65750620004cc565b60008155600101620005c7565b9091508190620005be565b634e487b7160e01b600052602260045260246000fd5b90607f1690620004b8565b634e487b7160e01b600052604160045260246000fd5b60206060600192604086518051835284810151858401520151151560408201520193019101909162000454565b60405163100960cb60e01b8152600f6004820152602490fd5b60405163100960cb60e01b8152600e6004820152602490fd5b60405163100960cb60e01b8152600d6004820152602490fd5b6001620002f4565b620006b1818362000854565b51620006be828662000854565b52620006cb818562000854565b506000198114620006df57600101620002b9565b634e487b7160e01b600052601160045260246000fd5b62000701818362000854565b516200070e828662000854565b526200071b818562000854565b506000198114620006df576001016200026a565b60405163100960cb60e01b8152600c6004820152602490fd5b90506001541438620001fe565b60405163100960cb60e01b8152600b6004820152602490fd5b600080fd5b608081019081106001600160401b038211176200060f57604052565b606081019081106001600160401b038211176200060f57604052565b51906001600160a01b03821682036200076e57565b60405190620007cf826200078f565b60006040838281528260208201520152565b6040805191908281016001600160401b038111848210176200060f5781528260005b8281106200081057505050565b6020906200081d620007c0565b818401520162000803565b80516001600160a01b031682526020808201519083015260408082015190830152606090810151910152565b906002811015620008665760051b0190565b634e487b7160e01b600052603260045260246000fdfe60806040526004361015610018575b361561001657005b005b60003560e01c8063160a366a146100f45780631e93b0f1146100eb5780633c496554146100e25780634cd87555146100d9578063573b8510146100d0578063823c0a8d146100c757806383230757146100be57806394134348146100b5578063ab53f2c6146100ac578063ea121ca3146100a35763f9d773330361000e5761009e610688565b61000e565b5061009e610600565b5061009e61058b565b5061009e6104e2565b5061009e6104c3565b5061009e610472565b5061009e61027a565b5061009e6101fd565b5061009e610191565b5061009e610172565b5061009e610113565b604090600319011261010e57600490565b600080fd5b50604036600319011261010e57610129366100fd565b610131610965565b60408236031261010e576101679160206040519161014e83610761565b80358352013561015d816109f4565b6020820152611665565b602060405160008152f35b503461010e57600036600319011261010e576020600354604051908152f35b503461010e57600036600319011261010e576101ab610965565b6005600054036101e457606060209160e06101d56101c76107fe565b858082518301019101610a86565b01519182910152604051908152f35b60405163100960cb60e01b815260076004820152602490fd5b503461010e57600036600319011261010e57610217610965565b6005600054036102615760a061025d916101406102446102356107fe565b60208082518301019101610a86565b0151151591018190526040519081529081906020820190565b0390f35b60405163100960cb60e01b8152600a6004820152602490fd5b5060208060031936011261010e57610290610965565b5061045c61029d3661224a565b916102b96102b46102b060045460ff1690565b1590565b610b3c565b60408051338152845160208201529093610449917fcf0e8bec53cd91fa87ecf8f6f405ac75914a22acdb92a3553ee5c294fee81596908690a1610300600160005414610b5c565b61032e61031c61030e6107fe565b85808251830101910161226a565b91518015908115610466575b50610b7c565b6103383415610b9c565b8281019261044460a061034b86516109d4565b9361036561036060608301968751903361132f565b610bbc565b61038033600180851b0361037984516109d4565b1614610bdc565b6103b06103a861038e6115de565b986103a261039c85516109d4565b8b610f9b565b516109d4565b858901610f9b565b6103c76103bf8a8301516109d4565b8a8901610f9b565b6080810151606088015260c0810151608088015260e0810151828801526103ed436112df565b60c08801526104086103ff82516109d4565b60e08901610f9b565b60006101008801524361012088015201519182519384519051019388828201519101511515916104366108a9565b958652850152151587840152565b611481565b6101408201526000610160820152611b8b565b5160008152602090f35b90506001541438610328565b50600036600319011261010e576020604061048b610965565b6104b781835161049a81610789565b600081526104a66109bb565b906000825251151586820152611665565b01511515604051908152f35b503461010e57600036600319011261010e576020600154604051908152f35b503461010e57600036600319011261010e5761025d61053e6080610504610965565b600054600781101561055057600561051c9114610c1c565b61052f61053660a061052f6102356107fe565b0151151590565b151582840152565b60405190151581529081906020820190565b600761055c9114610bfc565b61058661012061057c61056d6107fe565b60208082518301019101610dfd565b0151151582840152565b61052f565b503461010e576000806003193601126105fd5780546105a86107fe565b906040519283918252602090604082840152835191826040850152815b8381106105e657505060608094508284010152601f80199101168101030190f35b8086018201518782016060015286945081016105c5565b80fd5b50604036600319011261010e57610616366100fd565b61061e610965565b8136036040811261010e5760206040519161063883610761565b84358352601f19011261010e576101679260206040519161065883610789565b013581526020820152610fd1565b9190916040806060830194805115158452602081015160208501520151910152565b50602036600319011261010e5761069d610928565b5061025d60206106ab610965565b610702816040516106bb81610789565b6040516106c781610789565b8082526004359052604051906106dc82610761565b60008252858201906040516106f081610789565b60008152825260008352519052610fd1565b015160405191829182610666565b90600182811c92168015610740575b602083101461072a57565b634e487b7160e01b600052602260045260246000fd5b91607f169161071f565b50634e487b7160e01b600052604160045260246000fd5b604081019081106001600160401b0382111761077c57604052565b61078461074a565b604052565b602081019081106001600160401b0382111761077c57604052565b606081019081106001600160401b0382111761077c57604052565b61016081019081106001600160401b0382111761077c57604052565b601f909101601f19168101906001600160401b0382119082101761077c57604052565b604051906000826002549161081283610710565b808352600193808516908115610888575060011461083a575b50610838925003836107db565b565b600260009081526000805160206122f383398151915294602093509091905b81831061087057505061083893508201013861082b565b85548884018501529485019487945091830191610859565b905061083894506020925060ff191682840152151560051b8201013861082b565b60405190606082016001600160401b0381118382101761077c57604052565b6040519061016082016001600160401b0381118382101761077c57604052565b6040519061014082016001600160401b0381118382101761077c57604052565b6040519061010082016001600160401b0381118382101761077c57604052565b60405190606082016001600160401b03811183821017610958575b60405260006040838281528260208201520152565b61096061074a565b610943565b6040519060c082016001600160401b038111838210176109ae575b604052600060a083828152610993610928565b60208201528260408201528260608201528260808201520152565b6109b661074a565b610980565b604051906109c882610761565b60006020838281520152565b6001600160a01b031690565b51906001600160a01b038216820361010e57565b8015150361010e57565b5190610838826109f4565b9080601f8301121561010e57604091825192610a2484610761565b839260c083019281841161010e57935b838510610a4357505050505090565b60608583031261010e578251606091610a5b826107a4565b86518252602091828801518382015285880151610a77816109f4565b86820152815201940193610a34565b6102008183031261010e576101e0610b3391610aa06108c8565b93610aaa826109e0565b8552610ab8602083016109e0565b6020860152610ac9604083016109e0565b604086015260608201516060860152610ae4608083016109e0565b6080860152610af560a083016109fe565b60a086015260c082015160c086015260e082015160e0860152610b1d61010091828401610a09565b908501526101c0810151610120850152016109fe565b61014082015290565b15610b4357565b60405163100960cb60e01b815260106004820152602490fd5b15610b6357565b60405163100960cb60e01b815260116004820152602490fd5b15610b8357565b60405163100960cb60e01b815260126004820152602490fd5b15610ba357565b60405163100960cb60e01b815260136004820152602490fd5b15610bc357565b60405163100960cb60e01b815260146004820152602490fd5b15610be357565b60405163100960cb60e01b815260156004820152602490fd5b15610c0357565b60405163100960cb60e01b815260096004820152602490fd5b15610c2357565b60405163100960cb60e01b815260086004820152602490fd5b15610c4357565b60405163100960cb60e01b815260166004820152602490fd5b15610c6357565b60405163100960cb60e01b815260176004820152602490fd5b15610c8357565b60405163100960cb60e01b815260186004820152602490fd5b15610ca357565b60405163100960cb60e01b815260196004820152602490fd5b15610cc357565b60405163100960cb60e01b8152601a6004820152602490fd5b15610ce357565b60405163100960cb60e01b8152601b6004820152602490fd5b15610d0357565b60405163100960cb60e01b8152601c6004820152602490fd5b15610d2357565b60405163100960cb60e01b8152601d6004820152602490fd5b15610d4357565b60405163100960cb60e01b8152601e6004820152602490fd5b15610d6357565b60405163100960cb60e01b8152601f6004820152602490fd5b15610d8357565b60405163100960cb60e01b815260206004820152602490fd5b919082608091031261010e57604051608081016001600160401b03811182821017610df0575b6040526060808294610dd3816109e0565b845260208101516020850152604081015160408501520151910152565b610df861074a565b610dc2565b906102408282031261010e57610e9c610220610e176108e8565b93610e21816109e0565b8552610e2f602082016109e0565b6020860152610e40604082016109e0565b6040860152610e528460608301610d9c565b606086015260e081015160808601526101008082015160a0870152610e87610120958684015160c08901526101408401610a09565b60e087015261020082015190860152016109fe565b9082015290565b6040519060e082016001600160401b03811183821017610ef3575b60405281600080825280602083015280604083015280606083015280608083015260a082015260c0610eee610928565b910152565b610efb61074a565b610ebe565b6001600160a01b03169052565b604090815191610f1c83610761565b8260005b828110610f2c57505050565b602090610f37610928565b8184015201610f20565b60405190610f4e826107bf565b816101406000918281528260208201528260408201528260608201528260808201528260a08201528260c08201528260e082015282610100820152610f91610f0d565b6101208201520152565b6001600160a01b039091169052565b906002811015610fbb5760051b0190565b634e487b7160e01b600052603260045260246000fd5b61111a9161106691610fe1610ea3565b91610ff9610ff46102b060045460ff1690565b610c3c565b60408051338152835160208083019190915284015151818301529093907f117ff0fc7909f539043dcba1a015e3c49852b86bcb1c87a6cfa653f771ccbdc090606090a161104a600560005414610c5c565b6110526107fe565b916020958387808096518301019101610a86565b958461107e88965180159081156112bc575b50610c7c565b61109a61109361108e88516109d4565b6109d4565b3314610c9c565b019083825151926110b160e0880194855190611303565b9384865261112e60608901958651106110cf85890191829015159052565b8051156112b1576110e38851885190611317565b8b8901525b6111286111238c6110ff875151828d015190611317565b9c60608c019d8e526111113415610cbc565b019e8f516109d4565b8c51903361132f565b610cdc565b51151590565b156112a5576111408651865190611317565b60808701525b51905151608086015161115891611317565b61116191611303565b60a08501818152845160c09096018051929096111590915293845182825101528351888251015280518851611197819282610666565b037fe45ea5a84778eb813a65884ea75d393d3719404fab0ae5809df308eb5da2d0b791a1519101526111c7610f41565b9686516111d3906109d4565b6111dd9089610f9b565b838701516111ea906109d4565b6111f690898601610f9b565b51611200906109d4565b61120c90888701610f9b565b5160608701526080850151611220906109d4565b61122d9060808801610f9b565b60a08501511515151560a087015260c085015160c08701525160e0860152610100438187015284015192818401519283519051019281838201519101511515926112756108a9565b9485528401529015159082015261128b916114de565b906101209182840152015161014082015261083890611ffc565b60006080870152611146565b60008b8901526110e8565b90506001541438611078565b50634e487b7160e01b600052601160045260246000fd5b90615b378201918281116112f6575b821061010e57565b6112fe6112c8565b6112ee565b91908201918281116112f657821061010e57565b9081039081116113245790565b61132c6112c8565b90565b6040516323b872dd60e01b602082019081526001600160a01b03928316602483015230604483015260648083019590955293815261132c936000938493909284919060a081016001600160401b038111828210176113b2575b6040525193165af16113a261139b6113bf565b8092611421565b506020808251830101910161140c565b6113ba61074a565b611388565b3d15611407573d906001600160401b0382116113fa575b604051916113ee601f8201601f1916602001846107db565b82523d6000602084013e565b61140261074a565b6113d6565b606090565b9081602091031261010e575161132c816109f4565b156114295790565b80511561143857805190602001fd5b60405163100960cb60e01b815260016004820152602490fd5b156114595790565b80511561146857805190602001fd5b60405163100960cb60e01b815260026004820152602490fd5b919061148b610f0d565b9260005b6002811061149d5750508252565b806114aa60019284610faa565b516114b58288610faa565b526114c08187610faa565b5060001981146114d1575b0161148f565b6114d96112c8565b6114cb565b91906114e8610f0d565b9260005b600281106114fd5750506020830152565b8061150a60019284610faa565b516115158288610faa565b526115208187610faa565b506000198114611531575b016114ec565b6115396112c8565b61152b565b9190611548610f0d565b9260005b6002811061155a5750508252565b8061156760019284610faa565b516115728288610faa565b5261157d8187610faa565b50600019811461158e575b0161154c565b6115966112c8565b611588565b60405190608082016001600160401b038111838210176115d1575b60405260006060838281528260208201528260408201520152565b6115d961074a565b6115b6565b6040519061018082016001600160401b03811183821017611658575b6040528161016060009182815282602082015282604082015261161b61159b565b60608201528260808201528260a08201528260c08201528260e0820152826101008201528261012082015261164e610f0d565b6101408201520152565b61166061074a565b6115fa565b6108389161168061167b6102b060045460ff1690565b610cfc565b6040805133815283516020808301919091528401511515818301529092907fbe731e9f2a129299a212b8ec3ac324fa99671cd00a5a827cbd3d4fe6d7ad541d90606090a16116d2600760005414610d1c565b6118356116dd6107fe565b926117076116f5602095868082518301019101610dfd565b93518015908115611848575b50610d3c565b6117113415610d5c565b848301946117708161172388516109d4565b9361173d61173860808901968751903361132f565b610d7c565b8151600181527f913050007acac9e177378a174408080c224f6bc72bcef1ec6107b04084d8085790602090a10160019052565b6117b16117a961177e6115de565b9761179261178c88516109d4565b8a610f9b565b6103a26117a1898901516109d4565b898b01610f9b565b828801610f9b565b606084015160608701528151608087015260a084015160a087015260c084015160c08701526117e33360e08801610f9b565b611830610100956117f687890160019052565b4361012089015260e086015192818401519485519051019481838201519101511515926118216108a9565b96875286015284019015159052565b6114de565b6101408401520151610160820152611b8b565b90506001541438611701565b506040513d6000823e3d90fd5b81811061186c575050565b60008155600101611861565b611883600254610710565b8061188b5750565b601f811160011461189e57506000600255565b60026000526118e390601f0160051c6000805160206122f3833981519152017f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf611861565b6000602081208160025555565b6040519061014082016001600160401b0381118382101761195c575b6040528161012060009182815282602082015282604082015261192d61159b565b60608201528260808201528260a08201528260c082015261194c610f0d565b60e0820152826101008201520152565b61196461074a565b61190c565b6000915b6002831061197a57505050565b60019060608351918251815260209283810151848301526040809101511515908201520192019201919061196d565b610838909291926102206102408201946119c4838251610f00565b6119d660208201516020850190610f00565b6119e860408201516040850190610f00565b60608181015180516001600160a01b03168583015260208101516080860152604081015160a0860152015160c0840152608081015160e084015260a081015190610100918285015260c0810151916101209283860152611a5160e0830151610140870190611969565b81015161020085015201511515910152565b90601f8211611a70575050565b6108389160026000526020600020906020601f840160051c83019310611a9e575b601f0160051c0190611861565b9091508190611a91565b80519091906001600160401b038111611b7e575b611ad081611acb600254610710565b611a63565b602080601f8311600114611b0c5750819293600092611b01575b50508160011b916000199060031b1c191617600255565b015190503880611aea565b6002600052601f198316949091906000805160206122f3833981519152926000905b878210611b66575050836001959610611b4d575b505050811b01600255565b015160001960f88460031b161c19169055388080611b42565b80600185968294968601518155019501930190611b2e565b611b8661074a565b611abc565b610120908181019081519160c082019283511015600090600014611e77575061010082015115611e705760005b15611c925750611c7f91611c5d61083894610160611c8d94611bd86118f0565b94611bec611be683516109d4565b87610f9b565b611c05611bfc60208401516109d4565b60208801610f9b565b611c1e611c1560408401516109d4565b60408801610f9b565b606082015160608701526080820151608087015260a082015160a08701525160c086015261014081015160e08601520151610100840152820160019052565b611c676007600055565b611c7043600155565b604051928391602083016119a9565b03601f1981018352826107db565b611aa8565b915061010092838201611ca58151151590565b15611de15760408301948551611cba906109d4565b948451611cc6906109d4565b9261014096878701948551611cdb9060200190565b5151611cf29290916001600160a01b031690611e7c565b611cfa610f41565b978651611d06906109d4565b611d10908a610f9b565b6020870151611d1e906109d4565b611d2b9060208b01610f9b565b51611d35906109d4565b611d429060408a01610f9b565b60a0860151606089015260e0860151611d5a906109d4565b611d679060808a01610f9b565b51151560a08801528051606086015160400151611d8391611303565b60c088015260e08701600090525190860152516020810151602081015190604001511515611daf6108a9565b60008152602081019290925215156040820152611dcb916114de565b9084015261016001519082015261083890611ffc565b5050600080935080925081611e21611dfd6020849501516109d4565b611e0783516109d4565b6101408401515151916001600160a01b0390911690611e7c565b610160611e3161108e83516109d4565b91015190828215611e67575bf115611e5a575b60008055611e526000600155565b610838611878565b611e62611854565b611e44565b506108fc611e3d565b6001611bb8565b611bb8565b60405163a9059cbb60e01b602082019081526001600160a01b039384166024830152604480830195909552938152611ee893600093849392849190608081016001600160401b03811182821017611eef575b6040525193165af16113a2611ee16113bf565b8092611451565b1561010e57565b611ef761074a565b611ece565b60405190611f09826107bf565b816101406000918281528260208201528260408201528260608201528260808201528260a08201528260c08201528260e0820152611f45610f0d565b610100820152826101208201520152565b610838909291926101e0610140610200830195611f74848251610f00565b611f8660208201516020860190610f00565b611f9860408201516040860190610f00565b60608101516060850152611fb460808201516080860190610f00565b60a08181015115159085015260c081015160c085015260e081015160e0850152611fe76101008083015190860190611969565b6101208101516101c085015201511515910152565b6120046109bb565b60e082018051606084018051919091118352929190610100908184015160c0850190815110156000906000146122455750835115155b1561213d5793612113611c8d94610838979484611c7f9861206a602061211b98518a511115950194859015159052565b612072611efc565b9761208061178c88516109d4565b61209961209060208901516109d4565b60208b01610f9b565b6120b26120a960408901516109d4565b60408b01610f9b565b5160608901526120d16120c860808801516109d4565b60808a01610f9b565b6120ea6120e160a0880151151590565b151560a08a0152565b5160c08801525160e0870152610120908185015190870152610140809401519086015251151590565b151590830152565b6121256005600055565b61212e43600155565b60405192839160208301611f56565b50505060008093508261220d82949361215a6020859601516109d4565b906121658151151590565b85146122365761217860808501516109d4565b61012085018051515190936001600160a01b039261219a929190841690611e7c565b6121b16121aa60408701516109d4565b9251151590565b861461221d576122036121fd6121c787516109d4565b945b518051906121f86040602084015193015115156121e46108a9565b938c85526020850152604084019015159052565b61153e565b60200190565b5151921690611e7c565b610140611e3161108e83516109d4565b6122036121fd61223060808801516109d4565b946121c9565b61224084516109d4565b612178565b61203a565b602090600319011261010e576040519061226382610789565b6004358252565b6102008183031261010e576101e0906122d8612284610908565b9361228e836109e0565b855261229c602084016109e0565b60208601526122ad604084016109e0565b6040860152606083015160608601526122c98160808501610d9c565b60808601526101008301610a09565b60a08401526101c081015160c0840152015160e08201529056fe405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acea164736f6c6343000810000a`,
-  BytecodeLen: 11164,
+  ABI: `[{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"address payable","name":"elem1","type":"address"},{"internalType":"address payable","name":"elem2","type":"address"},{"internalType":"uint256","name":"elem3","type":"uint256"},{"components":[{"internalType":"address payable","name":"_address","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint256","name":"_maturation","type":"uint256"},{"internalType":"uint256","name":"_principal","type":"uint256"}],"internalType":"struct T9","name":"elem4","type":"tuple"}],"internalType":"struct T11","name":"v1793","type":"tuple"}],"stateMutability":"payable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"msg","type":"uint256"}],"name":"ReachError","type":"error"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"internalType":"address payable","name":"elem1","type":"address"},{"internalType":"address payable","name":"elem2","type":"address"},{"internalType":"uint256","name":"elem3","type":"uint256"},{"components":[{"internalType":"address payable","name":"_address","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"uint256","name":"_maturation","type":"uint256"},{"internalType":"uint256","name":"_principal","type":"uint256"}],"internalType":"struct T9","name":"elem4","type":"tuple"}],"indexed":false,"internalType":"struct T11","name":"_a","type":"tuple"}],"name":"_reach_e0","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"indexed":false,"internalType":"struct T4","name":"_a","type":"tuple"}],"name":"_reach_e1","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T4","name":"elem1","type":"tuple"}],"indexed":false,"internalType":"struct T5","name":"_a","type":"tuple"}],"name":"_reach_e4","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"_who","type":"address"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"enum _enum_T2","name":"which","type":"uint8"},{"internalType":"bool","name":"_Borrower_close0_101","type":"bool"},{"internalType":"bool","name":"_Lender_lend0_101","type":"bool"}],"internalType":"struct T2","name":"elem1","type":"tuple"}],"indexed":false,"internalType":"struct T3","name":"_a","type":"tuple"}],"name":"_reach_e5","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bool","name":"v0","type":"bool"}],"name":"_reach_oe_v734","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"bool","name":"v0","type":"bool"}],"name":"_reach_oe_v790","type":"event"},{"anonymous":false,"inputs":[{"components":[{"internalType":"bool","name":"elem0","type":"bool"},{"internalType":"uint256","name":"elem1","type":"uint256"},{"internalType":"uint256","name":"elem2","type":"uint256"}],"indexed":false,"internalType":"struct T0","name":"v0","type":"tuple"}],"name":"_reach_oe_v946","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[],"name":"Borrower_close","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"v1784","type":"uint256"}],"name":"Borrower_repay","outputs":[{"components":[{"internalType":"bool","name":"elem0","type":"bool"},{"internalType":"uint256","name":"elem1","type":"uint256"},{"internalType":"uint256","name":"elem2","type":"uint256"}],"internalType":"struct T0","name":"","type":"tuple"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"Lender_lend","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"LoanViews_amountPaid","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"LoanViews_isLive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"LoanViews_loanPaid","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCreationTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCurrentState","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_reachCurrentTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T4","name":"v1795","type":"tuple"}],"name":"_reachp_1","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"}],"internalType":"struct T4","name":"elem1","type":"tuple"}],"internalType":"struct T5","name":"v1807","type":"tuple"}],"name":"_reachp_4","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"inputs":[{"components":[{"internalType":"uint256","name":"elem0","type":"uint256"},{"components":[{"internalType":"enum _enum_T2","name":"which","type":"uint8"},{"internalType":"bool","name":"_Borrower_close0_101","type":"bool"},{"internalType":"bool","name":"_Lender_lend0_101","type":"bool"}],"internalType":"struct T2","name":"elem1","type":"tuple"}],"internalType":"struct T3","name":"v1813","type":"tuple"}],"name":"_reachp_5","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"payable","type":"function"},{"stateMutability":"payable","type":"receive"}]`,
+  Bytecode: `0x608062002ef438819003601f8101601f191683016001600160401b03811184821017620006155783928291604052833981010390610100821262000774576040519160a08301906001600160401b038211848310176200061557608091604052825184526200007160208401620007b1565b60208501526200008460408401620007b1565b604085015260608301516060850152607f190112620007745760e060405191620000ae8362000779565b620000bc60808201620007b1565b835260a0810151602084015260c081015160408401520151606082015260808201524360035560405160e0810181811060018060401b03821117620006155760009160c09160405282815282602082015262000117620007c6565b60408201528260608201528260808201528260a08201520152604051906200013f8262000779565b62000149620007c6565b825262000155620007e7565b602083015262000164620007e7565b604083015262000173620007e7565b606083015260ff600454166200075b577f0afc6dfb8e46904d26b470c9776dbda504ff03bf5751054892c18288aa52c9e46101206040513381528351602082015260018060a01b03602085015116604082015260018060a01b03604085015116606082015260608401516080820152620001f6608085015160a08301906200082e565ba1805180159081156200074e575b501562000735576000825152600060208351015260006040835101528151602083015152815160208084015101526020820151805160406020820151910151151560405191620002548362000795565b60008352602083015260408201526200026c620007e7565b9160005b60028110620006fb5750508152806040840152602081015160406020820151910151151560405191620002a38362000795565b6000835260208301526040820152620002bb620007e7565b9160005b60028110620006ab5750506020820152606083015260018060a01b0360408201511660018060a01b0360208301511614600014620006a35760005b156200068a5734620006715760808101516020606082015191015111156200065857604051916001600160401b0361010084019081119084111762000615576020916060608092610100860160405260008652600085870152600060408701526000828701526040516200036e8162000779565b60008152600086820152600060408201526000838201528487015262000393620007e7565b60a0870152600060c0870152600060e087015233865260018060a01b0385840151168587015260018060a01b03604084015116604087015281830151828701528383015184870152015160a0850152606082820151015160c08501520151015160e08201526001600055436001556040519033602083015260018060a01b03602082015116604083015260018060a01b036040820151166060830152606081015160808301526200044d608082015160a08401906200082e565b60a0810151600061012084015b600282106200062b5760c08401516101e086015260e08401516102008087019190915285528461022081016001600160401b03811182821017620006155760405280516001600160401b0381116200061557600254600181811c911680156200060a575b6020821014620005f457601f81116200058a575b50602091601f8211600114620005205791819260009262000514575b50508160011b916000199060031b1c1916176002555b6040516126719081620008838239f35b015190508280620004ee565b601f19821692600260005260206000209160005b858110620005715750836001951062000557575b505050811b0160025562000504565b015160001960f88460031b161c1916905582808062000548565b9192602060018192868501518155019401920162000534565b60026000527f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace601f830160051c81019160208410620005e9575b601f0160051c01905b818110620005dc5750620004d2565b60008155600101620005cd565b9091508190620005c4565b634e487b7160e01b600052602260045260246000fd5b90607f1690620004be565b634e487b7160e01b600052604160045260246000fd5b6020606060019260408651805183528481015185840152015115156040820152019301910190916200045a565b60405163100960cb60e01b8152600f6004820152602490fd5b60405163100960cb60e01b8152600e6004820152602490fd5b60405163100960cb60e01b8152600d6004820152602490fd5b6001620002fa565b620006b781836200085a565b51620006c482866200085a565b52620006d181856200085a565b506000198114620006e557600101620002bf565b634e487b7160e01b600052601160045260246000fd5b6200070781836200085a565b516200071482866200085a565b526200072181856200085a565b506000198114620006e55760010162000270565b60405163100960cb60e01b8152600c6004820152602490fd5b9050600154143862000204565b60405163100960cb60e01b8152600b6004820152602490fd5b600080fd5b608081019081106001600160401b038211176200061557604052565b606081019081106001600160401b038211176200061557604052565b51906001600160a01b03821682036200077457565b60405190620007d58262000795565b60006040838281528260208201520152565b6040805191908281016001600160401b03811184821017620006155781528260005b8281106200081657505050565b60209062000823620007c6565b818401520162000809565b80516001600160a01b031682526020808201519083015260408082015190830152606090810151910152565b9060028110156200086c5760051b0190565b634e487b7160e01b600052603260045260246000fdfe60806040526004361015610018575b361561001657005b005b60003560e01c80631e93b0f1146101085780633c496554146100ff57806340410cd5146100f65780634cd87555146100ed578063573b8510146100e4578063823c0a8d146100db57806383230757146100d25780638dca4147146100c957806394134348146100c0578063ab53f2c6146100b7578063ea121ca3146100ae5763f9d773330361000e576100a96106f3565b61000e565b506100a9610674565b506100a96105ff565b506100a961055c565b506100a96104d1565b506100a96104b2565b506100a9610464565b506100a961026d565b506100a96101f0565b506100a9610198565b506100a961012c565b5034610127576000366003190112610127576020600354604051908152f35b600080fd5b503461012757600036600319011261012757610146610a20565b60056000540361017f57608060209160e06101706101626108b9565b858082518301019101610b52565b01519182910152604051908152f35b60405163100960cb60e01b815260076004820152602490fd5b506000366003190112610127576020806101b0610a20565b6101e4816101bc610a5f565b84810190600082515251151585825101526101d5610a5f565b90600082525185820152611818565b01511515604051908152f35b50346101275760003660031901126101275761020a610a20565b6005600054036102545760c0610250916101406102376102286108b9565b60208082518301019101610b52565b0151151591018190526040519081529081906020820190565b0390f35b60405163100960cb60e01b8152600a6004820152602490fd5b5060208060031936011261012757610283610a20565b5061044e6102903661259c565b916102ac6102a76102a360045460ff1690565b1590565b610c08565b6040805133815284516020820152909361043b917fcf0e8bec53cd91fa87ecf8f6f405ac75914a22acdb92a3553ee5c294fee81596908690a16102f3600160005414610c28565b61032161030f6103016108b9565b8580825183010191016125bc565b91518015908115610458575b50610c48565b61032b3415610c68565b8281019261043660a061033e8651610aa0565b9361035861035360608301968751903361149a565b610c88565b61037333600180851b0361036c8451610aa0565b1614610ca8565b6103a361039b6103816117b0565b9861039561038f8551610aa0565b8b6110b1565b51610aa0565b8589016110b1565b6103ba6103b28a830151610aa0565b8a89016110b1565b6080810151606088015260c0810151608088015260e0810151828801526103e460c0880160019052565b6103fa6103f18251610aa0565b60e089016110b1565b6000610100880152436101208801520151918251938451905101938882820151910151151591610428610964565b958652850152151587840152565b61159f565b6101408201526000610160820152611eb3565b5160008152602090f35b9050600154143861031b565b506000366003190112610127576020606061047d610a20565b6101e481610489610a5f565b8581019060018251525115156040825101526104a3610a5f565b90600082525186820152611818565b5034610127576000366003190112610127576020600154604051908152f35b506080366003190112610127576104e6610a20565b604051906104f3826107ca565b600435825260603660231901126101275760405191610511836107f2565b6024359260028410156101275761055093815260443561053081610ac0565b602082015260643561054181610ac0565b60408201526020820152611818565b60405160008152602090f35b5034610127576000366003190112610127576102506105b760a061057e610a20565b60005460078110156105c95760056105969114610ce8565b6105a86105af836105a86102286108b9565b0151151590565b151582840152565b60405190151581529081906020820190565b60076105d59114610cc8565b6101606105f26105e36108b9565b60208082518301019101610f09565b01511515828201526105a8565b50346101275760008060031936011261067157805461061c6108b9565b906040519283918252602090604082840152835191826040850152815b83811061065a57505060608094508284010152601f80199101168101030190f35b808601820151878201606001528694508101610639565b80fd5b50604036600319011261012757610689610a20565b60405190610696826107ca565b60043582526020366023190112610127576106c6916040516106b78161080d565b602435815260208201526110e7565b602060405160008152f35b9190916040806060830194805115158452602081015160208501520151910152565b506020366003190112610127576107086109e3565b50610250610714610a20565b60408161076c829383516107278161080d565b84516107328161080d565b8082526004359052845190610746826107ca565b600082526020820190865161075a8161080d565b600081528252600083525190526110e7565b01519051918291826106d1565b90600182811c921680156107a9575b602083101461079357565b634e487b7160e01b600052602260045260246000fd5b91607f1691610788565b50634e487b7160e01b600052604160045260246000fd5b604081019081106001600160401b038211176107e557604052565b6107ed6107b3565b604052565b606081019081106001600160401b038211176107e557604052565b602081019081106001600160401b038211176107e557604052565b60e081019081106001600160401b038211176107e557604052565b61016081019081106001600160401b038211176107e557604052565b61018081019081106001600160401b038211176107e557604052565b60a081019081106001600160401b038211176107e557604052565b601f909101601f19168101906001600160401b038211908210176107e557604052565b60405190600082600254916108cd83610779565b80835260019380851690811561094357506001146108f5575b506108f392500383610896565b565b6002600090815260008051602061264583398151915294602093509091905b81831061092b5750506108f39350820101386108e6565b85548884018501529485019487945091830191610914565b90506108f394506020925060ff191682840152151560051b820101386108e6565b60405190606082016001600160401b038111838210176107e557604052565b6040519061016082016001600160401b038111838210176107e557604052565b6040519061018082016001600160401b038111838210176107e557604052565b6040519061010082016001600160401b038111838210176107e557604052565b60405190606082016001600160401b03811183821017610a13575b60405260006040838281528260208201520152565b610a1b6107b3565b6109fe565b60405190610a2d82610828565b8160c0600091828152826020820152610a446109e3565b60408201528260608201528260808201528260a08201520152565b60405190610a6c826107ca565b81600081526020610a7b6109e3565b910152565b60021115610a8a57565b634e487b7160e01b600052602160045260246000fd5b6001600160a01b031690565b51906001600160a01b038216820361012757565b8015150361012757565b51906108f382610ac0565b9080601f8301121561012757604091825192610af0846107ca565b839260c083019281841161012757935b838510610b0f57505050505090565b606085830312610127578251606091610b27826107f2565b86518252602091828801518382015285880151610b4381610ac0565b86820152815201940193610b00565b61020081830312610127576101e0610bff91610b6c610983565b93610b7682610aac565b8552610b8460208301610aac565b6020860152610b9560408301610aac565b604086015260608201516060860152610bb060808301610aac565b6080860152610bc160a08301610aca565b60a086015260c082015160c086015260e082015160e0860152610be961010091828401610ad5565b908501526101c081015161012085015201610aca565b61014082015290565b15610c0f57565b60405163100960cb60e01b815260106004820152602490fd5b15610c2f57565b60405163100960cb60e01b815260116004820152602490fd5b15610c4f57565b60405163100960cb60e01b815260126004820152602490fd5b15610c6f57565b60405163100960cb60e01b815260136004820152602490fd5b15610c8f57565b60405163100960cb60e01b815260146004820152602490fd5b15610caf57565b60405163100960cb60e01b815260156004820152602490fd5b15610ccf57565b60405163100960cb60e01b815260096004820152602490fd5b15610cef57565b60405163100960cb60e01b815260086004820152602490fd5b15610d0f57565b60405163100960cb60e01b815260166004820152602490fd5b15610d2f57565b60405163100960cb60e01b815260176004820152602490fd5b15610d4f57565b60405163100960cb60e01b815260186004820152602490fd5b15610d6f57565b60405163100960cb60e01b815260196004820152602490fd5b15610d8f57565b60405163100960cb60e01b8152601a6004820152602490fd5b15610daf57565b60405163100960cb60e01b8152601b6004820152602490fd5b15610dcf57565b60405163100960cb60e01b8152601c6004820152602490fd5b15610def57565b60405163100960cb60e01b8152601d6004820152602490fd5b15610e0f57565b60405163100960cb60e01b8152601e6004820152602490fd5b15610e2f57565b60405163100960cb60e01b815260216004820152602490fd5b15610e4f57565b60405163100960cb60e01b815260226004820152602490fd5b15610e6f57565b60405163100960cb60e01b8152601f6004820152602490fd5b15610e8f57565b60405163100960cb60e01b815260206004820152602490fd5b919082608091031261012757604051608081016001600160401b03811182821017610efc575b6040526060808294610edf81610aac565b845260208101516020850152604081015160408501520151910152565b610f046107b3565b610ece565b906102808282031261012757610fd5610260610f236109a3565b93610f2d81610aac565b8552610f3b60208201610aac565b6020860152610f4c60408201610aac565b6040860152610f5e8460608301610ea8565b606086015260e08101516080860152610100938482015160a0870152610120610f88818401610aca565b60c0880152610fc161014092610f9f848601610aac565b60e08a015261016097610fb3898701610aca565b908a01526101808501610ad5565b908701526102408201519086015201610aca565b9082015290565b60405190610fe982610828565b81600080825280602083015280604083015280606083015280608083015260a082015260c0610a7b6109e3565b6001600160a01b03169052565b604090815191611032836107ca565b8260005b82811061104257505050565b60209061104d6109e3565b8184015201611036565b6040519061106482610843565b816101406000918281528260208201528260408201528260608201528260808201528260a08201528260c08201528260e0820152826101008201526110a7611023565b6101208201520152565b6001600160a01b039091169052565b9060028110156110d15760051b0190565b634e487b7160e01b600052603260045260246000fd5b6112309161117c916110f7610fdc565b9161110f61110a6102a360045460ff1690565b610d08565b60408051338152835160208083019190915284015151818301529093907f117ff0fc7909f539043dcba1a015e3c49852b86bcb1c87a6cfa653f771ccbdc090606090a1611160600560005414610d28565b6111686108b9565b916020958387808096518301019101610b52565b958461119488965180159081156113d2575b50610d48565b6111b06111a96111a48851610aa0565b610aa0565b3314610d68565b019085825151926111c760e08801948551906113f5565b9384865261124460608901958651106111e589890191829015159052565b8051156113c7576111f98851885190611417565b858901525b61123e61123986611215875151828d015190611417565b9c60608c019d8e526112273415610d88565b019e8f51610aa0565b8c51903361149a565b610da8565b51151590565b156113bb576112568651865190611417565b60808701525b51905151608086015161126e91611417565b611277916113f5565b60a08501818152845160c090960180519290961115909152938451868251015283518282510152805182516112ad8192826106d1565b037fe40859618737b9398aef223bd7d61ef256c2af8399a29890bb8f6979903f461891a1519101526112dd611057565b9686516112e990610aa0565b6112f390896110b1565b8387015161130090610aa0565b61130c908986016110b1565b5161131690610aa0565b611322908887016110b1565b516060870152608085015161133690610aa0565b61134390608088016110b1565b60a08501511515151560a087015260c085015160c08701525160e08601526101004381870152840151928184015192835190510192818382015191015115159261138b610964565b948552840152901515908201526113a1916115fc565b90610120918284015201516101408201526108f390612348565b6000608087015261125c565b6000858901526111fe565b9050600154143861118e565b50634e487b7160e01b600052601160045260246000fd5b919082019182811161140a575b821061012757565b6114126113de565b611402565b9081039081116114245790565b61142c6113de565b90565b600061142c928192826040519160208301926323b872dd60e01b845260018060a01b038092166024820152306044820152826064820152606481526114738161087b565b5193165af161148a6114836114dd565b809261153f565b506020808251830101910161152a565b60009161142c9383809360405160208101936323b872dd60e01b855260018060a01b0380931660248301523060448301526064820152606481526114738161087b565b3d15611525573d906001600160401b038211611518575b6040519161150c601f8201601f191660200184610896565b82523d6000602084013e565b6115206107b3565b6114f4565b606090565b90816020910312610127575161142c81610ac0565b156115475790565b80511561155657805190602001fd5b60405163100960cb60e01b815260016004820152602490fd5b156115775790565b80511561158657805190602001fd5b60405163100960cb60e01b815260026004820152602490fd5b91906115a9611023565b9260005b600281106115bb5750508252565b806115c8600192846110c0565b516115d382886110c0565b526115de81876110c0565b5060001981146115ef575b016115ad565b6115f76113de565b6115e9565b9190611606611023565b9260005b6002811061161b5750506020830152565b80611628600192846110c0565b5161163382886110c0565b5261163e81876110c0565b50600019811461164f575b0161160a565b6116576113de565b611649565b9190611666611023565b9260005b6002811061167b5750506020830152565b80611688600192846110c0565b5161169382886110c0565b5261169e81876110c0565b5060001981146116af575b0161166a565b6116b76113de565b6116a9565b91906116c6611023565b9260005b600281106116d85750508252565b806116e5600192846110c0565b516116f082886110c0565b526116fb81876110c0565b50600019811461170c575b016116ca565b6117146113de565b611706565b90929160209060a083019460018060a01b03168352805182840152015180516002811015610a8a576080916040918285015260208101511515606085015201511515910152565b516002811015610a8a5790565b60405190608082016001600160401b038111838210176117a3575b60405260006060838281528260208201528260408201520152565b6117ab6107b3565b611788565b604051906117bd8261085f565b816101606000918281528260208201528260408201526117db61176d565b60608201528260808201528260a08201528260c08201528260e0820152826101008201528261012082015261180e611023565b6101408201520152565b6118909061183361182e6102a360045460ff1690565b610dc8565b60407fa8cc1e0e7313e31b67ffc8662535f499310f0a2b7d7f2ae89cbe01a18167f1fa815180611864853383611719565b0390a1611875600760005414610de8565b61187d6108b9565b6020938185808094518301019101610f09565b926118a681518015908115611b4f575b50610e08565b016118b18151611760565b6118ba81610a80565b6119d8575061195f906119576108f3956118d43415610e68565b600086848701926118f66118f16118eb8651610aa0565b3361142f565b610e88565b8551600081527f1e75cb36b95ba08656b27685c88d8290a733387bb6e11910718494d39672926e90602090a1015261039561192f6117b0565b9661194361193d8851610aa0565b896110b1565b61194f81880151610aa0565b9088016110b1565b9084016110b1565b606081015160608301526080810151608083015260a081015160a0830152600060c083015261199d61199460e0830151610aa0565b60e084016110b1565b6119b76101006119af81840151151590565b151590840152565b61012043818401528101519061014091828401520151610160820152611eb3565b6119e460019151611760565b6119ed81610a80565b146119f9575b50505050565b611b4693611b3091611a0b3415610e28565b611b2b81850195611a6e6060611a218951610aa0565b95611a3b611a3660808b01988951903361149a565b610e48565b8551600181527f8b7c04b80da66f78012eb5ea464906a9d795c02c8240d02a6cee08ace14eb4a090602090a10160019052565b611aa9611aa1611a7c6117b0565b98611a8a61038f8a51610aa0565b610395611a99858b0151610aa0565b858c016110b1565b8489016110b1565b606086015160608801528351608088015260a086015160a0880152611add611ad460c0880151151590565b151560c0890152565b611aea3360e089016110b1565b600161010088015261012043818901528601519281840151948551905101948183820151910151151592611b1c610964565b96875286015284019015159052565b61165c565b9061014091828401520151610160820152611eb3565b388080806119f3565b905060015414386118a0565b506040513d6000823e3d90fd5b818110611b73575050565b60008155600101611b68565b611b8a600254610779565b80611b925750565b601f8111600114611ba557506000600255565b6002600052611bea90601f0160051c600080516020612645833981519152017f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf611b68565b6000602081208160025555565b60405190611c048261085f565b81610160600091828152826020820152826040820152611c2261176d565b60608201528260808201528260a08201528260c08201528260e082015282610100820152611c4e611023565b610120820152826101408201520152565b6000915b60028310611c7057505050565b600190606083519182518152602092838101518483015260408091015115159082015201920192019190611c63565b6108f390929192610260610280820194611cba838251611016565b611ccc60208201516020850190611016565b611cde60408201516040850190611016565b60608181015180516001600160a01b03168583015260208101516080860152604081015160a0860152015160c0840152608081015160e084015260a081015190610100918285015260c081015191611d3d610120938487019015159052565b611d7960e083015191611d566101409384890190611016565b83015193611d6b610160958689019015159052565b830151610180870190611c5f565b81015161024085015201511515910152565b90601f8211611d98575050565b6108f39160026000526020600020906020601f840160051c83019310611dc6575b601f0160051c0190611b68565b9091508190611db9565b80519091906001600160401b038111611ea6575b611df881611df3600254610779565b611d8b565b602080601f8311600114611e345750819293600092611e29575b50508160011b916000199060031b1c191617600255565b015190503880611e12565b6002600052601f19831694909190600080516020612645833981519152926000905b878210611e8e575050836001959610611e75575b505050811b01600255565b015160001960f88460031b161c19169055388080611e6a565b80600185968294968601518155019501930190611e56565b611eae6107b3565b611de4565b61010090818101611ec48151151590565b80156121a35760005b15611fce575050611fc96108f392611f99611fbb936000611eec611bf7565b93611f00611efa8451610aa0565b866110b1565b611f19611f106020850151610aa0565b602087016110b1565b611f32611f296040850151610aa0565b604087016110b1565b606083015160608601526080830151608086015260a083015160a0860152611f5d60c0860160019052565b611f76611f6d60e0850151610aa0565b60e087016110b1565b840152610140808201516101208501526101608092015190840152820160019052565b611fa36007600055565b611fac43600155565b60405192839160208301611c9f565b03601f198101835282610896565b611dd0565b909190156121165760408101928351611fe690610aa0565b928251611ff290610aa0565b90610140948585019283516120079060200190565b515161201e9290916001600160a01b0316906121af565b612026611057565b95845161203290610aa0565b61203c90886110b1565b602085015161204a90610aa0565b61205790602089016110b1565b5161206190610aa0565b61206e90604088016110b1565b60a0840151606087015260e084015161208690610aa0565b61209390608088016110b1565b511515151560a08601526101209182840180516060860151604001516120b8916113f5565b60c088015260e087016000905251908601525160208101516020810151906040015115156120e4610964565b60008152602081019290925215156040820152612100916115fc565b908401526101600151908201526108f390612348565b600080935080925081612154612130602084950151610aa0565b61213a8351610aa0565b6101408401515151916001600160a01b03909116906121af565b6101606121646111a48351610aa0565b9101519082821561219a575bf11561218d575b600080556121856000600155565b6108f3611b7f565b612195611b5b565b612177565b506108fc612170565b60c08301511515611ecd565b60405163a9059cbb60e01b602082019081526001600160a01b03938416602483015260448083019590955293815261221b93600093849392849190608081016001600160401b03811182821017612222575b6040525193165af161148a6122146114dd565b809261156f565b1561012757565b61222a6107b3565b612201565b6040519061223c826107ca565b60006020838281520152565b6040519061225582610843565b816101406000918281528260208201528260408201528260608201528260808201528260a08201528260c08201528260e0820152612291611023565b610100820152826101208201520152565b6108f3909291926101e06101406102008301956122c0848251611016565b6122d260208201516020860190611016565b6122e460408201516040860190611016565b6060810151606085015261230060808201516080860190611016565b60a08181015115159085015260c081015160c085015260e081015160e08501526123336101008083015190860190611c5f565b6101208101516101c085015201511515910152565b61235061222f565b60e082018051606084018051919091118352929190610100908184015160c0850190815110156000906000146125975750835115155b1561248f5793612465611fc9946108f3979484611fbb986123b6602061246d98518a511115950194859015159052565b6123be612248565b976123d26123cc8851610aa0565b8a6110b1565b6123eb6123e26020890151610aa0565b60208b016110b1565b6124046123fb6040890151610aa0565b60408b016110b1565b51606089015261242361241a6080880151610aa0565b60808a016110b1565b61243c61243360a0880151151590565b151560a08a0152565b5160c08801525160e0870152610120908185015190870152610140809401519086015251151590565b151590830152565b6124776005600055565b61248043600155565b604051928391602083016122a2565b50505060008093508261255f8294936124ac602085960151610aa0565b906124b78151151590565b8514612588576124ca6080850151610aa0565b61012085018051515190936001600160a01b03926124ec9291908416906121af565b6125036124fc6040870151610aa0565b9251151590565b861461256f5761255561254f6125198751610aa0565b945b5180519061254a604060208401519301511515612536610964565b938c85526020850152604084019015159052565b6116bc565b60200190565b51519216906121af565b6101406121646111a48351610aa0565b61255561254f6125826080880151610aa0565b9461251b565b6125928451610aa0565b6124ca565b612386565b602090600319011261012757604051906125b58261080d565b6004358252565b61020081830312610127576101e09061262a6125d66109c3565b936125e083610aac565b85526125ee60208401610aac565b60208601526125ff60408401610aac565b60408601526060830151606086015261261b8160808501610ea8565b60808601526101008301610ad5565b60a08401526101c081015160c0840152015160e08201529056fe405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acea164736f6c6343000810000a`,
+  BytecodeLen: 12020,
   version: 9,
   views: {
     }
   };
 export const _stateSourceMap = {
   1: {
-    at: './src/contracts/loan_nnt_nnt.rsh:49:9:after expr stmt',
+    at: './src/contracts/loan_nnt_nnt.rsh:48:9:after expr stmt',
     fs: [],
     msg: null,
     who: 'Module'
     },
   4: {
-    at: './src/contracts/loan_nnt_nnt.rsh:128:17:after expr stmt',
+    at: './src/contracts/loan_nnt_nnt.rsh:129:17:after expr stmt',
     fs: [],
     msg: null,
     who: 'Module'
     },
   5: {
-    at: './src/contracts/loan_nnt_nnt.rsh:88:50:after expr stmt semicolon',
+    at: './src/contracts/loan_nnt_nnt.rsh:89:50:after expr stmt semicolon',
     fs: [],
     msg: null,
     who: 'Module'
     },
   6: {
-    at: './src/contracts/loan_nnt_nnt.rsh:82:17:after expr stmt',
+    at: './src/contracts/loan_nnt_nnt.rsh:83:17:after expr stmt',
     fs: [],
     msg: null,
     who: 'Module'
     },
   7: {
-    at: './src/contracts/loan_nnt_nnt.rsh:54:54:after expr stmt semicolon',
+    at: './src/contracts/loan_nnt_nnt.rsh:52:62:after expr stmt semicolon',
     fs: [],
     msg: null,
     who: 'Module'
@@ -1151,11 +1460,13 @@ export const _Connectors = {
   };
 export const _Participants = {
   "B": B,
+  "Borrower_close": Borrower_close,
   "Borrower_repay": Borrower_repay,
   "Lender_lend": Lender_lend
   };
 export const _APIs = {
   Borrower: {
+    close: Borrower_close,
     repay: Borrower_repay
     },
   Lender: {

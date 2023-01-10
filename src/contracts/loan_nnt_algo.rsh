@@ -54,7 +54,7 @@ export const main = Reach.App(() => {
 			'Loan balance not right'
 		)
 		.define(() => {
-			LoanViews.isLive.set(!loanAccepted && isLive)
+			LoanViews.isLive.set((!loanAccepted && isLive) || loanAccepted)
 		})
 		.paySpec([tokLoan])
 		.while(!loanAccepted && isLive)

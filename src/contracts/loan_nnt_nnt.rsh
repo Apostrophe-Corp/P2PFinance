@@ -15,8 +15,6 @@ const ParamsType = Object({
 	address: Address,
 })
 
-const ADVERTDEADLINE = 23351
-
 export const main = Reach.App(() => {
 	const B = Participant('B', {
 		getParams: Fun([], ParamsType),
@@ -26,6 +24,7 @@ export const main = Reach.App(() => {
 		lend: Fun([], Bool),
 	})
 	const Borrower = API('Borrower', {
+		close: Fun([], Null),
 		repay: Fun([UInt], Tuple(Bool, UInt, UInt)),
 	})
 
@@ -50,8 +49,7 @@ export const main = Reach.App(() => {
 	B.pay([[collateral, tokCollateral]])
 	B.interact.created(thisConsensusTime())
 
-	const end = thisConsensusTime() + ADVERTDEADLINE
-	const [loanAccepted, lender] = parallelReduce([false, B])
+	const [loanAccepted, lender, isLive] = parallelReduce([false, B, true])
 		.invariant(
 			balance(tokCollateral) == collateral,
 			'Collateral balance not right'
@@ -61,20 +59,23 @@ export const main = Reach.App(() => {
 			'Loan balance not right'
 		)
 		.define(() => {
-			LoanViews.isLive.set(
-				(thisConsensusTime() <= end && !loanAccepted) || loanAccepted
-			)
+			LoanViews.isLive.set((!loanAccepted && isLive) || loanAccepted)
 		})
-		.while(thisConsensusTime() <= end && !loanAccepted)
+		.paySpec([tokLoan])
+		.while(!loanAccepted && isLive)
 		.api_(Lender.lend, () => {
 			return [
 				[0, [loanInfo.principal, tokLoan]],
 				(notify) => {
 					notify(true)
 					const who = this
-					return [true, who]
+					return [true, who, isLive]
 				},
 			]
+		})
+		.api(Borrower.close, (ret) => {
+			ret(null)
+			return [loanAccepted, lender, false]
 		})
 	if (!loanAccepted) {
 		transfer(balance(tokCollateral), tokCollateral).to(B)
@@ -116,7 +117,7 @@ export const main = Reach.App(() => {
 					},
 				]
 			})
-		
+
 		transfer(balance(tokCollateral), tokCollateral).to(
 			amountPaid < loanInfo.amount ? lender : B
 		)
