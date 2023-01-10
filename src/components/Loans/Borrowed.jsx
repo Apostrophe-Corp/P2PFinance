@@ -8,7 +8,7 @@ import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 
-const Borrowed = ({ loan, ad }) => {
+const Borrowed = ({ loan, ad = false }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const { repay, close, user } = useReach()
@@ -21,11 +21,10 @@ const Borrowed = ({ loan, ad }) => {
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
 	const [outStanding, setOutStanding] = useState(0)
-	const [maturation, setMaturation] = useState(0)
+	const [maturation, setMaturation] = useState(Number(loan.maturation))
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		console.log({ loan })
 		if (ad && loan?.borrowerInfo) {
 			const pfp = Number(loan?.borrowerInfo?.pfp)
 			setPFPs([
@@ -43,14 +42,15 @@ const Borrowed = ({ loan, ad }) => {
 
 	useEffect(() => {
 		const updateValues = async () => {
+			// console.log({loan})
 			const assetData = loan.selected
-				? { name: 'ALGO', unit: 'ALGO' }
+				? { name: 'Algo' }
 				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
 			const collateralData = loan.offered
-				? { name: 'ALGO', unit: 'ALGO' }
+				? { name: 'Algo' }
 				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
@@ -59,27 +59,35 @@ const Borrowed = ({ loan, ad }) => {
 			)
 		}
 		updateValues()
-	}, [loan.offered, loan.selected, loan.tokenOffered, loan.tokenRequested])
+	}, [
+		loan,
+		loan.offered,
+		loan.selected,
+		loan.tokenOffered,
+		loan.tokenRequested,
+	])
 
 	useEffect(() => {
-		const outStandingTimer = setInterval(async () => {
-			const amountPaid_ = (await ctc.v.LoanViews.amountPaid())?.[1]
-			const amountPaid =
-				amountPaid_ !== null
-					? loan.offered
-						? instantReach.formatCurrency(amountPaid_)
-						: await parseCurrency(
-								Number(loan.tokenRequested),
-								instantReach.bigNumberToNumber(amountPaid_)
-						  )
-					: Number(loan.paymentAmount)
+		let outStandingTimer
+		if (!ad)
+			outStandingTimer = setInterval(async () => {
+				const amountPaid_ = (await ctc.v.LoanViews.amountPaid())?.[1]
+				const amountPaid =
+					amountPaid_ !== null
+						? loan.offered
+							? instantReach.formatCurrency(amountPaid_)
+							: await parseCurrency(
+									Number(loan.tokenRequested),
+									instantReach.bigNumberToNumber(amountPaid_)
+							  )
+						: Number(loan.paymentAmount)
 
-			// console.log(amountPaid)
-			const outstanding = Number(loan.paymentAmount) - amountPaid
-			// console.log(await parseCurrency(amountPaid))
-			setOutStanding(outstanding)
-			setLoading(false)
-		}, 5000)
+				// console.log(amountPaid)
+				const outstanding = Number(loan.paymentAmount) - amountPaid
+				// console.log(await parseCurrency(amountPaid))
+				setOutStanding(outstanding)
+				setLoading(false)
+			}, 5000)
 
 		let maturationTimer
 		if (!ad)
@@ -100,7 +108,7 @@ const Borrowed = ({ loan, ad }) => {
 			}, 5000)
 
 		return () => {
-			clearInterval(outStandingTimer)
+			if (!ad) clearInterval(outStandingTimer)
 			if (!ad) clearInterval(maturationTimer)
 		}
 	}, [
@@ -139,7 +147,7 @@ const Borrowed = ({ loan, ad }) => {
 					s.flexCenter,
 					l.detail,
 					l.bNone,
-					l.asa
+					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
 					viewASA(loan.tokenRequested)
@@ -167,11 +175,17 @@ const Borrowed = ({ loan, ad }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loan Token'}
+					{ad.selected ? 'Algo' : assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					loan.offered ? '' : l.asa
+				)}
 				onClick={() => {
 					viewASA(loan.tokenOffered)
 				}}
@@ -198,11 +212,17 @@ const Borrowed = ({ loan, ad }) => {
 						l.assetName
 					)}
 				>
-					{collateral ?? 'Collateral Token'}
+					{ad.offered ? 'Algo' : collateral ?? 'Collateral Token'}
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					loan.selected ? '' : l.asa
+				)}
 				onClick={() => {
 					viewASA(loan.tokenRequested)
 				}}
@@ -217,7 +237,7 @@ const Borrowed = ({ loan, ad }) => {
 						l.quantity
 					)}
 				>
-					{outStanding}
+					{ad ? loan.paymentAmount : outStanding}
 				</span>
 				<span
 					className={cf(
@@ -229,7 +249,7 @@ const Borrowed = ({ loan, ad }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loan Token'}
+					{ad.selected ? 'Algo' : assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
@@ -243,9 +263,9 @@ const Borrowed = ({ loan, ad }) => {
 						l.quantity
 					)}
 				>
-					{loading ? 'Loading...' : maturation}
+					{ad ? loan.maturation : loading ? 'Loading...' : maturation}
 				</span>
-				{!loading && maturation !== '...' && (
+				{(ad || (!loading && maturation !== '...')) && (
 					<span
 						className={cf(
 							s.wMax,

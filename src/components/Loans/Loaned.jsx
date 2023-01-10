@@ -24,13 +24,13 @@ const Loaned = ({ loan, ad = false }) => {
 	useEffect(() => {
 		const updateValues = async () => {
 			const assetData = loan.selected
-				? { name: 'ALGO', unit: 'ALGO' }
+				? { name: 'Algo' }
 				: await getASAInfo(Number(loan.tokenRequested))
 			setAssetName(
 				`${assetData?.name}${assetData?.unit ? `, (${assetData.unit})` : ''}`
 			)
 			const collateralData = loan.offered
-				? { name: 'ALGO', unit: 'ALGO' }
+				? { name: 'Algo' }
 				: await getASAInfo(Number(loan.tokenOffered))
 			setCollateral(
 				`${collateralData?.name}${
@@ -87,7 +87,7 @@ const Loaned = ({ loan, ad = false }) => {
 					l.detail,
 					l.bNone,
 					l.d17,
-					l.asa
+					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
 					viewASA(loan.tokenRequested)
@@ -115,7 +115,7 @@ const Loaned = ({ loan, ad = false }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loan Token'}
+					{ad.selected ? 'Algo' : assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div
@@ -125,7 +125,7 @@ const Loaned = ({ loan, ad = false }) => {
 					s.flexCenter,
 					l.detail,
 					l.d17,
-					l.asa
+					loan.offered ? '' : l.asa
 				)}
 				onClick={() => {
 					viewASA(loan.tokenOffered)
@@ -153,7 +153,7 @@ const Loaned = ({ loan, ad = false }) => {
 						l.assetName
 					)}
 				>
-					{collateral ?? 'Collateral Token'}
+					{ad.offered ? 'Algo' : collateral ?? 'Collateral Token'}
 				</span>
 			</div>
 			<div
@@ -163,7 +163,7 @@ const Loaned = ({ loan, ad = false }) => {
 					s.flexCenter,
 					l.detail,
 					l.d17,
-					l.asa
+					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
 					viewASA(loan.tokenRequested)
@@ -191,7 +191,7 @@ const Loaned = ({ loan, ad = false }) => {
 						l.assetName
 					)}
 				>
-					{assetName ?? 'Loan Token'}
+					{ad.selected ? 'Algo' : assetName ?? 'Loan Token'}
 				</span>
 			</div>
 			<div

@@ -40,7 +40,7 @@ const Profile = () => {
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
 				setAdverts(loansRes.loans)
-				console.log(loansRes.loans)
+				// console.log(loansRes.loans)
 				const remainingAdverts = presentAdverts.filter(
 					(el) => el.borrowerInfo.username === authUser.username
 				)

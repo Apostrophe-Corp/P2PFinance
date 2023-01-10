@@ -21,7 +21,9 @@ const Advert = ({ ad }) => {
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getASAInfo(Number(ad.tokenRequested))
+			const assetData = ad.selected
+				? { name: 'Algo' }
+				: await getASAInfo(Number(ad.tokenRequested))
 			// console.log(assetData)
 			setAssetName(
 				`${assetData?.['name']}`
@@ -29,7 +31,9 @@ const Advert = ({ ad }) => {
 				// 	assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
 				// }`
 			)
-			const collateralData = await getASAInfo(Number(ad.tokenOffered))
+			const collateralData = ad.offered
+				? { name: 'Algo' }
+				: await getASAInfo(Number(ad.tokenOffered))
 			// console.log(collateralData)
 			setCollateral(
 				`${collateralData?.['name']}`
@@ -41,7 +45,7 @@ const Advert = ({ ad }) => {
 			)
 		}
 		updateValues()
-	}, [ad.tokenOffered, ad.tokenRequested])
+	}, [ad.offered, ad.selected, ad.tokenOffered, ad.tokenRequested])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
@@ -66,7 +70,7 @@ const Advert = ({ ad }) => {
 					s.flexCenter,
 					l.detail,
 					l.bNone,
-					l.asa
+					ad.selected ? '' : l.asa
 				)}
 				onClick={() => {
 					viewASA(ad.tokenRequested)
@@ -94,13 +98,23 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{`${
-						assetName && assetName !== 'undefined' ? assetName : 'Loan Token'
-					}`}
+					{ad.selected
+						? 'Algo'
+						: `${
+								assetName && assetName !== 'undefined'
+									? assetName
+									: 'Loan Token'
+						  }`}
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					ad.offered ? '' : l.asa
+				)}
 				onClick={() => {
 					viewASA(ad.tokenOffered)
 				}}
@@ -127,15 +141,23 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{`${
-						collateral && collateral !== 'undefined'
-							? collateral
-							: 'Collateral Token'
-					}`}
+					{ad.offered
+						? 'Algo'
+						: `${
+								collateral && collateral !== 'undefined'
+									? collateral
+									: 'Collateral Token'
+						  }`}
 				</span>
 			</div>
 			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.asa)}
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					ad.selected ? '' : l.asa
+				)}
 				onClick={() => {
 					viewASA(ad.tokenRequested)
 				}}
@@ -162,9 +184,13 @@ const Advert = ({ ad }) => {
 						l.assetName
 					)}
 				>
-					{`${
-						assetName && assetName !== 'undefined' ? assetName : 'Loan Token'
-					}`}
+					{ad.selected
+						? 'Algo'
+						: `${
+								assetName && assetName !== 'undefined'
+									? assetName
+									: 'Loan Token'
+						  }`}
 				</span>
 			</div>
 			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

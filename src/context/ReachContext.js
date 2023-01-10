@@ -247,15 +247,15 @@ const ReachContextProvider = ({ children }) => {
 		if (res.success) {
 			if (res.loan?.lender === '') {
 				let rewardSent = false
-				const userAssetBalance = offered
+				const userAssetBalance = selected
 					? reach.formatCurrency(await reach.balanceOf(user.account), 4)
 					: await reach.balanceOf(user.account, asset)
 				const enough = userAssetBalance >= loanAmount
 
 				if (!enough) {
 					alertThis({
-						message: `Your ${offered ? 'ALGO ' : ''}balance${
-							offered ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+						message: `Your ${selected ? 'ALGO ' : ''}balance${
+							selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
 						} - ${userAssetBalance}, is insufficient for a repayment of: ${loanAmount}`,
 						forConfirmation: false,
 					})
@@ -293,7 +293,7 @@ const ReachContextProvider = ({ children }) => {
 
 				const agreed = await alertThis({
 					message: `You're about to lend ${loanAmount}${
-						offered
+						selected
 							? ' ALGO'
 							: ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
 					}. Proceed?`,
@@ -376,15 +376,15 @@ const ReachContextProvider = ({ children }) => {
 			? reach.parseCurrency(payAmountIn)
 			: await fmtCurrency(asset, Number(payAmountIn))
 
-		const userAssetBalance = offered
+		const userAssetBalance = selected
 			? reach.formatCurrency(await reach.balanceOf(user.account), 4)
 			: await reach.balanceOf(user.account, asset)
 		const enough = userAssetBalance >= payAmount
 
 		if (!enough) {
 			alertThis({
-				message: `Your ${offered ? 'ALGO ' : ''}balance${
-					offered ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+				message: `Your ${selected ? 'ALGO ' : ''}balance${
+					selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
 				} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
 				forConfirmation: false,
 			})
@@ -392,7 +392,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 		const agreed = await alertThis({
 			message: `You're about to repay ${payAmountIn}${
-				offered ? ' ALGO' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+				selected ? ' ALGO' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
 			}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
@@ -408,7 +408,7 @@ const ReachContextProvider = ({ children }) => {
 				JSON.parse(loanCtcInfo)
 			)
 			const [repaid, paid, original] = await ctc.a.Borrower.repay(
-				offered ? reach.parseCurrency(payAmountIn) : payAmount
+				selected ? reach.parseCurrency(payAmountIn) : payAmount
 			)
 			const [paid_] = [
 				reach.bigNumberToNumber(paid),
@@ -467,6 +467,14 @@ const ReachContextProvider = ({ children }) => {
 			})
 			stopWaiting()
 			if (res.success) {
+				const presentAdverts = adverts
+				const remainingAdverts = presentAdverts.filter((el) => el.id !== id)
+				setAdverts([...remainingAdverts])
+				const presentUserAdverts = userAdverts
+				const remainingUserAdverts = presentUserAdverts.filter(
+					(el) => el.id !== id
+				)
+				setUserAdverts([...remainingUserAdverts])
 				alertThis({
 					message: `Success!`,
 					forConfirmation: false,
