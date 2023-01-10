@@ -253,6 +253,7 @@ const ReachContextProvider = ({ children }) => {
 				const enough = userAssetBalance >= loanAmount
 
 				if (!enough) {
+					stopWaiting()
 					alertThis({
 						message: `Your ${selected ? 'ALGO ' : ''}balance${
 							selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
@@ -291,6 +292,7 @@ const ReachContextProvider = ({ children }) => {
 					}
 				}
 
+				stopWaiting()
 				const agreed = await alertThis({
 					message: `You're about to lend ${loanAmount}${
 						selected
