@@ -306,7 +306,12 @@ const Borrowed = ({ loan, ad = false }) => {
 					)}
 					onClick={async () => {
 						ad
-							? close(loan.id, loan.contractInfo, loan.selected, loan.offered)
+							? await close(
+									loan.id,
+									loan.contractInfo,
+									loan.selected,
+									loan.offered
+							  )
 							: await repay(
 									loan.id,
 									loan.contractInfo,
