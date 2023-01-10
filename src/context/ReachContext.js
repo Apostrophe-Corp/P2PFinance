@@ -240,7 +240,9 @@ const ReachContextProvider = ({ children }) => {
 		offered
 	) => {
 		startWaiting()
-		const assetInfo = await getASAInfo(Number(asset))
+		const assetInfo = selected
+			? { name: 'Algo' }
+			: await getASAInfo(Number(asset))
 		const res = await request({
 			path: `loans/${id}`,
 		})
@@ -250,14 +252,14 @@ const ReachContextProvider = ({ children }) => {
 				const userAssetBalance = selected
 					? reach.formatCurrency(await reach.balanceOf(user.account), 4)
 					: await reach.balanceOf(user.account, asset)
-				const enough = userAssetBalance >= loanAmount
+				const enough = Number(userAssetBalance) >= loanAmount
 
 				if (!enough) {
 					stopWaiting()
 					alertThis({
 						message: `Your ${selected ? 'ALGO ' : ''}balance${
 							selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
-						} - ${userAssetBalance}, is insufficient for a repayment of: ${loanAmount}`,
+						} - ${Number(userAssetBalance)}, is insufficient for a repayment of: ${loanAmount}`,
 						forConfirmation: false,
 					})
 					return
@@ -338,6 +340,7 @@ const ReachContextProvider = ({ children }) => {
 							}`,
 							forConfirmation: false,
 						})
+						return true
 					} else {
 						alertThis({
 							message: `Failed to upload your address information. Note: This does not affect the contract. Error message: ${res?.message}`,
@@ -363,10 +366,13 @@ const ReachContextProvider = ({ children }) => {
 				})
 			}
 		}
+		return false
 	}
 
 	const repay = async (id, loanCtcInfo, asset, selected, offered) => {
-		const assetInfo = await getASAInfo(Number(asset))
+		const assetInfo = selected
+			? { name: 'Algo' }
+			: await getASAInfo(Number(asset))
 		const payAmountIn = await alertThis({
 			message: 'Enter the repay amount',
 			prompt: true,
@@ -374,20 +380,20 @@ const ReachContextProvider = ({ children }) => {
 			canClear: true,
 		})
 		if (payAmountIn === undefined) return null
-		const payAmount = offered
+		const payAmount = selected
 			? reach.parseCurrency(payAmountIn)
 			: await fmtCurrency(asset, Number(payAmountIn))
 
 		const userAssetBalance = selected
 			? reach.formatCurrency(await reach.balanceOf(user.account), 4)
 			: await reach.balanceOf(user.account, asset)
-		const enough = userAssetBalance >= payAmount
+		const enough = Number(userAssetBalance) >= payAmountIn
 
 		if (!enough) {
 			alertThis({
 				message: `Your ${selected ? 'ALGO ' : ''}balance${
 					selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
-				} - ${userAssetBalance}, is insufficient for a repayment of: ${payAmount}`,
+				} - ${Number(userAssetBalance)}, is insufficient for a repayment of: ${payAmountIn}`,
 				forConfirmation: false,
 			})
 			return

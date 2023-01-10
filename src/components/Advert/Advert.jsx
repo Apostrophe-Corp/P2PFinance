@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
 import { cf, setPFPs, getASAInfo, viewASA } from '../../utils'
 
 const Advert = ({ ad }) => {
+	const navigate = useNavigate()
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const { lend } = useReach()
@@ -237,8 +239,8 @@ const Advert = ({ ad }) => {
 						s.flexCenter,
 						l.lendBtn
 					)}
-					onClick={() => {
-						lend(
+					onClick={async () => {
+						;(await lend(
 							Number(ad.id),
 							ad.contractInfo,
 							Number(ad.amountRequested),
@@ -246,7 +248,7 @@ const Advert = ({ ad }) => {
 							Number(ad.tokenOffered),
 							ad.selected,
 							ad.offered
-						)
+						)) && navigate('/account')
 					}}
 				>
 					Lend

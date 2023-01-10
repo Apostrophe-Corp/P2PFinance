@@ -126,7 +126,7 @@ const Create = () => {
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenRequested'
 						>
-							<span className={cf(cr8.formText)}>Loan Token ID</span>
+							<span className={cf(cr8.formText)}>Other Loan ASA</span>
 							<input
 								type='number'
 								name='tokenRequested'
@@ -186,7 +186,7 @@ const Create = () => {
 									...loanParams,
 									tokenOffered: 10458941,
 								})
-							} }
+							}}
 							mono={true}
 						/>
 						<label

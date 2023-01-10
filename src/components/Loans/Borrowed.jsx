@@ -74,7 +74,7 @@ const Borrowed = ({ loan, ad = false }) => {
 				const amountPaid_ = (await ctc.v.LoanViews.amountPaid())?.[1]
 				const amountPaid =
 					amountPaid_ !== null
-						? loan.offered
+						? loan.selected
 							? instantReach.formatCurrency(amountPaid_)
 							: await parseCurrency(
 									Number(loan.tokenRequested),
@@ -114,14 +114,12 @@ const Borrowed = ({ loan, ad = false }) => {
 	}, [
 		ad,
 		ctc.v.LoanViews,
-		loan.contractInfo,
 		loan.created,
 		loan.maturation,
-		loan.offered,
+		loan.selected,
 		loan.paymentAmount,
 		loan.tokenRequested,
 		outStanding,
-		user.account,
 	])
 
 	return (
@@ -316,6 +314,7 @@ const Borrowed = ({ loan, ad = false }) => {
 							? true
 							: !(!loan.resolved && maturation !== '...')
 					}
+					id={`${ad ? 'ad' : 'loan'}-btn-${ad.id}-${ad.borrower}`}
 				>
 					{ad ? 'Drop Ad' : 'Repay'}
 				</button>
