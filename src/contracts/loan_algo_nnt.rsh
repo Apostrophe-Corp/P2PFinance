@@ -86,7 +86,7 @@ export const main = Reach.App(() => {
 		transfer(balance()).to(B)
 
 		const beginBlock = thisConsensusTime()
-		const [end_, live_] = makeDeadline(loanInfo.maturation)
+		const end_ = beginBlock + loanInfo.maturation
 		LoanViews.beginBlock.set(beginBlock)
 		const amountPaid = parallelReduce(0)
 			.invariant(
@@ -102,7 +102,7 @@ export const main = Reach.App(() => {
 				LoanViews.loanPaid.set(amountPaid >= loanInfo.amount)
 				LoanViews.amountPaid.set(amountPaid)
 			})
-			.while(live_() && amountPaid < loanInfo.amount)
+			.while(thisConsensusTime() < end_ && amountPaid < loanInfo.amount)
 			.api_(Borrower.repay, (amt) => {
 				check(this == B, 'You are not the Borrower')
 				const excess =
@@ -127,7 +127,6 @@ export const main = Reach.App(() => {
 				ret(null)
 				return amountPaid
 			})
-			.timeRemaining(end_())
 
 		transfer(balance(tokCollateral), tokCollateral).to(
 			amountPaid < loanInfo.amount ? lender : B

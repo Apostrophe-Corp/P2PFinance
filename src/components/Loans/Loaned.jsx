@@ -76,8 +76,12 @@ const Loaned = ({ loan, ad = false }) => {
 						contractStatus === false
 							? blocksRemaining
 							: contractStatus === null
-							? 'Loan has been resolved'
-							: 'Loan has been resolved'
+							? loan.resolved
+								? 'Loan repaid in full'
+								: 'Loan not fully paid, collateral sent to you'
+							: loan.resolved
+							? 'Loan repaid in full'
+							: 'Evaluating...'
 					)
 					setMaturation_(
 						contractStatus === false
@@ -85,8 +89,12 @@ const Loaned = ({ loan, ad = false }) => {
 								? 'Ended'
 								: blocksRemaining
 							: contractStatus === null
-							? 'Loan has been resolved'
-							: 'Loan has been resolved'
+							? loan.resolved
+								? 'Loan repaid in full'
+								: 'Loan not fully paid, collateral sent to you'
+							: loan.resolved
+							? 'Loan repaid in full'
+							: 'Evaluating...'
 					)
 				} else {
 					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
@@ -99,8 +107,16 @@ const Loaned = ({ loan, ad = false }) => {
 					)
 					if (contractStatus === null || contractStatus === true) {
 						if (!ad) clearInterval(maturationTimer)
-						setMaturation_('Loan has been resolved')
-						setMaturation('Loan has been resolved')
+						setMaturation_(
+							loan.resolved
+								? 'Loan repaid in full'
+								: 'Loan not fully paid, collateral sent to you'
+						)
+						setMaturation(
+							loan.resolved
+								? 'Loan repaid in full'
+								: 'Loan not fully paid, collateral sent to you'
+						)
 					} else {
 						setMaturation_('Unable to evaluate maturation')
 						setMaturation('Unable to evaluate maturation')
@@ -254,7 +270,7 @@ const Loaned = ({ loan, ad = false }) => {
 				>
 					{maturation_}
 				</span>
-				{typeof maturation === 'number' && (
+				{(ad || (!status && maturation > 1)) && (
 					<span
 						className={cf(
 							s.wMax,
@@ -314,7 +330,7 @@ const Loaned = ({ loan, ad = false }) => {
 							}
 						}
 					}}
-					disabled={ad ? false : (status && maturation <= 0) || status}
+					disabled={ad ? false : (!status && maturation >= 0) || status}
 					id={`${ad ? 'ad' : 'loan'}-btn-${ad.id}-${ad.borrower}`}
 				>
 					{ad

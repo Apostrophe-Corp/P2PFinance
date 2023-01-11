@@ -191,7 +191,7 @@ const ReachContextProvider = ({ children }) => {
 					const balAtomic = tokenID
 						? await reach.balanceOf(account, tokenID)
 						: await reach.balanceOf(account)
-					const balance = reach.formatCurrency(balAtomic, 4)
+					const balance = Number(reach.formatCurrency(balAtomic, 4))
 					return balance
 				},
 				address: instantReach.formatAddress(account.getAddress()),
@@ -241,16 +241,21 @@ const ReachContextProvider = ({ children }) => {
 	) => {
 		startWaiting()
 		if (selected) {
-			const minBal = reach.formatCurrency(
-				await reach.minimumBalanceOf(user.account),
-				4
+			const minBal = Number(
+				reach.formatCurrency(await reach.minimumBalanceOf(user.account), 4)
 			)
-			const bal = reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			const bal = Number(
+				reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			)
 			const resultingBal = bal - Number(loanAmount)
 			if (resultingBal < minBal) {
 				stopWaiting()
 				alertThis({
-					message: `Your balance after giving the loan: ${resultingBal} Algo, would be lower than your minimum balance: ${minBal} Algo, Please consider getting more Algos`,
+					message: `Your balance after giving the loan: ${trimNum(
+						resultingBal
+					)} Algo, would be lower than your minimum balance: ${trimNum(
+						minBal
+					)} Algo, Please consider getting more Algos`,
 					forConfirmation: false,
 				})
 				return
@@ -526,12 +531,14 @@ const ReachContextProvider = ({ children }) => {
 		startWaiting()
 		let success = false
 		if (offered) {
-			const minBal = reach.formatCurrency(
-				await reach.minimumBalanceOf(user.account),
-				4
+			const minBal = Number(
+				reach.formatCurrency(await reach.minimumBalanceOf(user.account), 4)
 			)
-			const bal = reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			const bal = Number(
+				reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			)
 			const resultingBal = bal - Number(loanParams.amountOffered)
+			console.log({ minBal, resultingBal })
 			if (resultingBal < minBal) {
 				stopWaiting()
 				alertThis({
@@ -563,7 +570,7 @@ const ReachContextProvider = ({ children }) => {
 			const userBal = await reach.balanceOf(user.account)
 
 			if (
-				reach.formatCurrency(userBal, 4) < Number(loanParams['amountOffered'])
+				Number(reach.formatCurrency(userBal, 4)) < Number(loanParams['amountOffered'])
 			) {
 				stopWaiting()
 				alertThis({
