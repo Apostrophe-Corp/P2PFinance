@@ -18,7 +18,7 @@ import {
 	nnt_algo,
 	nnt_nnt,
 } from '../contracts'
-import { request, fmtCurrency, getASAInfo } from '../utils'
+import { request, fmtCurrency, getASAInfo, trimNum } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
 import { LoadingPreview } from '../components/LoadingPreview'
@@ -240,6 +240,22 @@ const ReachContextProvider = ({ children }) => {
 		offered
 	) => {
 		startWaiting()
+		if (selected) {
+			const minBal = reach.formatCurrency(
+				await reach.minimumBalanceOf(user.account),
+				4
+			)
+			const bal = reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			const resultingBal = bal - Number(loanAmount)
+			if (resultingBal < minBal) {
+				stopWaiting()
+				alertThis({
+					message: `Your balance after giving the loan: ${resultingBal} Algo, would be lower than your minimum balance: ${minBal} Algo, Please consider getting more Algos`,
+					forConfirmation: false,
+				})
+				return
+			}
+		}
 		const assetInfo = selected
 			? { name: 'Algo' }
 			: await getASAInfo(Number(asset))
@@ -509,6 +525,26 @@ const ReachContextProvider = ({ children }) => {
 	const create = async (loanParams, selected, offered) => {
 		startWaiting()
 		let success = false
+		if (offered) {
+			const minBal = reach.formatCurrency(
+				await reach.minimumBalanceOf(user.account),
+				4
+			)
+			const bal = reach.formatCurrency(await reach.balanceOf(user.account), 4)
+			const resultingBal = bal - Number(loanParams.amountOffered)
+			if (resultingBal < minBal) {
+				stopWaiting()
+				alertThis({
+					message: `Your balance after paying the collateral: ${trimNum(
+						resultingBal
+					)} Algo, would be lower than your minimum balance: ${trimNum(
+						minBal
+					)} Algo, Please reduce this amount or consider getting more Algos`,
+					forConfirmation: false,
+				})
+				return
+			}
+		}
 		if (!offered) {
 			const userBal = await reach.balanceOf(
 				user.account,

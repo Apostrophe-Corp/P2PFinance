@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
+import { useReach } from '../../hooks'
 import { cf, setPFPs, getASAInfo, viewASA } from '../../utils'
+import { algo_nnt, nnt_algo, nnt_nnt } from '../../contracts'
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
@@ -9,9 +11,18 @@ const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 const Loaned = ({ loan, ad = false }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
+	const { user, close, alertThis, startWaiting, stopWaiting } = useReach()
 	const [assetName, setAssetName] = useState('Loan Token')
 	const [collateral, setCollateral] = useState('Collateral Token')
+	const [maturation_, setMaturation_] = useState(Number(loan.maturation))
 	const [maturation, setMaturation] = useState(Number(loan.maturation))
+	const [ctc] = useState(
+		user.account.contract(
+			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
+			JSON.parse(loan.contractInfo)
+		)
+	)
+	const [status, setStatus] = useState(true)
 
 	useEffect(() => {
 		const pfp = Number(loan?.borrowerInfo?.pfp)
@@ -45,31 +56,67 @@ const Loaned = ({ loan, ad = false }) => {
 		let maturationTimer
 		if (!ad)
 			maturationTimer = setInterval(async () => {
-				if (!loan.resolved) {
+				const beginBlock_ = (await ctc.v.LoanViews.beginBlock())?.[1]
+				if (beginBlock_ !== null) {
+					const beginBlock = instantReach.bigNumberToNumber(beginBlock_)
 					const currentTime = instantReach.bigNumberToNumber(
 						await instantReach.getNetworkTime()
 					)
 					const blocksRemaining =
-						Number(loan.created) + Number(loan.maturation) - currentTime
-					if (blocksRemaining > 0) setMaturation(blocksRemaining)
-					else
-						setMaturation(
-							'Deadline exceeded, unable to pay, collateral is now yours'
-						)
+						Number(beginBlock) + Number(loan.maturation) - currentTime
+					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
+					setStatus(
+						contractStatus === false
+							? false
+							: contractStatus === null
+							? true
+							: true
+					)
+					setMaturation(
+						contractStatus === false
+							? blocksRemaining
+							: contractStatus === null
+							? 'Loan has been resolved'
+							: 'Loan has been resolved'
+					)
+					setMaturation_(
+						contractStatus === false
+							? blocksRemaining < 1
+								? 'Ended'
+								: blocksRemaining
+							: contractStatus === null
+							? 'Loan has been resolved'
+							: 'Loan has been resolved'
+					)
 				} else {
-					setMaturation('Deadline exceeded, full amount paid')
+					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
+					setStatus(
+						contractStatus === false
+							? false
+							: contractStatus === null
+							? true
+							: true
+					)
+					if (contractStatus === null || contractStatus === true) {
+						if (!ad) clearInterval(maturationTimer)
+						setMaturation_('Loan has been resolved')
+						setMaturation('Loan has been resolved')
+					} else {
+						setMaturation_('Unable to evaluate maturation')
+						setMaturation('Unable to evaluate maturation')
+					}
 				}
 			}, 5000)
 
 		return () => {
 			if (!ad) clearInterval(maturationTimer)
 		}
-	}, [ad, loan.created, loan.maturation, loan.resolved])
+	}, [ad, ctc.v.LoanViews, loan.created, loan.maturation, loan.resolved])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
 			<div
-				className={cf(s.flex, s.flex_dColumn, l.userDetail, l.d32)}
+				className={cf(s.flex, s.flex_dColumn, l.userDetail)}
 				ref={uCRef}
 			>
 				<div
@@ -89,11 +136,10 @@ const Loaned = ({ loan, ad = false }) => {
 					s.flexCenter,
 					l.detail,
 					l.bNone,
-					l.d17,
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(loan.tokenRequested)
+					if (!loan.selected) viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -127,11 +173,10 @@ const Loaned = ({ loan, ad = false }) => {
 					s.flex_dColumn,
 					s.flexCenter,
 					l.detail,
-					l.d17,
 					loan.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.offered ? false : viewASA(loan.tokenOffered)
+					if (!loan.offered) viewASA(loan.tokenOffered)
 				}}
 			>
 				<span
@@ -165,11 +210,10 @@ const Loaned = ({ loan, ad = false }) => {
 					s.flex_dColumn,
 					s.flexCenter,
 					l.detail,
-					l.d17,
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(loan.tokenRequested)
+					if (!loan.selected) viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -197,9 +241,7 @@ const Loaned = ({ loan, ad = false }) => {
 					{ad.selected ? 'Algo' : assetName ?? 'Loan Token'}
 				</span>
 			</div>
-			<div
-				className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-			>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 				<span
 					className={cf(
 						s.wMax,
@@ -210,7 +252,7 @@ const Loaned = ({ loan, ad = false }) => {
 						l.quantity
 					)}
 				>
-					{maturation}
+					{maturation_}
 				</span>
 				{typeof maturation === 'number' && (
 					<span
@@ -226,6 +268,63 @@ const Loaned = ({ loan, ad = false }) => {
 						Blocks
 					</span>
 				)}
+			</div>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					s.p5,
+					l.detail,
+					l.lend
+				)}
+			>
+				<button
+					className={cf(
+						s.wMax,
+						s.dInlineBlock,
+						s.flex,
+						s.flexCenter,
+						l.lendBtn
+					)}
+					onClick={async () => {
+						if (ad)
+							await close(
+								loan.id,
+								loan.contractInfo,
+								loan.selected,
+								loan.offered
+							)
+						else {
+							startWaiting()
+							try {
+								await ctc.apis.Lender.claim()
+								stopWaiting()
+								alertThis({
+									message: 'Success',
+									forConfirmation: false,
+								})
+							} catch (error) {
+								console.log({ error })
+								stopWaiting()
+								alertThis({
+									message: 'Unable to process your request',
+									forConfirmation: false,
+								})
+							}
+						}
+					}}
+					disabled={ad ? false : (status && maturation <= 0) || status}
+					id={`${ad ? 'ad' : 'loan'}-btn-${ad.id}-${ad.borrower}`}
+				>
+					{ad
+						? 'Drop Ad'
+						: !status && maturation > 0
+						? 'Waiting'
+						: !status && maturation <= 0
+						? 'Claim'
+						: 'Closed'}
+				</button>
 			</div>
 		</div>
 	)

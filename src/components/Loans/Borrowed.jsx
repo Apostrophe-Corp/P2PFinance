@@ -11,7 +11,8 @@ const instantReach = loadStdlib({ ...process.env, REACH_NO_WARN: 'Y' })
 const Borrowed = ({ loan, ad = false }) => {
 	const uCRef = useRef()
 	const pfpRef = useRef()
-	const { repay, close, user } = useReach()
+	const { repay, close, user, alertThis, startWaiting, stopWaiting } =
+		useReach()
 	const [ctc] = useState(
 		user.account.contract(
 			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
@@ -21,6 +22,7 @@ const Borrowed = ({ loan, ad = false }) => {
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
 	const [outStanding, setOutStanding] = useState('Loading...')
+	const [maturation_, setMaturation_] = useState('Loading...')
 	const [maturation, setMaturation] = useState('Loading...')
 	const [loading, setLoading] = useState(true)
 	const [status, setStatus] = useState(true)
@@ -116,6 +118,15 @@ const Borrowed = ({ loan, ad = false }) => {
 							? 'Loan has been resolved'
 							: 'Loan has been resolved'
 					)
+					setMaturation_(
+						contractStatus === false
+							? blocksRemaining < 1
+								? 'Ended'
+								: blocksRemaining
+							: contractStatus === null
+							? 'Loan has been resolved'
+							: 'Loan has been resolved'
+					)
 				} else {
 					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
 					setStatus(
@@ -127,8 +138,10 @@ const Borrowed = ({ loan, ad = false }) => {
 					)
 					if (contractStatus === null || contractStatus === true) {
 						if (!ad) clearInterval(maturationTimer)
+						setMaturation_('Loan has been resolved')
 						setMaturation('Loan has been resolved')
 					} else {
+						setMaturation_('Unable to evaluate maturation')
 						setMaturation('Unable to evaluate maturation')
 					}
 				}
@@ -175,7 +188,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(loan.tokenRequested)
+					if (!loan.selected) viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -212,7 +225,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.offered ? false : viewASA(loan.tokenOffered)
+					if (!loan.offered) viewASA(loan.tokenOffered)
 				}}
 			>
 				<span
@@ -249,7 +262,7 @@ const Borrowed = ({ loan, ad = false }) => {
 					loan.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(loan.tokenRequested)
+					if (!loan.selected) viewASA(loan.tokenRequested)
 				}}
 			>
 				<span
@@ -288,7 +301,7 @@ const Borrowed = ({ loan, ad = false }) => {
 						l.quantity
 					)}
 				>
-					{ad ? loan.maturation : loading ? 'Loading...' : maturation}
+					{ad ? loan.maturation : loading ? 'Loading...' : maturation_}
 				</span>
 				{(ad || !status) && (
 					<span
@@ -324,25 +337,49 @@ const Borrowed = ({ loan, ad = false }) => {
 						l.lendBtn
 					)}
 					onClick={async () => {
-						ad
-							? await close(
-									loan.id,
-									loan.contractInfo,
-									loan.selected,
-									loan.offered
-							  )
-							: await repay(
-									loan.id,
-									loan.contractInfo,
-									Number(loan.tokenRequested),
-									loan.selected,
-									loan.offered
-							  )
+						if (ad)
+							await close(
+								loan.id,
+								loan.contractInfo,
+								loan.selected,
+								loan.offered
+							)
+						else if (!status && maturation <= 0) {
+							startWaiting()
+							try {
+								await ctc.apis.Borrower.claimRefund()
+								stopWaiting()
+								alertThis({
+									message: 'Success',
+									forConfirmation: false,
+								})
+							} catch (error) {
+								console.log({ error })
+								stopWaiting()
+								alertThis({
+									message: 'Unable to process your request',
+									forConfirmation: false,
+								})
+							}
+						} else
+							await repay(
+								loan.id,
+								loan.contractInfo,
+								Number(loan.tokenRequested),
+								loan.selected,
+								loan.offered
+							)
 					}}
-					disabled={ad ? false : status}
+					disabled={ad ? false : (status && maturation <= 0) || status}
 					id={`${ad ? 'ad' : 'loan'}-btn-${ad.id}-${ad.borrower}`}
 				>
-					{ad ? 'Drop Ad' : 'Repay'}
+					{ad
+						? 'Drop Ad'
+						: !status && maturation > 0
+						? 'Repay'
+						: !status && maturation <= 0
+						? 'Claim Refund'
+						: 'Closed'}
 				</button>
 			</div>
 		</div>

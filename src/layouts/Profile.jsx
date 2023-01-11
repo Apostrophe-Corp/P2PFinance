@@ -212,15 +212,7 @@ const Profile = () => {
 				</div>
 			)}
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
-				<div
-					className={cf(
-						s.flex,
-						s.flex_dColumn,
-						s.flexCenter,
-						l.userDetail,
-						l.d32
-					)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.userDetail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -234,9 +226,7 @@ const Profile = () => {
 						Borrower (Loaned)
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -250,9 +240,7 @@ const Profile = () => {
 						Amount
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -266,9 +254,7 @@ const Profile = () => {
 						Collateral
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -282,9 +268,7 @@ const Profile = () => {
 						Payment
 					</span>
 				</div>
-				<div
-					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.d17)}
-				>
+				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
 					<span
 						className={cf(
 							s.wMax,
@@ -296,6 +280,22 @@ const Profile = () => {
 						)}
 					>
 						Maturation
+					</span>
+				</div>
+				<div
+					className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail, l.lend)}
+				>
+					<span
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							s.p5,
+							s.dInlineBlock,
+							l.assetName
+						)}
+					>
+						Claim
 					</span>
 				</div>
 			</div>

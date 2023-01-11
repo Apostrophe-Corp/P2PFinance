@@ -21,10 +21,12 @@ export const main = Reach.App(() => {
 	})
 	const Lender = API('Lender', {
 		lend: Fun([], Bool),
+		claim: Fun([], Null),
 	})
 	const Borrower = API('Borrower', {
 		close: Fun([], Null),
 		repay: Fun([UInt], Tuple(Bool, UInt, UInt)),
+		claimRefund: Fun([], Null),
 	})
 
 	const LoanViews = View('LoanViews', {
@@ -116,6 +118,14 @@ export const main = Reach.App(() => {
 						return totalPaid
 					},
 				]
+			})
+			.api(Borrower.claimRefund, (ret) => {
+				ret(null)
+				return amountPaid
+			})
+			.api(Lender.claim, (ret) => {
+				ret(null)
+				return amountPaid
 			})
 			.timeRemaining(end_())
 

@@ -75,7 +75,7 @@ const Advert = ({ ad }) => {
 					ad.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(ad.tokenRequested)
+					if (!ad.selected) viewASA(ad.tokenRequested)
 				}}
 			>
 				<span
@@ -118,7 +118,7 @@ const Advert = ({ ad }) => {
 					ad.offered ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.offered ? false : viewASA(ad.tokenOffered)
+					if (!ad.offered) viewASA(ad.tokenOffered)
 				}}
 			>
 				<span
@@ -161,7 +161,7 @@ const Advert = ({ ad }) => {
 					ad.selected ? '' : l.asa
 				)}
 				onClick={() => {
-					return ad.selected ? false : viewASA(ad.tokenRequested)
+					if (!ad.selected) viewASA(ad.tokenRequested)
 				}}
 			>
 				<span
