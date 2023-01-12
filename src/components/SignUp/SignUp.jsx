@@ -21,16 +21,6 @@ const SignUp = () => {
 
 	const save = async (e) => {
 		e.preventDefault()
-		// const [, owned] = await reach.balancesOf(user.address, [null, pfp])
-		// const owned = reach.formatCurrency(await reach.balanceOf(user.address), 4)
-		// console.log({ owned })
-		// if (!owned) {
-		// 	alertThis({
-		// 		message: "You don't seem to own this NFT",
-		// 		forConfirmation: false,
-		// 	})
-		// 	return
-		// }
 		const registered = await request({
 			path: `users/${user.address}`,
 			method: 'GET',

@@ -45,7 +45,6 @@ const Borrowed = ({ loan, ad = false }) => {
 
 	useEffect(() => {
 		const updateValues = async () => {
-			// console.log({loan})
 			const assetData = loan.selected
 				? { name: 'Algo' }
 				: await getASAInfo(Number(loan.tokenRequested))
@@ -84,10 +83,7 @@ const Borrowed = ({ loan, ad = false }) => {
 									instantReach.bigNumberToNumber(amountPaid_)
 							  )
 						: Number(loan.paymentAmount)
-
-				// console.log(amountPaid)
 				const outstanding = Number(loan.paymentAmount) - amountPaid
-				// console.log(await parseCurrency(amountPaid))
 				setOutStanding(outstanding)
 				setLoading(false)
 			}, 5000)

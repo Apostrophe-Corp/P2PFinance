@@ -13,9 +13,7 @@ export const setPFPs = async (others) => {
 				const opts = others[i]
 				const ref = opts[0]
 				const nftInfo = await getASAInfo(opts[1])
-				// console.log({ nftInfo, opts1: opts[1] })
 				const pfp = nftInfo?.url ?? ''
-				// console.log({ pfp })
 				const blur = opts[2]
 				ref.current.style.background = `${
 					blur

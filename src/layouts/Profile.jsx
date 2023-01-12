@@ -40,7 +40,6 @@ const Profile = () => {
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
 				setAdverts(loansRes.loans)
-				// console.log(loansRes.loans)
 				const remainingAdverts = presentAdverts.filter(
 					(el) => el.borrowerInfo.username === authUser.username
 				)
@@ -80,7 +79,6 @@ const Profile = () => {
 						loaned?.loans?.length ? 'Loading...' : `You've not given a loan yet`
 					)
 					setLoanedLoans(loaned)
-					// console.log({ tempLoans, borrowed, loaned })
 				}
 			}
 		}

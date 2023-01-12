@@ -8,7 +8,6 @@ export class Arc69 {
 	}
 
 	async fetch(assetId) {
-		// console.log(assetId, typeof assetId)
 		// Fetch `acfg` transactions.
 		const url = `${this.algoExplorerApiBaseUrl}/v2/transactions?asset-id=${assetId}&tx-type=acfg`
 		let transactions
@@ -18,15 +17,12 @@ export class Arc69 {
 					Origin: 'https://ipfs.io',
 				},
 			}).then((res) => res.json())
-			// console.log(transitTransactions)
 			transactions = transitTransactions.transactions
 		} catch (err) {
-			// console.error(err)
 			return { success: false }
 		}
 
 		// Sort the most recent `acfg` transactions first.
-
 		if (transactions) {
 			transactions.sort((a, b) => b['round-time'] - a['round-time'])
 
@@ -43,7 +39,6 @@ export class Arc69 {
 					// 	return noteObject
 					// }
 					const params = transaction['asset-config-transaction']['params']
-					// console.log({params})
 					if (params['name']) {
 						rData['name'] = params['name']
 					}

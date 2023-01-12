@@ -6,14 +6,9 @@ import {
 	ALGO_MakePeraConnect as MakePeraConnect,
 	ALGO_PeraConnect as PeraConnect,
 	unsafeAllowMultipleStdlibs,
-	// ALGO_MakeWalletConnect as MakeWalletConnect,
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
-// import WalletConnect from '@walletconnect/client'
-// import QRCodeModal from 'algorand-walletconnect-qrcode-modal'
 import {
-	// loanCtc,
-	//  adminCtc
 	algo_nnt,
 	nnt_algo,
 	nnt_nnt,
@@ -42,7 +37,6 @@ const ReachContextProvider = ({ children }) => {
 		balance: null,
 		address: null,
 	})
-	// const [adminConnection, setAdminConnection] = useState(null)
 
 	const [promiseOfConfirmation, setPromiseOfConfirmation] = useState({})
 
@@ -163,10 +157,6 @@ const ReachContextProvider = ({ children }) => {
 				break
 			case 'WalletConnect':
 				instantReach.setWalletFallback(
-					// instantReach.walletFallback({
-					// 	providerEnv,
-					// 	WalletConnect: MakeWalletConnect(WalletConnect, QRCodeModal),
-					// })
 					instantReach.walletFallback({ providerEnv, WalletConnect })
 				)
 				break
@@ -345,12 +335,6 @@ const ReachContextProvider = ({ children }) => {
 						},
 					})
 
-					// try {
-					// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(user.address)
-					// } catch (error) {
-					// 	console.log({ error })
-					// }
-
 					stopWaiting()
 					if (res.success) {
 						const presentAdverts = adverts
@@ -444,9 +428,7 @@ const ReachContextProvider = ({ children }) => {
 			)
 			const [paid_] = [
 				reach.bigNumberToNumber(paid),
-				// reach.bigNumberToNumber(original),
 			]
-			// console.log({ repaid, paid_, original_ })
 			if (repaid || paid_ >= original) {
 				res = await request({
 					path: `loans/${id}`,
@@ -538,7 +520,6 @@ const ReachContextProvider = ({ children }) => {
 				reach.formatCurrency(await reach.balanceOf(user.account), 4)
 			)
 			const resultingBal = bal - Number(loanParams.amountOffered)
-			console.log({ minBal, resultingBal })
 			if (resultingBal < minBal) {
 				stopWaiting()
 				alertThis({
@@ -672,13 +653,6 @@ const ReachContextProvider = ({ children }) => {
 								offered,
 							},
 						})
-						// try {
-						// 	rewardSent = await adminConnection.apis.A.sendLoyaltyToken(
-						// 		reach.formatAddress(user.address)
-						// 	)
-						// } catch (error) {
-						// 	console.log({ error })
-						// }
 						stopWaiting()
 						if (res.success) {
 							alertThis({
@@ -710,7 +684,6 @@ const ReachContextProvider = ({ children }) => {
 	}
 
 	const ReachContextValue = {
-		// ...states
 		user,
 		connectToWallet,
 		promiseOfConfirmation,

@@ -100,6 +100,7 @@ export const main = Reach.App(() => {
 			.while(thisConsensusTime() < end_ && amountPaid < loanInfo.amount)
 			.api_(Borrower.repay, (amt) => {
 				check(this == B, 'You are not the Borrower')
+				check(thisConsensusTime() <= end_, 'Its past the deadline')
 				const excess =
 					amt + amountPaid > loanInfo.amount
 						? amt + amountPaid - loanInfo.amount

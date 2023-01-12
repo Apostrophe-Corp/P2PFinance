@@ -5,12 +5,10 @@ import s from '../styles/Shared.module.css'
 import lg from '../styles/Landing.module.css'
 import { cf } from '../utils'
 
-// TODO complete this component
 const Landing = () => {
 	const navigate = useNavigate()
 	const {
 		checkForSignIn,
-		// alertThis
 	} = useReach()
 	return (
 		<div className={cf(s.wMax, s.window)}>
@@ -50,7 +48,6 @@ const Landing = () => {
 					</h2>
 				</div>
 			</div>
-			{/* The Card Forest */}
 			<div
 				className={cf(
 					s.container,

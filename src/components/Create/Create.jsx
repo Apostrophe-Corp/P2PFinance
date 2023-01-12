@@ -4,7 +4,7 @@ import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
 import { setPFPs, cf } from '../../utils'
-import previewImg from '../../assets/images/logo.jpg' // TODO change this image
+import previewImg from '../../assets/images/logo.jpg'
 import { ASASelect } from '../ASASelect'
 
 const Create = () => {
@@ -53,7 +53,6 @@ const Create = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		// console.log(nftParams)
 		;(await create(loanParams, selected, offered)) && navigate('/account')
 	}
 
@@ -234,21 +233,6 @@ const Create = () => {
 						</label>
 						<div
 							className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}
-							// onClick={() => {
-							// 	console.log({
-							// 		'selected || loanParams.tokenRequested':
-							// 			selected || loanParams.tokenRequested,
-							// 		amountOffered: loanParams.amountOffered ? true : false,
-							// 		amountRequested: loanParams.amountRequested ? true : false,
-							// 		paymentAmount: loanParams.paymentAmount ? true : false,
-							// 		'(offered || loanParams.tokenOffered)':
-							// 			offered || loanParams.tokenOffered,
-							// 		maturation: loanParams.maturation ? true : false,
-							// 		'r!=o':
-							// 			Number(loanParams?.tokenRequested ?? 0) !==
-							// 			Number(loanParams?.tokenOffered ?? 0),
-							// 	})
-							// }}
 						>
 							<button
 								type='submit'

@@ -15,7 +15,6 @@ const Alert = () => {
 	)
 
 	const decide = (decision) => {
-		// if (alertInfo.forConfirmation)
 		promiseOfConfirmation.resolve && promiseOfConfirmation.resolve(decision)
 		setShowAlert(false)
 	}

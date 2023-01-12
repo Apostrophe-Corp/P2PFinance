@@ -26,7 +26,6 @@ const Advert = ({ ad }) => {
 			const assetData = ad.selected
 				? { name: 'Algo' }
 				: await getASAInfo(Number(ad.tokenRequested))
-			// console.log(assetData)
 			setAssetName(
 				`${assetData?.['name']}`
 				// `${assetData?.name}${
@@ -36,7 +35,6 @@ const Advert = ({ ad }) => {
 			const collateralData = ad.offered
 				? { name: 'Algo' }
 				: await getASAInfo(Number(ad.tokenOffered))
-			// console.log(collateralData)
 			setCollateral(
 				`${collateralData?.['name']}`
 				// `${collateralData?.name}${

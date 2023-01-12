@@ -16,7 +16,6 @@ const AuthContextProvider = ({ children }) => {
 			method: 'GET',
 		})
 
-		// console.log({ res })
 		stopWaiting()
 		if (res.success) {
 			setIsAuthenticated(true)

@@ -7,14 +7,6 @@ import { cf } from '../../utils'
 const ConnectAccount = () => {
 	const { setShowConnectAccount, connectToWallet } = useReach()
 
-	// const copyToClipboard = async (e) => {
-	// 	navigator.clipboard.writeText(user.address)
-	// 	alertThis({
-	// 		message: 'Copied to clipboard',
-	// 		forConfirmation: false,
-	// 	})
-	// }
-
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, ca.conParent)}>
 			<div className={cf(s.wMax, ca.conMask)}></div>
