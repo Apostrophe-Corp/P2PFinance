@@ -8,11 +8,7 @@ import {
 	unsafeAllowMultipleStdlibs,
 } from '@reach-sh/stdlib'
 import { PeraWalletConnect } from '@perawallet/connect'
-import {
-	algo_nnt,
-	nnt_algo,
-	nnt_nnt,
-} from '../contracts'
+import { algo_nnt, nnt_algo, nnt_nnt } from '../contracts'
 import { request, fmtCurrency, getASAInfo, trimNum } from '../utils'
 import { Alert } from '../components/Alert'
 import { ConnectAccount } from '../components/ConnectAccount'
@@ -28,7 +24,7 @@ unsafeAllowMultipleStdlibs()
 const providerEnv = 'TestNet'
 
 const waitingPro = {}
-
+let waiter = undefined
 export const ReachContext = React.createContext()
 
 const ReachContextProvider = ({ children }) => {
@@ -102,7 +98,7 @@ const ReachContextProvider = ({ children }) => {
 			setShowPreloader(display)
 			if (display) setProcessing(display)
 		}
-		let waiter = undefined
+
 		try {
 			await new Promise((resolve, reject) => {
 				waitingPro['resolve'] = resolve
@@ -131,6 +127,8 @@ const ReachContextProvider = ({ children }) => {
 	const stopWaiting = (mode = true) => {
 		if (mode && waitingPro.resolve) waitingPro.resolve()
 		else if (waitingPro.reject) waitingPro.reject()
+		clearTimeout(waiter)
+		waiter = undefined
 	}
 
 	const connectToWallet = async (
@@ -426,9 +424,7 @@ const ReachContextProvider = ({ children }) => {
 			const [repaid, paid, original] = await ctc.a.Borrower.repay(
 				selected ? reach.parseCurrency(payAmountIn) : payAmount
 			)
-			const [paid_] = [
-				reach.bigNumberToNumber(paid),
-			]
+			const [paid_] = [reach.bigNumberToNumber(paid)]
 			if (repaid || paid_ >= original) {
 				res = await request({
 					path: `loans/${id}`,
@@ -551,7 +547,8 @@ const ReachContextProvider = ({ children }) => {
 			const userBal = await reach.balanceOf(user.account)
 
 			if (
-				Number(reach.formatCurrency(userBal, 4)) < Number(loanParams['amountOffered'])
+				Number(reach.formatCurrency(userBal, 4)) <
+				Number(loanParams['amountOffered'])
 			) {
 				stopWaiting()
 				alertThis({
