@@ -323,7 +323,7 @@ const Profile = () => {
 							l.assetName
 						)}
 					>
-						You (Borrowed)
+						Lender (Borrowed)
 					</span>
 				</div>
 				<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>

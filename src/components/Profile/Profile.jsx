@@ -77,7 +77,7 @@ const Profile = ({ user }) => {
 						className={cf(s.wMax, s.flex, s.flexCenter, p.label)}
 					>
 						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							NFT ID
+							Current PFP ID: {user.pfp}
 						</span>
 						<input
 							className={cf(s.wMax, s.dInlineBlock, p.input)}
