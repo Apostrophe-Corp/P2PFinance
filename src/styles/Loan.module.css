@@ -162,6 +162,10 @@
 		border: none !important;
 	}
 
+	.userDetail + .detail {
+		border: none !important;
+	}
+
 	.detail:not(.lend) {
 		width: 25% !important;
 	}
