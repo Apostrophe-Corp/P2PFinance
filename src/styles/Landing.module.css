@@ -150,7 +150,7 @@
 .card {
 	color: #000;
 	/* color: #fff; */
-	background: linear-gradient(to bottom, #fff, rgba(179, 0, 255, 0.715));
+	background: linear-gradient(to bottom, #fff,#fff,#fff, rgba(179, 0, 255, 0.715));
 	max-width: 300px;
 	padding: 10px;
 	/* background-color: rgb(11, 0, 21); */
