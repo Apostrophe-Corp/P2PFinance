@@ -56,7 +56,7 @@ const Landing = () => {
 			>
 				<div className={cf(lg.forestTextCon)}>
 					<h2 className={cf(lg.forestText)}>
-						Unlock Financial Opportunities: Borrow or Invest.
+						Unlock Financial Opportunities
 					</h2>
 				</div>
 				<div
@@ -78,7 +78,7 @@ const Landing = () => {
 					>
 						<div className={cf(lg.cardAction)}>Borrow</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Get a Loan</div>
+							<div className={cf(lg.cardPurposeText)}>Access Funds</div>
 							<div className={cf(lg.cardDescription)}>
 								Get the funds you need, fast and easy with P2PFinance. Connect
 								your wallet, sign up and Create an advert to access liquidity
@@ -111,7 +111,7 @@ const Landing = () => {
 					>
 						<div className={cf(lg.cardAction)}>Lend</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Earn Interest Income</div>
+							<div className={cf(lg.cardPurposeText)}>Income from Interest</div>
 							<div className={cf(lg.cardDescription)}>
 								Explore your investment options with P2PFinance. Browse a
 								variety of loan options that match your risk vs reward profile.
