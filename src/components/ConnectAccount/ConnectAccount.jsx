@@ -11,7 +11,6 @@ const ConnectAccount = () => {
 		<div className={cf(s.wMax, s.flex, s.flexCenter, ca.conParent)}>
 			<div className={cf(s.wMax, ca.conMask)}></div>
 			<div className={cf(s.flex, s.flexCenter, ca.conContainer)}>
-
 				<div className={cf(s.w50, s.w480_100, s.w360_100, ca.wallet)}></div>
 				{!(process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH') ? (
 					<div
@@ -51,7 +50,7 @@ const ConnectAccount = () => {
 								</span>
 							</div>
 						</div>
-						<div
+						{/*	<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
 								connectToWallet('WalletConnect')
@@ -63,7 +62,7 @@ const ConnectAccount = () => {
 									WalletConnect
 								</span>
 							</div>
-						</div>
+						</div> */}
 						<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
@@ -101,14 +100,14 @@ const ConnectAccount = () => {
 						ca.addressContainer
 					)}
 				>
-						<button
-							onClick={() => {
-								setShowConnectAccount(false)
-							}}
-							className={cf(s.dInlineBlock, ca.connectTitle)}
-						>
-							Close
-						</button>
+					<button
+						onClick={() => {
+							setShowConnectAccount(false)
+						}}
+						className={cf(s.dInlineBlock, ca.connectTitle)}
+					>
+						Close
+					</button>
 				</div>
 			</div>
 		</div>
