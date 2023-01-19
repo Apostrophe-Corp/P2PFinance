@@ -111,7 +111,7 @@ const Landing = () => {
 					>
 						<div className={cf(lg.cardAction)}>Lend</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Income from Interest</div>
+							<div className={cf(lg.cardPurposeText)}>Profit from Interest</div>
 							<div className={cf(lg.cardDescription)}>
 								Explore your investment options with P2PFinance. Browse a
 								variety of loan options that match your risk vs reward profile.
