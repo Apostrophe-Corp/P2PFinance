@@ -1,4 +1,4 @@
-const serverURI = "http://18.207.98.132:80/api/v1.0"
+const serverURI = "http://3.235.157.104:80/api/v1.0"
 
 export const request = async ({
 	path = '',
