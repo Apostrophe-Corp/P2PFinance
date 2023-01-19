@@ -55,7 +55,7 @@ const Landing = () => {
 				)}
 			>
 				<div className={cf(lg.forestTextCon)}>
-					<h2 className={cf(lg.forestText)}>
+					<h2 className={cf(lg.forestText, s.tCenter)}>
 						Unlock Financial Opportunities
 					</h2>
 				</div>
