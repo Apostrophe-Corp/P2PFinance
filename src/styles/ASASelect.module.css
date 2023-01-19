@@ -88,8 +88,6 @@
 }
 
 /* Unselected */
-
-/* Algo */
 .radioBtn:checked.unSelected + label,
 .radioBtn.unSelected + label {
 	background-color: transparent !important;
@@ -99,18 +97,6 @@
 
 .radioBtn:checked.unSelected + label .typeLabelSpan {
 	color: #363738;
-}
-
-.radioBtn:checked.unSelected + label .checkIcon,
-.radioBtn.unSelected + label .checkIcon {
-	display: none !important;
-}
-
-/* USDC */
-.radioBtn:checked.unSelected + label,
-.radioBtn.unSelected + label {
-	background-color: transparent !important;
-	border: 2px solid #be78e4 !important;
 }
 
 .radioBtn:checked.unSelected + label .checkIcon,
