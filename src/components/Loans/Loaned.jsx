@@ -122,7 +122,7 @@ const Loaned = ({ loan, ad = false }) => {
 						setMaturation('Unable to evaluate maturation')
 					}
 				}
-			}, 5000)
+			}, 3600)
 
 		return () => {
 			if (!ad) clearInterval(maturationTimer)

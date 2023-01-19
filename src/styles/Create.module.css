@@ -1,7 +1,8 @@
 .createParent {
 	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-		url(../assets/images/contractBox.jpg);
-	background-position: center;
+		url(../assets/images/contractBox_2.jpg);
+	background-position: center -2px;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: inherit;

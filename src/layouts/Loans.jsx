@@ -163,7 +163,7 @@ const Loans = () => {
 					))
 				) : (
 					<div
-						className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+						className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 					>
 						<h1>{message}</h1>
 					</div>

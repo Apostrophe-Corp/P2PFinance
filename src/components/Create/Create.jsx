@@ -98,7 +98,7 @@ const Create = () => {
 							ref={previewRef}
 						></div>
 						<span className={cf(cr8.sideNote)}>
-							Collateral image NFT preview
+							Collateral preview for image NFTs
 						</span>
 						<ASASelect
 							mode={'Quick Select Loan ASA'}

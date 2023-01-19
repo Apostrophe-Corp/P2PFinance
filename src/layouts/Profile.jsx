@@ -104,7 +104,7 @@ const Profile = () => {
 	])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10)}>
+		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10, l.profileContainer)}>
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 				<UserProfile user={authUser} />
 			</div>
@@ -206,7 +206,7 @@ const Profile = () => {
 				))
 			) : (
 				<div
-					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
 					<h1>{message__}</h1>
 				</div>
@@ -308,7 +308,7 @@ const Profile = () => {
 				))
 			) : (
 				<div
-					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
 					<h1>{message}</h1>
 				</div>
@@ -410,7 +410,7 @@ const Profile = () => {
 				))
 			) : (
 				<div
-					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}
+					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
 					<h1>{message_}</h1>
 				</div>

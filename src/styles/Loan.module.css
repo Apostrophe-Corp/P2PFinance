@@ -13,13 +13,20 @@
 	align-items: center;
 	min-height: inherit;
 	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-		url(../assets/images/contractLand.jpg);
+		url(../assets/images/contractBox.jpg);
 	background-position: center;
-	/* background-attachment: fixed; */
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: inherit;
 	padding: 50px 10px;
+}
+
+.profileContainer{
+	composes: loanContainer;
+	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
+		url(../assets/images/contractBox_3.jpg);
+	background-attachment: fixed;
 }
 
 .userDetail {
@@ -104,11 +111,17 @@
 		rgb(152, 0, 223); */
 	color: rgb(152, 0, 223);
 	/* background-clip: text; */
+	margin-top: 50px;
 	font-size: 15px;
 	font-weight: 450;
 	/* -webkit-background-clip: text;
 	-webkit-text-fill-color: transparent; */
 	background-color: rgb(255, 255, 255);
+}
+
+.subHeader{
+	composes: header;
+	margin: 0 !important;
 }
 
 .asa {
