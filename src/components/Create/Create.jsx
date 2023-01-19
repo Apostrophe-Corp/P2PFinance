@@ -227,7 +227,7 @@ const Create = () => {
 								name='maturation'
 								id='maturation'
 								onChange={handleChange}
-								placeholder='1 ~ 3.7 secs ∴ 1hr ~ 973, 1d ~ 23351'
+								placeholder='1 ~ 3.7secs ∴ 1hr ~ 973, 1d ~ 23351'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
