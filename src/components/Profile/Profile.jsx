@@ -68,7 +68,7 @@ const Profile = ({ user }) => {
 				ref={pfpRef}
 			></div>
 			<div className={cf(s.flex, s.flexCenter, s.p5, p.userDetails)}>
-				<span className={cf(s.dInlineBlock, s.flex, s.flexCenter)}>
+				<span className={cf(s.dInlineBlock, s.flex, s.flexCenter, p.name)}>
 					{user.username}
 				</span>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, p.form)}>
@@ -76,7 +76,7 @@ const Profile = ({ user }) => {
 						htmlFor='pfp'
 						className={cf(s.wMax, s.flex, s.flexCenter, p.label)}
 					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
+						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter, p.pfpID)}>
 							Current PFP ID: {user.pfp}
 						</span>
 						<input

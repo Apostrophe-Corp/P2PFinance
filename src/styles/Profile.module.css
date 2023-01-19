@@ -3,6 +3,12 @@
 	gap: 10px;
 }
 
+.name, .pfpID{
+	font-weight: 500;
+	font-size: 22px;
+	color: rgb(152, 0, 223);
+}
+
 .pfp {
 	height: 250px;
 	width: 250px;
