@@ -121,7 +121,6 @@ const Landing = () => {
 							<div className={cf(lg.cardDescription)}>
 								Explore your investment options with P2PFinance. Browse a
 								variety of loan options that match your risk vs reward profile.
-								Connect your wallet and sign up in minutes.
 							</div>
 						</div>
 						<div className={cf(lg.cardIcon, lg.buyIcon)}>
