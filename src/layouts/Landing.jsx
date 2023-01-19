@@ -346,7 +346,7 @@ const Landing = () => {
 						<div
 							className={lg.comSocialIcon}
 							onClick={() => {
-								window.open(`https://www.rea/`, '_blank')
+								window.open(`https://www.reach.sh/`, '_blank')
 							}}
 						>
 							<svg
@@ -374,12 +374,11 @@ const Landing = () => {
 								>
 									Our platform allows borrowers and lenders to interact
 									directly, providing a marketplace and a secure smart contract
-									to hold collateral in escrow. Sign up now and join the future
-									of lending and borrowing, where no one is denied
-									participation. Why not just sell the asset to raise the
-									necessary funds? Some assets give the user access to certain
-									benefits such as Alpha, rewards, acces to a DApp, amongst
-									other things.
+									to hold collateral in escrow. Why not just sell the asset to
+									raise the necessary funds? Some assets give the user access to
+									certain benefits such as Alpha, rewards, access to a dApp,
+									amongst other things, therefore it becomes detrimental to sell
+									off such assets. Hence, we provide you with the solution.
 								</span>
 							</div>
 						</div>
