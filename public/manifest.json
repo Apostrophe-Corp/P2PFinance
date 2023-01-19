@@ -1,6 +1,6 @@
 {
-  "short_name": "Urgent2K",
-  "name": "Urgent2K | D-Lending Platform",
+  "short_name": "P2PFinance",
+  "name": "P2PFinance | A Fully Decentralized Loaning Platform",
   "icons": [
     {
       "src": "logo.jpg",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#2fff00",
-  "background_color": "#ffffff"
+  "theme_color": "#8400ffa7",
+  "background_color": "#8400ffa7"
 }
