@@ -30,7 +30,7 @@ const App = ({ children }) => {
 						navigate('/')
 					}}
 				>
-					Urgent2K
+					P2PFinance
 				</div>
 				{user.address && isAuthenticated && (
 					<div
@@ -45,7 +45,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Apply for a Loan
+								Borrow
 							</li>
 							<li
 								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
@@ -55,7 +55,7 @@ const App = ({ children }) => {
 									})
 								}}
 							>
-								Give out Loans
+								Lend
 							</li>
 						</ul>
 					</div>
@@ -101,11 +101,11 @@ const App = ({ children }) => {
 							navigate('/')
 						}}
 					>
-						Urgent2K
+						P2PFinance
 					</div>
 					<div className={cf(s.wMax, app.registered)}>
-						Urgent2K is the product of Apostrophe Corp. for the Polygon Bounty
-						Hack.
+						P2PFinance is the product of Apostrophe Corp. Built for the Algorand Green House 
+						Hack Series.
 					</div>
 				</div>
 			</div>

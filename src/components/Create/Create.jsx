@@ -73,9 +73,9 @@ const Create = () => {
 					)}
 				>
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
-						Some dummy text...
+						Get the Funds You Need: Launch Your Loan Advert Now!
 					</h1>
-					<h2 className={cf(cr8.callOutSub)}>Some dummy text...</h2>
+					<h2 className={cf(cr8.callOutSub)}>Unlock liquidity on the spot with P2PFinance. Connect your wallet, fill out the form, and submit your advert. Let lenders come to you, with the security of a smart contract holding your collateral in escrow. Get the funds you need, without selling your assets. Apply now and open up new opportunities.</h2>
 				</div>
 				<div
 					className={cf(

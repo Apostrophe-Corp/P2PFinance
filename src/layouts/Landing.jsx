@@ -33,18 +33,19 @@ const Landing = () => {
 					)}
 				>
 					<h2 className={cf(s.wMax, s.p0, s.m0, lg.heroWelcomeText)}>
-						Welcome to Urgent2K
+						Welcome to P2PFinance - the future of lending and borrowing.
 					</h2>
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.catchPhrase)}>
 					<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseText)}>
-						A Fully Decentralized P2P Loaning Platform.
+						Direct connections, smart choices, easy access.
+						Unlock liquidity without having to sell your assets
 					</h1>
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.intro)}>
 					<h2 className={cf(s.wMax, s.p0, s.m0, lg.introText)}>
-						Some dummy text...Some dummy text...Some dummy text...Some dummy
-						text...
+						Welcome to P2PFinance, the revolutionary decentralized peer-to-peer lending and borrowing platform that connects lenders and borrowers directly with no middle man.
+						With P2PFinance, you can access liquidity for unexpected expenses without having to sell your assets at a loss. Our platform is designed to be user-friendly, secure, and accessible to all, giving you the flexibility you need.
 					</h2>
 				</div>
 			</div>
@@ -58,7 +59,7 @@ const Landing = () => {
 				)}
 			>
 				<div className={cf(lg.forestTextCon)}>
-					<h2 className={cf(lg.forestText)}>Start trading.</h2>
+					<h2 className={cf(lg.forestText)}>Unlock Financial Opportunities: Borrow or Invest.</h2>
 				</div>
 				<div
 					className={cf(
@@ -73,78 +74,15 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignIn(() => {
-								navigate('/new-loan')
-							})
-						}}
-					>
-						<div className={cf(lg.cardAction)}>Create</div>
-						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Mint NFTs</div>
-							<div className={cf(lg.cardDescription)}>
-								Create your very own collectibles on the Algorand blockchain.
-							</div>
-						</div>
-						<div className={cf(lg.cardIcon, lg.createIcon)}>
-							<svg
-								width='32'
-								height='32'
-								viewBox='0 0 32 32'
-								fill='none'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<circle
-									cx='4.08823'
-									cy='27.0335'
-									r='3.08824'
-									stroke='white'
-									strokeWidth='1.5'
-								></circle>{' '}
-								<circle
-									cx='27.9115'
-									cy='27.0335'
-									r='3.08824'
-									stroke='white'
-									strokeWidth='1.5'
-								></circle>{' '}
-								<circle
-									cx='16.0003'
-									cy='4.97105'
-									r='3.08824'
-									stroke='white'
-									strokeWidth='1.5'
-								></circle>{' '}
-								<path
-									d='M14.0242 8.49609L5.62305 23.4981'
-									stroke='white'
-									strokeWidth='1.5'
-								></path>{' '}
-								<path
-									d='M17.9756 8.49609L26.3767 23.4981'
-									stroke='white'
-									strokeWidth='1.5'
-								></path>{' '}
-								<path
-									d='M8.05859 27.0273H23.9409'
-									stroke='white'
-									strokeWidth='1.5'
-								></path>
-							</svg>
-						</div>
-					</div>
-					<div
-						className={cf(lg.card)}
-						onClick={() => {
-							checkForSignIn(() => {
 								navigate('/loans')
 							})
 						}}
 					>
-						<div className={cf(lg.cardAction)}>Sell</div>
+						<div className={cf(lg.cardAction)}>Borrow</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Auction Assets</div>
+							<div className={cf(lg.cardPurposeText)}>Get a Loan</div>
 							<div className={cf(lg.cardDescription)}>
-								Start your very own auction to sell your collectibles to the
-								highest bidder.
+								Get the funds you need, fast and easy with P2PFinance. Connect your wallet, sign up and Create an advert to access liquidity securely.
 							</div>
 						</div>
 						<div className={cf(lg.cardIcon, lg.sellIcon)}>
@@ -171,12 +109,11 @@ const Landing = () => {
 							})
 						}}
 					>
-						<div className={cf(lg.cardAction)}>Buy</div>
+						<div className={cf(lg.cardAction)}>Lend</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Purchase Assets</div>
+							<div className={cf(lg.cardPurposeText)}>Earn Interst Income</div>
 							<div className={cf(lg.cardDescription)}>
-								Browse through our vast pool of Auctioneers and bid on any
-								collectibles you like.
+								Explore your investment options with P2PFinance. Browse a variety of loan options that match your risk vs reward profile. Connect your wallet and sign up in minutes. 
 							</div>
 						</div>
 						<div className={cf(lg.cardIcon, lg.buyIcon)}>
@@ -226,7 +163,7 @@ const Landing = () => {
 				>
 					<div className={cf(s.wMax, lg.joinComTheme)}>
 						<h1 className={cf(s.wMax, s.p10, s.m0, lg.joinComThemeText)}>
-							Trading has never been this easy.
+							Unlock financial opportunities without restrictions on P2PFinance.
 						</h1>
 					</div>
 					<div className={cf(s.wMax, lg.joinComDescription)}>
@@ -240,26 +177,9 @@ const Landing = () => {
 								lg.joinComDescriptionText
 							)}
 						>
-							With 0xAuction you can mint an NFT, start an auction to sell any
-							collectible you own, browse through the list of active auctions to
-							bid on any NFT on the list. Auctions are safe, fully
-							decentralized, peer-to-peer, and designed with the best interest
-							of the Buyer and Seller in mind.
+							Join the future of lending and borrowing with P2PFinance. Our platform offers direct connections, smart choices, and easy access to liquidity. Sign up now and experience the convenience and security of decentralized peer-to-peer lending. Stay updated with the latest developments by following us on social media. P2PFinance - the smart choice for lending and borrowing.
 						</span>
 					</div>
-					<div
-						className={cf(s.wMax, s.flex, s.flexStart, s.p10, lg.joinComAction)}
-					>
-						<a
-							className={cf(lg.joinComActionLink)}
-							href='https://www.reach.sh/'
-							target='_blank'
-							rel='noreferrer'
-						>
-							Visit Reach
-						</a>
-					</div>
-				</div>
 				<div
 					className={cf(
 						s.flex,
@@ -290,7 +210,7 @@ const Landing = () => {
 						<div
 							className={lg.comSocialIcon}
 							onClick={() => {
-								window.open(`https://twitter.com/reachlang`, '_blank')
+								window.open(`https://twitter.com`, '_blank')
 							}}
 						>
 							<svg
@@ -309,19 +229,12 @@ const Landing = () => {
 							</svg>
 						</div>
 						<div className={lg.comSocialContent}>
-							<div className={lg.comSocialName}>Real-time Notifications</div>
+							<div className={lg.comSocialName}>Join the conversation on Twitter</div>
 							<div className={lg.comSocialDescription}>
 								<span
 									className={cf(s.wMax, s.dInlineBlock, lg.comSocialDesText)}
 								>
-									Buyers can all opt-in to receive realtime notifications to see
-									the exact bid amount made anytime a bid higher than theirs is
-									made, and at the auction's end they get to see the outcome of
-									the auction, if the highest bid got accepted or rejected. For
-									every Buyer that opts in, the Seller gets 10% of the opt-in
-									fee, and the rest is sent to the deployer of the 0xAuction
-									contract as a way of appreciating users for choosing
-									0xAuction.
+									Stay up-to-date with the latest developments and news from P2PFinance by following us on Twitter. Get access to exclusive promotions, updates on new features, and valuable insights on the lending and borrowing industry. Follow us now and stay connected with P2PFinance community
 								</span>
 							</div>
 						</div>
@@ -346,7 +259,7 @@ const Landing = () => {
 						<div
 							className={lg.comSocialIcon}
 							onClick={() => {
-								window.open(`https://bit.ly/3BnPyKd`, '_blank')
+								window.open(`https://bit.ly/`, '_blank')
 							}}
 						>
 							<svg
@@ -379,17 +292,12 @@ const Landing = () => {
 							</svg>
 						</div>
 						<div className={lg.comSocialContent}>
-							<div className={lg.comSocialName}>Trustless and Secure</div>
+							<div className={lg.comSocialName}>Join our discord community</div>
 							<div className={lg.comSocialDescription}>
 								<span
 									className={cf(s.wMax, s.dInlineBlock, lg.comSocialDesText)}
 								>
-									Auctions are timed and safe as both the NFT and the current
-									highest bid are held in escrow by the contract until the
-									expiry of the set time (however the Seller may choose to end
-									the auction at any time), afterwards the Seller must then
-									either sign off on the sale or reject it and the highest
-									bidder refunded.
+									Join our growing community on Discord and stay connected with the P2PFinance team and other users. Get real-time support, participate in discussions and events, and stay updated with the latest developments and updates on the platform. Join us now and be a part of the P2PFinance community.
 								</span>
 							</div>
 						</div>
@@ -414,7 +322,7 @@ const Landing = () => {
 						<div
 							className={lg.comSocialIcon}
 							onClick={() => {
-								window.open(`https://www.reach.sh/`, '_blank')
+								window.open(`https://www.rea/`, '_blank')
 							}}
 						>
 							<svg
@@ -440,9 +348,7 @@ const Landing = () => {
 								<span
 									className={cf(s.wMax, s.dInlineBlock, lg.comSocialDesText)}
 								>
-									0xAuction is built with Reach and powered by the Algorand
-									Network. Utilizing the Reach verification engine, 0xAuction's
-									contracts are vetted by the Z3 theorem prover.
+									Our platform allows borrowers and lenders to interact directly, providing a marketplace and a secure smart contract to hold collateral in escrow. Sign up now and join the future of lending and borrowing, where no one is denied participation. Why not just sell the asset to raise the necessary funds? Some assets give the user access to certain benefits such as Alpha, rewards, acces to a DApp,  amongst other things.
 								</span>
 							</div>
 						</div>

@@ -81,7 +81,7 @@ const SignUp = () => {
 						Sign Up
 					</h1>
 					<h2 className={cf(cr8.callOutSub)}>
-						Make the first step to gain access to the world's funds.
+						Unlock financial opportunities with P2PFinance. It's easy, secure, and accessible to all. Sign up now!
 					</h2>
 				</div>
 				<div
