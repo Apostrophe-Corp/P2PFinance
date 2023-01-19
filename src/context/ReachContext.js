@@ -310,7 +310,7 @@ const ReachContextProvider = ({ children }) => {
 					message: `You're about to lend ${loanAmount}${
 						selected
 							? ' ALGO'
-							: ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+							: ` ${assetInfo?.name}, ASA ID: #${asset}`
 					}. Proceed?`,
 					accept: 'Yes',
 					decline: 'No',
@@ -396,7 +396,7 @@ const ReachContextProvider = ({ children }) => {
 		if (!enough) {
 			alertThis({
 				message: `Your ${selected ? 'ALGO ' : ''}balance${
-					selected ? '' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+					selected ? '' : ` ${assetInfo?.name}, ASA ID: #${asset}`
 				} - ${Number(
 					userAssetBalance
 				)}, is insufficient for a repayment of: ${payAmountIn}`,
@@ -406,7 +406,7 @@ const ReachContextProvider = ({ children }) => {
 		}
 		const agreed = await alertThis({
 			message: `You're about to repay ${payAmountIn}${
-				selected ? ' ALGO' : ` of asset: ${assetInfo?.name}, ASA ID: #${asset}`
+				selected ? ' ALGO' : ` ${assetInfo?.name}, ASA ID: #${asset}`
 			}. Please note any excess amount would be removed before the payment transaction. Proceed?`,
 			accept: 'Yes',
 			decline: 'No',
