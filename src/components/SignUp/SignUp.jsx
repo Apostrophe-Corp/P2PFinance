@@ -125,13 +125,13 @@ const SignUp = () => {
 							className={cf(cr8.formLabel)}
 							htmlFor='pfp'
 						>
-							<span className={cf(cr8.formText)}>NFT ID</span>
+							<span className={cf(cr8.formText)}>PFP ID</span>
 							<input
 								type='number'
 								name='pfp'
 								id='pfp'
 								onChange={handleInputChange}
-								placeholder=''
+								placeholder='Enter an NFT ID'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
