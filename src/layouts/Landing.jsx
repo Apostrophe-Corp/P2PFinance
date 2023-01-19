@@ -171,7 +171,7 @@ const Landing = () => {
 				>
 					<div className={cf(s.wMax, lg.joinComTheme)}>
 						<h1 className={cf(s.wMax, s.p10, s.m0, lg.joinComThemeText)}>
-							Unlock financial opportunities without restrictions on P2PFinance.
+							Join the future of lending and borrowing with P2PFinance.
 						</h1>
 					</div>
 					<div className={cf(s.wMax, lg.joinComDescription)}>
@@ -185,11 +185,10 @@ const Landing = () => {
 								lg.joinComDescriptionText
 							)}
 						>
-							Join the future of lending and borrowing with P2PFinance. Our
-							platform offers direct connections, smart choices, and easy access
-							to liquidity. Sign up now and experience the convenience and
-							security of decentralized peer-to-peer lending. Stay updated with
-							the latest developments by following us on social media.
+							Our platform offers direct connections, smart choices, and easy
+							access to liquidity. Sign up now and experience the convenience
+							and security of decentralized peer-to-peer lending. Stay updated
+							with the latest developments by following us on social media.
 							P2PFinance - the smart choice for lending and borrowing.
 						</span>
 					</div>
