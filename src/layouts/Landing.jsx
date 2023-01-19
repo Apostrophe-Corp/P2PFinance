@@ -36,18 +36,12 @@ const Landing = () => {
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.catchPhrase)}>
 					<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseText)}>
-						Direct connections, smart choices, easy access. Unlock liquidity
-						without having to sell your assets
+						A Fully Decentralized P2P Loaning Platform
 					</h1>
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.intro)}>
 					<h2 className={cf(s.wMax, s.p0, s.m0, lg.introText)}>
-						Welcome to P2PFinance, the revolutionary decentralized peer-to-peer
-						lending and borrowing platform that connects lenders and borrowers
-						directly with no middle man. With P2PFinance, you can access
-						liquidity for unexpected expenses without having to sell your assets
-						at a loss. Our platform is designed to be user-friendly, secure, and
-						accessible to all, giving you the flexibility you need.
+						Direct connections, smart choices, easy access.
 					</h2>
 				</div>
 			</div>
@@ -221,9 +215,9 @@ const Landing = () => {
 					>
 						<div
 							className={lg.comSocialIcon}
-							onClick={() => {
-								window.open(`https://twitter.com`, '_blank')
-							}}
+							// onClick={() => {
+							// 	window.open(`https://twitter.com`, '_blank')
+							// }}
 						>
 							<svg
 								data-v-41d372ae=''
@@ -276,9 +270,9 @@ const Landing = () => {
 					>
 						<div
 							className={lg.comSocialIcon}
-							onClick={() => {
-								window.open(`https://bit.ly/`, '_blank')
-							}}
+							// onClick={() => {
+							// 	window.open(`https://bit.ly/`, '_blank')
+							// }}
 						>
 							<svg
 								data-v-41d372ae=''
@@ -343,9 +337,9 @@ const Landing = () => {
 					>
 						<div
 							className={lg.comSocialIcon}
-							onClick={() => {
-								window.open(`https://www.reach.sh/`, '_blank')
-							}}
+							// onClick={() => {
+							// 	window.open(`https://www.reach.sh/`, '_blank')
+							// }}
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
