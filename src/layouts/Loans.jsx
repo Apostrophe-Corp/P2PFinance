@@ -22,7 +22,7 @@ const Loans = () => {
 			if (loansRes.success) {
 				setLoans(loansRes.loans)
 				setMessage(
-					loansRes.loans.length ? 'Loading...' : 'There are no Ads yet'
+					loansRes?.loans?.length ? 'Loading...' : 'There are no Ads yet'
 				)
 				clearInterval(retriever)
 				retriever = undefined

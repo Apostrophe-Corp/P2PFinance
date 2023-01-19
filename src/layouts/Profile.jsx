@@ -23,7 +23,7 @@ const Profile = () => {
 		!loanedLoans.length ? 'Loading...' : ''
 	)
 	const [message_, setMessage_] = useState(
-		!loanedLoans.length ? 'Loading...' : ''
+		!borrowedLoans.length ? 'Loading...' : ''
 	)
 	const [message__, setMessage__] = useState(
 		!userAdverts.length ? 'Loading...' : ''
@@ -45,7 +45,9 @@ const Profile = () => {
 				)
 				setUserAdverts([...remainingAdverts])
 				setMessage__(
-					loansRes.loans.length ? 'Loading...' : 'You have no active Ads'
+					remainingAdverts?.loans?.length
+						? 'Loading...'
+						: 'You have no active Ads'
 				)
 				clearInterval(retriever)
 				retriever = undefined
