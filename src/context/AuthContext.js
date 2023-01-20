@@ -68,12 +68,18 @@ const AuthContextProvider = ({ children }) => {
 				forConfirmation: false,
 			})
 		} else {
-			alertThis({
-				message: `Sign-up failed. Error message: ${
-					res.error.message ?? res.message
-				}`,
-				forConfirmation: false,
-			})
+			if (res?.message === 'bad request' || res?.error === 400)
+				alertThis({
+					message: `Sign-up failed. Error message: username already exists`,
+					forConfirmation: false,
+				})
+			else
+				alertThis({
+					message: `Sign-up failed. Error message: ${
+						res?.error?.message ?? res.message
+					}`,
+					forConfirmation: false,
+				})
 		}
 
 		return res.success

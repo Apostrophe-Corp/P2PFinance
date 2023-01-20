@@ -72,7 +72,7 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignIn(() => {
-								navigate('/loans')
+								navigate('/new-loan')
 							})
 						}}
 					>

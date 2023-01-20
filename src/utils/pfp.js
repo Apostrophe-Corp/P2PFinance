@@ -1,4 +1,5 @@
 import { getASAInfo } from './tokenUtil'
+import logo from '../assets/images/logo.jpg'
 
 /**
  * Sets the background of the element ref to that of the user's pfp
@@ -13,7 +14,7 @@ export const setPFPs = async (others) => {
 				const opts = others[i]
 				const ref = opts[0]
 				const nftInfo = await getASAInfo(opts[1])
-				const pfp = nftInfo?.url ?? ''
+				const pfp = nftInfo?.url ?? logo
 				const blur = opts[2]
 				ref.current.style.background = `${
 					blur

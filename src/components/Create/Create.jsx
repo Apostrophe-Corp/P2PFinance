@@ -4,7 +4,7 @@ import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
 import { setPFPs, cf } from '../../utils'
-import previewImg from '../../assets/images/logo.png'
+import previewImg from '../../assets/images/logo.jpg'
 import { ASASelect } from '../ASASelect'
 
 const Create = () => {
