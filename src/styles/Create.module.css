@@ -22,7 +22,7 @@
 
 .callOutSub {
 	color: var(--title);
-	width: 60%;
+	width: max(60%, 300px);
 	/* font- */
 }
 
