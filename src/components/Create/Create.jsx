@@ -4,7 +4,7 @@ import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
 import { setPFPs, cf } from '../../utils'
-import previewImg from '../../assets/images/logo.jpg'
+import previewImg from '../../assets/images/logo.png'
 import { ASASelect } from '../ASASelect'
 
 const Create = () => {
@@ -75,7 +75,11 @@ const Create = () => {
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
 						Launch Your Loan Advert Now!
 					</h1>
-					<h2 className={cf(cr8.callOutSub)}>Let lenders come to you, with the security of a smart contract holding your collateral in escrow. Get the funds you need, without selling your assets.</h2>
+					<h2 className={cf(cr8.callOutSub)}>
+						Let lenders come to you, with the security of a smart contract
+						holding your collateral in escrow. Get the funds you need, without
+						selling your assets.
+					</h2>
 				</div>
 				<div
 					className={cf(
@@ -231,9 +235,7 @@ const Create = () => {
 								className={cf(cr8.formInput)}
 							/>
 						</label>
-						<div
-							className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}
-						>
+						<div className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}>
 							<button
 								type='submit'
 								disabled={
