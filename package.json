@@ -1,5 +1,6 @@
 {
-  "name": "urgent2k",
+  "name": "p2pfinance",
+  "description": "A Fully Decentralized P2P Loaning Platform",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
