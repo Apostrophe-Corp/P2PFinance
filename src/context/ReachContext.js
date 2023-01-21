@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	loadStdlib,
 	ALGO_MakeAlgoSignerConnect as MakeAlgoSignerConnect,
