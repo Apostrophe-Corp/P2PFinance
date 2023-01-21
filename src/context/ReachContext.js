@@ -24,7 +24,6 @@ import { LoadingPreview } from '../components/LoadingPreview'
 
 export let reach = loadStdlib({ REACH_CONNECTOR_MODE: 'ALGO' })
 const providerEnv = 'TestNet'
-reach.setProvider(providerEnv)
 
 const waitingPro = {}
 let waiter = undefined

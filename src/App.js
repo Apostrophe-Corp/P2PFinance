@@ -14,6 +14,7 @@ import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
 import { cf } from './utils'
 import s from './styles/Shared.module.css'
+import app from './styles/Landing.module.css'
 
 const PrivateRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth()
@@ -32,7 +33,7 @@ const PrivateRoute = ({ children }) => {
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
-		[]
+		[user]
 	)
 
 	return (
@@ -40,9 +41,18 @@ const PrivateRoute = ({ children }) => {
 			{isAuthenticated ? (
 				<>{children}</>
 			) : (
-				<div
-					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
-				></div>
+				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
+					<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+						<button
+							className={cf(app.connectAccount)}
+							onClick={() => {
+								navigate('/')
+							}}
+						>
+							Back to Home
+						</button>
+					</div>
+				</div>
 			)}
 		</div>
 	)
@@ -63,7 +73,7 @@ const DepRoute = ({ children }) => {
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
-		[]
+		[user]
 	)
 
 	return (
@@ -71,9 +81,18 @@ const DepRoute = ({ children }) => {
 			{user.address ? (
 				<>{children}</>
 			) : (
-				<div
-					className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}
-				></div>
+				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
+					<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+						<button
+							className={cf(app.connectAccount)}
+							onClick={() => {
+								navigate('/')
+							}}
+						>
+							Back to Home
+						</button>
+					</div>
+				</div>
 			)}
 		</div>
 	)
