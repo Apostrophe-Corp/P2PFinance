@@ -121,7 +121,6 @@ const App = () => {
 							path='/sign-up'
 							element={
 								<AppView>
-									{/* <SignUp /> */}
 									<DepRoute>
 										<SignUp />
 									</DepRoute>
