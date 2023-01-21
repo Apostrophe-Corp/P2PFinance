@@ -21,10 +21,10 @@ const AuthContextProvider = ({ children }) => {
 			setIsAuthenticated(true)
 			setAuthUser(res.user)
 			cb != null && cb()
-			alertThis({
-				message: 'Success',
-				forConfirmation: false,
-			})
+			// alertThis({
+			// 	message: 'Success',
+			// 	forConfirmation: false,
+			// })
 		} else {
 			if (res?.message === 'resource not found' || res?.error === 404) {
 				alertThis({

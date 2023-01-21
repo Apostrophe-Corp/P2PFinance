@@ -3,10 +3,12 @@ import p from '../../styles/Profile.module.css'
 import s from '../../styles/Shared.module.css'
 import { useReach, useAuth } from '../../hooks'
 import { cf, request, setPFPs } from '../../utils'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = ({ user }) => {
+	const navigate = useNavigate()
 	const { alertThis, user: thisUser } = useReach()
-	const { updateUser } = useAuth()
+	const { updateUser, signOut } = useAuth()
 	const pfpRef = useRef()
 	const [pfpData, setPfpData] = useState({
 		pfp: user.pfp,
@@ -103,6 +105,26 @@ const Profile = ({ user }) => {
 							onClick={save}
 						>
 							Save
+						</button>
+					</div>
+					<div className={cf(s.wMax, s.flex, s.flexCenter, p.btnBox)}>
+						<button
+							type='button'
+							className={cf(p.saveBtn)}
+							disabled={!pfp}
+							onClick={async () => {
+								const proceed = await alertThis({
+									message: 'Are you certain you want to logout?',
+									accept: 'No',
+									decline: 'Yes',
+								})
+								if (!proceed) {
+									signOut()
+									navigate('/')
+								}
+							}}
+						>
+							Logout
 						</button>
 					</div>
 				</div>

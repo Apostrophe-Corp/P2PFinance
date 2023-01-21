@@ -8,7 +8,13 @@ import { cf } from '../utils'
 
 const App = ({ children }) => {
 	const navigate = useNavigate()
-	const { checkForSignIn, setShowConnectAccount, user, alertThis } = useReach()
+	const {
+		checkForSignIn,
+		setShowConnectAccount,
+		user,
+		alertThis,
+		disconnectWallet,
+	} = useReach()
 	const { isAuthenticated, authUser, signIn } = useAuth()
 	return (
 		<div>
@@ -61,7 +67,7 @@ const App = ({ children }) => {
 					</div>
 				)}
 				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
-					{user.address && (
+					{/* {user.address && (
 						<button
 							className={cf(app.connectAccount)}
 							onClick={() => {
@@ -74,22 +80,41 @@ const App = ({ children }) => {
 						>
 							{isAuthenticated ? authUser.username : `Sign In`}
 						</button>
-					)}
-					{!user.account && (
-						<button
-							className={cf(app.connectAccount)}
-							onClick={() => {
-								!user.address
-									? setShowConnectAccount(true)
-									: alertThis({
-											message: 'You are connected',
-											forConfirmation: false,
-									  })
-							}}
-						>
-							{!user.account ? 'Connect Wallet' : user.address}
-						</button>
-					)}
+					)} */}
+					<button
+						className={cf(app.connectAccount)}
+						onClick={() => {
+							!user.address
+								? setShowConnectAccount(true)
+								: (async () => {
+										const proceed = await alertThis({
+											message: `Your wallet is connected. Would you like to sign-in or disconnect?`,
+											accept: 'Sign In',
+											decline: 'Disconnect',
+											neutral: true,
+											canClose: true,
+										})
+										!proceed
+											? await disconnectWallet()
+											: checkForSignIn(async () => {
+													!(
+														isAuthenticated ||
+														(await signIn(user.address, () => {
+															navigate('/account')
+														}))
+													)
+														? navigate('/sign-up')
+														: navigate('/account')
+											  })
+								  })()
+						}}
+					>
+						{!user.account
+							? 'Connect Wallet'
+							: isAuthenticated
+							? authUser.username
+							: user.address}
+					</button>
 				</div>
 			</div>
 			{children}
@@ -104,8 +129,8 @@ const App = ({ children }) => {
 						P2PFinance
 					</div>
 					<div className={cf(s.wMax, app.registered)}>
-						P2PFinance is the product of Apostrophe Corp. Built for the Algorand Green House 
-						Hack Series.
+						P2PFinance is the product of Apostrophe Corp. Built for the Algorand
+						Green House Hack Series.
 					</div>
 				</div>
 			</div>
