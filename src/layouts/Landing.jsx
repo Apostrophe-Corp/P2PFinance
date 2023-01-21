@@ -1,13 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useReach } from '../hooks'
+import { useReach, useAuth } from '../hooks'
 import s from '../styles/Shared.module.css'
 import lg from '../styles/Landing.module.css'
 import { cf } from '../utils'
 
 const Landing = () => {
 	const navigate = useNavigate()
-	const { checkForSignIn } = useReach()
+	const { checkForSignIn, alertThis, user } = useReach()
+	const { isAuthenticated, signIn } = useAuth()
 	return (
 		<div className={cf(s.wMax, s.window)}>
 			<div
@@ -72,7 +73,22 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignIn(() => {
-								navigate('/new-loan')
+								if (!isAuthenticated) {
+									;(async () => {
+										const proceed = await alertThis({
+											message:
+												'You are not signed in, would you like to do so now?',
+											accept: 'Yes',
+											decline: 'No',
+										})
+										proceed &&
+											(await signIn(user.address, () => {
+												navigate('/new-loan')
+											}))
+									})()
+								} else {
+									navigate('/new-loan')
+								}
 							})
 						}}
 					>
@@ -105,7 +121,22 @@ const Landing = () => {
 						className={cf(lg.card)}
 						onClick={() => {
 							checkForSignIn(() => {
-								navigate('/loans')
+								if (!isAuthenticated) {
+									;(async () => {
+										const proceed = await alertThis({
+											message:
+												'You are not signed in, would you like to do so now?',
+											accept: 'Yes',
+											decline: 'No',
+										})
+										proceed &&
+											(await signIn(user.address, () => {
+												navigate('/loans')
+											}))
+									})()
+								} else {
+									navigate('/loans')
+								}
 							})
 						}}
 					>

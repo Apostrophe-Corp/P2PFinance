@@ -123,7 +123,7 @@ const Profile = ({ user }) => {
 								}
 							}}
 						>
-							Logout
+							Sign Out
 						</button>
 					</div>
 				</div>

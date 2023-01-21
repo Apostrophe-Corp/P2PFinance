@@ -15,7 +15,7 @@ const App = ({ children }) => {
 		alertThis,
 		disconnectWallet,
 	} = useReach()
-	const { isAuthenticated, authUser, signIn } = useAuth()
+	const { isAuthenticated, authUser, signIn, signOut } = useAuth()
 	return (
 		<div>
 			<div
@@ -86,9 +86,10 @@ const App = ({ children }) => {
 						onClick={() => {
 							!user.address
 								? setShowConnectAccount(true)
-								: (async () => {
+								: !isAuthenticated
+								? (async () => {
 										const proceed = await alertThis({
-											message: `Your wallet is connected. Would you like to sign-in or disconnect?`,
+											message: `Your wallet is connected. Would you like to sign-in or disconnect your wallet?`,
 											accept: 'Sign In',
 											decline: 'Disconnect',
 											neutral: true,
@@ -106,6 +107,16 @@ const App = ({ children }) => {
 														? navigate('/sign-up')
 														: navigate('/account')
 											  })
+								  })()
+								: (async () => {
+										const proceed = await alertThis({
+											message: `You are signed-in. Would you like to sign-out or disconnect your wallet?`,
+											accept: 'Sign Out',
+											decline: 'Disconnect',
+											neutral: true,
+											canClose: true,
+										})
+										proceed ? await signOut() : await disconnectWallet()
 								  })()
 						}}
 					>

@@ -91,6 +91,7 @@ const AuthContextProvider = ({ children }) => {
 			setIsAuthenticated(false)
 			setAuthUser({})
 		}
+		return true
 	}
 
 	const updateUser = async (address) => {
