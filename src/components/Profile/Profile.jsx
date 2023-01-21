@@ -111,7 +111,6 @@ const Profile = ({ user }) => {
 						<button
 							type='button'
 							className={cf(p.saveBtn)}
-							disabled={!pfp}
 							onClick={async () => {
 								const proceed = await alertThis({
 									message: 'Are you certain you want to logout?',

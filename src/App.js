@@ -17,7 +17,7 @@ import s from './styles/Shared.module.css'
 import app from './styles/Landing.module.css'
 
 const PrivateRoute = ({ children }) => {
-	const { isAuthenticated } = useAuth()
+	const { isAuthenticated, signIn } = useAuth()
 	const { alertThis, user } = useReach()
 	const navigate = useNavigate()
 
@@ -25,11 +25,18 @@ const PrivateRoute = ({ children }) => {
 		() => {
 			if (!user.address) navigate('/')
 			if (!isAuthenticated) {
-				alertThis({
-					message: 'You are not signed in',
-					forConfirmation: false,
-				})
 				navigate('/')
+				;(async () => {
+					const proceed = await alertThis({
+						message: 'You are not signed in, would you like to do so now?',
+						accept: 'Yes',
+						decline: 'No',
+					})
+					proceed &&
+						(await signIn(user.address, () => {
+							navigate('/account')
+						}))
+				})()
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
@@ -59,7 +66,7 @@ const PrivateRoute = ({ children }) => {
 }
 
 const DepRoute = ({ children }) => {
-	const { alertThis, user } = useReach()
+	const { user } = useReach()
 	const navigate = useNavigate()
 
 	useEffect(
