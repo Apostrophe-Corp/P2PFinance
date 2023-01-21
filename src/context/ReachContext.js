@@ -772,6 +772,7 @@ const ReachContextProvider = ({ children }) => {
 	const ReachContextValue = {
 		user,
 		connectToWallet,
+		disconnectWallet,
 		promiseOfConfirmation,
 		setPromiseOfConfirmation,
 		alertInfo,
