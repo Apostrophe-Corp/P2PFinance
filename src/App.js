@@ -65,10 +65,6 @@ const DepRoute = ({ children }) => {
 	useEffect(
 		() => {
 			if (!user.address) {
-				alertThis({
-					message: 'Your wallet is not connected',
-					forConfirmation: false,
-				})
 				navigate('/')
 			}
 		},
