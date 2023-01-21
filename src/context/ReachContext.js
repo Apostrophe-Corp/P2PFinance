@@ -315,6 +315,8 @@ const ReachContextProvider = ({ children }) => {
 			message: 'Wallet connection terminated',
 			forConfirmation: false,
 		})
+
+		return true
 	}
 
 	const checkForSignIn = async (func) => {

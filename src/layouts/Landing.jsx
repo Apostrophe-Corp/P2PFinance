@@ -77,7 +77,7 @@ const Landing = () => {
 									;(async () => {
 										const proceed = await alertThis({
 											message:
-												'You are not signed in, would you like to do so now?',
+												'You are not signed-in, would you like to do so now?',
 											accept: 'Yes',
 											decline: 'No',
 										})
@@ -125,7 +125,7 @@ const Landing = () => {
 									;(async () => {
 										const proceed = await alertThis({
 											message:
-												'You are not signed in, would you like to do so now?',
+												'You are not signed-in, would you like to do so now?',
 											accept: 'Yes',
 											decline: 'No',
 										})

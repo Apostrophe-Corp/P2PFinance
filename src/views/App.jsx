@@ -2,12 +2,13 @@ import React from 'react'
 import g from '../styles/Global.module.css'
 import s from '../styles/Shared.module.css'
 import app from '../styles/Landing.module.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useReach, useAuth } from '../hooks'
 import { cf } from '../utils'
 
 const App = ({ children }) => {
 	const navigate = useNavigate()
+	const location = useLocation()
 	const {
 		checkForSignIn,
 		setShowConnectAccount,
@@ -67,20 +68,6 @@ const App = ({ children }) => {
 					</div>
 				)}
 				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
-					{/* {user.address && (
-						<button
-							className={cf(app.connectAccount)}
-							onClick={() => {
-								checkForSignIn(async () => {
-									!(isAuthenticated || (await signIn(user.address)))
-										? navigate('/sign-up')
-										: navigate('/account')
-								})
-							}}
-						>
-							{isAuthenticated ? authUser.username : `Sign In`}
-						</button>
-					)} */}
 					<button
 						className={cf(app.connectAccount)}
 						onClick={() => {
@@ -93,10 +80,11 @@ const App = ({ children }) => {
 											accept: 'Sign In',
 											decline: 'Disconnect',
 											neutral: true,
-											canClose: true,
+											canClear: true,
 										})
+										if (proceed === undefined) return
 										!proceed
-											? await disconnectWallet()
+											? navigate('/') && (await disconnectWallet())
 											: checkForSignIn(async () => {
 													!(
 														isAuthenticated ||
@@ -109,14 +97,29 @@ const App = ({ children }) => {
 											  })
 								  })()
 								: (async () => {
+										const viewingProfile = location.pathname === '/account'
 										const proceed = await alertThis({
-											message: `You are signed-in. Would you like to sign-out or disconnect your wallet?`,
-											accept: 'Sign Out',
+											message: `You are signed-in. Would you like to ${
+												viewingProfile ? 'sign-out' : 'view your profile'
+											} or disconnect your wallet?`,
+											accept: viewingProfile ? 'Sign Out' : 'View Profile',
 											decline: 'Disconnect',
 											neutral: true,
-											canClose: true,
+											canClear: true,
 										})
-										proceed ? await signOut() : await disconnectWallet()
+										if(proceed === undefined) return
+										proceed
+											? viewingProfile
+												? (async () => {
+														navigate('/')
+														await signOut()
+												  })()
+												: navigate('/account')
+											: (async () => {
+													navigate('/')
+													await signOut()
+													await disconnectWallet()
+											  })()
 								  })()
 						}}
 					>
