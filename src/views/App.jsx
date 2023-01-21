@@ -129,8 +129,7 @@ const App = ({ children }) => {
 						P2PFinance
 					</div>
 					<div className={cf(s.wMax, app.registered)}>
-						P2PFinance is the product of Apostrophe Corp. Built for the Algorand
-						Green House Hack Series.
+						Copyright &copy; Apostrophe Corp. 2022.
 					</div>
 				</div>
 			</div>
