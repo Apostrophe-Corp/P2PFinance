@@ -246,7 +246,7 @@ const Landing = () => {
 									P2PFinance by following us on Twitter. Get access to exclusive
 									promotions, updates on new features, and valuable insights on
 									the lending and borrowing industry. Follow us now and stay
-									connected with P2PFinance community
+									connected with the P2PFinance community
 								</span>
 							</div>
 						</div>
