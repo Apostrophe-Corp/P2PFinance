@@ -184,7 +184,7 @@
 .forestParent {
 	opacity: 1;
 	/* box-shadow: 0 0 10px 5px rgba(186, 154, 218, 0.3); */
-	background: linear-gradient(to bottom, transparent, rgb(85, 0, 255)),
+	background: linear-gradient(to bottom, transparent, rgb(123, 0, 255)),
 		rgba(128, 0, 255, 0.3);
 	padding-top: 100px;
 	padding-bottom: 100px;
@@ -254,8 +254,8 @@
 }
 
 .community {
-	box-shadow: 0 0 10px 5px rgb(85, 0, 255);
-	background-color: rgb(85, 0, 255);
+	box-shadow: 0 0 10px 5px rgb(123, 0, 255);
+	background-color: rgb(123, 0, 255);
 	color: #fff !important;
 	padding-bottom: 100px;
 }
@@ -281,7 +281,7 @@
 	margin-top: var(--spacing-6);
 	line-height: calc(1.53983em + 0.13429vw - 0.42972px);
 	font-size: var(--font-size-1);
-	font-weight: var(--font-weight-normal-1);
+	font-weight: var(--font-weight-normal--1);
 	padding-right: 70px !important;
 }
 
