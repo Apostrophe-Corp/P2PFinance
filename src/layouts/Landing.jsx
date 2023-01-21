@@ -78,7 +78,7 @@ const Landing = () => {
 					>
 						<div className={cf(lg.cardAction)}>Borrow</div>
 						<div className={cf(s.flex, s.flex_dColumn, lg.cardPurpose)}>
-							<div className={cf(lg.cardPurposeText)}>Access Funds</div>
+							<div className={cf(lg.cardPurposeText)}>Access to Funds</div>
 							<div className={cf(lg.cardDescription)}>
 								Get the funds you need, fast and easy with P2PFinance. Connect
 								your wallet, sign up and Create an advert to access liquidity
