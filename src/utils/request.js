@@ -1,4 +1,4 @@
-const serverURI = "http://3.235.157.104:80/api/v1.0"
+const serverURI = process.env.REACT_APP_SERVER_URI
 
 export const request = async ({
 	path = '',
