@@ -1,11 +1,11 @@
 {
   "short_name": "P2PFinance",
-  "name": "P2PFinance | A Fully Decentralized Loaning Platform",
+  "name": "P2PFinance | A Fully Decentralized Loan Platform",
   "icons": [
     {
       "src": "logo.jpg",
       "type": "image/jpg",
-      "sizes": "4500x4500"
+      "sizes": "4500x4500 512x512 192x192"
     }
   ],
   "start_url": ".",

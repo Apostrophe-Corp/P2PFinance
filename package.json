@@ -1,6 +1,6 @@
 {
   "name": "p2pfinance",
-  "description": "A Fully Decentralized P2P Loaning Platform",
+  "description": "A Fully Decentralized P2P Loan Platform",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
