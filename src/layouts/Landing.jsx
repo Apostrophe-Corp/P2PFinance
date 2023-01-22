@@ -37,7 +37,7 @@ const Landing = () => {
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.catchPhrase)}>
 					<h1 className={cf(s.wMax, s.p0, s.m0, lg.catchPhraseText)}>
-						A Fully Decentralized P2P Loaning Platform
+						A Fully Decentralized P2P Loan Platform
 					</h1>
 				</div>
 				<div className={cf(s.wMax, s.p10, s.flex, s.flexLeft, lg.intro)}>
