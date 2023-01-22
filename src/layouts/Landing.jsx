@@ -82,9 +82,14 @@ const Landing = () => {
 											decline: 'No',
 										})
 										proceed &&
+										!(
+											isAuthenticated ||
 											(await signIn(user.address, () => {
 												navigate('/new-loan')
 											}))
+										)
+											? navigate('/sign-up')
+											: navigate('/new-loan')
 									})()
 								} else {
 									navigate('/new-loan')
@@ -130,9 +135,14 @@ const Landing = () => {
 											decline: 'No',
 										})
 										proceed &&
+										!(
+											isAuthenticated ||
 											(await signIn(user.address, () => {
 												navigate('/loans')
 											}))
+										)
+											? navigate('/sign-up')
+											: navigate('/loans')
 									})()
 								} else {
 									navigate('/loans')
