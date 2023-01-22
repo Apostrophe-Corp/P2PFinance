@@ -84,7 +84,10 @@ const App = ({ children }) => {
 										})
 										if (proceed === undefined) return
 										!proceed
-											? navigate('/') && (await disconnectWallet())
+											? (async () => {
+													navigate('/')
+													await disconnectWallet()
+											  })()
 											: checkForSignIn(async () => {
 													!(
 														isAuthenticated ||
@@ -107,7 +110,7 @@ const App = ({ children }) => {
 											neutral: true,
 											canClear: true,
 										})
-										if(proceed === undefined) return
+										if (proceed === undefined) return
 										proceed
 											? viewingProfile
 												? (async () => {
