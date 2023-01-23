@@ -25,7 +25,7 @@ const Loans = () => {
 			} while (
 				(loansRes?.message === 'internal server error' ||
 					loansRes?.error === 500) &&
-				retries < 3
+				retries < 5
 			)
 			if (loansRes.success) {
 				setLoans(loansRes.loans)

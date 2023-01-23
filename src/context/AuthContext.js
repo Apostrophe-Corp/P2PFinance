@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} while (
 			(res?.message === 'internal server error' || res?.error === 500) &&
-			retries < 3
+			retries < 5
 		)
 
 		stopWaiting()
@@ -69,7 +69,7 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} while (
 			(res?.message === 'internal server error' || res?.error === 500) &&
-			retries < 3
+			retries < 5
 		)
 
 		stopWaiting()
@@ -118,7 +118,7 @@ const AuthContextProvider = ({ children }) => {
 			})
 		} while (
 			(res?.message === 'internal server error' || res?.error === 500) &&
-			retries < 3
+			retries < 5
 		)
 
 		if (res.success) {

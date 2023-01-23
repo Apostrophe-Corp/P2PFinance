@@ -43,7 +43,7 @@ const Profile = () => {
 			} while (
 				(loansRes?.message === 'internal server error' ||
 					loansRes?.error === 500) &&
-				retries < 3
+				retries < 5
 			)
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
@@ -61,7 +61,8 @@ const Profile = () => {
 		}
 
 		const getLoans = async () => {
-			let res = undefined, retries = 0
+			let res = undefined,
+				retries = 0
 			do {
 				res = await request({
 					path: 'loans',
@@ -72,7 +73,7 @@ const Profile = () => {
 				})
 			} while (
 				(res?.message === 'internal server error' || res?.error === 500) &&
-				retries < 3
+				retries < 5
 			)
 			if (res.success) {
 				if (res.loans) {

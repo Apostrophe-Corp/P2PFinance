@@ -38,7 +38,7 @@ const Profile = ({ user }) => {
 			})
 		} while (
 			(result?.message === 'internal server error' || result?.error === 500) &&
-			retries < 3
+			retries < 5
 		)
 
 		if (result.success) await updateUser(String(thisUser.address))
