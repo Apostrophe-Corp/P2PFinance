@@ -9,25 +9,31 @@ import { useReach } from '../hooks'
 const Loans = () => {
 	const { adverts: loans, setAdverts: setLoans } = useReach()
 	const [message, setMessage] = useState(
-		!loans.length ? 'Loading...' : 'There are no Ads yet'
+		!loans.length ? 'Loading...' : 'No active advert'
 	)
 
 	useEffect(() => {
 		let retriever = undefined
 		const getLoans = async () => {
-			const loansRes = await request({
-				path: `loans`,
-				method: 'GET',
-			})
+			let loansRes = undefined,
+				retries = 0
+			do {
+				loansRes = await request({
+					path: `loans`,
+					method: 'GET',
+				})
+			} while (
+				(loansRes?.message === 'internal server error' ||
+					loansRes?.error === 500) &&
+				retries < 3
+			)
 			if (loansRes.success) {
 				setLoans(loansRes.loans)
-				setMessage(
-					loansRes?.loans?.length ? 'Loading...' : 'There are no Ads yet'
-				)
+				setMessage(loansRes?.loans?.length ? 'Loading...' : 'No active advert')
 				clearInterval(retriever)
 				retriever = undefined
 			} else if (!loans?.length) {
-				setMessage('There are no Ads yet')
+				setMessage('No active advert')
 			}
 		}
 
@@ -163,9 +169,15 @@ const Loans = () => {
 					))
 				) : (
 					<div
-						className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
+						className={cf(
+							s.wMax,
+							s.flex,
+							s.flexCenter,
+							l.container,
+							l.subHeader
+						)}
 					>
-						<h1>{message}</h1>
+						<h3>{message}</h3>
 					</div>
 				)}
 			</div>

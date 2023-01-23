@@ -26,13 +26,20 @@ const Profile = ({ user }) => {
 	const save = async (e) => {
 		e.preventDefault()
 		const cPfp = pfp
-		const result = await request({
-			path: `users/${String(thisUser.address)}`,
-			method: 'PATCH',
-			body: {
-				pfp,
-			},
-		})
+		let result = undefined,
+			retries = 0
+		do {
+			result = await request({
+				path: `users/${String(thisUser.address)}`,
+				method: 'PATCH',
+				body: {
+					pfp,
+				},
+			})
+		} while (
+			(result?.message === 'internal server error' || result?.error === 500) &&
+			retries < 3
+		)
 
 		if (result.success) await updateUser(String(thisUser.address))
 		alertThis({

@@ -33,10 +33,18 @@ const Profile = () => {
 		let retriever = undefined
 
 		const quickCheck = async () => {
-			const loansRes = await request({
-				path: `loans`,
-				method: 'GET',
-			})
+			let loansRes = undefined,
+				retries = 0
+			do {
+				loansRes = await request({
+					path: `loans`,
+					method: 'GET',
+				})
+			} while (
+				(loansRes?.message === 'internal server error' ||
+					loansRes?.error === 500) &&
+				retries < 3
+			)
 			if (loansRes.success) {
 				const presentAdverts = loansRes.loans
 				setAdverts(loansRes.loans)
@@ -45,9 +53,7 @@ const Profile = () => {
 				)
 				setUserAdverts([...remainingAdverts])
 				setMessage__(
-					remainingAdverts?.loans?.length
-						? 'Loading...'
-						: 'You have no active Ads'
+					remainingAdverts?.loans?.length ? 'Loading...' : 'No active advert'
 				)
 				clearInterval(retriever)
 				retriever = undefined
@@ -55,13 +61,19 @@ const Profile = () => {
 		}
 
 		const getLoans = async () => {
-			const res = await request({
-				path: 'loans',
-				method: 'POST',
-				body: {
-					searchTerm: authUser.username,
-				},
-			})
+			let res = undefined, retries = 0
+			do {
+				res = await request({
+					path: 'loans',
+					method: 'POST',
+					body: {
+						searchTerm: authUser.username,
+					},
+				})
+			} while (
+				(res?.message === 'internal server error' || res?.error === 500) &&
+				retries < 3
+			)
 			if (res.success) {
 				if (res.loans) {
 					const tempLoans = res.loans
@@ -69,17 +81,13 @@ const Profile = () => {
 						(el) => el.borrower === authUser.address && el.lender !== ''
 					)
 					setMessage_(
-						borrowed?.loans?.length
-							? 'Loading...'
-							: `You've not been given a loan yet`
+						borrowed?.loans?.length ? 'Loading...' : `No borrow history`
 					)
 					setBorrowedLoans(borrowed)
 					const loaned = tempLoans.filter(
 						(el) => el.lender === authUser.address
 					)
-					setMessage(
-						loaned?.loans?.length ? 'Loading...' : `You've not given a loan yet`
-					)
+					setMessage(loaned?.loans?.length ? 'Loading...' : `No loan history`)
 					setLoanedLoans(loaned)
 				}
 			}
@@ -104,7 +112,9 @@ const Profile = () => {
 	])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter, s.p10, l.profileContainer)}>
+		<div
+			className={cf(s.wMax, s.flex, s.flexCenter, s.p10, l.profileContainer)}
+		>
 			<div className={cf(s.wMax, s.flex, s.flexCenter)}>
 				<UserProfile user={authUser} />
 			</div>
@@ -208,7 +218,7 @@ const Profile = () => {
 				<div
 					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
-					<h1>{message__}</h1>
+					<h3>{message__}</h3>
 				</div>
 			)}
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
@@ -310,7 +320,7 @@ const Profile = () => {
 				<div
 					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
-					<h1>{message}</h1>
+					<h3>{message}</h3>
 				</div>
 			)}
 			<div className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.header)}>
@@ -412,7 +422,7 @@ const Profile = () => {
 				<div
 					className={cf(s.wMax, s.flex, s.flexCenter, l.container, l.subHeader)}
 				>
-					<h1>{message_}</h1>
+					<h3>{message_}</h3>
 				</div>
 			)}
 		</div>

@@ -370,9 +370,17 @@ const ReachContextProvider = ({ children }) => {
 		const assetInfo = selected
 			? { name: 'Algo' }
 			: await getASAInfo(Number(asset))
-		const res = await request({
-			path: `loans/${id}`,
-		})
+		let res = undefined,
+			retries = 0
+		do {
+			res = await request({
+				path: `loans/${id}`,
+			})
+			retries++
+		} while (
+			(res?.message === 'internal server error' || res?.error === 500) &&
+			retries < 3
+		)
 		if (res.success) {
 			if (res.loan?.lender === '') {
 				let rewardSent = false
@@ -441,14 +449,21 @@ const ReachContextProvider = ({ children }) => {
 						JSON.parse(loanCtcInfo)
 					)
 					await ctc.a.Lender.lend()
-					const res = await request({
-						path: `loans/${id}`,
-						method: 'PATCH',
-						body: {
-							lender: String(user.address),
-						},
-					})
-
+					let res = undefined,
+						retries = 0
+					do {
+						res = await request({
+							path: `loans/${id}`,
+							method: 'PATCH',
+							body: {
+								lender: String(user.address),
+							},
+						})
+						retries++
+					} while (
+						(res?.message === 'internal server error' || res?.error === 500) &&
+						retries < 3
+					)
 					stopWaiting()
 					if (res.success) {
 						const presentAdverts = adverts
@@ -542,13 +557,20 @@ const ReachContextProvider = ({ children }) => {
 			)
 			const [paid_] = [reach.bigNumberToNumber(paid)]
 			if (repaid || paid_ >= original) {
-				res = await request({
-					path: `loans/${id}`,
-					method: 'PATCH',
-					body: {
-						resolved: true,
-					},
-				})
+				let retries = 0
+				do {
+					res = await request({
+						path: `loans/${id}`,
+						method: 'PATCH',
+						body: {
+							resolved: true,
+						},
+					})
+					retries++
+				} while (
+					(res?.message === 'internal server error' || res?.error === 500) &&
+					retries < 3
+				)
 				stopWaiting()
 				if (res.success) {
 					alertThis({

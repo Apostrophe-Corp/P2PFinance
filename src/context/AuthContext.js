@@ -11,10 +11,17 @@ const AuthContextProvider = ({ children }) => {
 
 	const signIn = async (address, cb = null) => {
 		startWaiting()
-		const res = await request({
-			path: `users/${address}`,
-			method: 'GET',
-		})
+		let res = undefined,
+			retries = 0
+		do {
+			res = await request({
+				path: `users/${address}`,
+				method: 'GET',
+			})
+		} while (
+			(res?.message === 'internal server error' || res?.error === 500) &&
+			retries < 3
+		)
 
 		stopWaiting()
 		if (res.success) {
@@ -48,15 +55,22 @@ const AuthContextProvider = ({ children }) => {
 
 	const signUp = async (username, address, pfp, cb = null) => {
 		startWaiting()
-		const res = await request({
-			path: `users`,
-			method: 'POST',
-			body: {
-				username,
-				address,
-				pfp,
-			},
-		})
+		let res = undefined,
+			retries = 0
+		do {
+			res = await request({
+				path: `users`,
+				method: 'POST',
+				body: {
+					username,
+					address,
+					pfp,
+				},
+			})
+		} while (
+			(res?.message === 'internal server error' || res?.error === 500) &&
+			retries < 3
+		)
 
 		stopWaiting()
 		if (res.success) {
@@ -95,10 +109,17 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	const updateUser = async (address) => {
-		const res = await request({
-			path: `users/${address}`,
-			method: 'GET',
-		})
+		let res = undefined,
+			retries = 0
+		do {
+			res = await request({
+				path: `users/${address}`,
+				method: 'GET',
+			})
+		} while (
+			(res?.message === 'internal server error' || res?.error === 500) &&
+			retries < 3
+		)
 
 		if (res.success) {
 			setAuthUser(res.user)
