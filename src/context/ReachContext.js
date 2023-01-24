@@ -196,6 +196,10 @@ const ReachContextProvider = ({ children }) => {
 				window.localStorage.setItem('walletPreference', 'MyAlgoConnect')
 				break
 		}
+		if (mnemonic) {
+			window.localStorage.setItem('walletPreference', '')
+			window.localStorage.setItem('userAddress', '')
+		}
 		if (newConnection) {
 			try {
 				const account = mnemonic
@@ -252,7 +256,8 @@ const ReachContextProvider = ({ children }) => {
 			userAddress: localStorage.getItem('userAddress'),
 		}
 
-		if (!sessionInfo.walletPreference || !sessionInfo.userAddress) return false
+		if (sessionInfo.walletPreference === '' || sessionInfo.userAddress === '')
+			return false
 
 		await connectToWallet(sessionInfo.walletPreference, false, false)
 		try {
@@ -308,6 +313,7 @@ const ReachContextProvider = ({ children }) => {
 		!(
 			walletPreference === 'PeraConnect' || walletPreference === 'WalletConnect'
 		) && (await window?.algorand?.disconnect())
+		delete window?.algorand
 		window.localStorage.setItem('walletPreference', '')
 		window.localStorage.setItem('userAddress', '')
 		setUser({})
