@@ -318,10 +318,6 @@ const ReachContextProvider = ({ children }) => {
 		window.localStorage.setItem('walletPreference', '')
 		window.localStorage.setItem('userAddress', '')
 		setUser({})
-		alertThis({
-			message: 'Wallet connection terminated',
-			forConfirmation: false,
-		})
 
 		return true
 	}
@@ -503,7 +499,7 @@ const ReachContextProvider = ({ children }) => {
 				setAdverts([...remainingAdverts])
 				alertThis({
 					message:
-						"Woah!!! Isn't this fascinating, someone just lend to this advert",
+						"Woah!!! Isn't this fascinating, someone just lent to this advert",
 					forConfirmation: false,
 				})
 			}

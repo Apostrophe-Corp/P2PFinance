@@ -155,7 +155,7 @@ const Loans = () => {
 								l.assetName
 							)}
 						>
-							Trade
+							Lend
 						</span>
 					</div>
 				</div>
