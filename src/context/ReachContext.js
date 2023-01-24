@@ -141,6 +141,7 @@ const ReachContextProvider = ({ children }) => {
 	) => {
 		newConnection && startWaiting(true, mnemonic ? 180000 : 120000)
 		delete window?.algorand
+		reach = undefined
 		reach = loadStdlib({ REACH_CONNECTOR_MODE: 'ALGO' })
 		switch (walletPreference) {
 			case 'PeraConnect':

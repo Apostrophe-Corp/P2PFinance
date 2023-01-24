@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
@@ -17,6 +17,8 @@ const Create = () => {
 	const [unSelected_, setUnSelected_] = useState(false)
 
 	const previewRef = useRef()
+	const requestedRef = createRef()
+	const offeredRef = createRef()
 
 	const setPreviewBgs = () => {
 		previewRef.current.style.background = `url(${previewImg})`
@@ -53,7 +55,11 @@ const Create = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		;(await create(loanParams, selected, offered)) && navigate('/account')
+		;(await create({
+			...loanParams,
+			tokenRequested: requestedRef.current.value,
+			tokenOffered: offeredRef.current.value,
+		}, selected, offered)) && navigate('/account')
 	}
 
 	return (
@@ -138,6 +144,7 @@ const Create = () => {
 								onChange={handleChange}
 								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
+								ref={requestedRef}
 							/>
 						</label>
 						<label
@@ -205,6 +212,7 @@ const Create = () => {
 								onChange={handleChange}
 								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
+								ref={offeredRef}
 							/>
 						</label>
 						<label

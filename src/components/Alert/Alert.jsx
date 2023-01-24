@@ -104,6 +104,7 @@ const Alert = () => {
 											id='response'
 											placeholder='Enter your response'
 											autoFocus={true}
+											autoComplete='off'
 											onChange={(e) => {
 												setResponse(e.currentTarget.value)
 											}}
