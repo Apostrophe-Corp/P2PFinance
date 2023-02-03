@@ -1,15 +1,15 @@
 {
-  "short_name": "Urgent2K",
-  "name": "Urgent2K | D-Lending Platform",
+  "short_name": "P2PFinance",
+  "name": "P2PFinance | P2P Loan Platform",
   "icons": [
     {
       "src": "logo.jpg",
       "type": "image/jpg",
-      "sizes": "4500x4500"
+      "sizes": "4500x4500 2500x2500 512x512 192x192"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#8400ffa7",
+  "background_color": "#8400ffa7"
 }

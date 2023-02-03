@@ -2,14 +2,21 @@ import React from 'react'
 import g from '../styles/Global.module.css'
 import s from '../styles/Shared.module.css'
 import app from '../styles/Landing.module.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useReach, useAuth } from '../hooks'
 import { cf } from '../utils'
 
 const App = ({ children }) => {
 	const navigate = useNavigate()
-	const { checkForSignIn, setShowConnectAccount, user } = useReach()
-	const { isAuthenticated, authUser } = useAuth()
+	const location = useLocation()
+	const {
+		checkForSignIn,
+		setShowConnectAccount,
+		user,
+		alertThis,
+		disconnectWallet,
+	} = useReach()
+	const { isAuthenticated, authUser, signIn, signOut } = useAuth()
 	return (
 		<div>
 			<div
@@ -19,6 +26,7 @@ const App = ({ children }) => {
 					s.flex,
 					s.spaceXBetween,
 					s.spaceYCenter,
+					s.g10,
 					app.header,
 					g.empty
 				)}
@@ -29,50 +37,100 @@ const App = ({ children }) => {
 						navigate('/')
 					}}
 				>
-					Urgent2K
+					P2PFinance
 				</div>
-				<div className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}>
-					<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter)}>
-						<li
-							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
-							onClick={() => {
-								checkForSignIn(() => {
-									navigate('/new-loan')
-								})
-							}}
-						>
-							Create
-						</li>
-						<li
-							className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
-							onClick={() => {
-								checkForSignIn(() => {
-									navigate('/loans')
-								})
-							}}
-						>
-							Lend
-						</li>
-					</ul>
-				</div>
+				{user.address && isAuthenticated && (
+					<div
+						className={cf(s.p0, s.m0, s.w480_100, s.w360_100, app.navParent)}
+					>
+						<ul className={cf(s.p0, s.m0, s.flex, s.flexCenter, s.g10)}>
+							<li
+								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
+								onClick={() => {
+									checkForSignIn(() => {
+										navigate('/new-loan')
+									})
+								}}
+							>
+								Borrow
+							</li>
+							<li
+								className={cf(s.flex, s.flexCenter, s.p10, s.m0, app.navItem)}
+								onClick={() => {
+									checkForSignIn(() => {
+										navigate('/loans')
+									})
+								}}
+							>
+								Lend
+							</li>
+						</ul>
+					</div>
+				)}
 				<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
 					<button
-						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
+						className={cf(app.connectAccount)}
 						onClick={() => {
-							checkForSignIn(() => {
-							!isAuthenticated ? navigate('/sign-up') : navigate('/account')
-							})
+							!user.address
+								? setShowConnectAccount(true)
+								: !isAuthenticated
+								? (async () => {
+										const proceed = await alertThis({
+											message: `Your wallet is connected. Would you like to sign-in or disconnect your wallet?`,
+											accept: 'Sign In',
+											decline: 'Disconnect',
+											neutral: true,
+											canClear: true,
+										})
+										if (proceed === undefined) return
+										!proceed
+											? (async () => {
+													navigate('/')
+													await disconnectWallet()
+											  })()
+											: checkForSignIn(async () => {
+													!(
+														isAuthenticated ||
+														(await signIn(user.address, () => {
+															navigate('/account')
+														}))
+													)
+														? navigate('/sign-up')
+														: navigate('/account')
+											  })
+								  })()
+								: (async () => {
+										const viewingProfile = location.pathname === '/account'
+										const proceed = await alertThis({
+											message: `You are signed-in. Would you like to ${
+												viewingProfile ? 'sign-out' : 'view your profile'
+											} or disconnect your wallet?`,
+											accept: viewingProfile ? 'Sign Out' : 'View Profile',
+											decline: 'Disconnect',
+											neutral: true,
+											canClear: true,
+										})
+										if (proceed === undefined) return
+										proceed
+											? viewingProfile
+												? (async () => {
+														navigate('/')
+														await signOut()
+												  })()
+												: navigate('/account')
+											: (async () => {
+													navigate('/')
+													await signOut()
+													await disconnectWallet()
+											  })()
+								  })()
 						}}
 					>
-						{isAuthenticated ? authUser.username : `Sign Up`}
-					</button>
-					<button
-						className={cf(s.w480_100, s.w360_100, app.connectAccount)}
-						onClick={() => {
-							setShowConnectAccount(true)
-						}}
-					>
-						{!user.account ? 'Connect Wallet' : user.address}
+						{!user.account
+							? 'Connect Wallet'
+							: isAuthenticated
+							? authUser.username
+							: user.address}
 					</button>
 				</div>
 			</div>
@@ -85,11 +143,10 @@ const App = ({ children }) => {
 							navigate('/')
 						}}
 					>
-						Urgent2K
+						P2PFinance
 					</div>
 					<div className={cf(s.wMax, app.registered)}>
-						Urgent2K is the product of Apostrophe Corp. for the Polygon Bounty
-						Hack.
+						Copyright &copy; Apostrophe Corp. 2022.
 					</div>
 				</div>
 			</div>

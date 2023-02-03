@@ -1,46 +1,56 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import l from '../../styles/Loan.module.css'
 import { useReach } from '../../hooks'
-import { cf, setPfps, getTokenInfo } from '../../utils'
+import { cf, setPFPs, getASAInfo, viewASA } from '../../utils'
 
 const Advert = ({ ad }) => {
+	const navigate = useNavigate()
 	const uCRef = useRef()
 	const pfpRef = useRef()
 	const { lend } = useReach()
-	const [assetName, setAssetName] = useState('')
-	const [collateral, setCollateral] = useState('')
+	const [assetName, setAssetName] = useState('Loan Token')
+	const [collateral, setCollateral] = useState('Collateral Token')
 
 	useEffect(() => {
-		setPfps(
-			[uCRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, true],
-			[pfpRef, ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract, false]
-		)
-	}, [ad?.borrowerInfo?.pfp, ad?.borrowerInfo?.pfpContract])
+		const pfp = Number(ad?.borrowerInfo?.pfp)
+		setPFPs([
+			[uCRef, pfp, true],
+			[pfpRef, pfp, false],
+		])
+	}, [ad?.borrowerInfo?.pfp])
 
 	useEffect(() => {
 		const updateValues = async () => {
-			const assetData = await getTokenInfo(ad.tokenRequested, ad.tokenContract)
+			const assetData = ad.selected
+				? { name: 'Algo' }
+				: await getASAInfo(Number(ad.tokenRequested))
 			setAssetName(
-				`${assetData?.name}${assetData?.symbol ? `, ${assetData.symbol}` : ''}`
+				`${assetData?.['name']}`
+				// `${assetData?.name}${
+				// 	assetData?.['unit-name'] ? `, (${assetData?.['unit-name']})` : ''
+				// }`
 			)
-			const collateralData = await getTokenInfo(
-				ad.tokenOffered,
-				ad.tokenContract
-			)
+			const collateralData = ad.offered
+				? { name: 'Algo' }
+				: await getASAInfo(Number(ad.tokenOffered))
 			setCollateral(
-				`${collateralData?.name}${
-					collateralData?.symbol ? `, ${collateralData.symbol}` : ''
-				}`
+				`${collateralData?.['name']}`
+				// `${collateralData?.name}${
+				// 	collateralData?.['unit-name']
+				// 		? `, (${collateralData?.['unit-name']})`
+				// 		: ''
+				// }`
 			)
 		}
 		updateValues()
-	}, [ad.tokenContract, ad.tokenOffered, ad.tokenRequested])
+	}, [ad.offered, ad.selected, ad.tokenOffered, ad.tokenRequested])
 
 	return (
-		<div className={cf(s.wMax, s.flex, s.flexCenter)}>
+		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
 			<div
-				className={cf(s.flex, s.flex_dColumn, l.userContainer)}
+				className={cf(s.flex, s.flex_dColumn, l.userDetail)}
 				ref={uCRef}
 			>
 				<div
@@ -53,123 +63,194 @@ const Advert = ({ ad }) => {
 					</span>
 				</div>
 			</div>
-			<div className={cf(s.flex, s.flexCenter, s.flex_dColumn)}>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.amountRequested}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{assetName ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.amountOffered}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{collateral ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.paymentAmount}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							{assetName ?? 'Loading'}
-						</span>
-					</div>
-					<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.quantity
-							)}
-						>
-							{ad.maturation}
-						</span>
-						<span
-							className={cf(
-								s.wMax,
-								s.flex,
-								s.flexCenter,
-								s.p5,
-								s.dInlineBlock,
-								l.assetName
-							)}
-						>
-							Blocks
-						</span>
-					</div>
-				</div>
-				<div className={cf(s.wMax, s.flex, s.flexCenter)}>
-					<button
-						className={cf(s.wMax, s.dInlineBlock, s.flex, s.flexCenter)}
-						onClick={() => {
-							lend(ad.id, ad.contractInfo, ad.amountRequested, ad.tokenRequested)
-						}}
-					>
-						Lend
-					</button>
-				</div>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					l.bNone,
+					ad.selected ? '' : l.asa
+				)}
+				onClick={() => {
+					if (!ad.selected) viewASA(ad.tokenRequested)
+				}}
+			>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.amountRequested}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{ad.selected
+						? 'Algo'
+						: `${
+								assetName && assetName !== 'undefined'
+									? assetName
+									: 'Loan Token'
+						  }`}
+				</span>
+			</div>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					ad.offered ? '' : l.asa
+				)}
+				onClick={() => {
+					if (!ad.offered) viewASA(ad.tokenOffered)
+				}}
+			>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.amountOffered}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{ad.offered
+						? 'Algo'
+						: `${
+								collateral && collateral !== 'undefined'
+									? collateral
+									: 'Collateral Token'
+						  }`}
+				</span>
+			</div>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					l.detail,
+					ad.selected ? '' : l.asa
+				)}
+				onClick={() => {
+					if (!ad.selected) viewASA(ad.tokenRequested)
+				}}
+			>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.paymentAmount}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					{ad.selected
+						? 'Algo'
+						: `${
+								assetName && assetName !== 'undefined'
+									? assetName
+									: 'Loan Token'
+						  }`}
+				</span>
+			</div>
+			<div className={cf(s.flex, s.flex_dColumn, s.flexCenter, l.detail)}>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.quantity
+					)}
+				>
+					{ad.maturation}
+				</span>
+				<span
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p5,
+						s.dInlineBlock,
+						l.assetName
+					)}
+				>
+					Blocks
+				</span>
+			</div>
+			<div
+				className={cf(
+					s.flex,
+					s.flex_dColumn,
+					s.flexCenter,
+					s.p5,
+					l.detail,
+					l.lend
+				)}
+			>
+				<button
+					className={cf(
+						s.wMax,
+						s.dInlineBlock,
+						s.flex,
+						s.flexCenter,
+						l.lendBtn
+					)}
+					onClick={async () => {
+						;(await lend(
+							Number(ad.id),
+							ad.contractInfo,
+							Number(ad.amountRequested),
+							Number(ad.tokenRequested),
+							Number(ad.tokenOffered),
+							ad.selected,
+							ad.offered
+						)) && navigate('/account')
+					}}
+				>
+					Lend
+				</button>
 			</div>
 		</div>
 	)

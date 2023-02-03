@@ -1,0 +1,1136 @@
+#pragma version 8
+// resource: R_Txn
+txn ApplicationID
+bz alloc
+byte base64()
+app_global_get
+dup
+int 0
+extract_uint64
+store 1 // GV_currentStep :: UInt
+int 8
+extract_uint64
+store 2 // GV_currentTime :: UInt
+byte base64(AA==)
+app_global_get
+byte base64(AQ==)
+app_global_get
+concat
+preamble:
+pushbytess base64(BVFjDw==) base64(DCkD+w==) base64(H3DUzg==) base64(J1G4/w==) base64(Oum5vg==) base64(PoAXdg==) base64(Z4o7WQ==) base64(c7b41w==) base64(jvcBQQ==) base64(k6nkTg==) base64(l00j+g==) base64(pHqhMg==) base64(39kjKA==)
+txna ApplicationArgs 0
+match LoanViews_isLiveygbpOgyMKriAHNbbfYITDN23_lz1HYtza3S8s9ustHA_ Borrower_claimRehLzOMYamstM98LFMXy_RbgQmURtxtfgAb9r8oywhzMU_ _reachp_0 LoanViews_beginB9aNTbDOJJXx7cq89pSm9o_ZvFf_S5wXjeC2SuwJAoZM_ LoanViews_loanPae2G8y_1RaF5EbTYml45MyD1yVOphFow2R_6VD4sYDcg_ Lender_lend__bytcCYmXd1bQe9ilXhvuDt3qCu23A_eD46UCjl4vdUqAPg_ LoanViews_amountLvNmgcV_tJPxuPy73QovTTP_6hNcFZOUaVZQ7bHPxbI_ Borrower_repay_uNHWAJnX9SP_B8PPqZDC0XstqapHXtodsjU0kHqRGmKg_ _reachp_4 Borrower_close__QdX9GHT6oNns3qy_pCvDarvskjcnBRMel9zI8D0VgpY_ _reachp_5 Lender_claim__vouZQ6HopY3GjxjdGTXJCQscOpvxkNSvCiIA6PnMy9P6k_ _reachp_1
+errl:
+err
+Borrower_claimRehLzOMYamstM98LFMXy_RbgQmURtxtfgAb9r8oywhzMU_:
+_reacha_Borrower_claimRefund:
+int 17
+bzero
+store 14 // v3140
+_reachi_4:
+int 5
+load 1 // GV_currentStep :: UInt
+==
+assert
+callsub l2_LF_svsLoad_5
+load 14 // v3140
+int 0
+extract_uint64
+store 15 // v3139
+load 14 // v3140
+extract 8 9
+store 21 // .fork285.msg/1172
+byte base64(KSdsNg==)
+load 15 // v3139
+itob
+concat
+load 21 // .fork285.msg/1172
+concat
+log // up to 21 bytes
+// ^ log: "_reach_e4" [v3139,.fork285.msg/1172] "_reach_e4(uint64,(byte,byte[8]))"
+load 15 // v3139
+callsub l5_LF_timeCheck
+load 21 // .fork285.msg/1172
+int 0
+getbyte
+switch l10_Borrower_claimRefund0_285 l11_Borrower_repay0_285 l12_Lender_claim0_285
+b errl
+Borrower_close__QdX9GHT6oNns3qy_pCvDarvskjcnBRMel9zI8D0VgpY_:
+_reacha_Borrower_close:
+int 9
+bzero
+store 11 // v3143
+_reachi_5:
+int 7
+load 1 // GV_currentStep :: UInt
+==
+assert
+callsub l4_LF_svsLoad_7
+load 11 // v3143
+int 0
+extract_uint64
+store 12 // v3142
+load 11 // v3143
+extract 8 1
+store 13 // .fork101.msg/917
+byte base64(BRynmg==)
+load 12 // v3142
+itob
+concat
+load 13 // .fork101.msg/917
+concat
+log // up to 13 bytes
+// ^ log: "_reach_e5" [v3142,.fork101.msg/917] "_reach_e5(uint64,(byte,byte[0]))"
+load 12 // v3142
+callsub l5_LF_timeCheck
+load 13 // .fork101.msg/917
+int 0
+getbyte
+switch l17_Borrower_close0_101 l18_Lender_lend0_101
+b errl
+Borrower_repay_uNHWAJnX9SP_B8PPqZDC0XstqapHXtodsjU0kHqRGmKg_:
+txna ApplicationArgs 1
+btoi
+store 11 // v3119
+_reacha_Borrower_repay:
+int 8
+bzero
+byte base64(AQ==)
+load 11 // v3119
+itob
+concat
+concat
+store 14 // v3140
+b _reachi_4
+Lender_claim__vouZQ6HopY3GjxjdGTXJCQscOpvxkNSvCiIA6PnMy9P6k_:
+_reacha_Lender_claim:
+byte base64(AAAAAAAAAAACAAAAAAAAAAA=)
+store 14 // v3140
+b _reachi_4
+Lender_lend__bytcCYmXd1bQe9ilXhvuDt3qCu23A_eD46UCjl4vdUqAPg_:
+_reacha_Lender_lend:
+byte base64(AAAAAAAAAAAB)
+store 11 // v3143
+b _reachi_5
+LoanViews_amountLvNmgcV_tJPxuPy73QovTTP_6hNcFZOUaVZQ7bHPxbI_:
+_reacha_LoanViews_amountPaid:
+load 1 // GV_currentStep :: UInt
+int 5
+==
+assert
+// ^ Claim: Incorrect state: not leaf
+// at ./src/contracts/loan_nnt_nnt.rsh:36:27:property binding
+callsub l2_LF_svsLoad_5
+load 26 // amountPaid/1058
+itob
+store 4 // GV_apiRet :: Null
+apiReturn_check:
+txn OnCompletion
+int NoOp
+==
+assert
+// checked on completion
+apiReturn_noCheck:
+byte base64(FR98dQ==)
+load 4 // GV_apiRet :: Null
+concat
+log // up to 21 bytes
+done:
+int 1
+return
+LoanViews_beginB9aNTbDOJJXx7cq89pSm9o_ZvFf_S5wXjeC2SuwJAoZM_:
+_reacha_LoanViews_beginBlock:
+load 1 // GV_currentStep :: UInt
+int 5
+==
+assert
+// ^ Claim: Incorrect state: not leaf
+// at ./src/contracts/loan_nnt_nnt.rsh:37:27:property binding
+callsub l2_LF_svsLoad_5
+load 16 // thisConsensusTime/851
+itob
+store 4 // GV_apiRet :: Null
+b apiReturn_check
+LoanViews_isLiveygbpOgyMKriAHNbbfYITDN23_lz1HYtza3S8s9ustHA_:
+_reacha_LoanViews_isLive:
+load 1 // GV_currentStep :: UInt
+int 7
+<
+bz l3_ifF
+load 1 // GV_currentStep :: UInt
+int 5
+==
+assert
+// ^ Claim: Incorrect state: not leaf
+// at ./src/contracts/loan_nnt_nnt.rsh:34:23:property binding
+callsub l2_LF_svsLoad_5
+load 19 // v1018
+itob
+substring 7 8
+store 4 // GV_apiRet :: Null
+b apiReturn_check
+LoanViews_loanPae2G8y_1RaF5EbTYml45MyD1yVOphFow2R_6VD4sYDcg_:
+_reacha_LoanViews_loanPaid:
+load 1 // GV_currentStep :: UInt
+int 5
+==
+assert
+// ^ Claim: Incorrect state: not leaf
+// at ./src/contracts/loan_nnt_nnt.rsh:35:25:property binding
+callsub l2_LF_svsLoad_5
+load 15 // v1089
+itob
+substring 7 8
+store 4 // GV_apiRet :: Null
+b apiReturn_check
+_api_Borrower_claimRefund4:
+byte base64()
+store 14 // v1226
+byte base64(AAAAAAAABMo=)
+load 14 // v1226
+concat
+log // up to 8 bytes
+load 14 // v1226
+store 4 // GV_apiRet :: Null
+global Round
+store 13 // thisConsensusTime/1059
+_reachl_3:
+load 26 // amountPaid/1058
+load 20 // v834
+<
+store 14 // v1086
+load 13 // thisConsensusTime/1059
+load 17 // end_/1057
+<
+load 14 // v1086
+&&
+bz l24_ifF
+load 26 // amountPaid/1058
+load 20 // v834
+>=
+store 15 // v1089
+l25_LF_svsDump_5:
+load 25 // B/816
+load 24 // tokCollateral/817
+itob
+concat
+load 23 // tokLoan/818
+itob
+concat
+load 20 // v834
+itob
+concat
+load 18 // lender/849
+concat
+load 16 // thisConsensusTime/851
+itob
+concat
+load 19 // v1018
+itob
+substring 7 8
+concat
+load 17 // end_/1057
+itob
+concat
+load 26 // amountPaid/1058
+itob
+concat
+load 13 // thisConsensusTime/1059
+itob
+concat
+load 12 // tokenInfos/1065
+concat
+load 11 // netBalance/1066
+itob
+concat
+load 15 // v1089
+itob
+substring 7 8
+concat
+int 33
+bzero
+concat
+int 5
+global Round
+updateStateNoOp:
+store 2 // GV_currentTime :: UInt
+store 1 // GV_currentStep :: UInt
+byte base64(AA==)
+dig 1
+extract 0 127
+app_global_put
+byte base64(AQ==)
+swap
+extract 127 70
+app_global_put
+byte base64()
+load 1 // GV_currentStep :: UInt
+itob
+load 2 // GV_currentTime :: UInt
+itob
+concat
+app_global_put
+txn OnCompletion
+int NoOp
+==
+assert
+// checked on completion
+callsub l26_LF_updateMbr
+updateState:
+load 3 // GV_wasntMeth :: Bool
+bnz done
+b apiReturn_noCheck
+_api_Borrower_close5:
+byte base64()
+store 11 // v953
+byte base64(AAAAAAAAA7k=)
+load 11 // v953
+concat
+log // up to 8 bytes
+load 11 // v953
+store 4 // GV_apiRet :: Null
+int 0
+global Round
+store 16 // thisConsensusTime/851
+store 19 // isLive/848
+_reachl_2:
+load 17 // loanAccepted/850
+!
+load 19 // isLive/848
+&&
+bz l19_ifF
+int 1
+store 12 // v880
+int 1
+store 19 // isLive/848
+int 0
+store 17 // loanAccepted/850
+l20_LF_svsDump_7:
+load 25 // B/816
+load 24 // tokCollateral/817
+itob
+concat
+load 23 // tokLoan/818
+itob
+concat
+load 22 // loanInfo/820
+concat
+load 21 // v833
+itob
+concat
+load 20 // v834
+itob
+concat
+load 19 // isLive/848
+itob
+substring 7 8
+concat
+load 18 // lender/849
+concat
+load 17 // loanAccepted/850
+itob
+substring 7 8
+concat
+load 15 // tokenInfos/857
+concat
+load 14 // netBalance/858
+itob
+concat
+load 12 // v880
+itob
+substring 7 8
+concat
+int 7
+global Round
+b updateStateNoOp
+_api_Borrower_repay4:
+load 21 // .fork285.msg/1172
+int 1
+extract_uint64
+store 27 // amt/1279
+txn Sender
+load 25 // B/816
+==
+assert
+// ^ Claim: You are not the Borrower
+// at reach standard library:57:5:application
+// at ./src/contracts/loan_nnt_nnt.rsh:111:38:application call to "check" (defined at: reach standard library:49:32:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:110:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:110:53:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:94:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:110:53:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:94:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:94:50:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:108:34:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:108:34:function exp)
+load 13 // thisConsensusTime/1059
+load 17 // end_/1057
+<=
+assert
+// ^ Claim: Its past the deadline
+// at reach standard library:57:5:application
+// at ./src/contracts/loan_nnt_nnt.rsh:112:38:application call to "check" (defined at: reach standard library:49:32:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:110:53:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:110:53:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:94:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:110:53:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:94:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:94:50:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:108:34:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:108:34:function exp)
+load 27 // amt/1279
+load 26 // amountPaid/1058
++
+dup
+store 28 // v1285
+load 20 // v834
+>
+dup
+store 15 // v1287
+bz l13_localIfF
+load 28 // v1285
+load 20 // v834
+-
+store 14 // excess/1288
+l14_localIfK:
+load 27 // amt/1279
+load 14 // excess/1288
+-
+store 22 // payAmt/1292
+load 12 // tokenInfos/1065
+extract 17 17
+store 21 // tokInfo/1313
+load 22 // payAmt/1292
+load 23 // tokLoan/818
+callsub l9_LF_checkTxn_True
+// ^ CheckPay
+// at ./src/contracts/loan_nnt_nnt.rsh:94:50:dot
+global Round
+load 17 // end_/1057
+<=
+assert
+// ^ Claim: Its past the deadline
+// at reach standard library:57:5:application
+// at ./src/contracts/loan_nnt_nnt.rsh:112:38:application call to "check" (defined at: reach standard library:49:32:function exp)
+// at ./src/contracts/loan_nnt_nnt.rsh:120:50:application call to [unknown function] (defined at: ./src/contracts/loan_nnt_nnt.rsh:120:50:function exp)
+load 15 // v1287
+bz l15_localIfF
+load 28 // v1285
+load 20 // v834
+-
+store 14 // excess/1336
+l16_localIfK:
+load 26 // amountPaid/1058
+load 27 // amt/1279
+load 14 // excess/1336
+-
++
+dup
+store 15 // amountPaid/1342
+load 20 // v834
+>=
+itob
+substring 7 8
+load 15 // amountPaid/1342
+itob
+concat
+load 20 // v834
+itob
+concat
+store 14 // v1346
+byte base64(AAAAAAAABUI=)
+load 14 // v1346
+concat
+log // up to 25 bytes
+load 14 // v1346
+store 4 // GV_apiRet :: Null
+load 15 // amountPaid/1342
+global Round
+load 12 // tokenInfos/1065
+load 21 // tokInfo/1313
+dup
+int 0
+extract_uint64
+load 22 // payAmt/1292
++
+itob
+replace2 0
+replace2 17
+store 12 // tokenInfos/1065
+store 13 // thisConsensusTime/1059
+store 26 // amountPaid/1058
+b _reachl_3
+_api_Lender_claim4:
+byte base64()
+store 14 // v1451
+byte base64(AAAAAAAABas=)
+load 14 // v1451
+concat
+log // up to 8 bytes
+load 14 // v1451
+store 4 // GV_apiRet :: Null
+global Round
+store 13 // thisConsensusTime/1059
+b _reachl_3
+_api_Lender_lend5:
+load 15 // tokenInfos/857
+extract 17 17
+store 12 // tokInfo/994
+load 21 // v833
+load 23 // tokLoan/818
+callsub l9_LF_checkTxn_True
+// ^ CheckPay
+// at ./src/contracts/loan_nnt_nnt.rsh:55:62:dot
+int 1
+store 11 // v1009
+byte base64(AAAAAAAAA/E=)
+load 11 // v1009
+itob
+substring 7 8
+concat
+log // up to 9 bytes
+load 11 // v1009
+itob
+substring 7 8
+store 4 // GV_apiRet :: Null
+txn Sender
+int 1
+global Round
+load 15 // tokenInfos/857
+load 12 // tokInfo/994
+dup
+int 0
+extract_uint64
+load 21 // v833
++
+itob
+replace2 0
+replace2 17
+store 15 // tokenInfos/857
+store 16 // thisConsensusTime/851
+store 17 // loanAccepted/850
+store 18 // lender/849
+b _reachl_2
+_reachi_0:
+txn Sender
+store 25 // B/816
+load 11 // v3134
+int 0
+extract_uint64
+store 12 // v3133
+load 11 // v3134
+int 8
+extract_uint64
+store 24 // tokCollateral/817
+load 11 // v3134
+int 16
+extract_uint64
+store 23 // tokLoan/818
+load 11 // v3134
+int 24
+extract_uint64
+store 26 // collateral/819
+load 11 // v3134
+extract 32 56
+store 22 // loanInfo/820
+byte base64(vJXWJA==)
+load 12 // v3133
+itob
+concat
+load 24 // tokCollateral/817
+itob
+concat
+load 23 // tokLoan/818
+itob
+concat
+load 26 // collateral/819
+itob
+concat
+load 22 // loanInfo/820
+concat
+log // up to 92 bytes
+// ^ log: "_reach_e0" [v3133,tokCollateral/817,tokLoan/818,collateral/819,loanInfo/820] "_reach_e0(uint64,uint64,uint64,uint64,(address,uint64,uint64,uint64))"
+load 12 // v3133
+callsub l5_LF_timeCheck
+int 17
+bzero
+dup
+store 11 // initialInfo/790
+dup
+concat
+dup
+store 12 // tokInfos/791
+dup
+extract 0 17
+int 8
+bzero
+replace2 0
+replace2 0
+dup
+store 11 // tokInfos'/825
+dup
+extract 17 17
+int 8
+bzero
+replace2 0
+replace2 17
+store 13 // tokInfos'/829
+load 23 // tokLoan/818
+load 24 // tokCollateral/817
+!=
+assert
+// ^ Claim: non-network tokens distinct
+// at ./src/contracts/loan_nnt_nnt.rsh:49:11:dot
+int 100000
+callsub l1_LF_mbrAdd
+int 0
+// resource: R_Asset
+load 24 // tokCollateral/817
+global CurrentApplicationAddress
+callsub l6_LF_makeTxn_False_False_True_True
+int 100000
+callsub l1_LF_mbrAdd
+int 0
+// resource: R_Asset
+load 23 // tokLoan/818
+global CurrentApplicationAddress
+callsub l6_LF_makeTxn_False_False_True_True
+load 22 // loanInfo/820
+int 48
+extract_uint64
+store 21 // v833
+load 22 // loanInfo/820
+int 32
+extract_uint64
+store 20 // v834
+load 21 // v833
+load 20 // v834
+<
+assert
+// ^ Claim
+// at ./src/contracts/loan_nnt_nnt.rsh:50:16:application
+l7_LF_svsDump_1:
+load 25 // B/816
+load 24 // tokCollateral/817
+itob
+concat
+load 23 // tokLoan/818
+itob
+concat
+load 26 // collateral/819
+itob
+concat
+load 22 // loanInfo/820
+concat
+load 13 // tokInfos'/829
+concat
+load 21 // v833
+itob
+concat
+load 20 // v834
+itob
+concat
+int 35
+bzero
+concat
+int 1
+global Round
+b updateStateNoOp
+_reachi_1:
+int 1
+load 1 // GV_currentStep :: UInt
+==
+assert
+l8_LF_svsLoad_1:
+dup
+extract 0 32
+store 25 // B/816
+dup
+int 32
+extract_uint64
+store 24 // tokCollateral/817
+dup
+int 40
+extract_uint64
+store 23 // tokLoan/818
+dup
+int 48
+extract_uint64
+store 26 // collateral/819
+dup
+extract 56 56
+store 22 // loanInfo/820
+dup
+extract 112 34
+store 13 // tokInfos'/829
+dup
+int 146
+extract_uint64
+store 21 // v833
+int 154
+extract_uint64
+store 20 // v834
+load 11 // v3137
+btoi
+store 12 // v3136
+byte base64(1RUZFA==)
+load 12 // v3136
+itob
+concat
+log // up to 12 bytes
+// ^ log: "_reach_e1" [v3136] "_reach_e1(uint64)"
+load 12 // v3136
+callsub l5_LF_timeCheck
+load 13 // tokInfos'/829
+extract 0 17
+store 11 // tokInfo/839
+load 26 // collateral/819
+load 24 // tokCollateral/817
+callsub l9_LF_checkTxn_True
+// ^ CheckPay
+// at ./src/contracts/loan_nnt_nnt.rsh:52:11:dot
+load 25 // B/816
+txn Sender
+==
+assert
+// ^ Claim: sender correct
+// at ./src/contracts/loan_nnt_nnt.rsh:52:11:dot
+int 1
+load 25 // B/816
+int 0
+global Round
+load 13 // tokInfos'/829
+load 11 // tokInfo/839
+dup
+int 0
+extract_uint64
+load 26 // collateral/819
++
+itob
+replace2 0
+replace2 0
+int 0
+store 14 // netBalance/858
+store 15 // tokenInfos/857
+store 16 // thisConsensusTime/851
+store 17 // loanAccepted/850
+store 18 // lender/849
+store 19 // isLive/848
+b _reachl_2
+_reachp_0:
+callsub l0_LF_wasntMeth
+int 100000
+callsub l1_LF_mbrAdd
+txna ApplicationArgs 1
+store 11 // v3134
+b _reachi_0
+_reachp_1:
+callsub l0_LF_wasntMeth
+txna ApplicationArgs 1
+store 11 // v3137
+b _reachi_1
+_reachp_4:
+callsub l0_LF_wasntMeth
+txna ApplicationArgs 1
+store 14 // v3140
+b _reachi_4
+_reachp_5:
+callsub l0_LF_wasntMeth
+txna ApplicationArgs 1
+store 11 // v3143
+b _reachi_5
+alloc:
+int 0
+txn GlobalNumUint
+==
+assert
+int 3
+txn GlobalNumByteSlice
+==
+assert
+int 0
+txn LocalNumUint
+==
+assert
+int 0
+txn LocalNumByteSlice
+==
+assert
+callsub l0_LF_wasntMeth
+int 197
+bzero
+int 0
+int 0
+b updateStateNoOp
+l10_Borrower_claimRefund0_285:
+b _api_Borrower_claimRefund4
+l11_Borrower_repay0_285:
+b _api_Borrower_repay4
+l12_Lender_claim0_285:
+b _api_Lender_claim4
+l13_localIfF:
+int 0
+store 14 // excess/1288
+b l14_localIfK
+l15_localIfF:
+int 0
+store 14 // excess/1336
+b l16_localIfK
+l17_Borrower_close0_101:
+b _api_Borrower_close5
+l18_Lender_lend0_101:
+b _api_Lender_lend5
+l19_ifF:
+load 17 // loanAccepted/850
+store 19 // v1018
+load 17 // loanAccepted/850
+bz l21_ifF
+load 15 // tokenInfos/857
+extract 17 17
+dup
+store 27 // tokInfo/1044
+int 0
+extract_uint64
+dup
+store 21 // v1045
+// resource: R_Asset
+load 23 // tokLoan/818
+// resource: R_Account
+load 25 // B/816
+callsub l6_LF_makeTxn_False_False_True_True
+load 16 // thisConsensusTime/851
+load 22 // loanInfo/820
+int 40
+extract_uint64
++
+store 17 // end_/1057
+int 0
+load 16 // thisConsensusTime/851
+load 15 // tokenInfos/857
+load 27 // tokInfo/1044
+load 21 // v1045
+dup
+-
+itob
+replace2 0
+replace2 17
+load 14 // netBalance/858
+store 11 // netBalance/1066
+store 12 // tokenInfos/1065
+store 13 // thisConsensusTime/1059
+store 26 // amountPaid/1058
+b _reachl_3
+l21_ifF:
+load 15 // tokenInfos/857
+extract 0 17
+int 0
+extract_uint64
+// resource: R_Asset
+load 24 // tokCollateral/817
+// resource: R_Account
+load 25 // B/816
+callsub l6_LF_makeTxn_False_False_True_True
+load 14 // netBalance/858
+load 25 // B/816
+callsub l22_LF_makeTxn_False_False_False_True
+// resource: R_Account
+int 0
+// resource: R_Asset
+load 23 // tokLoan/818
+global CurrentApplicationAddress
+global CreatorAddress
+callsub l23_LF_makeTxn_False_True_True_True
+int 0
+load 24 // tokCollateral/817
+global CurrentApplicationAddress
+global CreatorAddress
+callsub l23_LF_makeTxn_False_True_True_True
+updateStateHalt:
+txn OnCompletion
+int DeleteApplication
+==
+assert
+// checked on completion
+callsub l26_LF_updateMbr
+// resource: R_Account
+int 0
+global CurrentApplicationAddress
+global CreatorAddress
+callsub l27_LF_makeTxn_False_True_False_True
+b updateState
+l24_ifF:
+load 12 // tokenInfos/1065
+extract 0 17
+dup
+store 15 // tokInfo/1459
+int 0
+extract_uint64
+dup
+store 13 // v1460
+// resource: R_Asset
+load 24 // tokCollateral/817
+// resource: R_Account
+load 25 // B/816
+load 18 // lender/849
+load 14 // v1086
+select
+callsub l6_LF_makeTxn_False_False_True_True
+load 12 // tokenInfos/1065
+load 15 // tokInfo/1459
+load 13 // v1460
+dup
+-
+itob
+replace2 0
+replace2 0
+extract 17 17
+int 0
+extract_uint64
+// resource: R_Asset
+load 23 // tokLoan/818
+// resource: R_Account
+load 18 // lender/849
+load 25 // B/816
+load 14 // v1086
+select
+callsub l6_LF_makeTxn_False_False_True_True
+load 11 // netBalance/1066
+// resource: R_Account
+load 25 // B/816
+callsub l22_LF_makeTxn_False_False_False_True
+// resource: R_Account
+int 0
+load 23 // tokLoan/818
+global CurrentApplicationAddress
+global CreatorAddress
+callsub l23_LF_makeTxn_False_True_True_True
+int 0
+load 24 // tokCollateral/817
+global CurrentApplicationAddress
+global CreatorAddress
+callsub l23_LF_makeTxn_False_True_True_True
+b updateStateHalt
+l28_LF_makeTxnK_False_True:
+int 0
+itxn_field Fee
+int pay
+itxn_field TypeEnum
+itxn_field Receiver
+itxn_field Amount
+itxn_submit
+retsub
+l29_LF_makeTxnK_True_True:
+int 0
+itxn_field Fee
+int axfer
+itxn_field TypeEnum
+itxn_field AssetReceiver
+itxn_field XferAsset
+itxn_field AssetAmount
+itxn_submit
+retsub
+l3_ifF:
+load 1 // GV_currentStep :: UInt
+int 7
+==
+assert
+// ^ Claim: Incorrect state: not leaf
+// at ./src/contracts/loan_nnt_nnt.rsh:34:23:property binding
+callsub l4_LF_svsLoad_7
+load 12 // v880
+itob
+substring 7 8
+store 4 // GV_apiRet :: Null
+b apiReturn_check
+updateMbr_eq:
+pop
+retsub
+updateMbr_neg:
+swap
+-
+dup
+store 6 // GV_mbrAdd :: UInt
+global CreatorAddress
+callsub l22_LF_makeTxn_False_False_False_True
+retsub
+updateMbr_pos_eq:
+-
+dup
+bz updateMbr_eq
+dup
+store 6 // GV_mbrAdd :: UInt
+l30_LF_checkTxn_False:
+// resource: R_Txn
+txn GroupIndex
+load 0 // GV_txnCounter :: UInt
+int 1
++
+dup
+store 0 // GV_txnCounter :: UInt
+-
+dupn 2
+gtxns Receiver
+global CurrentApplicationAddress
+==
+assert
+gtxns TypeEnum
+int pay
+==
+assert
+gtxns Amount
+==
+assert
+retsub
+l6_LF_makeTxn_False_False_True_True:
+itxn_begin
+b l29_LF_makeTxnK_True_True
+l2_LF_svsLoad_5:
+dup
+extract 0 32
+store 25 // B/816
+dup
+int 32
+extract_uint64
+store 24 // tokCollateral/817
+dup
+int 40
+extract_uint64
+store 23 // tokLoan/818
+dup
+int 48
+extract_uint64
+store 20 // v834
+dup
+extract 56 32
+store 18 // lender/849
+dup
+int 88
+extract_uint64
+store 16 // thisConsensusTime/851
+dup
+extract 96 1
+btoi
+store 19 // v1018
+dup
+int 97
+extract_uint64
+store 17 // end_/1057
+dup
+int 105
+extract_uint64
+store 26 // amountPaid/1058
+dup
+int 113
+extract_uint64
+store 13 // thisConsensusTime/1059
+dup
+extract 121 34
+store 12 // tokenInfos/1065
+dup
+int 155
+extract_uint64
+store 11 // netBalance/1066
+extract 163 1
+btoi
+store 15 // v1089
+retsub
+l0_LF_wasntMeth:
+int 1
+store 3 // GV_wasntMeth :: Bool
+retsub
+l5_LF_timeCheck:
+dup
+int 0
+==
+swap
+load 2 // GV_currentTime :: UInt
+==
+||
+assert
+retsub
+l23_LF_makeTxn_False_True_True_True:
+itxn_begin
+itxn_field AssetCloseTo
+b l29_LF_makeTxnK_True_True
+l9_LF_checkTxn_True:
+// resource: R_Txn
+txn GroupIndex
+load 0 // GV_txnCounter :: UInt
+int 1
++
+dup
+store 0 // GV_txnCounter :: UInt
+-
+dupn 3
+gtxns AssetReceiver
+global CurrentApplicationAddress
+==
+assert
+gtxns TypeEnum
+int axfer
+==
+assert
+gtxns XferAsset
+uncover 2
+==
+assert
+gtxns AssetAmount
+==
+assert
+retsub
+l22_LF_makeTxn_False_False_False_True:
+itxn_begin
+b l28_LF_makeTxnK_False_True
+l1_LF_mbrAdd:
+load 6 // GV_mbrAdd :: UInt
++
+store 6 // GV_mbrAdd :: UInt
+retsub
+l4_LF_svsLoad_7:
+dup
+extract 0 32
+store 25 // B/816
+dup
+int 32
+extract_uint64
+store 24 // tokCollateral/817
+dup
+int 40
+extract_uint64
+store 23 // tokLoan/818
+dup
+extract 48 56
+store 22 // loanInfo/820
+dup
+int 104
+extract_uint64
+store 21 // v833
+dup
+int 112
+extract_uint64
+store 20 // v834
+dup
+extract 120 1
+btoi
+store 19 // isLive/848
+dup
+extract 121 32
+store 18 // lender/849
+dup
+extract 153 1
+btoi
+store 17 // loanAccepted/850
+dup
+extract 154 34
+store 15 // tokenInfos/857
+dup
+int 188
+extract_uint64
+store 14 // netBalance/858
+extract 196 1
+btoi
+store 12 // v880
+retsub
+l26_LF_updateMbr:
+load 6 // GV_mbrAdd :: UInt
+load 7 // GV_mbrSub :: UInt
+dup2
+>=
+bz updateMbr_neg
+b updateMbr_pos_eq
+l27_LF_makeTxn_False_True_False_True:
+itxn_begin
+itxn_field CloseRemainderTo
+b l28_LF_makeTxnK_False_True

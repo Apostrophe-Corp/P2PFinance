@@ -1,213 +1,269 @@
 .header {
-    background: linear-gradient(
-                    to bottom right,
-                    rgb(152, 0, 223),
-                    rgba(0, 119, 255, 0.5)
-            ),
-            rgb(152, 0, 223);
-    color: var(--reachWhite);
-    padding: 10px 100px;
+	background: linear-gradient(
+			to bottom right,
+			rgb(152, 0, 223),
+			rgba(0, 119, 255, 0.5)
+		),
+		rgb(152, 0, 223);
+	color: var(--reachWhite);
+	padding: 10px 100px;
 }
 
-.btnBox{
-    gap: 10px;
+.btnBox {
+	gap: 10px;
+	max-width: 100%;
 }
 
 .branding {
-    text-transform: none;
-    background:
+	text-transform: none;
+	background:
     /* linear-gradient(
                     to bottom right,
                     rgb(247, 231, 255),
                     rgb(213, 3, 255)
             ), */ rgb(
-            255,
-            255,
-            255
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.navItem {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.navItem::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    transform: scale(0, 1);
-    margin: 0 auto;
-    background-color: #fff;
-    transition: transform 0.3s;
-}
-
-.navItem:hover::after {
-    transform: scale(1, 1);
+		255,
+		255,
+		255
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 30px;
+	font-weight: 800;
+	cursor: pointer;
 }
 
 .connectAccount {
-    padding: 10px;
-    border-radius: 10px;
-    border: 0.5px solid rgb(0, 145, 255);
-    background-color: rgb(106, 0, 255);
-    color: rgb(255, 255, 255);
-    box-shadow: 0 5px 15px 5px rgb(54, 0, 131);
-    font-weight: 500;
-    font-size: 14px;
-    width: 200px;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    text-align: center;
-    transition: all 0.2s;
+	padding: 10px;
+	border-radius: 10px;
+	border: 0.5px solid rgb(0, 145, 255);
+	background-color: rgb(106, 0, 255);
+	color: rgb(255, 255, 255);
+	box-shadow: 0 5px 15px 5px rgb(54, 0, 131);
+	font-weight: 500;
+	font-size: 14px;
+	width: 200px;
+	max-width: 100%;
+	text-overflow: ellipsis !important;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-align: center;
+	transition: all 0.2s;
 }
 
 .connectAccount:hover {
-    background-color: rgb(49, 0, 118);
+	background-color: rgb(49, 0, 118);
+}
+
+.navItem {
+	composes: connectAccount;
+	cursor: pointer;
 }
 
 .hero {
-    background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-            url(../assets/images/contractLand.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 140vh;
+	background: linear-gradient(to bottom, transparent, rgba(128, 0, 255, 0.3)),
+		url(../assets/images/main.jpg), #ffffff;
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: contain;
+	text-align: left !important;
+	min-height: 100vh;
 }
 
 .heroWelcome {
-    opacity: 1;
+	opacity: 1;
 }
 
 .heroWelcomeText {
-    font-weight: var(--font-weight-medium-0);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: var(--font-size-0);
-    text-align: center;
-    color: rgba(255, 255, 255, 0.8);
+	font-weight: var(--font-weight-medium-0);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: var(--font-size-0);
+	color: rgba(102, 255, 0, 0.764);
+	mix-blend-mode: difference;
+	background-color: rgb(0, 0, 0);
 }
 
 .catchPhrase {
-    opacity: 1;
+	opacity: 1;
 }
 
 .catchPhraseText {
-    /* -----Imported-styles----- */
-    max-width: 10em;
-    margin: var(--spacing-6) 0 0;
-    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
-            linear-gradient(25deg, #c67df4 23%, #fff 60%);
-    letter-spacing: 0.01em;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* ------------------------- */
-    text-align: center;
-    font-size: 70px;
+	max-width: 10em;
+	margin: var(--spacing-6) 0 0;
+	/* ------------------------- */
+	background: linear-gradient(200deg, hsla(0, 0%, 100%, 0) 70%, #7700ff 48%),
+		linear-gradient(340deg, hsla(0, 0%, 100%, 0) 70%, #7b00ff 48%),
+		linear-gradient(30deg, hsla(0, 0%, 100%, 0) 70%, #ee00ff 48%),
+		linear-gradient(100deg, hsla(0, 0%, 0%, 0) 70%, #7b00ff 48%),
+		linear-gradient(300deg, hsla(0, 0%, 100%, 0) 70%, #ae00ff 48%),
+		linear-gradient(160deg, hsla(0, 0%, 100%, 0) 70%, #e600ff 48%),
+		linear-gradient(60deg, hsl(265, 100%, 50%) 53%, #a600ff 50%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	/* ----------------------------- */
+	/* color: rgba(128, 255, 0, 0.764);
+	mix-blend-mode: difference;
+	background-color: rgb(0, 0, 0); */
+	/* ------------------------- */
+	/* text-align: center; */
+	letter-spacing: 0.01em;
+	font-size: 70px;
+	animation: bg 10s infinite ease-in-out;
 }
 
-.catchPhraseTextBlk{
-    max-width: 10em;
-    margin: var(--spacing-6) 0 0;
-    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
-            linear-gradient(25deg, #c67df4 23%, rgb(0, 0, 0) 60%);
-    letter-spacing: 0.01em;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* ------------------------- */
-    text-align: center;
-    font-size: 60px;
+@keyframes bg {
+	0% {
+		background-position: -60px 50px, 70px 40px, center, center, center, center;
+	}
+
+	10% {
+		background-position: 90px 20px, center -30px, 30px 10px, center, center, center;
+	}
+
+	20% {
+		background-position: 20px 30px, 30px 59px, center 70px, center, center,
+			center;
+	}
+
+	30% {
+		background-position: 10px 45px, center, center, 80px center, center, center;
+	}
+
+	40% {
+		background-position: center, 100px 99px, center, center, 90px center, center;
+	}
+
+	50% {
+		background-position: center, 29px 29px, center, 70px 30px, center, 60px 40px;
+	}
+
+	60% {
+		background-position: center, 100px 99px, center, center, 90px center, center;
+	}
+
+	70% {
+		background-position: 10px 45px, center, center, 80px center, center, center;
+	}
+
+	80% {
+		background-position: 20px 30px, 30px 59px, center 70px, center, center,
+			center;
+	}
+
+	90% {
+		background-position: 90px 20px, center -30px, 30px 10px, center, center, center;
+	}
+
+	100% {
+		background-position: -60px 50px, 70px 40px, center, center, center, center;
+	}
+}
+
+.catchPhraseTextBlk {
+	max-width: 10em;
+	margin: var(--spacing-6) 0 0;
+	color: white;
+	font-size: 60px;
 }
 
 .intro {
-    opacity: 1;
+	opacity: 1;
 }
 
 .introText {
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-    max-width: 30em;
+	color: rgba(128, 255, 0, 0.764);
+	mix-blend-mode: difference;
+	background-color: rgb(0, 0, 0);
+	/* text-align: center; */
+	max-width: 30em;
 }
 
 .forestParent {
-    opacity: 1;
-    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
-    background: linear-gradient(to bottom, transparent, rgb(93, 0, 154)), #000;
-    padding-top: 100px;
-    padding-bottom: 100px;
+	opacity: 1;
+	/* box-shadow: 0 0 10px 5px rgba(186, 154, 218, 0.3); */
+	background: linear-gradient(to bottom, transparent, rgb(123, 0, 255)),
+		rgba(128, 0, 255, 0.3);
+	padding-top: 100px;
+	padding-bottom: 100px;
 }
 
 .forestTextCon {
-    padding-top: 50px 10px;
+	padding-top: 50px 10px;
 }
 
 .forestText {
-    font-weight: var(--font-weight-bold-5);
-    color: var(--title);
-    font-size: 50px;
+	font-weight: var(--font-weight-bold-5);
+	color: rgb(255, 255, 255);
+	font-size: 50px;
 }
 
 .cardForest {
-    opacity: 1;
-    padding: 30px 0;
+	opacity: 1;
+	padding: 30px 0;
 }
 
 .card {
-    color: #fff;
-    max-width: 300px;
-    padding: 10px;
-    background-color: rgb(11, 0, 21);
-    border-radius: 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
+	color: #000;
+	/* color: #fff; */
+	background: linear-gradient(
+		to bottom,
+		#fff,
+		#fff,
+		#fff,
+		rgba(179, 0, 255, 0.715)
+	);
+	max-width: 300px;
+	padding: 10px;
+	/* background-color: rgb(11, 0, 21); */
+	border-radius: 20px;
+	margin-bottom: 20px;
+	cursor: pointer;
 }
 
 .cardAction {
-    font-size: 20px;
-    color: rgba(255, 255, 255, 0.5);
-    text-transform: uppercase;
+	font-size: 20px;
+	/* color: rgba(255, 255, 255, 0.5); */
+	/* color: rgba(0, 0, 0, 0.5); */
+	color: rgb(85, 0, 255, 0.5);
+	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .cardPurpose {
-    padding: 20px 0;
-    gap: 5px;
+	padding: 20px 0;
+	gap: 5px;
 }
 
 .cardPurposeText {
-    font-size: 25px;
-    font-weight: 700;
+	font-size: 25px;
+	font-weight: 700;
 }
 
 .cardDescription {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.5);
+	font-size: 16px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.5);
 }
 
 .cardIcon {
-    padding-top: 10px;
+	padding-top: 10px;
+	/* background-color: red; */
 }
 
 .community {
-    box-shadow: 0 0 10px 5px rgb(93, 0, 154);
-    background-color: rgb(93, 0, 154);
-    color: #fff !important;
-    padding-bottom: 100px;
+	box-shadow: 0 0 10px 5px rgb(123, 0, 255);
+	background-color: rgb(123, 0, 255);
+	color: #fff !important;
+	padding-bottom: 100px;
 }
 
 .joinCommunity,
 .communitySocials {
-    width: max(48%, 300px);
-    margin: 0;
+	width: max(48%, 300px);
+	margin: 0;
 }
 
 /* .joinCommunity {
@@ -215,152 +271,156 @@
 } */
 
 .joinComThemeText {
-    font-weight: var(--font-weight-bold-5);
-    font-size: var(--font-size-5);
-    line-height: var(--font-size-5);
-    text-align: left;
+	font-weight: var(--font-weight-bold-5);
+	font-size: var(--font-size-5);
+	line-height: var(--font-size-5);
+	text-align: left;
 }
 
 .joinComDescriptionText {
-    margin-top: var(--spacing-6);
-    line-height: calc(1.53983em + 0.13429vw - 0.42972px);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-normal-1);
-    padding-right: 70px !important;
+	margin-top: var(--spacing-6);
+	line-height: calc(1.53983em + 0.13429vw - 0.42972px);
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-normal--1);
+	padding-right: 70px !important;
 }
 
 .joinComAction {
-    opacity: 1;
+	opacity: 1;
 }
 
 .joinComActionLink {
-    color: var(--title);
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
+	color: var(--title);
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: 600;
 }
 
 .communitySocial {
-    opacity: 1;
-    gap: 10px;
+	opacity: 1;
+	gap: 10px;
 }
 
 .comSocialIcon {
-    width: 50px;
-    cursor: pointer;
+	width: 50px;
+	cursor: pointer;
 }
 
 .comSocialIcon svg {
-    width: 100%;
+	width: 100%;
 }
 
 .comSocialContent {
-    flex: 1;
+	flex: 1;
 }
 
 .comSocialName {
-    font-weight: var(--font-weight-bold-1);
-    font-size: var(--font-size-1);
+	font-weight: var(--font-weight-bold-1);
+	font-size: var(--font-size-1);
 }
 
 .comSocialDescription {
-    font-size: var(--font-size-0);
-    font-weight: var(--font-weight-normal-0);
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-normal-0);
 }
 
 .footer {
-    background-color: #000;
-    color: #fff;
-    box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+	background-color: #000;
+	color: #fff;
+	box-shadow: 0 0 10px 5px rgb(0, 0, 0);
 }
 
 .footerBranding {
-    composes: branding;
-    background: linear-gradient(
-                    to bottom right,
-                    rgb(152, 0, 223),
-                    rgba(0, 119, 255, 0.5)
-            ),
-            rgb(152, 0, 223);
-    background-clip: text;
-    font-size: 30px;
-    font-weight: 800;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+	composes: branding;
+	background: linear-gradient(
+			to bottom right,
+			rgb(152, 0, 223),
+			rgba(0, 119, 255, 0.5)
+		),
+		rgb(152, 0, 223);
+	background-clip: text;
+	font-size: 30px;
+	font-weight: 800;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .footerSocial {
-    width: 50px;
-    height: 50px;
+	width: 50px;
+	height: 50px;
 }
 
 .footerSocial svg,
 .footerSocial svg path {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .registered {
-    text-align: center;
-    background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
-            linear-gradient(25deg, #c67df4 23%, #fff 60%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 600;
+	text-align: center;
+	background: linear-gradient(135deg, hsla(0, 0%, 100%, 0) 56%, #dcadf4 98%),
+		linear-gradient(25deg, #c67df4 23%, #fff 60%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: 600;
 }
 
 @media only screen and (max-width: 900px) and (min-width: 761px) {
-    .header {
-            padding: 10px 80px;
-    }
+	.header {
+		padding: 10px 80px;
+		justify-content: space-evenly !important;
+	}
 
-    .hero {
-            min-height: 95vh;
-    }
+	.hero {
+		min-height: 100vh;
+	}
 }
 
 @media only screen and (max-width: 760px) and (min-width: 481px) {
-    .header {
-            padding: 10px 60px;
-    }
+	.header {
+		padding: 10px 60px;
+		justify-content: space-evenly !important;
+	}
 
-    .hero {
-            min-height: 90vh;
-    }
+	.hero {
+		min-height: 80vh;
+	}
 }
 
 @media only screen and (max-width: 480px) and (min-width: 361px) {
-    .header {
-            padding: 10px 40px;
-    }
+	.header {
+		padding: 10px 40px;
+		justify-content: center !important;
+	}
 
-    .hero {
-            min-height: 90vh;
-    }
+	.hero {
+		min-height: 80vh;
+	}
 
-    .catchPhraseText {
-            font-size: 50px;
-    }
+	.catchPhraseText {
+		font-size: 50px;
+	}
 
-    .branding {
-            text-align: center;
-    }
+	.branding {
+		text-align: center;
+	}
 }
 
 @media only screen and (max-width: 360px) {
-    .header {
-            padding: 10px 20px;
-    }
-    .hero {
-            height: 80vh;
-    }
+	.header {
+		padding: 10px 20px;
+		justify-content: center !important;
+	}
+	.hero {
+		min-height: 70vh;
+	}
 
-    .catchPhraseText {
-            font-size: 40px;
-    }
+	.catchPhraseText {
+		font-size: 40px;
+	}
 
-    .branding {
-            text-align: center;
-    }
+	.branding {
+		text-align: center;
+	}
 }

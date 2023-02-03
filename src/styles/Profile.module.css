@@ -3,6 +3,16 @@
 	gap: 10px;
 }
 
+.name, .pfpID{
+	font-weight: 500;
+	font-size: 22px;
+	color: rgb(255, 255, 255);
+}
+
+.pfpID{
+	margin-bottom: 5px;
+}
+
 .pfp {
 	height: 250px;
 	width: 250px;
@@ -16,6 +26,7 @@
 	padding: 5px;
 	border-radius: 5px;
 	border: 1px solid rgb(153, 0, 255);
+	width: 250px !important;
 }
 
 .btnBox {

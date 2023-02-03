@@ -5,48 +5,12 @@ import { useReach } from '../../hooks'
 import { cf } from '../../utils'
 
 const ConnectAccount = () => {
-	const { setShowConnectAccount, connectToWallet, user, alertThis } = useReach()
-
-	const copyToClipboard = async (e) => {
-		navigator.clipboard.writeText(user.address)
-		alertThis({
-			message: 'Copied to clipboard',
-			forConfirmation: false,
-		})
-	}
+	const { setShowConnectAccount, connectToWallet } = useReach()
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, ca.conParent)}>
 			<div className={cf(s.wMax, ca.conMask)}></div>
 			<div className={cf(s.flex, s.flexCenter, ca.conContainer)}>
-				<button
-					onClick={() => {
-						setShowConnectAccount(false)
-					}}
-					type='button'
-					className={cf(s.flex, s.flexCenter, s.dInlineBlock, ca.closeBtn)}
-				>
-					Close
-				</button>
-				<div
-					className={cf(
-						s.wMax,
-						s.flex,
-						s.flexCenter,
-						s.p10,
-						s.m10,
-						ca.addressContainer
-					)}
-				>
-					{user.account && (
-						<button
-							onClick={copyToClipboard}
-							className={cf(s.wMax, s.dInlineBlock, ca.connectTitle)}
-						>
-							{user.address}
-						</button>
-					)}
-				</div>
 				<div className={cf(s.w50, s.w480_100, s.w360_100, ca.wallet)}></div>
 				{!(process.env.REACT_APP_REACH_CONNECTOR_MODE === 'ETH') ? (
 					<div
@@ -60,7 +24,7 @@ const ConnectAccount = () => {
 							ca.connect
 						)}
 					>
-						{/* <div
+						<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
 								connectToWallet('PeraConnect')
@@ -72,7 +36,7 @@ const ConnectAccount = () => {
 									Pera Algo Wallet
 								</span>
 							</div>
-						</div> */}
+						</div>
 						<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
@@ -102,7 +66,20 @@ const ConnectAccount = () => {
 						<div
 							className={cf(s.flex, s.flexCenter, ca.connectOption)}
 							onClick={() => {
-								connectToWallet('Mnemonic')
+								connectToWallet('AlgoSigner')
+							}}
+						>
+							<div className={cf(ca.walletIcon)}></div>
+							<div className={cf(s.wMax, ca.walletName)}>
+								<span className={cf(s.wMax, s.dInlineBlock, ca.walletNameText)}>
+									AlgoSigner
+								</span>
+							</div>
+						</div>
+						<div
+							className={cf(s.flex, s.flexCenter, ca.connectOption)}
+							onClick={() => {
+								connectToWallet('', true)
 							}}
 						>
 							<div className={cf(ca.walletIcon)}></div>
@@ -126,6 +103,25 @@ const ConnectAccount = () => {
 						</div>
 					</div>
 				)}
+				<div
+					className={cf(
+						s.wMax,
+						s.flex,
+						s.flexCenter,
+						s.p10,
+						s.m10,
+						ca.addressContainer
+					)}
+				>
+					<button
+						onClick={() => {
+							setShowConnectAccount(false)
+						}}
+						className={cf(s.dInlineBlock, ca.connectTitle)}
+					>
+						Close
+					</button>
+				</div>
 			</div>
 		</div>
 	)

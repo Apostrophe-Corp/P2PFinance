@@ -1,61 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { loadStdlib } from '@reach-sh/stdlib'
 import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach, useAuth } from '../../hooks'
-import { cf, request, setPfps } from '../../utils'
-
-const reach = loadStdlib({
-	...process.env,
-	REACH_NO_WARN: 'Y',
-	REACH_CONNECTOR_MODE: 'ETH',
-})
-reach.setWalletFallback(
-	reach.walletFallback({
-		providerEnv: {
-			ETH_NODE_URI: 'https://matic-mubai.chainstacklabs.com',
-		},
-	})
-)
+import { cf, request, setPFPs } from '../../utils'
 
 const SignUp = () => {
 	const pfpRef = useRef()
 	const { alertThis, user } = useReach()
 	const { signUp, signIn } = useAuth()
-	const [[username, setUsername], [pfp, setPfp], [contract, setContract]] = [
-		useState(''),
-		useState(''),
-		useState(''),
-	]
+	const [[username, setUsername], [pfp, setPfp]] = [useState(''), useState(0)]
 	const navigate = useNavigate()
 
 	const handleInputChange = (e) => {
 		const name = e.currentTarget.name
 		const value = e.currentTarget.value
-		if (name === 'pfp') setPfp(value)
+		if (name === 'pfp') setPfp(Number(value))
 		else if (name === 'username') setUsername(value)
-		else if (name === 'contract') setContract(value)
 	}
 
 	const save = async (e) => {
 		e.preventDefault()
-		// const [, owned] = await reach.balancesOf(user.address, [null, pfp])
-		// const owned = reach.formatCurrency(await reach.balanceOf(user.address), 4)
-		// console.log({ owned })
-		// if (!owned) {
-		// 	alertThis({
-		// 		message: "You don't seem to own this NFT",
-		// 		forConfirmation: false,
-		// 	})
-		// 	return
-		// }
 		const registered = await request({
-			path: `/users/${user.address}`,
+			path: `users/${user.address}`,
 			method: 'GET',
 		})
 		if (!(registered.success && registered.id))
-			await signUp(username, user.address, pfp, contract, () => {
+			await signUp(username, user.address, pfp, () => {
 				navigate('/account')
 			})
 		else {
@@ -73,13 +44,13 @@ const SignUp = () => {
 
 	useEffect(() => {
 		let timer = undefined
-		if (pfp && contract) {
+		if (pfp) {
 			if (typeof timer == 'number') {
 				clearTimeout(timer)
 				timer = undefined
 			}
 			timer = setTimeout(() => {
-				setPfps([pfpRef, pfp, contract, false])
+				setPFPs([[pfpRef, pfp, false]])
 				clearTimeout(timer)
 				timer = undefined
 			}, 3000)
@@ -88,7 +59,7 @@ const SignUp = () => {
 			clearTimeout(timer)
 			timer = undefined
 		}
-	}, [pfp, contract])
+	}, [pfp])
 
 	return (
 		<div className={cf(s.wMax, s.window)}>
@@ -107,11 +78,10 @@ const SignUp = () => {
 					)}
 				>
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
-						Some dummy text...Some dummy text...Some dummy text...Some dummy
-						text...
+						Sign Up
 					</h1>
 					<h2 className={cf(cr8.callOutSub)}>
-						Some dummy text...Some dummy text...Some dummy text...
+						Unlock financial opportunities with P2PFinance. It's easy, secure, and accessible to all. Sign up now!
 					</h2>
 				</div>
 				<div
@@ -146,7 +116,7 @@ const SignUp = () => {
 								type='text'
 								name='username'
 								id='username'
-								onInput={handleInputChange}
+								onChange={handleInputChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -155,27 +125,13 @@ const SignUp = () => {
 							className={cf(cr8.formLabel)}
 							htmlFor='pfp'
 						>
-							<span className={cf(cr8.formText)}>NFT ID</span>
+							<span className={cf(cr8.formText)}>PFP ID</span>
 							<input
-								type='text'
+								type='number'
 								name='pfp'
 								id='pfp'
-								onInput={handleInputChange}
-								placeholder=''
-								className={cf(cr8.formInput)}
-							/>
-						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='contract'
-						>
-							<span className={cf(cr8.formText)}>NFT Contract Address</span>
-							<input
-								type='text'
-								name='contract'
-								id='contract'
-								onInput={handleInputChange}
-								placeholder=''
+								onChange={handleInputChange}
+								placeholder='Enter an NFT ID'
 								className={cf(cr8.formInput)}
 							/>
 						</label>

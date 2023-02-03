@@ -1,7 +1,8 @@
 .createParent {
 	background: linear-gradient(to bottom, transparent, var(--reachBlack)),
-		url(../assets/images/contractBox.jpg);
+		url(../assets/images/contractBox_2.jpg);
 	background-position: center;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: inherit;
@@ -21,7 +22,7 @@
 
 .callOutSub {
 	color: var(--title);
-	width: 60%;
+	width: max(60%, 300px);
 	/* font- */
 }
 

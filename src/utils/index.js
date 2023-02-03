@@ -1,4 +1,11 @@
+import { MakePeraConnect } from './PeraWallet-wrapper.ts'
 export { cf } from './cf'
-export { setPfps } from './pfp'
+export { setPFPs } from './pfp'
 export { request } from './request'
-export { getTokenInfo, getNFTInfo } from './tokenUtil'
+export { getASAInfo } from './tokenUtil'
+export { Arc69 } from './arc'
+export { fmtCurrency } from './fmtCurrency'
+export { parseCurrency } from './parseCurrency'
+export { viewASA } from './viewASA'
+export { trimNum } from './trimNum'
+export { MakePeraConnect }

@@ -1,43 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react'
 import p from '../../styles/Profile.module.css'
 import s from '../../styles/Shared.module.css'
-import { useReach } from '../../hooks'
-import { cf, request, setPfps } from '../../utils'
+import { useReach, useAuth } from '../../hooks'
+import { cf, request, setPFPs } from '../../utils'
 
 const Profile = ({ user }) => {
-	const { alertThis } = useReach()
+	const { alertThis, user: thisUser } = useReach()
+	const { updateUser } = useAuth()
 	const pfpRef = useRef()
 	const [pfpData, setPfpData] = useState({
 		pfp: user.pfp,
-		address: user.pfpContract,
 	})
 	const [pfp, setPfp] = useState(0)
-	const [address, setAddress] = useState('')
 
 	const handleInputChange = (e) => {
 		const name = e.currentTarget.name
-		if (name === 'pfp') setPfp(e.currentTarget.value)
-		else setAddress(e.currentTarget.value)
+		if (name === 'pfp') setPfp(Number(e.currentTarget.value))
 	}
 
 	const preview = async (e) => {
 		e.preventDefault()
-		setPfps([pfpRef, pfp, address, false])
+		setPFPs([[pfpRef, pfp, false]])
 	}
 
 	const save = async (e) => {
 		e.preventDefault()
 		const cPfp = pfp
-		const cAddress = address
-		const result = await request({
-			path: '/users',
-			method: 'PATCH',
-			body: {
-				pfp,
-				pfpContract: address,
-			},
-		})
+		let result = undefined,
+			retries = 0
+		do {
+			result = await request({
+				path: `users/${String(thisUser.address)}`,
+				method: 'PATCH',
+				body: {
+					pfp,
+				},
+			})
+		} while (
+			(result?.message === 'internal server error' || result?.error === 500) &&
+			retries < 5
+		)
 
+		if (result.success) await updateUser(String(thisUser.address))
 		alertThis({
 			message: result.success
 				? 'PFP successfully updated'
@@ -45,17 +49,16 @@ const Profile = ({ user }) => {
 			forConfirmation: false,
 		})
 
-		if (result.success) setPfpData({ pfp: cPfp, address: cAddress })
+		if (result.success) setPfpData({ pfp: cPfp })
 	}
 
 	useEffect(() => {
-		if (!(pfp && address))
-			setPfps([pfpRef, pfpData.pfp, pfpData.address, false])
-	}, [pfp, address, pfpData.pfp, pfpData.address])
+		if (!pfp) setPFPs([[pfpRef, pfpData.pfp, false]])
+	}, [pfp, pfpData.pfp])
 
 	useEffect(() => {
-		setPfps([pfpRef, pfpData.pfp, pfpData.address, false])
-	}, [pfpData.pfp, pfpData.address])
+		setPFPs([[pfpRef, pfpData.pfp, false]])
+	}, [pfpData.pfp])
 
 	return (
 		<div
@@ -72,7 +75,7 @@ const Profile = ({ user }) => {
 				ref={pfpRef}
 			></div>
 			<div className={cf(s.flex, s.flexCenter, s.p5, p.userDetails)}>
-				<span className={cf(s.dInlineBlock, s.flex, s.flexCenter)}>
+				<span className={cf(s.dInlineBlock, s.flex, s.flexCenter, p.name)}>
 					{user.username}
 				</span>
 				<div className={cf(s.wMax, s.flex, s.flexCenter, p.form)}>
@@ -80,8 +83,8 @@ const Profile = ({ user }) => {
 						htmlFor='pfp'
 						className={cf(s.wMax, s.flex, s.flexCenter, p.label)}
 					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							NFT ID
+						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter, p.pfpID)}>
+							Current PFP ID: {user.pfp}
 						</span>
 						<input
 							className={cf(s.wMax, s.dInlineBlock, p.input)}
@@ -91,34 +94,19 @@ const Profile = ({ user }) => {
 							onChange={handleInputChange}
 						/>
 					</label>
-					<label
-						htmlFor='address'
-						className={cf(s.wMax, s.flex, s.flexCenter, p.label)}
-					>
-						<span className={cf(s.wMax, s.dInlineBlock, s.tCenter)}>
-							NFT Contract
-						</span>
-						<input
-							className={cf(s.wMax, s.dInlineBlock, p.input)}
-							placeholder='New PFP Contract Address'
-							id='address'
-							name='address'
-							onChange={handleInputChange}
-						/>
-					</label>
 					<div className={cf(s.wMax, s.flex, s.flexCenter, p.btnBox)}>
 						<button
 							type='button'
 							className={cf(p.previewBtn)}
 							onClick={preview}
-							disabled={!(pfp && address)}
+							disabled={!pfp}
 						>
 							Preview
 						</button>
 						<button
 							type='button'
 							className={cf(p.saveBtn)}
-							disabled={!(pfp && address)}
+							disabled={!pfp}
 							onClick={save}
 						>
 							Save

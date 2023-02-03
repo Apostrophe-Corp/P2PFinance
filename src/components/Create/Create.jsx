@@ -1,15 +1,24 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, createRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
-import { setPfps, cf } from '../../utils'
-import previewImg from '../../assets/images/logo.jpg' // TODO change this image
+import { setPFPs, cf } from '../../utils'
+import previewImg from '../../assets/images/logo.jpg'
+import { ASASelect } from '../ASASelect'
 
 const Create = () => {
-	const { mintNFT } = useReach()
+	const navigate = useNavigate()
+	const { create } = useReach()
 	const [loanParams, setLoanParams] = useState({})
+	const [selected, setSelected] = useState(true)
+	const [offered, setOffered] = useState(true)
+	const [unSelected, setUnSelected] = useState(false)
+	const [unSelected_, setUnSelected_] = useState(false)
 
 	const previewRef = useRef()
+	const requestedRef = createRef()
+	const offeredRef = createRef()
 
 	const setPreviewBgs = () => {
 		previewRef.current.style.background = `url(${previewImg})`
@@ -18,37 +27,39 @@ const Create = () => {
 		previewRef.current.style.backgroundSize = 'contain'
 	}
 
-	const handleInput = (e) => {
+	const handleChange = (e) => {
 		const name = e.currentTarget.name
 		let value = e.currentTarget.value
 
-		if (name === 'offeredContract' || name === 'tokenContract') {
-			value = String(value)
-			setLoanParams({
-				...loanParams,
-				[name]: value,
-			})
-		} else {
-			value = Number(value)
-			setLoanParams({
-				...loanParams,
-				[name]: value,
-			})
+		value = Number(value) < 0 ? 0 : Number(value)
+		setLoanParams({
+			...loanParams,
+			[name]: value,
+		})
+
+		if (value && name === 'tokenOffered') {
+			setPFPs([[previewRef, Number(value), false]])
+			setOffered(false)
+			setUnSelected_(true)
+		} else if (!value) {
+			setPreviewBgs()
 		}
 
-		if (loanParams['tokenOffered'] && loanParams['offeredContract']) {
-			setPfps([previewRef, loanParams['tokenOffered'], loanParams['offeredContract'], false])
-		}else{
-			setPreviewBgs()
+		if (name === 'tokenRequested') {
+			setUnSelected(true)
+			setSelected(false)
 		}
 
 		e.currentTarget.value = value
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
-		// console.log(nftParams)
-		mintNFT(loanParams)
+		;(await create({
+			...loanParams,
+			tokenRequested: requestedRef.current.value,
+			tokenOffered: offeredRef.current.value,
+		}, selected, offered)) && navigate('/account')
 	}
 
 	return (
@@ -68,11 +79,12 @@ const Create = () => {
 					)}
 				>
 					<h1 className={cf(s.w480_100, s.w360_100, cr8.callOutMain)}>
-						Some dummy text...Some dummy text...Some dummy text...Some dummy
-						text...
+						Launch Your Loan Advert Now!
 					</h1>
 					<h2 className={cf(cr8.callOutSub)}>
-						Some dummy text...Some dummy text...Some dummy text...
+						Let lenders come to you, with the security of a smart contract
+						holding your collateral in escrow. Get the funds you need, without
+						selling your assets.
 					</h2>
 				</div>
 				<div
@@ -96,34 +108,43 @@ const Create = () => {
 							ref={previewRef}
 						></div>
 						<span className={cf(cr8.sideNote)}>
-							Preview only available for image NFTs
+							Collateral preview for image NFTs
 						</span>
+						<ASASelect
+							mode={'Quick Select Loan ASA'}
+							handler={(x) => {
+								setSelected(x)
+							}}
+							name='loan'
+							unSelected={unSelected}
+							activate={() => {
+								setUnSelected(false)
+								setLoanParams({
+									...loanParams,
+									tokenRequested: '',
+								})
+							}}
+							setASA={() => {
+								setLoanParams({
+									...loanParams,
+									tokenRequested: 10458941,
+								})
+							}}
+						/>
 						<label
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenRequested'
 						>
-							<span className={cf(cr8.formText)}>Loan Token ID</span>
+							<span className={cf(cr8.formText)}>Other Loan ASA</span>
 							<input
-								type='text'
+								type='number'
 								name='tokenRequested'
 								id='tokenRequested'
-								onInput={handleInput}
-								placeholder=''
+								value={loanParams?.tokenRequested ?? ''}
+								onChange={handleChange}
+								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
-							/>
-						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='tokenContract'
-						>
-							<span className={cf(cr8.formText)}>Loan Token Contract</span>
-							<input
-								type='text'
-								name='tokenContract'
-								id='tokenContract'
-								onInput={handleInput}
-								placeholder=''
-								className={cf(cr8.formInput)}
+								ref={requestedRef}
 							/>
 						</label>
 						<label
@@ -135,7 +156,7 @@ const Create = () => {
 								type='number'
 								name='amountRequested'
 								id='amountRequested'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -149,39 +170,49 @@ const Create = () => {
 								type='number'
 								name='paymentAmount'
 								id='paymentAmount'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
 						</label>
+						<ASASelect
+							mode={'Collateral ASA'}
+							handler={(x) => {
+								setOffered(x)
+
+								setPreviewBgs()
+							}}
+							name='collateral'
+							unSelected={unSelected_}
+							activate={() => {
+								setUnSelected_(false)
+								setLoanParams({
+									...loanParams,
+									tokenOffered: '',
+								})
+							}}
+							setASA={() => {
+								setLoanParams({
+									...loanParams,
+									tokenOffered: 10458941,
+								})
+							}}
+							mono={true}
+						/>
 						<label
 							className={cf(cr8.formLabel)}
 							htmlFor='tokenOffered'
 						>
-							<span className={cf(cr8.formText)}>Collateral Token ID</span>
+							<span className={cf(cr8.formText)}>Other Collateral ASA</span>
 							<input
-								type='text'
+								type='number'
 								name='tokenOffered'
 								id='tokenOffered'
-								onInput={handleInput}
-								placeholder=''
+								value={loanParams?.tokenOffered ?? ''}
+								onChange={handleChange}
+								placeholder='Please enter the ASA ID'
 								className={cf(cr8.formInput)}
-							/>
-						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='offeredContract'
-						>
-							<span className={cf(cr8.formText)}>
-								Collateral Token Contract
-							</span>
-							<input
-								type='text'
-								name='offeredContract'
-								id='offeredContract'
-								onInput={handleInput}
-								placeholder=''
-								className={cf(cr8.formInput)}
+								ref={offeredRef}
 							/>
 						</label>
 						<label
@@ -193,7 +224,7 @@ const Create = () => {
 								type='number'
 								name='amountOffered'
 								id='amountOffered'
-								onInput={handleInput}
+								onChange={handleChange}
 								placeholder=''
 								className={cf(cr8.formInput)}
 							/>
@@ -207,8 +238,8 @@ const Create = () => {
 								type='number'
 								name='maturation'
 								id='maturation'
-								onInput={handleInput}
-								placeholder=''
+								onChange={handleChange}
+								placeholder='1 ~ 3.7secs ∴ 1hr ~ 973, 1d ~ 23351'
 								className={cf(cr8.formInput)}
 							/>
 						</label>
@@ -217,18 +248,20 @@ const Create = () => {
 								type='submit'
 								disabled={
 									!(
-										loanParams.tokenRequested &&
-										loanParams.tokenOffered &&
+										(selected || loanParams.tokenRequested) &&
 										loanParams.amountOffered &&
 										loanParams.amountRequested &&
+										Number(loanParams?.paymentAmount ?? 0) >
+											Number(loanParams?.amountRequested ?? 0) &&
 										loanParams.paymentAmount &&
-										loanParams.offeredContract &&
-										loanParams.tokenContract &&
-										loanParams.maturation
+										(offered || loanParams.tokenOffered) &&
+										loanParams.maturation &&
+										Number(loanParams?.tokenRequested ?? 0) !==
+											Number(loanParams?.tokenOffered ?? 0)
 									)
 								}
 							>
-								Create Advert
+								Complete Application
 							</button>
 						</div>
 					</form>

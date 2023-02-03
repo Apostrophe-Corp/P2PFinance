@@ -134,7 +134,7 @@ a {
 	align-items: flex-start !important;
 }
 
-.flexButton {
+.flexBottom {
 	justify-content: center !important;
 	align-items: flex-end !important;
 }
@@ -181,6 +181,10 @@ a {
 
 .tCenter {
 	text-align: center;
+}
+
+.flexOne {
+	flex: 1;
 }
 
 /* -----------------Media-Queries---------------------- */

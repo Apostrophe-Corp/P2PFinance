@@ -1,6 +1,6 @@
-// Automatically generated with Reach 0.1.12 (1f68dfdb)
+// Automatically generated with Reach 0.1.13 (f79282c4)
 pragma abicoder v2;
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.17;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -683,98 +683,113 @@ contract Stdlib {
   }
 }
 
-struct T1 {
-  uint256 elem0;
+struct T0 {
+  bool elem0;
+  uint256 elem1;
+  uint256 elem2;
   }
 struct T2 {
   uint256 elem0;
-  T1 elem1;
   }
+enum _enum_T3 {Borrower_claimRefund0_237, Borrower_repay0_237, Lender_claim0_237}
 struct T3 {
-  uint256 elem0;
-  bool elem1;
+  _enum_T3 which;
+  bool _Borrower_claimRefund0_237;
+  T2 _Borrower_repay0_237;
+  bool _Lender_claim0_237;
   }
 struct T4 {
+  uint256 elem0;
+  T3 elem1;
+  }
+enum _enum_T5 {Borrower_close0_93, Lender_lend0_93}
+struct T5 {
+  _enum_T5 which;
+  bool _Borrower_close0_93;
+  bool _Lender_lend0_93;
+  }
+struct T6 {
+  uint256 elem0;
+  T5 elem1;
+  }
+struct T7 {
   uint256 elem0;
   uint256 elem1;
   bool elem2;
   }
-struct T6 {
-  address payable v495;
-  address payable v496;
-  address payable v497;
-  uint256 v513;
-  address payable v529;
-  uint256 v622;
-  uint256 v623;
-  uint256 v624;
-  T4[2] v630;
-  uint256 v631;
-  bool v654;
+struct T9 {
+  address payable v667;
+  address payable v668;
+  uint256 v678;
+  address payable v693;
+  uint256 v695;
+  bool v799;
+  uint256 v829;
+  uint256 v830;
+  uint256 v831;
+  T7[1] v837;
+  uint256 v838;
+  bool v860;
   }
-struct T7 {
+struct T10 {
   address payable _address;
   uint256 _amount;
   uint256 _maturation;
   uint256 _principal;
   }
-struct T8 {
+struct T11 {
+  address payable v667;
+  address payable v668;
+  T10 v670;
+  uint256 v677;
+  uint256 v678;
+  bool v692;
+  address payable v693;
+  bool v694;
+  T7[1] v701;
+  uint256 v702;
+  bool v723;
+  }
+struct T12 {
   uint256 elem0;
   address payable elem1;
-  address payable elem2;
-  uint256 elem3;
-  T7 elem4;
+  uint256 elem2;
+  T10 elem3;
   }
-struct T9 {
-  address payable v495;
-  address payable v496;
-  address payable v497;
-  uint256 v498;
-  T7 v499;
-  uint256 v500;
-  T4[2] v508;
-  uint256 v512;
-  uint256 v513;
+struct T13 {
+  address payable v667;
+  address payable v668;
+  uint256 v669;
+  T10 v670;
+  T7[1] v675;
+  uint256 v677;
+  uint256 v678;
   }
-struct T10 {
+struct T14 {
   address payable elem0;
   address payable elem1;
-  address payable elem2;
-  T7 elem3;
+  T10 elem2;
+  uint256 elem3;
   uint256 elem4;
-  uint256 elem5;
-  uint256 elem6;
-  address payable elem7;
-  bool elem8;
-  uint256 elem9;
+  bool elem5;
+  address payable elem6;
+  bool elem7;
+  uint256 elem8;
+  T7[1] elem9;
   uint256 elem10;
-  T4[2] elem11;
-  uint256 elem12;
   }
-struct T11 {
+struct T15 {
   address payable elem0;
   address payable elem1;
-  address payable elem2;
-  uint256 elem3;
-  address payable elem4;
-  uint256 elem5;
+  uint256 elem2;
+  address payable elem3;
+  uint256 elem4;
+  bool elem5;
   uint256 elem6;
   uint256 elem7;
   uint256 elem8;
-  T4[2] elem9;
+  T7[1] elem9;
   uint256 elem10;
-  }
-struct T12 {
-  address payable v495;
-  address payable v496;
-  address payable v497;
-  T7 v499;
-  uint256 v512;
-  uint256 v513;
-  uint256 v528;
-  uint256 v531;
-  T4[2] v537;
-  uint256 v538;
   }
 contract ReachContract is Stdlib {
   uint256 current_step;
@@ -785,31 +800,412 @@ contract ReachContract is Stdlib {
   function _reachCreationTime() external view returns (uint256) { return creation_time; }
   function _reachCurrentTime() external view returns (uint256) { return current_time; }
   function _reachCurrentState() external view returns (uint256, bytes memory) { return (current_step, current_svbs); }
-  function array_set5(T4[2] memory arr, uint256 idx, T4 memory val) internal  returns (T4[2] memory arrp) {
-    for (uint256 i = 0; i < 2; i++){
+  function array_set8(T7[1] memory arr, uint256 idx, T7 memory val) internal  returns (T7[1] memory arrp) {
+    for (uint256 i = 0; i < 1; i++){
       arrp[i] = arr[i];
       }
     arrp[idx] = val;
     }
-  event _reach_e0(address _who, T8 _a);
-  event _reach_e1(address _who, T1 _a);
-  event _reach_e4(address _who, T2 _a);
-  event _reach_e5(address _who, T3 _a);
-  event _reach_oe_v577(bool v0);
-  event _reach_oe_v623(uint256 v0);
+  event _reach_e0(address _who, T12 _a);
+  event _reach_e1(address _who, T2 _a);
+  event _reach_e4(address _who, T4 _a);
+  event _reach_e5(address _who, T6 _a);
+  event _reach_oe_v1040(T0 v0);
+  event _reach_oe_v1118(bool v0);
+  event _reach_oe_v757(bool v0);
+  event _reach_oe_v790(bool v0);
+  event _reach_oe_v947(bool v0);
   receive () external payable {}
   fallback () external payable {}
   struct Memory {
     bool nil;
-    uint256 _reachr_Borrower_repay;
+    bool _reachr_Borrower_claimRefund;
+    bool _reachr_Borrower_close;
+    T0 _reachr_Borrower_repay;
+    bool _reachr_Lender_claim;
     bool _reachr_Lender_lend;
     uint256 _reachr_LoanViews_amountPaid;
+    uint256 _reachr_LoanViews_beginBlock;
+    bool _reachr_LoanViews_isLive;
     bool _reachr_LoanViews_loanPaid;
     }
-  function Borrower_repay(uint256 v1080) external payable returns (uint256) {
+  struct _F2629 {
+    bool v2596;
+    T3 v2597;
+    }
+  function _reacha_Borrower_claimRefund(bool _a, Memory memory _Memory) internal  {
+    _F2629 memory _f;
+    _f.v2597.which = _enum_T3.Borrower_claimRefund0_237;
+    _f.v2597._Borrower_claimRefund0_237 = _f.v2596;
+    T4  memory _ja;
+    _ja.elem0 = (uint256(0));
+    _ja.elem1 = _f.v2597;
+    _reachi_4(_ja, _Memory);
+    }
+  struct _F2630 {
+    bool v2600;
+    T5 v2601;
+    }
+  function _reacha_Borrower_close(bool _a, Memory memory _Memory) internal  {
+    _F2630 memory _f;
+    _f.v2601.which = _enum_T5.Borrower_close0_93;
+    _f.v2601._Borrower_close0_93 = _f.v2600;
+    T6  memory _ja;
+    _ja.elem0 = (uint256(0));
+    _ja.elem1 = _f.v2601;
+    _reachi_5(_ja, _Memory);
+    }
+  struct _F2631 {
+    T2 v2605;
+    T3 v2606;
+    }
+  function _reacha_Borrower_repay(uint256 _a, Memory memory _Memory) internal  {
+    _F2631 memory _f;
+    _f.v2605.elem0 = _a;
+    _f.v2606.which = _enum_T3.Borrower_repay0_237;
+    _f.v2606._Borrower_repay0_237 = _f.v2605;
+    T4  memory _ja;
+    _ja.elem0 = (uint256(0));
+    _ja.elem1 = _f.v2606;
+    _reachi_4(_ja, _Memory);
+    }
+  struct _F2632 {
+    bool v2610;
+    T3 v2611;
+    }
+  function _reacha_Lender_claim(bool _a, Memory memory _Memory) internal  {
+    _F2632 memory _f;
+    _f.v2611.which = _enum_T3.Lender_claim0_237;
+    _f.v2611._Lender_claim0_237 = _f.v2610;
+    T4  memory _ja;
+    _ja.elem0 = (uint256(0));
+    _ja.elem1 = _f.v2611;
+    _reachi_4(_ja, _Memory);
+    }
+  struct _F2633 {
+    bool v2614;
+    T5 v2615;
+    }
+  function _reacha_Lender_lend(bool _a, Memory memory _Memory) internal  {
+    _F2633 memory _f;
+    _f.v2615.which = _enum_T5.Lender_lend0_93;
+    _f.v2615._Lender_lend0_93 = _f.v2614;
+    T6  memory _ja;
+    _ja.elem0 = (uint256(0));
+    _ja.elem1 = _f.v2615;
+    _reachi_5(_ja, _Memory);
+    }
+  function _reacha_LoanViews_amountPaid(bool _a, Memory memory _Memory) internal view {
+    reachRequire(((current_step == uint256(5))), uint256(7) /*'(./src/contracts/loan_algo_nnt.rsh:35:27:property binding,[],Just "Incorrect state: not leaf")'*/);
+    (T9 memory _svs) = abi.decode(current_svbs, (T9));
+    _Memory._reachr_LoanViews_amountPaid = _svs.v830;
+    }
+  function _reacha_LoanViews_beginBlock(bool _a, Memory memory _Memory) internal view {
+    reachRequire(((current_step == uint256(5))), uint256(8) /*'(./src/contracts/loan_algo_nnt.rsh:36:27:property binding,[],Just "Incorrect state: not leaf")'*/);
+    (T9 memory _svs) = abi.decode(current_svbs, (T9));
+    _Memory._reachr_LoanViews_beginBlock = _svs.v695;
+    }
+  function _reacha_LoanViews_isLive(bool _a, Memory memory _Memory) internal view {
+    if ((current_step < uint256(7))) {
+      reachRequire(((current_step == uint256(5))), uint256(9) /*'(./src/contracts/loan_algo_nnt.rsh:33:23:property binding,[],Just "Incorrect state: not leaf")'*/);
+      (T9 memory _svs) = abi.decode(current_svbs, (T9));
+      _Memory._reachr_LoanViews_isLive = _svs.v799;
+      }
+    else {
+      reachRequire(((current_step == uint256(7))), uint256(10) /*'(./src/contracts/loan_algo_nnt.rsh:33:23:property binding,[],Just "Incorrect state: not leaf")'*/);
+      (T11 memory _svs) = abi.decode(current_svbs, (T11));
+      _Memory._reachr_LoanViews_isLive = _svs.v723;
+      }
+    }
+  function _reacha_LoanViews_loanPaid(bool _a, Memory memory _Memory) internal view {
+    reachRequire(((current_step == uint256(5))), uint256(11) /*'(./src/contracts/loan_algo_nnt.rsh:34:25:property binding,[],Just "Incorrect state: not leaf")'*/);
+    (T9 memory _svs) = abi.decode(current_svbs, (T9));
+    _Memory._reachr_LoanViews_loanPaid = _svs.v860;
+    }
+  struct _F2638 {
+    T7 v645;
+    T7[1] v646;
+    }
+  function _reachi_0(T12 memory _a, Memory memory _Memory) internal  {
+    _F2638 memory _f;
+    reachRequire((! locked), uint256(12) /*'locked'*/);
+    emit _reach_e0(msg.sender, _a);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(13) /*'time check at ./src/contracts/loan_algo_nnt.rsh:47:11:dot'*/);
+    _f.v645.elem0 = uint256(0);
+    _f.v645.elem1 = uint256(0);
+    _f.v645.elem2 = false;
+    _f.v646[0] = _f.v645;
+    
+    reachRequire((msg.value == uint256(0)), uint256(14) /*'(./src/contracts/loan_algo_nnt.rsh:47:11:dot,[],"verify network token pay amount")'*/);
+    reachRequire(((((_a.elem3)._principal) < ((_a.elem3)._amount))), uint256(15) /*'(./src/contracts/loan_algo_nnt.rsh:48:16:application,[],Nothing)'*/);
+    T13 memory nsvs;
+    nsvs.v667 = payable(msg.sender);
+    nsvs.v668 = (_a.elem1);
+    nsvs.v669 = (_a.elem2);
+    nsvs.v670 = (_a.elem3);
+    nsvs.v675 = (array_set8(_f.v646, uint256(0), (T7({elem0: uint256(0), elem1: (_f.v646[uint256(0)]).elem1, elem2: (_f.v646[uint256(0)]).elem2}))));
+    nsvs.v677 = ((_a.elem3)._principal);
+    nsvs.v678 = ((_a.elem3)._amount);
+    current_step = uint256(1);
+    current_time = uint256(block.number);
+    current_svbs = abi.encode(nsvs);
+    }
+  function _reachi_1(T2 memory _a, Memory memory _Memory) internal  {
+    reachRequire((current_step == uint256(1)), uint256(16) /*'state check at ./src/contracts/loan_algo_nnt.rsh:50:11:dot'*/);
+    (T13 memory _svs) = abi.decode(current_svbs, (T13));
+    reachRequire((! locked), uint256(17) /*'locked'*/);
+    emit _reach_e1(msg.sender, _a);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(18) /*'time check at ./src/contracts/loan_algo_nnt.rsh:50:11:dot'*/);
+    reachRequire((msg.value == uint256(0)), uint256(19) /*'(./src/contracts/loan_algo_nnt.rsh:50:11:dot,[],"verify network token pay amount")'*/);
+    reachRequire((checkPayAmt(msg.sender, _svs.v668, _svs.v669)), uint256(20) /*'(./src/contracts/loan_algo_nnt.rsh:50:11:dot,[],"verify non-network token pay amount")'*/);
+    reachRequire(((_svs.v667 == payable(msg.sender))), uint256(21) /*'(./src/contracts/loan_algo_nnt.rsh:50:11:dot,[],Just "sender correct")'*/);
+    T14  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v670;
+    _ja.elem3 = _svs.v677;
+    _ja.elem4 = _svs.v678;
+    _ja.elem5 = true;
+    _ja.elem6 = _svs.v667;
+    _ja.elem7 = false;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = (array_set8(_svs.v675, uint256(0), (T7({elem0: (unsafeAdd(((_svs.v675[uint256(0)]).elem0), _svs.v669)), elem1: (_svs.v675[uint256(0)]).elem1, elem2: (_svs.v675[uint256(0)]).elem2}))));
+    _ja.elem10 = uint256(0);
+    _reachl_2(_ja, _Memory);
+    }
+  struct _F2640 {
+    T2 v990;
+    uint256 v1002;
+    bool v1004;
+    uint256 v1005;
+    uint256 v1009;
+    uint256 v1030;
+    uint256 v1036;
+    T0 v1040;
+    }
+  function _reachi_4(T4 memory _a, Memory memory _Memory) internal  {
+    _F2640 memory _f;
+    reachRequire((current_step == uint256(5)), uint256(22) /*'state check at ./src/contracts/loan_algo_nnt.rsh:91:50:dot'*/);
+    (T9 memory _svs) = abi.decode(current_svbs, (T9));
+    reachRequire((! locked), uint256(23) /*'locked'*/);
+    emit _reach_e4(msg.sender, _a);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(24) /*'time check at ./src/contracts/loan_algo_nnt.rsh:91:50:dot'*/);
+    if ((_a.elem1).which == _enum_T3.Borrower_claimRefund0_237) {
+    reachRequire((msg.value == uint256(0)), uint256(25) /*'(./src/contracts/loan_algo_nnt.rsh:91:50:dot,[],"verify network token pay amount")'*/);
+    emit _reach_oe_v947( (false));
+    _Memory._reachr_Borrower_claimRefund = (false);
+    T15  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v678;
+    _ja.elem3 = _svs.v693;
+    _ja.elem4 = _svs.v695;
+    _ja.elem5 = _svs.v799;
+    _ja.elem6 = _svs.v829;
+    _ja.elem7 = _svs.v830;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = _svs.v837;
+    _ja.elem10 = _svs.v838;
+    _reachl_3(_ja, _Memory);
+    } else if ((_a.elem1).which == _enum_T3.Borrower_repay0_237) {
+    _f.v990 = (_a.elem1)._Borrower_repay0_237;
+    reachRequire(((payable(msg.sender) == _svs.v667)), uint256(26) /*'(reach standard library:57:5:application,[at ./src/contracts/loan_algo_nnt.rsh:107:38:application call to "check" (defined at: reach standard library:49:32:function exp),at ./src/contracts/loan_algo_nnt.rsh:106:53:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:106:53:function exp),at ./src/contracts/loan_algo_nnt.rsh:91:50:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:106:53:function exp),at ./src/contracts/loan_algo_nnt.rsh:91:50:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:91:50:function exp)],Just "You are not the Borrower")'*/);
+    reachRequire(((_svs.v831 <= _svs.v829)), uint256(27) /*'(reach standard library:57:5:application,[at ./src/contracts/loan_algo_nnt.rsh:108:38:application call to "check" (defined at: reach standard library:49:32:function exp),at ./src/contracts/loan_algo_nnt.rsh:106:53:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:106:53:function exp),at ./src/contracts/loan_algo_nnt.rsh:91:50:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:106:53:function exp),at ./src/contracts/loan_algo_nnt.rsh:91:50:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:91:50:function exp)],Just "Its past the deadline")'*/);
+    _f.v1002 = safeAdd((_f.v990.elem0), _svs.v830);
+    _f.v1004 = _f.v1002 > _svs.v678;
+    if (_f.v1004) {
+      _f.v1005 = (safeSub(_f.v1002, _svs.v678));
+      }
+    else {
+      _f.v1005 = uint256(0);
+      }
+    _f.v1009 = safeSub((_f.v990.elem0), _f.v1005);
+    reachRequire((msg.value == _f.v1009), uint256(28) /*'(./src/contracts/loan_algo_nnt.rsh:91:50:dot,[],"verify network token pay amount")'*/);
+    reachRequire(((uint256(block.number) <= _svs.v829)), uint256(29) /*'(reach standard library:57:5:application,[at ./src/contracts/loan_algo_nnt.rsh:108:38:application call to "check" (defined at: reach standard library:49:32:function exp),at ./src/contracts/loan_algo_nnt.rsh:116:50:application call to [unknown function] (defined at: ./src/contracts/loan_algo_nnt.rsh:116:50:function exp)],Just "Its past the deadline")'*/);
+    if (_f.v1004) {
+      _f.v1030 = (safeSub(_f.v1002, _svs.v678));
+      }
+    else {
+      _f.v1030 = uint256(0);
+      }
+    _f.v1036 = safeAdd(_svs.v830, (safeSub((_f.v990.elem0), _f.v1030)));
+    _f.v1040.elem0 = (_f.v1036 >= _svs.v678);
+    _f.v1040.elem1 = _f.v1036;
+    _f.v1040.elem2 = _svs.v678;
+    emit _reach_oe_v1040( _f.v1040);
+    _Memory._reachr_Borrower_repay = _f.v1040;
+    T15  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v678;
+    _ja.elem3 = _svs.v693;
+    _ja.elem4 = _svs.v695;
+    _ja.elem5 = _svs.v799;
+    _ja.elem6 = _svs.v829;
+    _ja.elem7 = _f.v1036;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = _svs.v837;
+    _ja.elem10 = (unsafeAdd(_svs.v838, _f.v1009));
+    _reachl_3(_ja, _Memory);
+    } else if ((_a.elem1).which == _enum_T3.Lender_claim0_237) {
+    reachRequire((msg.value == uint256(0)), uint256(30) /*'(./src/contracts/loan_algo_nnt.rsh:91:50:dot,[],"verify network token pay amount")'*/);
+    emit _reach_oe_v1118( (false));
+    _Memory._reachr_Lender_claim = (false);
+    T15  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v678;
+    _ja.elem3 = _svs.v693;
+    _ja.elem4 = _svs.v695;
+    _ja.elem5 = _svs.v799;
+    _ja.elem6 = _svs.v829;
+    _ja.elem7 = _svs.v830;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = _svs.v837;
+    _ja.elem10 = _svs.v838;
+    _reachl_3(_ja, _Memory);
+    }
+    }
+  function _reachi_5(T6 memory _a, Memory memory _Memory) internal  {
+    reachRequire((current_step == uint256(7)), uint256(31) /*'state check at ./src/contracts/loan_algo_nnt.rsh:53:62:dot'*/);
+    (T11 memory _svs) = abi.decode(current_svbs, (T11));
+    reachRequire((! locked), uint256(32) /*'locked'*/);
+    emit _reach_e5(msg.sender, _a);
+    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(33) /*'time check at ./src/contracts/loan_algo_nnt.rsh:53:62:dot'*/);
+    if ((_a.elem1).which == _enum_T5.Borrower_close0_93) {
+    reachRequire((msg.value == uint256(0)), uint256(34) /*'(./src/contracts/loan_algo_nnt.rsh:53:62:dot,[],"verify network token pay amount")'*/);
+    emit _reach_oe_v757( (false));
+    _Memory._reachr_Borrower_close = (false);
+    T14  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v670;
+    _ja.elem3 = _svs.v677;
+    _ja.elem4 = _svs.v678;
+    _ja.elem5 = false;
+    _ja.elem6 = _svs.v693;
+    _ja.elem7 = _svs.v694;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = _svs.v701;
+    _ja.elem10 = _svs.v702;
+    _reachl_2(_ja, _Memory);
+    } else if ((_a.elem1).which == _enum_T5.Lender_lend0_93) {
+    reachRequire((msg.value == _svs.v677), uint256(35) /*'(./src/contracts/loan_algo_nnt.rsh:53:62:dot,[],"verify network token pay amount")'*/);
+    emit _reach_oe_v790( (true));
+    _Memory._reachr_Lender_lend = (true);
+    T14  memory _ja;
+    _ja.elem0 = _svs.v667;
+    _ja.elem1 = _svs.v668;
+    _ja.elem2 = _svs.v670;
+    _ja.elem3 = _svs.v677;
+    _ja.elem4 = _svs.v678;
+    _ja.elem5 = _svs.v692;
+    _ja.elem6 = payable(msg.sender);
+    _ja.elem7 = true;
+    _ja.elem8 = uint256(block.number);
+    _ja.elem9 = _svs.v701;
+    _ja.elem10 = (unsafeAdd(_svs.v702, _svs.v677));
+    _reachl_2(_ja, _Memory);
+    }
+    }
+  function _reachl_2(T14 memory _a, Memory memory _Memory) internal  {
+    if ((_a.elem7 ? false : _a.elem5)) {
+      T11 memory nsvs;
+      nsvs.v667 = _a.elem0;
+      nsvs.v668 = _a.elem1;
+      nsvs.v670 = _a.elem2;
+      nsvs.v677 = _a.elem3;
+      nsvs.v678 = _a.elem4;
+      nsvs.v692 = true;
+      nsvs.v693 = _a.elem6;
+      nsvs.v694 = false;
+      nsvs.v701 = _a.elem9;
+      nsvs.v702 = _a.elem10;
+      nsvs.v723 = (true);
+      current_step = uint256(7);
+      current_time = uint256(block.number);
+      current_svbs = abi.encode(nsvs);
+      }
+    else {
+      if (_a.elem7) {
+        _a.elem0.transfer(_a.elem10);
+        T15  memory _ja;
+        _ja.elem0 = _a.elem0;
+        _ja.elem1 = _a.elem1;
+        _ja.elem2 = _a.elem4;
+        _ja.elem3 = _a.elem6;
+        _ja.elem4 = _a.elem8;
+        _ja.elem5 = (_a.elem7);
+        _ja.elem6 = (safeAdd(_a.elem8, (_a.elem2._maturation)));
+        _ja.elem7 = uint256(0);
+        _ja.elem8 = _a.elem8;
+        _ja.elem9 = _a.elem9;
+        _ja.elem10 = (unsafeSub(_a.elem10, _a.elem10));
+        _reachl_3(_ja, _Memory);
+        }
+      else {
+        safeTokenTransfer(_a.elem1, _a.elem0, ((_a.elem9[uint256(0)]).elem0));
+        _a.elem0.transfer(_a.elem10);
+        current_step = 0x0;
+        current_time = 0x0;
+        delete current_svbs;
+        }
+      }
+    }
+  struct _F2643 {
+    bool v857;
+    }
+  function _reachl_3(T15 memory _a, Memory memory _Memory) internal  {
+    _F2643 memory _f;
+    _f.v857 = _a.elem7 < _a.elem2;
+    if (((_a.elem8 < _a.elem6) ? _f.v857 : false)) {
+      T9 memory nsvs;
+      nsvs.v667 = _a.elem0;
+      nsvs.v668 = _a.elem1;
+      nsvs.v678 = _a.elem2;
+      nsvs.v693 = _a.elem3;
+      nsvs.v695 = _a.elem4;
+      nsvs.v799 = _a.elem5;
+      nsvs.v829 = _a.elem6;
+      nsvs.v830 = _a.elem7;
+      nsvs.v831 = _a.elem8;
+      nsvs.v837 = _a.elem9;
+      nsvs.v838 = _a.elem10;
+      nsvs.v860 = (_a.elem7 >= _a.elem2);
+      current_step = uint256(5);
+      current_time = uint256(block.number);
+      current_svbs = abi.encode(nsvs);
+      }
+    else {
+      safeTokenTransfer(_a.elem1, (_f.v857 ? _a.elem3 : _a.elem0), ((_a.elem9[uint256(0)]).elem0));
+      (_f.v857 ? _a.elem0 : _a.elem3).transfer(_a.elem10);
+      current_step = 0x0;
+      current_time = 0x0;
+      delete current_svbs;
+      }
+    }
+  function Borrower_claimRefund() external payable returns (bool) {
     Memory memory _Memory;
-    _reacha_Borrower_repay(v1080, _Memory);
+    bool  _ja;
+    _reacha_Borrower_claimRefund(_ja, _Memory);
+    return _Memory._reachr_Borrower_claimRefund;
+    }
+  function Borrower_close() external payable returns (bool) {
+    Memory memory _Memory;
+    bool  _ja;
+    _reacha_Borrower_close(_ja, _Memory);
+    return _Memory._reachr_Borrower_close;
+    }
+  function Borrower_repay(uint256 v2608) external payable returns (T0 memory) {
+    Memory memory _Memory;
+    _reacha_Borrower_repay(v2608, _Memory);
     return _Memory._reachr_Borrower_repay;
+    }
+  function Lender_claim() external payable returns (bool) {
+    Memory memory _Memory;
+    bool  _ja;
+    _reacha_Lender_claim(_ja, _Memory);
+    return _Memory._reachr_Lender_claim;
     }
   function Lender_lend() external payable returns (bool) {
     Memory memory _Memory;
@@ -823,273 +1219,40 @@ contract ReachContract is Stdlib {
     _reacha_LoanViews_amountPaid(_ja, _Memory);
     return _Memory._reachr_LoanViews_amountPaid;
     }
+  function LoanViews_beginBlock() external view returns (uint256) {
+    Memory memory _Memory;
+    bool  _ja;
+    _reacha_LoanViews_beginBlock(_ja, _Memory);
+    return _Memory._reachr_LoanViews_beginBlock;
+    }
+  function LoanViews_isLive() external view returns (bool) {
+    Memory memory _Memory;
+    bool  _ja;
+    _reacha_LoanViews_isLive(_ja, _Memory);
+    return _Memory._reachr_LoanViews_isLive;
+    }
   function LoanViews_loanPaid() external view returns (bool) {
     Memory memory _Memory;
     bool  _ja;
     _reacha_LoanViews_loanPaid(_ja, _Memory);
     return _Memory._reachr_LoanViews_loanPaid;
     }
-  struct _F1121 {
-    T1 v1082;
-    }
-  function _reacha_Borrower_repay(uint256 _a, Memory memory _Memory) internal  {
-    _F1121 memory _f;
-    _f.v1082.elem0 = _a;
-    T2  memory _ja;
-    _ja.elem0 = (uint256(0));
-    _ja.elem1 = _f.v1082;
-    _reachi_4(_ja, _Memory);
-    }
-  struct _F1122 {
-    bool v1085;
-    }
-  function _reacha_Lender_lend(bool _a, Memory memory _Memory) internal  {
-    _F1122 memory _f;
-    T3  memory _ja;
-    _ja.elem0 = (uint256(0));
-    _ja.elem1 = _f.v1085;
-    _reachi_5(_ja, _Memory);
-    }
-  function _reacha_LoanViews_amountPaid(bool _a, Memory memory _Memory) internal view {
-    reachRequire(((current_step == uint256(5))), uint256(7) /*'(./src/contracts/loan.rsh:34:27:property binding,[],Just "Incorrect state: not leaf")'*/);
-    (T6 memory _svs) = abi.decode(current_svbs, (T6));
-    _Memory._reachr_LoanViews_amountPaid = _svs.v623;
-    }
-  function _reacha_LoanViews_loanPaid(bool _a, Memory memory _Memory) internal view {
-    reachRequire(((current_step == uint256(5))), uint256(8) /*'(./src/contracts/loan.rsh:33:25:property binding,[],Just "Incorrect state: not leaf")'*/);
-    (T6 memory _svs) = abi.decode(current_svbs, (T6));
-    _Memory._reachr_LoanViews_loanPaid = _svs.v654;
-    }
-  struct _F1125 {
-    T4 v469;
-    T4[2] v470;
-    T4[2] v504;
-    T4[2] v508;
-    }
-  function _reachi_0(T8 memory _a, Memory memory _Memory) internal  {
-    _F1125 memory _f;
-    reachRequire((! locked), uint256(9) /*'locked'*/);
-    emit _reach_e0(msg.sender, _a);
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(10) /*'time check at ./src/contracts/loan.rsh:46:11:dot'*/);
-    _f.v469.elem0 = uint256(0);
-    _f.v469.elem1 = uint256(0);
-    _f.v469.elem2 = false;
-    _f.v470[0] = _f.v469;
-    _f.v470[1] = _f.v469;
-    _f.v504 = array_set5(_f.v470, uint256(0), (T4({elem0: uint256(0), elem1: (_f.v470[uint256(0)]).elem1, elem2: (_f.v470[uint256(0)]).elem2})));
-    _f.v508 = array_set5(_f.v504, uint256(1), (T4({elem0: uint256(0), elem1: (_f.v504[uint256(1)]).elem1, elem2: (_f.v504[uint256(1)]).elem2})));
-    reachRequire(((((_a.elem2) == (_a.elem1)) ? false : true)), uint256(11) /*'(./src/contracts/loan.rsh:46:11:dot,[],Just "non-network tokens distinct")'*/);
-    
-    
-    reachRequire((msg.value == uint256(0)), uint256(12) /*'(./src/contracts/loan.rsh:46:11:dot,[],"verify network token pay amount")'*/);
-    reachRequire(((((_a.elem4)._principal) < ((_a.elem4)._amount))), uint256(13) /*'(./src/contracts/loan.rsh:47:16:application,[],Nothing)'*/);
-    T9 memory nsvs;
-    nsvs.v495 = payable(msg.sender);
-    nsvs.v496 = (_a.elem1);
-    nsvs.v497 = (_a.elem2);
-    nsvs.v498 = (_a.elem3);
-    nsvs.v499 = (_a.elem4);
-    nsvs.v500 = uint256(block.number);
-    nsvs.v508 = _f.v508;
-    nsvs.v512 = ((_a.elem4)._principal);
-    nsvs.v513 = ((_a.elem4)._amount);
-    current_step = uint256(1);
-    current_time = uint256(block.number);
-    current_svbs = abi.encode(nsvs);
-    }
-  function _reachi_1(T1 memory _a, Memory memory _Memory) internal  {
-    reachRequire((! locked), uint256(14) /*'locked'*/);
-    emit _reach_e1(msg.sender, _a);
-    reachRequire((current_step == uint256(1)), uint256(15) /*'state check at ./src/contracts/loan.rsh:49:11:dot'*/);
-    (T9 memory _svs) = abi.decode(current_svbs, (T9));
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(16) /*'time check at ./src/contracts/loan.rsh:49:11:dot'*/);
-    reachRequire((msg.value == uint256(0)), uint256(17) /*'(./src/contracts/loan.rsh:49:11:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v496, _svs.v498)), uint256(18) /*'(./src/contracts/loan.rsh:49:11:dot,[],"verify non-network token pay amount")'*/);
-    reachRequire(((_svs.v495 == payable(msg.sender))), uint256(19) /*'(./src/contracts/loan.rsh:49:11:dot,[],Just "sender correct")'*/);
-    T10  memory _ja;
-    _ja.elem0 = _svs.v495;
-    _ja.elem1 = _svs.v496;
-    _ja.elem2 = _svs.v497;
-    _ja.elem3 = _svs.v499;
-    _ja.elem4 = _svs.v512;
-    _ja.elem5 = _svs.v513;
-    _ja.elem6 = (safeAdd(_svs.v500, uint256(50)));
-    _ja.elem7 = (_svs.v495);
-    _ja.elem8 = (false);
-    _ja.elem9 = (uint256(block.number));
-    _ja.elem10 = (_svs.v500);
-    _ja.elem11 = ((array_set5(_svs.v508, uint256(0), (T4({elem0: (unsafeAdd(((_svs.v508[uint256(0)]).elem0), _svs.v498)), elem1: (_svs.v508[uint256(0)]).elem1, elem2: (_svs.v508[uint256(0)]).elem2})))));
-    _ja.elem12 = (uint256(0));
-    _reachl_2(_ja, _Memory);
-    }
-  struct _F1127 {
-    uint256 v696;
-    bool v698;
-    uint256 v699;
-    uint256 v703;
-    uint256 v720;
-    }
-  function _reachi_4(T2 memory _a, Memory memory _Memory) internal  {
-    _F1127 memory _f;
-    reachRequire((! locked), uint256(20) /*'locked'*/);
-    emit _reach_e4(msg.sender, _a);
-    reachRequire((current_step == uint256(5)), uint256(21) /*'state check at ./src/contracts/loan.rsh:83:42:dot'*/);
-    (T6 memory _svs) = abi.decode(current_svbs, (T6));
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(22) /*'time check at ./src/contracts/loan.rsh:83:42:dot'*/);
-    reachRequire(((payable(msg.sender) == _svs.v495)), uint256(23) /*'(reach standard library:57:5:application,[at ./src/contracts/loan.rsh:99:30:application call to "check" (defined at: reach standard library:49:32:function exp),at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp),at ./src/contracts/loan.rsh:98:45:application call to [unknown function] (defined at: ./src/contracts/loan.rsh:98:45:function exp)],Just "You are not the Borrower")'*/);
-    _f.v696 = safeAdd(((_a.elem1).elem0), _svs.v623);
-    _f.v698 = _f.v696 > _svs.v513;
-    if (_f.v698) {
-      _f.v699 = (safeSub(_f.v696, _svs.v513));
-      }
-    else {
-      _f.v699 = uint256(0);
-      }
-    _f.v703 = safeSub(((_a.elem1).elem0), _f.v699);
-    reachRequire((msg.value == uint256(0)), uint256(24) /*'(./src/contracts/loan.rsh:83:42:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v497, _f.v703)), uint256(25) /*'(./src/contracts/loan.rsh:83:42:dot,[],"verify non-network token pay amount")'*/);
-    if (_f.v698) {
-      _f.v720 = (safeSub(_f.v696, _svs.v513));
-      }
-    else {
-      _f.v720 = uint256(0);
-      }
-    emit _reach_oe_v623( _svs.v623);
-    _Memory._reachr_Borrower_repay = _svs.v623;
-    T11  memory _ja;
-    _ja.elem0 = _svs.v495;
-    _ja.elem1 = _svs.v496;
-    _ja.elem2 = _svs.v497;
-    _ja.elem3 = _svs.v513;
-    _ja.elem4 = _svs.v529;
-    _ja.elem5 = _svs.v622;
-    _ja.elem6 = ((safeAdd(_svs.v623, (safeSub(((_a.elem1).elem0), _f.v720)))));
-    _ja.elem7 = (uint256(block.number));
-    _ja.elem8 = (_svs.v624);
-    _ja.elem9 = ((array_set5(_svs.v630, uint256(1), (T4({elem0: (unsafeAdd(((_svs.v630[uint256(1)]).elem0), _f.v703)), elem1: (_svs.v630[uint256(1)]).elem1, elem2: (_svs.v630[uint256(1)]).elem2})))));
-    _ja.elem10 = (_svs.v631);
-    _reachl_3(_ja, _Memory);
-    }
-  function _reachi_5(T3 memory _a, Memory memory _Memory) internal  {
-    reachRequire((! locked), uint256(26) /*'locked'*/);
-    emit _reach_e5(msg.sender, _a);
-    reachRequire((current_step == uint256(7)), uint256(27) /*'state check at ./src/contracts/loan.rsh:53:54:dot'*/);
-    (T12 memory _svs) = abi.decode(current_svbs, (T12));
-    _a.elem1;
-    reachRequire((((_a.elem0) == uint256(0)) || (current_time == (_a.elem0))), uint256(28) /*'time check at ./src/contracts/loan.rsh:53:54:dot'*/);
-    reachRequire((msg.value == uint256(0)), uint256(29) /*'(./src/contracts/loan.rsh:53:54:dot,[],"verify network token pay amount")'*/);
-    reachRequire((checkPayAmt(msg.sender, _svs.v497, _svs.v512)), uint256(30) /*'(./src/contracts/loan.rsh:53:54:dot,[],"verify non-network token pay amount")'*/);
-    emit _reach_oe_v577( (true));
-    _Memory._reachr_Lender_lend = (true);
-    T10  memory _ja;
-    _ja.elem0 = _svs.v495;
-    _ja.elem1 = _svs.v496;
-    _ja.elem2 = _svs.v497;
-    _ja.elem3 = _svs.v499;
-    _ja.elem4 = _svs.v512;
-    _ja.elem5 = _svs.v513;
-    _ja.elem6 = _svs.v528;
-    _ja.elem7 = (payable(msg.sender));
-    _ja.elem8 = (true);
-    _ja.elem9 = (uint256(block.number));
-    _ja.elem10 = (_svs.v531);
-    _ja.elem11 = ((array_set5(_svs.v537, uint256(1), (T4({elem0: (unsafeAdd(((_svs.v537[uint256(1)]).elem0), _svs.v512)), elem1: (_svs.v537[uint256(1)]).elem1, elem2: (_svs.v537[uint256(1)]).elem2})))));
-    _ja.elem12 = (_svs.v538);
-    _reachl_2(_ja, _Memory);
-    }
-  function _reachl_2(T10 memory _a, Memory memory _Memory) internal  {
-    if (((_a.elem6 > _a.elem10) ? (_a.elem8 ? false : true) : false)) {
-      T12 memory nsvs;
-      nsvs.v495 = _a.elem0;
-      nsvs.v496 = _a.elem1;
-      nsvs.v497 = _a.elem2;
-      nsvs.v499 = _a.elem3;
-      nsvs.v512 = _a.elem4;
-      nsvs.v513 = _a.elem5;
-      nsvs.v528 = _a.elem6;
-      nsvs.v531 = _a.elem9;
-      nsvs.v537 = _a.elem11;
-      nsvs.v538 = _a.elem12;
-      current_step = uint256(7);
-      current_time = uint256(block.number);
-      current_svbs = abi.encode(nsvs);
-      }
-    else {
-      if (_a.elem8) {
-        safeTokenTransfer(_a.elem2, _a.elem0, ((_a.elem11[uint256(1)]).elem0));
-        T11  memory _ja;
-        _ja.elem0 = _a.elem0;
-        _ja.elem1 = _a.elem1;
-        _ja.elem2 = _a.elem2;
-        _ja.elem3 = _a.elem5;
-        _ja.elem4 = _a.elem7;
-        _ja.elem5 = (safeAdd(_a.elem10, (_a.elem3._maturation)));
-        _ja.elem6 = (uint256(0));
-        _ja.elem7 = (_a.elem9);
-        _ja.elem8 = (_a.elem10);
-        _ja.elem9 = ((array_set5(_a.elem11, uint256(1), (T4({elem0: (unsafeSub(((_a.elem11[uint256(1)]).elem0), ((_a.elem11[uint256(1)]).elem0))), elem1: (_a.elem11[uint256(1)]).elem1, elem2: (_a.elem11[uint256(1)]).elem2})))));
-        _ja.elem10 = (_a.elem12);
-        _reachl_3(_ja, _Memory);
-        }
-      else {
-        safeTokenTransfer(_a.elem1, _a.elem0, ((_a.elem11[uint256(0)]).elem0));
-        _a.elem0.transfer(_a.elem12);
-        current_step = 0x0;
-        current_time = 0x0;
-        delete current_svbs;
-        }
-      }
-    }
-  struct _F1130 {
-    bool v651;
-    bool v654;
-    }
-  function _reachl_3(T11 memory _a, Memory memory _Memory) internal  {
-    _F1130 memory _f;
-    _f.v651 = _a.elem6 < _a.elem3;
-    if (((_a.elem5 > _a.elem8) ? _f.v651 : false)) {
-      _f.v654 = _a.elem6 >= _a.elem3;
-      T6 memory nsvs;
-      nsvs.v495 = _a.elem0;
-      nsvs.v496 = _a.elem1;
-      nsvs.v497 = _a.elem2;
-      nsvs.v513 = _a.elem3;
-      nsvs.v529 = _a.elem4;
-      nsvs.v622 = _a.elem5;
-      nsvs.v623 = _a.elem6;
-      nsvs.v624 = _a.elem7;
-      nsvs.v630 = _a.elem9;
-      nsvs.v631 = _a.elem10;
-      nsvs.v654 = _f.v654;
-      current_step = uint256(5);
-      current_time = uint256(block.number);
-      current_svbs = abi.encode(nsvs);
-      }
-    else {
-      safeTokenTransfer(_a.elem1, (_f.v651 ? _a.elem4 : _a.elem0), ((_a.elem9[uint256(0)]).elem0));
-      safeTokenTransfer(_a.elem2, (_f.v651 ? _a.elem0 : _a.elem4), (((array_set5(_a.elem9, uint256(0), (T4({elem0: (unsafeSub(((_a.elem9[uint256(0)]).elem0), ((_a.elem9[uint256(0)]).elem0))), elem1: (_a.elem9[uint256(0)]).elem1, elem2: (_a.elem9[uint256(0)]).elem2}))))[uint256(1)]).elem0));
-      _a.elem0.transfer(_a.elem10);
-      current_step = 0x0;
-      current_time = 0x0;
-      delete current_svbs;
-      }
-    }
-  constructor(T8 memory v1088) payable {
+  constructor(T12 memory v2619) payable {
     current_step = 0x0;
     creation_time = uint256(block.number);
     Memory memory _Memory;
-    _reachi_0(v1088, _Memory);
+    _reachi_0(v2619, _Memory);
     }
-  function _reachp_1(T1 calldata v1090) external payable returns (bool) {
+  function _reachp_1(T2 calldata v2622) external payable returns (bool) {
     Memory memory _Memory;
-    _reachi_1(v1090, _Memory);
+    _reachi_1(v2622, _Memory);
     }
-  function _reachp_4(T2 calldata v1103) external payable returns (bool) {
+  function _reachp_4(T4 calldata v2625) external payable returns (bool) {
     Memory memory _Memory;
-    _reachi_4(v1103, _Memory);
+    _reachi_4(v2625, _Memory);
     }
-  function _reachp_5(T3 calldata v1110) external payable returns (bool) {
+  function _reachp_5(T6 calldata v2628) external payable returns (bool) {
     Memory memory _Memory;
-    _reachi_5(v1110, _Memory);
+    _reachi_5(v2628, _Memory);
     }
   }

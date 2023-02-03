@@ -14,39 +14,76 @@ import { SignUp } from './components/SignUp'
 import { Create } from './components/Create'
 import { cf } from './utils'
 import s from './styles/Shared.module.css'
+import app from './styles/Landing.module.css'
 
-const PrivateRoute = ({ child }) => {
-	const { isAuthenticated, signIn } = useAuth()
-	const { alertThis, user } = useReach()
+const PrivateRoute = ({ children }) => {
+	const { isAuthenticated } = useAuth()
+	const { user } = useReach()
 	const navigate = useNavigate()
 
 	useEffect(
 		() => {
+			if (!user.address) navigate('/')
 			if (!isAuthenticated) {
-				alertThis({
-					message: 'You are not signed in. Would you like to do so?',
-					accept: 'Sign in',
-					decline: 'Not now',
-				}).then(async (accept) => {
-					if (accept) {
-						const stay = await signIn(user.address)
-						if (!stay) navigate('/')
-					} else {
-						navigate('/')
-					}
-				})
+				navigate('/')
 			}
 		},
 		/* eslint-disable-next-line react-hooks/exhaustive-deps */
-		[]
+		[user]
 	)
 
 	return (
 		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
 			{isAuthenticated ? (
-			{child}
+				<>{children}</>
 			) : (
 				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
+					<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+						<button
+							className={cf(app.connectAccount)}
+							onClick={() => {
+								navigate('/')
+							}}
+						>
+							Back to Home
+						</button>
+					</div>
+				</div>
+			)}
+		</div>
+	)
+}
+
+const DepRoute = ({ children }) => {
+	const { user } = useReach()
+	const navigate = useNavigate()
+
+	useEffect(
+		() => {
+			if (!user.address) {
+				navigate('/')
+			}
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+		[user]
+	)
+
+	return (
+		<div className={cf(s.wMax, s.window, s.flex, s.flexCenter)}>
+			{user.address ? (
+				<>{children}</>
+			) : (
+				<div className={cf(s.window, s.wMax, s.flex, s.flexCenter, s.hidden)}>
+					<div className={cf(s.flex, s.flexCenter, app.btnBox)}>
+						<button
+							className={cf(app.connectAccount)}
+							onClick={() => {
+								navigate('/')
+							}}
+						>
+							Back to Home
+						</button>
+					</div>
 				</div>
 			)}
 		</div>
@@ -71,7 +108,7 @@ const App = () => {
 							path='/loans'
 							element={
 								<AppView>
-									<PrivateRoute child={<Loans />} />
+									<PrivateRoute children={<Loans />} />
 								</AppView>
 							}
 						/>
@@ -79,7 +116,7 @@ const App = () => {
 							path='/account'
 							element={
 								<AppView>
-									<PrivateRoute child={<Profile />} />
+									<PrivateRoute children={<Profile />} />
 								</AppView>
 							}
 						/>
@@ -87,7 +124,7 @@ const App = () => {
 							path='/new-loan'
 							element={
 								<AppView>
-									<PrivateRoute child={<Create />} />
+									<PrivateRoute children={<Create />} />
 								</AppView>
 							}
 						/>
@@ -95,7 +132,9 @@ const App = () => {
 							path='/sign-up'
 							element={
 								<AppView>
-									<SignUp />
+									<DepRoute>
+										<SignUp />
+									</DepRoute>
 								</AppView>
 							}
 						/>
