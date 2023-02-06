@@ -1,4 +1,4 @@
-import { getASAInfo } from "./tokenUtil"
+import { getASAInfo } from './tokenUtils'
 
 export const fmtCurrency = async (tok, amt) => {
 	const { decimals = 0 } = await getASAInfo(tok)

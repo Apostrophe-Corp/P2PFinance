@@ -3,9 +3,14 @@
   "name": "P2PFinance | P2P Loan Platform",
   "icons": [
     {
-      "src": "logo.jpg",
-      "type": "image/jpg",
-      "sizes": "4500x4500 2500x2500 512x512 192x192"
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo_.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",

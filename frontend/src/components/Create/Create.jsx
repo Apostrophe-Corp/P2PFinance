@@ -4,7 +4,7 @@ import s from '../../styles/Shared.module.css'
 import cr8 from '../../styles/Create.module.css'
 import { useReach } from '../../hooks'
 import { setPFPs, cf } from '../../utils'
-import previewImg from '../../assets/images/logo.jpg'
+import previewImg from '../../assets/images/logo_.png'
 import { ASASelect } from '../ASASelect'
 
 const Create = () => {
@@ -55,11 +55,15 @@ const Create = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		;(await create({
-			...loanParams,
-			tokenRequested: requestedRef.current.value,
-			tokenOffered: offeredRef.current.value,
-		}, selected, offered)) && navigate('/account')
+		;(await create(
+			{
+				...loanParams,
+				tokenRequested: requestedRef.current.value,
+				tokenOffered: offeredRef.current.value,
+			},
+			selected,
+			offered
+		)) && navigate('/account')
 	}
 
 	return (

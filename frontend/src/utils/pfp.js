@@ -1,5 +1,5 @@
-import { getASAInfo } from './tokenUtil'
-import logo from '../assets/images/logo.jpg'
+import { getASAInfo } from './tokenUtils'
+import logo from '../assets/images/logo_.png'
 
 /**
  * Sets the background of the element ref to that of the user's pfp
