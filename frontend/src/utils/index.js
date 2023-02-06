@@ -1,6 +1,6 @@
 import { MakePeraConnect } from './PeraWallet-wrapper.ts'
 export { cf } from './cf'
-export { setBgs } from './pfp'
+export { setPFPs } from './pfp'
 export { request } from './request'
 export { getASAInfo } from './tokenUtils'
 export { fmtCurrency } from './fmtCurrency'
