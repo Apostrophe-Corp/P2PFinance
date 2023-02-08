@@ -33,15 +33,15 @@ simply click on the project link, here: [link to DApp](https://p2pfinance.vercel
 
 In strict terms, the flow of P2PFinance DApp goes like this:
 
--User A connects their wallet, signs up or signs in, and then creates an advert by providing the required parameters to create an advert.
--In order to successfully create an advert, the collateral must be sent from the user’s wallet to the smart contract to be held in escrow.
--It should be noted that User A can cancel or remove the advert and collect back their collateral at any point before another user lends the money to them.
--Additionally, it should be noted that the term of the loan only starts counting down after a user has lent the funds to the borrower (User A).
--User B also connects their wallet, signs up, and navigates to the lending page where they can see the list of available adverts. User B can then select an advert (User A’s) and lend to them with the click of a button (after authorizing transactions in their wallet of course). When this happens:
--The countdown of the loan term commences.
--The payment of the loan amount is sent to the contract and the contract forwards the said amount to the borrower (User A).
--User A, having received the loan, can pay back the loan either in installments or lump sum at any point before the expiry of the loan term.
--If User A pays back in installments, each installment is held by the contract until the repayment amount is complete and then this amount is sent by the contract to the lender (User B), and the collateral is sent back to user A. Any payment in excess of the required amount is
+- User A connects their wallet, signs up or signs in, and then creates an advert by providing the required parameters to create an advert.
+- In order to successfully create an advert, the collateral must be sent from the user’s wallet to the smart contract to be held in escrow.
+- It should be noted that User A can cancel or remove the advert and collect back their collateral at any point before another user lends the money to them.
+- Additionally, it should be noted that the term of the loan only starts counting down after a user has lent the funds to the borrower (User A).
+- User B also connects their wallet, signs up, and navigates to the lending page where they can see the list of available adverts. User B can then select an advert (User A’s) and lend to them with the click of a button (after authorizing transactions in their wallet of course). When this happens:
+- The countdown of the loan term commences.
+- The payment of the loan amount is sent to the contract and the contract forwards the said amount to the borrower (User A).
+- User A, having received the loan, can pay back the loan either in installments or lump sum at any point before the expiry of the loan term.
+- If User A pays back in installments, each installment is held by the contract until the repayment amount is complete and then this amount is sent by the contract to the lender (User B), and the collateral is sent back to user A. Any payment in excess of the required amount is
   
  In today’s digital age, the world of finance is constantly evolving, and traditional financial institutions are no longer the only option for lending and borrowing. Decentralized finance (DeFi) has emerged as a new, innovative way of managing money, and P2PFinance is leading the way in this exciting new field.
 
