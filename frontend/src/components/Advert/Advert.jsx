@@ -12,6 +12,7 @@ const Advert = ({ ad }) => {
 	const { lend } = useReach()
 	const [assetName, setAssetName] = useState('Loan Token')
 	const [collateral, setCollateral] = useState('Collateral Token')
+	const [maturation, setMaturation] = useState('Evaluating...')
 
 	useEffect(() => {
 		const pfp = Number(ad?.borrowerInfo?.pfp)
@@ -43,9 +44,55 @@ const Advert = ({ ad }) => {
 				// 		: ''
 				// }`
 			)
+			const diffInHours = (Math.abs(ad.maturation) * 3.7) / 60 / 60
+			const diffInUnits = {
+				sec: Math.floor(((((diffInHours % 24) % 1) * 60) % 1) * 60),
+				min: Math.floor(((diffInHours % 24) % 1) * 60),
+				hr: Math.floor(diffInHours % 24),
+				day: Math.floor(diffInHours / 24),
+			}
+			const blocksRemaining_ = `${
+				diffInUnits?.day
+					? diffInUnits?.hr > 12
+						? diffInUnits?.day + 1
+						: diffInUnits?.day
+					: diffInUnits?.hr
+					? diffInUnits?.min > 30
+						? diffInUnits?.hr + 1
+						: diffInUnits?.hr
+					: diffInUnits?.min
+					? diffInUnits?.sec > 30
+						? diffInUnits?.min + 1
+						: diffInUnits?.min
+					: diffInUnits?.sec > 0
+					? diffInUnits?.sec
+					: ''
+			} ${
+				diffInUnits?.day
+					? (diffInUnits?.hr > 12 && diffInUnits?.day === 1) ||
+					  diffInUnits?.day > 1
+						? 'DAYS'
+						: 'DAY'
+					: diffInUnits?.hr
+					? (diffInUnits?.min > 30 && diffInUnits?.hr === 1) ||
+					  diffInUnits?.hr > 1
+						? 'HOURS'
+						: 'HOUR'
+					: diffInUnits?.min
+					? (diffInUnits?.sec > 30 && diffInUnits?.min === 1) ||
+					  diffInUnits?.min > 1
+						? 'MINUTES'
+						: 'MINUTE'
+					: diffInUnits?.sec
+					? diffInUnits?.sec > 1
+						? 'SECONDS'
+						: 'SECOND'
+					: 'A MOMENT'
+			}`
+			setMaturation(blocksRemaining_)
 		}
 		updateValues()
-	}, [ad.offered, ad.selected, ad.tokenOffered, ad.tokenRequested])
+	}, [ad.offered, ad.selected, ad.tokenOffered, ad.tokenRequested, ad.maturation])
 
 	return (
 		<div className={cf(s.wMax, s.flex, s.flexCenter, l.container)}>
@@ -204,7 +251,7 @@ const Advert = ({ ad }) => {
 						l.quantity
 					)}
 				>
-					{ad.maturation}
+					{maturation}
 				</span>
 				<span
 					className={cf(
