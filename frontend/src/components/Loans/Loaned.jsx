@@ -302,20 +302,6 @@ const Loaned = ({ loan, ad = false }) => {
 				>
 					{maturation_}
 				</span>
-				{(ad || (!status && maturation > 1)) && (
-					<span
-						className={cf(
-							s.wMax,
-							s.flex,
-							s.flexCenter,
-							s.p5,
-							s.dInlineBlock,
-							l.assetName
-						)}
-					>
-						Blocks
-					</span>
-				)}
 			</div>
 			<div
 				className={cf(

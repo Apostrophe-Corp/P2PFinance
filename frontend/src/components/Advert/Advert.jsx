@@ -253,18 +253,6 @@ const Advert = ({ ad }) => {
 				>
 					{maturation}
 				</span>
-				<span
-					className={cf(
-						s.wMax,
-						s.flex,
-						s.flexCenter,
-						s.p5,
-						s.dInlineBlock,
-						l.assetName
-					)}
-				>
-					Blocks
-				</span>
 			</div>
 			<div
 				className={cf(

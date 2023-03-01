@@ -361,20 +361,6 @@ const Borrowed = ({ loan, ad = false }) => {
 				>
 					{ad ? loan.maturation : loading ? 'Loading...' : maturation_}
 				</span>
-				{(ad || (!status && maturation > 1)) && (
-					<span
-						className={cf(
-							s.wMax,
-							s.flex,
-							s.flexCenter,
-							s.p5,
-							s.dInlineBlock,
-							l.assetName
-						)}
-					>
-						Blocks
-					</span>
-				)}
 			</div>
 			<div
 				className={cf(
