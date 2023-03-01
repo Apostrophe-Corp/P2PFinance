@@ -14,8 +14,8 @@ const Loaned = ({ loan, ad = false }) => {
 	const { user, close, alertThis, startWaiting, stopWaiting } = useReach()
 	const [assetName, setAssetName] = useState('Loan Token')
 	const [collateral, setCollateral] = useState('Collateral Token')
-	const [maturation_, setMaturation_] = useState(Number(loan.maturation))
-	const [maturation, setMaturation] = useState(Number(loan.maturation))
+	const [maturation_, setMaturation_] = useState('Evaluating...')
+	const [maturation, setMaturation] = useState('Evaluating...')
 	const [ctc] = useState(
 		user.account.contract(
 			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
