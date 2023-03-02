@@ -70,37 +70,47 @@ const Loaned = ({ loan, ad = false }) => {
 						sec: Math.floor(((((diffInHours % 24) % 1) * 60) % 1) * 60),
 						min: Math.floor(((diffInHours % 24) % 1) * 60),
 						hr: Math.floor(diffInHours % 24),
-						day: Math.floor(diffInHours / 24),
+						day: Math.floor((diffInHours / 24) % 30),
+						month: Math.floor(diffInHours / 24 / 30),
 					}
 					const blocksRemaining_ = `${
-						diffInUnits?.day
-							? diffInUnits?.hr > 12
+						diffInUnits?.month
+							? diffInUnits?.day >= 15
+								? diffInUnits?.month + 1
+								: diffInUnits?.month
+							: diffInUnits?.day
+							? diffInUnits?.hr >= 12
 								? diffInUnits?.day + 1
 								: diffInUnits?.day
 							: diffInUnits?.hr
-							? diffInUnits?.min > 30
+							? diffInUnits?.min >= 30
 								? diffInUnits?.hr + 1
 								: diffInUnits?.hr
 							: diffInUnits?.min
-							? diffInUnits?.sec > 30
+							? diffInUnits?.sec >= 30
 								? diffInUnits?.min + 1
 								: diffInUnits?.min
 							: diffInUnits?.sec > 0
 							? diffInUnits?.sec
 							: ''
 					} ${
-						diffInUnits?.day
-							? (diffInUnits?.hr > 12 && diffInUnits?.day === 1) ||
+						diffInUnits?.month
+							? (diffInUnits?.day >= 12 && diffInUnits?.month === 1) ||
+							  diffInUnits?.month > 1
+								? 'MONTHS'
+								: 'MONTH'
+							: diffInUnits?.month
+							? (diffInUnits?.hr >= 12 && diffInUnits?.day === 1) ||
 							  diffInUnits?.day > 1
 								? 'DAYS'
 								: 'DAY'
 							: diffInUnits?.hr
-							? (diffInUnits?.min > 30 && diffInUnits?.hr === 1) ||
+							? (diffInUnits?.min >= 30 && diffInUnits?.hr === 1) ||
 							  diffInUnits?.hr > 1
 								? 'HOURS'
 								: 'HOUR'
 							: diffInUnits?.min
-							? (diffInUnits?.sec > 30 && diffInUnits?.min === 1) ||
+							? (diffInUnits?.sec >= 30 && diffInUnits?.min === 1) ||
 							  diffInUnits?.min > 1
 								? 'MINUTES'
 								: 'MINUTE'
@@ -109,7 +119,7 @@ const Loaned = ({ loan, ad = false }) => {
 								? 'SECONDS'
 								: 'SECOND'
 							: 'A MOMENT'
-					}${blocksRemaining < 0 ? ' AGO' : ''}`
+					}`
 					setStatus(
 						contractStatus === false
 							? false

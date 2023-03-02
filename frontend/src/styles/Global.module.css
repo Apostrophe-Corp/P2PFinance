@@ -126,6 +126,17 @@ button {
     cursor: pointer !important;
 }
 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input[type='number']{
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
 .empty{
     opacity: 1;
 }

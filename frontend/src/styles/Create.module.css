@@ -101,6 +101,26 @@
 	color: rgb(187, 0, 255);
 }
 
+.formLabel_inline {
+	composes: formLabel;
+	display: inline-block !important;
+	width: fit-content !important;
+	gap: 5px !important;
+}
+
+.formText_inline {
+	composes: formText;
+	display: inline-block !important;
+	width: fit-content !important;
+	margin-right: 5px !important;
+}
+
+.formInput_inline {
+	composes: formInput;
+	display: inline-block !important;
+	width: 40px !important;
+}
+
 .urlDiv {
 	gap: 5px;
 }

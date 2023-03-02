@@ -60,6 +60,12 @@ const Create = () => {
 				...loanParams,
 				tokenRequested: requestedRef.current.value,
 				tokenOffered: offeredRef.current.value,
+				maturation: Math.ceil(
+					(loanParams['maturation-month'] ?? 0) * 30 * 23351.351 +
+						(loanParams['maturation-day'] ?? 0) * 23351.351 +
+						(loanParams['maturation-hour'] ?? 0) * 927.973 +
+						(loanParams['maturation-minute'] ?? 0) * 16.216
+				),
 			},
 			selected,
 			offered
@@ -233,20 +239,65 @@ const Create = () => {
 								className={cf(cr8.formInput)}
 							/>
 						</label>
-						<label
-							className={cf(cr8.formLabel)}
-							htmlFor='maturation'
-						>
-							<span className={cf(cr8.formText)}>Maturation in Blocks</span>
-							<input
-								type='number'
-								name='maturation'
-								id='maturation'
-								onChange={handleChange}
-								placeholder='1 ~ 3.7secs ∴ 1hr ~ 973, 1d ~ 23351'
-								className={cf(cr8.formInput)}
-							/>
-						</label>
+						<div className={cf(s.wMax, s.flex, s.flexStart)}>
+							<span className={cf(cr8.formText, s.p5)}>Maturation Period</span>
+							<label
+								className={cf(cr8.formLabel_inline)}
+								htmlFor='maturation-month'
+							>
+								<span className={cf(cr8.formText_inline)}>Months</span>
+								<input
+									type='number'
+									name='maturation-month'
+									id='maturation-month'
+									onChange={handleChange}
+									placeholder='0'
+									className={cf(cr8.formInput_inline)}
+								/>
+							</label>
+							<label
+								className={cf(cr8.formLabel_inline)}
+								htmlFor='maturation-day'
+							>
+								<span className={cf(cr8.formText_inline)}>Days</span>
+								<input
+									type='number'
+									name='maturation-day'
+									id='maturation-day'
+									onChange={handleChange}
+									placeholder='0'
+									className={cf(cr8.formInput_inline)}
+								/>
+							</label>
+							<label
+								className={cf(cr8.formLabel_inline)}
+								htmlFor='maturation-hour'
+							>
+								<span className={cf(cr8.formText_inline)}>Hours</span>
+								<input
+									type='number'
+									name='maturation-hour'
+									id='maturation-hour'
+									onChange={handleChange}
+									placeholder='0'
+									className={cf(cr8.formInput_inline)}
+								/>
+							</label>
+							<label
+								className={cf(cr8.formLabel_inline)}
+								htmlFor='maturation-minute'
+							>
+								<span className={cf(cr8.formText_inline)}>Minutes</span>
+								<input
+									type='number'
+									name='maturation-minute'
+									id='maturation-minute'
+									onChange={handleChange}
+									placeholder='0'
+									className={cf(cr8.formInput_inline)}
+								/>
+							</label>
+						</div>
 						<div className={cf(s.wMax, s.flex, s.flexCenter, cr8.submitDiv)}>
 							<button
 								type='submit'
@@ -259,7 +310,10 @@ const Create = () => {
 											Number(loanParams?.amountRequested ?? 0) &&
 										loanParams.paymentAmount &&
 										(offered || loanParams.tokenOffered) &&
-										loanParams.maturation &&
+										(loanParams['maturation-month'] ||
+											loanParams['maturation-day'] ||
+											loanParams['maturation-hour'] ||
+											loanParams['maturation-minute']) &&
 										Number(loanParams?.tokenRequested ?? 0) !==
 											Number(loanParams?.tokenOffered ?? 0)
 									)
