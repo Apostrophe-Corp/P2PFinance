@@ -21,9 +21,9 @@ const Borrowed = ({ loan, ad = false }) => {
 	)
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-	const [outStanding, setOutStanding] = useState('Evaluating...')
-	const [maturation_, setMaturation_] = useState('Evaluating...')
-	const [maturation, setMaturation] = useState('Evaluating...')
+	const [outStanding, setOutStanding] = useState('Loading...')
+	const [maturation_, setMaturation_] = useState('Loading...')
+	const [maturation, setMaturation] = useState('Loading...')
 	const [loading, setLoading] = useState(true)
 	const [status, setStatus] = useState(true)
 
@@ -171,7 +171,7 @@ const Borrowed = ({ loan, ad = false }) => {
 								: 'Not fully paid, paid amounts refunded, collateral lost'
 							: loan.resolved
 							? 'Repaid in full, collateral returned'
-							: 'Evaluating...'
+							: 'Loading...'
 					)
 					setMaturation_(
 						contractStatus === false
@@ -184,7 +184,7 @@ const Borrowed = ({ loan, ad = false }) => {
 								: 'Not fully paid, paid amounts refunded, collateral lost'
 							: loan.resolved
 							? 'Repaid in full, collateral returned'
-							: 'Evaluating...'
+							: 'Loading...'
 					)
 				} else {
 					const diffInHours = (Math.abs(loan.maturation) * 3.7) / 60 / 60
@@ -430,7 +430,7 @@ const Borrowed = ({ loan, ad = false }) => {
 						l.quantity
 					)}
 				>
-					{loading ? 'Evaluating...' : maturation_}
+					{loading ? 'Loading...' : maturation_}
 				</span>
 			</div>
 			<div

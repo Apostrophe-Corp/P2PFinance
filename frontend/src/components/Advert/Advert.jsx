@@ -12,7 +12,7 @@ const Advert = ({ ad }) => {
 	const { lend } = useReach()
 	const [assetName, setAssetName] = useState('Loan Token')
 	const [collateral, setCollateral] = useState('Collateral Token')
-	const [maturation, setMaturation] = useState('Evaluating...')
+	const [maturation, setMaturation] = useState('Loading...')
 
 	useEffect(() => {
 		const pfp = Number(ad?.borrowerInfo?.pfp)

@@ -14,8 +14,8 @@ const Loaned = ({ loan, ad = false }) => {
 	const { user, close, alertThis, startWaiting, stopWaiting } = useReach()
 	const [assetName, setAssetName] = useState('Loan Token')
 	const [collateral, setCollateral] = useState('Collateral Token')
-	const [maturation_, setMaturation_] = useState('Evaluating...')
-	const [maturation, setMaturation] = useState('Evaluating...')
+	const [maturation_, setMaturation_] = useState('Loading...')
+	const [maturation, setMaturation] = useState('Loading...')
 	const [ctc] = useState(
 		user.account.contract(
 			loan.selected ? algo_nnt : loan.offered ? nnt_algo : nnt_nnt,
@@ -136,7 +136,7 @@ const Loaned = ({ loan, ad = false }) => {
 								: 'Not fully paid, collateral is now yours'
 							: loan.resolved
 							? 'Repaid in full'
-							: 'Evaluating...'
+							: 'Loading...'
 					)
 				} else {
 					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
