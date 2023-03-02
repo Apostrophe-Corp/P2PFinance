@@ -132,10 +132,10 @@ const Loaned = ({ loan, ad = false }) => {
 							? blocksRemaining_
 							: contractStatus === null
 							? loan.resolved
-								? 'Loan repaid in full'
-								: 'Loan not fully paid, collateral sent to you'
+								? 'Repaid in full'
+								: 'Not fully paid, collateral is now yours'
 							: loan.resolved
-							? 'Loan repaid in full'
+							? 'Repaid in full'
 							: 'Evaluating...'
 					)
 				} else {
@@ -151,13 +151,13 @@ const Loaned = ({ loan, ad = false }) => {
 						if (!ad) clearInterval(maturationTimer)
 						setMaturation_(
 							loan.resolved
-								? 'Loan repaid in full'
-								: 'Loan not fully paid, collateral sent to you'
+								? 'Repaid in full'
+								: 'Not fully paid, collateral is now yours'
 						)
 						setMaturation(
 							loan.resolved
-								? 'Loan repaid in full'
-								: 'Loan not fully paid, collateral sent to you'
+								? 'Repaid in full'
+								: 'Not fully paid, collateral is now yours'
 						)
 					} else {
 						setMaturation_('Unable to evaluate maturation')

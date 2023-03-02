@@ -21,9 +21,9 @@ const Borrowed = ({ loan, ad = false }) => {
 	)
 	const [assetName, setAssetName] = useState('')
 	const [collateral, setCollateral] = useState('')
-	const [outStanding, setOutStanding] = useState('Loading...')
-	const [maturation_, setMaturation_] = useState('Loading...')
-	const [maturation, setMaturation] = useState('Loading...')
+	const [outStanding, setOutStanding] = useState('Evaluating...')
+	const [maturation_, setMaturation_] = useState('Evaluating...')
+	const [maturation, setMaturation] = useState('Evaluating...')
 	const [loading, setLoading] = useState(true)
 	const [status, setStatus] = useState(true)
 
@@ -167,10 +167,10 @@ const Borrowed = ({ loan, ad = false }) => {
 							? blocksRemaining_
 							: contractStatus === null
 							? loan.resolved
-								? 'Loan repaid in full, collateral returned'
-								: 'Loan not fully paid, paid amounts refunded, collateral lost'
+								? 'Repaid in full, collateral returned'
+								: 'Not fully paid, paid amounts refunded, collateral lost'
 							: loan.resolved
-							? 'Loan repaid in full, collateral returned'
+							? 'Repaid in full, collateral returned'
 							: 'Evaluating...'
 					)
 					setMaturation_(
@@ -180,10 +180,10 @@ const Borrowed = ({ loan, ad = false }) => {
 								: blocksRemaining_
 							: contractStatus === null
 							? loan.resolved
-								? 'Loan repaid in full, collateral returned'
-								: 'Loan not fully paid, paid amounts refunded, collateral lost'
+								? 'Repaid in full, collateral returned'
+								: 'Not fully paid, paid amounts refunded, collateral lost'
 							: loan.resolved
-							? 'Loan repaid in full, collateral returned'
+							? 'Repaid in full, collateral returned'
 							: 'Evaluating...'
 					)
 				} else {
@@ -199,13 +199,13 @@ const Borrowed = ({ loan, ad = false }) => {
 						if (!ad) clearInterval(maturationTimer)
 						setMaturation_(
 							loan.resolved
-								? 'Loan repaid in full, collateral returned'
-								: 'Loan not fully paid, paid amounts refunded, collateral lost'
+								? 'Repaid in full, collateral returned'
+								: 'Not fully paid, paid amounts refunded, collateral lost'
 						)
 						setMaturation(
 							loan.resolved
-								? 'Loan repaid in full, collateral returned'
-								: 'Loan not fully paid, paid amounts refunded, collateral lost'
+								? 'Repaid in full, collateral returned'
+								: 'Not fully paid, paid amounts refunded, collateral lost'
 						)
 					} else {
 						setMaturation_('Unable to evaluate maturation')
@@ -369,7 +369,7 @@ const Borrowed = ({ loan, ad = false }) => {
 						l.quantity
 					)}
 				>
-					{ad ? loan.maturation : loading ? 'Loading...' : maturation_}
+					{loading ? 'Evaluating...' : maturation_}
 				</span>
 			</div>
 			<div
