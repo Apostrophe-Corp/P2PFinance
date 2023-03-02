@@ -111,7 +111,7 @@
 .formText_inline {
 	composes: formText;
 	display: inline-block !important;
-	width: fit-content !important;
+	width: 70px !important;
 	margin-right: 5px !important;
 }
 
