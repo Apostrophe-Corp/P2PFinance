@@ -187,64 +187,6 @@ const Borrowed = ({ loan, ad = false }) => {
 							: 'Loading...'
 					)
 				} else {
-					const diffInHours = (Math.abs(loan.maturation) * 3.7) / 60 / 60
-					const diffInUnits = {
-						sec: Math.floor(((((diffInHours % 24) % 1) * 60) % 1) * 60),
-						min: Math.floor(((diffInHours % 24) % 1) * 60),
-						hr: Math.floor(diffInHours % 24),
-						day: Math.floor((diffInHours / 24) % 30),
-						month: Math.floor(diffInHours / 24 / 30),
-					}
-					const blocksRemaining_ = `${
-						diffInUnits?.month
-							? diffInUnits?.day >= 15
-								? diffInUnits?.month + 1
-								: diffInUnits?.month
-							: diffInUnits?.day
-							? diffInUnits?.hr >= 12
-								? diffInUnits?.day + 1
-								: diffInUnits?.day
-							: diffInUnits?.hr
-							? diffInUnits?.min >= 30
-								? diffInUnits?.hr + 1
-								: diffInUnits?.hr
-							: diffInUnits?.min
-							? diffInUnits?.sec >= 30
-								? diffInUnits?.min + 1
-								: diffInUnits?.min
-							: diffInUnits?.sec > 0
-							? diffInUnits?.sec
-							: ''
-					} ${
-						diffInUnits?.month
-							? (diffInUnits?.day >= 12 && diffInUnits?.month === 1) ||
-							  diffInUnits?.month > 1
-								? 'MONTHS'
-								: 'MONTH'
-							: diffInUnits?.month
-							? (diffInUnits?.hr >= 12 && diffInUnits?.day === 1) ||
-							  diffInUnits?.day > 1
-								? 'DAYS'
-								: 'DAY'
-							: diffInUnits?.hr
-							? (diffInUnits?.min >= 30 && diffInUnits?.hr === 1) ||
-							  diffInUnits?.hr > 1
-								? 'HOURS'
-								: 'HOUR'
-							: diffInUnits?.min
-							? (diffInUnits?.sec >= 30 && diffInUnits?.min === 1) ||
-							  diffInUnits?.min > 1
-								? 'MINUTES'
-								: 'MINUTE'
-							: diffInUnits?.sec
-							? diffInUnits?.sec > 1
-								? 'SECONDS'
-								: 'SECOND'
-							: 'A MOMENT'
-					}`
-
-					setMaturation(blocksRemaining_)
-					setMaturation_(blocksRemaining_)
 					const contractStatus = (await ctc.v.LoanViews.loanPaid())?.[1]
 					setStatus(
 						contractStatus === false
@@ -269,11 +211,69 @@ const Borrowed = ({ loan, ad = false }) => {
 						setMaturation_('Unable to evaluate maturation')
 						setMaturation('Unable to evaluate maturation')
 					}
-
-					setLoading(false)
 				}
 			}, 3600)
+		else {
+			const diffInHours = (Math.abs(loan.maturation) * 3.7) / 60 / 60
+			const diffInUnits = {
+				sec: Math.floor(((((diffInHours % 24) % 1) * 60) % 1) * 60),
+				min: Math.floor(((diffInHours % 24) % 1) * 60),
+				hr: Math.floor(diffInHours % 24),
+				day: Math.floor((diffInHours / 24) % 30),
+				month: Math.floor(diffInHours / 24 / 30),
+			}
+			const blocksRemaining_ = `${
+				diffInUnits?.month
+					? diffInUnits?.day >= 15
+						? diffInUnits?.month + 1
+						: diffInUnits?.month
+					: diffInUnits?.day
+					? diffInUnits?.hr >= 12
+						? diffInUnits?.day + 1
+						: diffInUnits?.day
+					: diffInUnits?.hr
+					? diffInUnits?.min >= 30
+						? diffInUnits?.hr + 1
+						: diffInUnits?.hr
+					: diffInUnits?.min
+					? diffInUnits?.sec >= 30
+						? diffInUnits?.min + 1
+						: diffInUnits?.min
+					: diffInUnits?.sec > 0
+					? diffInUnits?.sec
+					: ''
+			} ${
+				diffInUnits?.month
+					? (diffInUnits?.day >= 12 && diffInUnits?.month === 1) ||
+					  diffInUnits?.month > 1
+						? 'MONTHS'
+						: 'MONTH'
+					: diffInUnits?.month
+					? (diffInUnits?.hr >= 12 && diffInUnits?.day === 1) ||
+					  diffInUnits?.day > 1
+						? 'DAYS'
+						: 'DAY'
+					: diffInUnits?.hr
+					? (diffInUnits?.min >= 30 && diffInUnits?.hr === 1) ||
+					  diffInUnits?.hr > 1
+						? 'HOURS'
+						: 'HOUR'
+					: diffInUnits?.min
+					? (diffInUnits?.sec >= 30 && diffInUnits?.min === 1) ||
+					  diffInUnits?.min > 1
+						? 'MINUTES'
+						: 'MINUTE'
+					: diffInUnits?.sec
+					? diffInUnits?.sec > 1
+						? 'SECONDS'
+						: 'SECOND'
+					: 'A MOMENT'
+			}`
 
+			setMaturation(blocksRemaining_)
+			setMaturation_(blocksRemaining_)
+			setLoading(false)
+		}
 		return () => {
 			if (!ad) clearInterval(outStandingTimer)
 			if (!ad) clearInterval(maturationTimer)
